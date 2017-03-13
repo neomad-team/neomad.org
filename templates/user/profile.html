@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block extra_css %}
+<link rel=stylesheet href={{ url_for('static', filename='css/profile.css') }}>
+{% endblock %}
+
+{% block main %}
+<header>
+  <img class=avatar src=https://cdn-images-1.medium.com/fit/c/100/100/0*LX5hEUi7QzID3ymC.jpeg>
+  <div>
+    <h1 contenteditable={{edit|boolean}} name=username>{{ user.username or 'My username' }}</h1>
+    <!--<section>{{ user.about }}</section>-->
+    <p contenteditable={{edit|boolean}} name=about>{{ user.about }}</p>
+  </div>
+  {% if edit %}
+  <form method=post action={{ url_for('profile_edit') }}>
+    <button type>Save</button>
+    <input type=hidden name=username>
+    <input type=hidden name=about>
+  </form>
+  <script>
+    document.forms[0].addEventListener('submit', event => {
+      event.target.username.value = document.querySelector('[contenteditable][name=username]').innerHTML
+      event.target.about.value = document.querySelector('[contenteditable][name=about]').innerHTML
+    })
+  // [].forEach.call(document.querySelectorAll('[contenteditable=true]'), editable => {
+  //   editable.addEventListener('blur', _ => {
+  //     fetch('{{ url_for('profile_edit') }}', {method: 'post', body: editable.innerHTML})
+  //   })
+  // })
+  </script>
+  {% endif %}
+</header>
+
+<section class=articles>
+{% for article in articles %}
+  <article class=preview>
+    <h1>{{ article.title|title }}</h1>
+    {{ article.body|striptags|truncate(200) }}
+    <a href="{{ url_for('article_read', slug=article.slug, author=user.username) | replace('%40', '@') }}">Read</a>
+  </article>
+{% endfor %}
+</section>
+{% endblock %}

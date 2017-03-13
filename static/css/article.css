@@ -1,0 +1,40 @@
+html {
+  background-color: #fff;
+}
+
+
+article {
+  margin: 0 auto;
+  font-family: Lora;
+  font-size: 1.15em;
+  letter-spacing: .02em;
+  margin-bottom: 3em;
+}
+
+article .meta {
+  line-height: 1.4;
+  font-size: .7em;
+}
+article .meta a {
+  color: #666;
+}
+
+article h1 {
+  font-size: 1.9em;
+  margin: 1em 0;
+}
+
+article .content {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+article .content p {
+  line-height: 1.7;
+  margin: 1.7em 0;
+}
+
+article .date {
+  display: block;
+  margin-top: 3em;
+  font-size: .7em;
+}

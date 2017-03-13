@@ -1,0 +1,39 @@
+body > header {
+  box-shadow: none;
+}
+
+main {
+  margin-top: 60px;
+}
+
+main header {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 3px solid #eee;
+  padding: 3em calc(50% - 300px);
+  margin-bottom: 3em;
+  line-height: 1.3em;
+}
+main > header > img {
+  flex: 3 3;
+  width: 100px;
+  height: 100px;
+  order: 1;
+  align-content: flex-end;
+  display: block;
+}
+main > header > section {
+  max-width: 85%;
+  color: #888;
+  font-size: .9em;
+}
+main > header > div {
+  padding-right: 2em;
+}
+
+main > header > h1 {
+  font-weight: bold;
+  margin: 0 auto;
+}

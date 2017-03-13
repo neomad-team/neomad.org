@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  db:
+    image: mongo:latest
+    command: mongod
+    volumes:
+      - ./data/db:/data/db
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+
+  # web:
+  #   image: jazzdd/alpine-flask:python3
+  #   restart: "always"
+  #   volumes:
+  #     - .:/app
+  #   ports:
+  #     - 5000:80

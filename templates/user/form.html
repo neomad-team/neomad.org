@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+<form>
+  <label for=username>Username</label>
+  <input id=username name=username required>
+
+  <label for=about>About</label>
+  <textarea id=about name=about placeholder="Tell a little about yourself" required></textarea>
+
+  <input type=submit value=Save>
+</form>
+{% endblock %}
