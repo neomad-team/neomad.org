@@ -9,7 +9,7 @@ from .models import User
 @app.route('/@<string:username>', methods=['get'])
 def profile(username):
     try:
-        user = User.objects.get(username=username)
+        user = User.objects.get(slug=username)
     except User.DoesNotExist:
         abort(404)
     # articles = db.articles.search(Q.author == username)
@@ -23,9 +23,10 @@ def profile_edit():
     if request.method == 'POST':
         data = request.form
         if 'username' in data:
-            user.username = data['username']
+            username = data['username'].replace('<br>', '')
+            user.username = username
         if 'about' in data:
             user.about = data['about']
         user.save()
-        return redirect(url_for('profile', username=user.username or ''))
+        return redirect(request.url)
     return render_template('user/profile.html', user=user, edit=True)

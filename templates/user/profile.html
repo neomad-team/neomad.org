@@ -13,10 +13,10 @@
     <p contenteditable={{edit|boolean}} name=about>{{ user.about }}</p>
   </div>
   {% if edit %}
-  <form method=post action={{ url_for('profile_edit') }}>
-    <button type>Save</button>
+  <form method=post action={{ url_for('profile_edit') }} edit>
     <input type=hidden name=username>
     <input type=hidden name=about>
+    <button type=submit>Save</button>
   </form>
   <script>
     document.forms[0].addEventListener('submit', event => {

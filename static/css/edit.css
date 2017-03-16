@@ -1,0 +1,47 @@
+form[edit] {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  min-height: 50px;
+  background: #fefefe;
+  border-top: 1px solid #ccc;
+  padding: 10px 20px;
+  text-align: right;
+}
+
+button {
+  font-size: inherit;
+  font-weight: bold;
+  display: inline-block;
+  padding: 5px 20px;
+  background-color: #71d459;
+  color: #154110;
+  border: 1px solid #309226;
+  border-radius: 3px;
+}
+
+[contenteditable=true] {
+  position: relative;
+  border-bottom: 1px dashed transparent;
+  transition: .2s border-bottom-color;
+}
+
+[contenteditable=true]:hover,
+[contenteditable=true]:focus {
+  border-bottom-color: #333;
+}
+
+[contenteditable=true]::after {
+  position: absolute;
+  top: 0;
+  right: -9px;
+  visibility: hidden;
+  content: " ✏️";
+  font-size: 18px;
+}
+
+[contenteditable=true]:hover::after,
+[contenteditable=true]:focus::after {
+  visibility: inherit;
+}
