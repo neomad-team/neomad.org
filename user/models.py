@@ -23,7 +23,7 @@ class User(UserMixin, db.Document):
         return check_password_hash(self.password, password)
 
     def __str__(self):
-        return self.email
+        return self.username
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.username)

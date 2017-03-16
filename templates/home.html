@@ -5,25 +5,5 @@
 {% endblock %}
 
 {% block main %}
-<section class=articles>
-{% for article in articles %}
-  <article>
-    <section class=meta>
-      <a href=#>
-        <img class=avatar src=https://cdn-images-1.medium.com/fit/c/32/32/0*LX5hEUi7QzID3ymC.jpeg>
-      </a>
-      <div>
-        <a href=# class=author>Vincent Agnano</a href=#>
-        <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date|datetime }}</time>
-      </div>
-    </section>
-    <section class=content>
-      <a href={{ url_for('article_read', author=article.author, slug=article.slug) | replace('%40', '@') }} title='Read "{{ article.title }}"'>
-        <h1>{{ article.title|title }}</h1>
-        <p>{{ article.body|striptags|truncate(200) }}</p>
-      </a>
-    </section>
-  </article>
-{% endfor %}
-</section>
+
 {% endblock %}

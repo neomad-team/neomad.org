@@ -5,10 +5,9 @@ import unicodedata
 from . import app
 
 
-@app.template_filter()
+@app.template_filter('datetime')
 def filter_datetime(date, fmt=None):
-    dt = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f')
-    return dt.strftime('%d-%m-%Y')
+    return date.strftime('%d-%m-%Y')
 
 
 @app.template_filter()

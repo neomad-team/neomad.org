@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block extra_css %}
+<link rel=stylesheet href={{ url_for('static', filename='css/article.css') }}>
+{% endblock %}
+
+{% block main %}
+<article>
+  <section class=meta>
+    <a href=#>
+      <img class=avatar src=https://cdn-images-1.medium.com/fit/c/60/60/0*LX5hEUi7QzID3ymC.jpeg>
+    </a>
+    <div>
+      <a href=# class=author>{{ article.author }}</a>
+      <p>{{ article.author.about }}</p>
+      <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date|datetime }}</time>
+    </div>
+  </section>
+
+  <h1>{{ article.title }}</h1>
+
+  <section class=content>
+    {{ article.content|safe }}
+  </section>
+</article>
+{% endblock %}
