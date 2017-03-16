@@ -37,7 +37,7 @@
   <article class=preview>
     <h1>{{ article.title|title }}</h1>
     {{ article.body|striptags|truncate(200) }}
-    <a href="{{ url_for('article_read', slug=article.slug, author=user.username) | replace('%40', '@') }}">Read</a>
+    <a href="{{ url_for('article', slug=article.slug, author=user.slug) | replace('%40', '@') }}">Read</a>
   </article>
 {% endfor %}
 </section>

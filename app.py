@@ -3,6 +3,7 @@ import os
 from core import app
 from auth import *
 from core.helpers import *
+from blog import *
 if app.config['DEBUG']:
     from core.debug import *
 

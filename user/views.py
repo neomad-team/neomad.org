@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 
 from core import app
 from user.models import User
+from blog.models import Article
 from .models import User
 
 
@@ -13,7 +14,8 @@ def profile(username):
     except User.DoesNotExist:
         abort(404)
     # articles = db.articles.search(Q.author == username)
-    return render_template('user/profile.html', user=user, articles=[])
+    return render_template('user/profile.html', user=user,
+                           articles=Article.objects(author=user))
 
 
 @login_required
@@ -29,4 +31,6 @@ def profile_edit():
             user.about = data['about']
         user.save()
         return redirect(request.url)
-    return render_template('user/profile.html', user=user, edit=True)
+    articles = Article.objects(author=user)
+    return render_template('user/profile.html', user=user, articles=articles,
+                           edit=True)
