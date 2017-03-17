@@ -10,7 +10,7 @@ form[edit] {
   text-align: right;
 }
 
-button {
+form[edit] button {
   font-size: inherit;
   font-weight: bold;
   display: inline-block;

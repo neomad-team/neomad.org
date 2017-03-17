@@ -23,11 +23,6 @@
       event.target.username.value = document.querySelector('[contenteditable][name=username]').innerHTML
       event.target.about.value = document.querySelector('[contenteditable][name=about]').innerHTML
     })
-  // [].forEach.call(document.querySelectorAll('[contenteditable=true]'), editable => {
-  //   editable.addEventListener('blur', _ => {
-  //     fetch('{{ url_for('profile_edit') }}', {method: 'post', body: editable.innerHTML})
-  //   })
-  // })
   </script>
   {% endif %}
 </header>

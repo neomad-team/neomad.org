@@ -9,6 +9,8 @@ DATABASE = {
   #'host': 'mongodb://admin:qwerty@localhost/production',
 }
 
+DEBUG_TB_ENABLED = False
+
 DEBUG_TB_PANELS = (
     'flask_debugtoolbar.panels.versions.VersionDebugPanel',
     'flask_debugtoolbar.panels.timer.TimerDebugPanel',
@@ -19,5 +21,7 @@ DEBUG_TB_PANELS = (
     'flask_debugtoolbar.panels.route_list.RouteListDebugPanel',
     'flask_mongoengine.panels.MongoDebugPanel',
 )
+
+DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 SECRET_KEY = 'mysecretkey'
