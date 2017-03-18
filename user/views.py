@@ -13,13 +13,12 @@ def profile(username):
         user = User.objects.get(slug=username)
     except User.DoesNotExist:
         abort(404)
-    # articles = db.articles.search(Q.author == username)
     return render_template('user/profile.html', user=user,
                            articles=Article.objects(author=user))
 
 
-@login_required
 @app.route('/profile', methods=['get', 'post'])
+@login_required
 def profile_edit():
     user = User.objects.get(id=current_user.id)
     if request.method == 'POST':

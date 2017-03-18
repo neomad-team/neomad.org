@@ -3,7 +3,7 @@ import datetime
 from flask import (
     Flask, request, render_template, redirect, url_for, abort, Markup
 )
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 from core import app, db
 from user.models import User
@@ -22,6 +22,7 @@ def article(author, slug):
 
 
 @app.route('/article/new', methods=['get', 'post'])
+@login_required
 def article_create():
     article = Article.objects.create(title='', content='',
         slug='new', creation_date=datetime.datetime.now())
@@ -35,6 +36,7 @@ def article_create():
 
 
 @app.route('/@<string:author>/<string:slug>', methods=['post'])
+@login_required
 def article_edit(author, slug):
     try:
         author = User.objects.get(slug=author)
