@@ -1,3 +1,6 @@
+body {
+  padding-bottom: 50px;
+}
 form[edit] {
   position: fixed;
   bottom: 0;

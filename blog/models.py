@@ -17,3 +17,7 @@ class Article(db.Document):
     def pre_save(cls, sender, document, **kwargs):
         document.creation_date = datetime.datetime.utcnow()
         self.slug = slugify(self.title)
+
+    meta = {
+        'ordering': ['-creation_date']
+    }

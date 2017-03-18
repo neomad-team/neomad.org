@@ -2,6 +2,21 @@
 
 {% block extra_css %}
 <link rel=stylesheet href={{ url_for('static', filename='css/profile.css') }}>
+<style>
+  .newtext {
+    display: block;
+    border-radius: 10px;
+    width: 90%;
+    background-color: #333;
+    opacity: .1;
+    line-height: 70%;
+    margin-bottom: 10px;
+  }
+  .newtext.title {
+    opacity: .2;
+    width: 50%;
+  }
+</style>
 {% endblock %}
 
 {% block main %}
@@ -28,10 +43,17 @@
 </header>
 
 <section class=articles>
+{% if edit %}
+  <article class=preview>
+    <h1><span class="newtext title">&nbsp;</span></h1>
+    <p><span class=newtext>&nbsp;</span><span class=newtext>&nbsp;</span><span class=newtext>&nbsp;</span></p>
+    <a href="{{ url_for('article_create') }}">Write this article</a>
+  </article>
+{% endif %}
 {% for article in articles %}
   <article class=preview>
     <h1>{{ article.title|title }}</h1>
-    {{ article.body|striptags|truncate(200) }}
+    {{ article.content|striptags|truncate(200) }}
     <a href="{{ url_for('article', slug=article.slug, author=user.slug) | replace('%40', '@') }}">Read</a>
   </article>
 {% endfor %}
