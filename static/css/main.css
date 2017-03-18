@@ -49,6 +49,22 @@ header > h1 {
   margin: 0;
 }
 
+header > a {
+  float: right;
+  margin: -35px 10px 0 0;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 3px 15px;
+}
+header > a:hover {
+  color: #000;
+  background-color: #eee;
+}
+
 .articles article {
   box-shadow: 0 0 3px #eee;
   padding: 1em;
