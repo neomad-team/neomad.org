@@ -32,3 +32,15 @@ Run `docker-compose up` to install and start the database.
 
 Simply run `app.py` to have a running server.
 You can then open [http://localhost:5000](http://localhost:5000).
+
+
+### Creating a user
+
+Users must currently be created by hand.
+To do so, open a python shell `ipython` and run the following:
+
+    from user.models import User
+    User(username='johndoe', email='my@email.com').set_password('mypass').save()
+
+You can now log on http://localhost/5000/login with "_my@email.com_" email
+and "_mypass_" as password.
