@@ -1,9 +1,145 @@
-{% extends 'layout.html' %}
+<meta charset=utf-8>
+<title>Making the world your workplace - Neomad</title>
+<meta name=description content="Find a local place to work, get connected to other remote workers.">
+<style>
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, Sans-Serif;
+  background-color: #f6f6f6;
+}
+* {
+  box-sizing: border-box;
+}
+body > header {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+body > header > img {
+  width: 100%;
+  height: 100%;
+  transition: 3s filter;
+  filter: brightness(0%);
+}
+body.loaded > header > img {
+  filter: brightness(50%);
+}
+body > header > h1 {
+  font-size: 5em;
+  top: 50px;
+}
+body > header > h2 {
+  top: 170px;
+}
+body > header > h1,
+body > header > h2 {
+  position: absolute;
+  left: 12.5%;
+  color: #fff;
+  text-shadow: 0 0 5px #000;
+}
 
-{% block extra_css %}
-<link rel=stylesheet href={{ url_for('static', filename='css/home.css') }}>
-{% endblock %}
+.earlybird {
+  position: absolute;
+  background: rgba(0, 0, 0, .6);
+  width: 75%;
+  margin: auto;
+  padding: 30px 50px;
+  top: 260px;
+  left: 12.5%;
+  color: #fff;
+}
+.earlybird p {
+  font-size: 1.2em;
+}
 
-{% block main %}
+a {
+  color: inherit;
+}
 
-{% endblock %}
+form {
+  padding: 0 !important;
+}
+form input[type=email] {
+  border: 1px solid #ccc;
+  width: 73%;
+  font-size: 1.2em;
+}
+form input {
+  font: inherit;
+  padding: 15px 30px;
+  height: 60px;
+  display: inline;
+  vertical-align: middle;
+}
+form input.valid {
+  border: 1px solid #ccc;
+  background-color: rgba(243, 174, 115, .85);
+  color: #fff;
+  text-transform: uppercase;
+  width: 25%;
+  margin-left: 1%;
+  background-color: #6B5;
+}
+form input.valid[disabled] {
+  background-color: #999;
+  opacity: .6;
+}
+form input[type=checkbox] {
+  width: 35px;
+  margin-right: 1em;
+}
+form input[type=checkbox] + label {
+  font-size: 1.1em;
+}
+
+#notice:not(.empty) {
+  padding: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+</style>
+
+<header>
+  <section id=notice class=empty></section>
+  <img src={{ url_for('static', filename='homebackground.jpg') }} alt="Nomad worker">
+  <h1>N<span>e</span>omad</h1>
+  <h2>Make the world your home. And workplace.</h2>
+  <section class=earlybird>
+    <p>Do you want an early account? We are looking for <strong>beta users</strong>.</p>
+    <link href=//cdn-images.mailchimp.com/embedcode/classic-081711.css rel=stylesheet type=text/css>
+    <form method=post action=https://getsimpleform.com/messages?form_api_token=ec09216646c52506bc83161e4bc3e609>
+      <input type=hidden name=redirect_to value=http://neomad.org/#sent>
+      <input type=email name=email placeholder="Enter your email address" required>
+      <input class=valid type=submit value="Count me in!">
+      <input type=checkbox id=contribute name=contribute>
+      <label for=contribute>
+        I'd also like to contribute somehow!
+      </label>
+      <small>(like: graphism, coding, ideas, …)</small>
+    </form>
+    <small><a href={{ url_for('login') }}>I already have an account</a></small>
+  </section>
+</header>
+
+<script>
+  document.body.classList.add('loaded')
+  if (document.location.hash) {
+    var notice = document.querySelector('#notice')
+    notice.innerHTML = "Thanks, we'll keep you informed!"
+    notice.classList.remove('empty')
+    var button = document.querySelector('[type=submit]')
+  }
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-59484449-1', 'auto');
+  ga('send', 'pageview');
+</script>
