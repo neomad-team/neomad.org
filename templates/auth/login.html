@@ -1,6 +1,38 @@
 {% extends 'layout.html' %}
 
 {% block main %}
+<style>
+  form {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: white;
+  }
+  label {
+    display: inline-block;
+    width: 100px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  input {
+    font: inherit;
+    padding: 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  form button {
+    font: inherit;
+    font-weight: inherit;
+    background-color: #297ddb;
+    color: white;
+    border: 1px solid #6c6969;
+    border-radius: 7px;
+    padding: 5px 50px;
+    font-weight: bold;
+    margin-left: 100px;
+  }
+</style>
 <form action={{ url_for('login') }} method=post>
   <div>
     <label for=email>Email</label>
