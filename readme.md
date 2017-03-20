@@ -5,6 +5,10 @@
 Choose between a manual installation (best for dev) or a _docker_ installation
 (easy for testing or deploying).
 
+In both case, create an _uploads_ folder:
+
+    mkdir -p static/uploads/avatars
+
 
 ### Manual installation
 
@@ -35,9 +39,12 @@ You can install the database and the server with Docker.
 In which case you don't need to do any of the steps above, you won't need
 anything like Python or a virtualenv.
 
-Create the settings.py file: `cp settings.example.py settings.py`.
+Add the server setup to your Docker Compose: `cp docker-compose.server.yml docker-compose.override.yml`.
 
-And add the server setup to your Docker Compose: `cp docker-compose.server.yml docker-compose.override.yml`.
+Create the _settings.py_ file: `cp settings.example.py settings.py`.
+In that _settings.py_ file, set the `DATABASE = {…, 'host': 'db', …}` to
+connect the server to the database (`'db'` is the actual name you want as
+_host_, it is the name of the docker _link_).
 
 Then run `docker-compose up` and open your browser at http://localhost:5000.
 
@@ -59,12 +66,12 @@ Tune your settings there.
 ### Creating a user
 
 Users must currently be created by hand.
-To do so, open a python shell with the virtualenv activated:
+To do so, open a python shell with the _virtualenv_ activated:
 
     source ./venv/bin/activate
-    ipython
+    python3  # or python, or python3.5
 
-then in the _ipython_ shell, run the following:
+then in the _python_ shell, run the following:
 
     from user.models import User
     User(username='johndoe', email='my@email.com').set_password('mypass').save()
