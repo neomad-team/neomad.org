@@ -3,13 +3,13 @@ import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-from core import db
+from core import db, app
 from core.helpers import slugify
 
 
 class User(UserMixin, db.Document):
     email = db.EmailField(unique=True)
-    password = db.StringField(required=True, min_length=93, max_length=93)
+    password = db.StringField(required=True, min_length=32, max_length=120)
     creation_date = db.DateTimeField(default=datetime.datetime.utcnow)
     username = db.StringField()
     about = db.StringField()
@@ -21,6 +21,10 @@ class User(UserMixin, db.Document):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+    @property
+    def avatar(self):
+        return '{}/{}'.format(app.config.get('AVATARS_URL'), self.id)
 
     def __str__(self):
         return self.username
