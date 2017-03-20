@@ -1,14 +1,17 @@
 DEBUG = True
+HOST = '0.0.0.0'
+PORT = 5000
 
 # MongoDB connection settings
 DATABASE = {
   'db': 'neomad',
   'username': 'root',
+  'host': 'db',  # docker-compose MongoDB link name
   'password': '',
   'port': 27017,
 }
 
-DEBUG_TB_ENABLED = True
+DEBUG_TB_ENABLED = DEBUG
 
 DEBUG_TB_PANELS = (
     'flask_debugtoolbar.panels.versions.VersionDebugPanel',

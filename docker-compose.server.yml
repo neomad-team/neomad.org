@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  web:
+    image: jazzdd/alpine-flask:python3
+    restart: "always"
+    links:
+      - db
+    volumes:
+      - "/Users/vinyll/Projects/neomad:/app"
+    ports:
+      - 5000:80
