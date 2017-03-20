@@ -13,10 +13,11 @@ class Article(db.Document):
     author = db.ReferenceField(User)
     language = db.StringField(min_length=2, max_length=2, default='en')
 
-    @classmethod
-    def pre_save(cls, sender, document, **kwargs):
-        document.creation_date = datetime.datetime.utcnow()
+    def save(self, *args, **kwargs):
+        if not self.creation_date:
+            self.creation_date = datetime.datetime.utcnow()
         self.slug = slugify(self.title)
+        return super(Article, self).save(*args, **kwargs)
 
     meta = {
         'ordering': ['-creation_date']
