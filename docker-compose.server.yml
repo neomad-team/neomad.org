@@ -7,6 +7,6 @@ services:
     links:
       - db
     volumes:
-      - "/Users/vinyll/Projects/neomad:/app"
+      - .:/app
     ports:
       - 5000:80
