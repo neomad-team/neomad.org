@@ -23,12 +23,16 @@ def profile_edit():
     user = User.objects.get(id=current_user.id)
     if request.method == 'POST':
         data = request.form
+        picture = request.files.get('picture')
         if 'username' in data:
             username = data['username'].replace('<br>', '')
             user.username = username
         if 'about' in data:
             user.about = data['about']
         user.save()
+        if picture:
+            picture.save('{}/{}'.format(app.config.get('AVATARS_PATH'),
+                         user.id))
         return redirect(request.url)
     articles = Article.objects(author=user)
     return render_template('user/profile.html', user=user, articles=articles,

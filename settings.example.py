@@ -1,3 +1,5 @@
+import os
+
 DEBUG = True
 HOST = '0.0.0.0'
 PORT = 5000
@@ -6,10 +8,14 @@ PORT = 5000
 DATABASE = {
   'db': 'neomad',
   'username': 'root',
-  'host': 'db',  # docker-compose MongoDB link name
+  'host': 'localhost',  # set this value to 'db' if using docker-compose server.
   'password': '',
   'port': 27017,
 }
+
+PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
+UPLOAD_PATH = '{}/uploads'.format(PROJECT_PATH)
+AVATARS_PATH = '{}/avatars'.format(UPLOAD_PATH)
 
 DEBUG_TB_ENABLED = DEBUG
 

@@ -2,6 +2,8 @@ import datetime
 import re
 import unicodedata
 
+from flask import url_for
+
 from . import app
 
 
@@ -21,3 +23,10 @@ def slugify(value):
 @app.template_filter()
 def boolean(value):
     return str(bool(value)).lower()
+
+
+@app.context_processor
+def utility_processor():
+    def url_for_user(user):
+        return url_for('profile', username=user.slug).replace('%40', '@')
+    return dict(url_for_user=url_for_user)

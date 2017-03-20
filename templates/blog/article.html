@@ -7,11 +7,11 @@
 {% block main %}
 <article>
   <section class=meta>
-    <a href=#>
-      <img class=avatar src=https://cdn-images-1.medium.com/fit/c/60/60/0*LX5hEUi7QzID3ymC.jpeg>
+    <a href={{ url_for_user(article.author) }}>
+      <img class=avatar src={{ article.author.avatar }} width=70 height=70>
     </a>
     <div>
-      <a href=# class=author>{{ article.author }}</a>
+      <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
       <p>{{ article.author.about }}</p>
       <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date|datetime }}</time>
     </div>
@@ -33,9 +33,11 @@
 <link rel=stylesheet href=https://cdn.rawgit.com/orthes/medium-editor-insert-plugin/3.0/dist/css/medium-editor-insert.min.css>
 <script src=https://cdn.rawgit.com/orthes/medium-editor-insert-plugin/3.0/dist/js/medium-editor-insert.min.js></script>
 <form method=post action="" edit>
-  <input type=hidden name=title>
-  <input type=hidden name=content>
-  <button type=submit>Save</button>
+  <div class=toolbar>
+    <input type=hidden name=title>
+    <input type=hidden name=content>
+    <button type=submit>Save</button>
+  </div>
 </form>
 <script>
   var markDownEl = document.createElement('div')

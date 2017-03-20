@@ -21,17 +21,22 @@
 
 {% block main %}
 <header>
-  <img class=avatar src=https://cdn-images-1.medium.com/fit/c/100/100/0*LX5hEUi7QzID3ymC.jpeg>
+  {% if edit %}
+  <form edit method=post action={{ url_for('profile_edit') }} enctype=multipart/form-data>
+    <input type=file name=picture>
+  {% endif %}
+  <img class=avatar src={{ user.avatar }} width=100 height=100>
   <div>
     <h1 contenteditable={{edit|boolean}} name=username>{{ user.username or 'My username' }}</h1>
     <!--<section>{{ user.about }}</section>-->
     <p contenteditable={{edit|boolean}} name=about>{{ user.about }}</p>
   </div>
   {% if edit %}
-  <form method=post action={{ url_for('profile_edit') }} edit>
-    <input type=hidden name=username>
-    <input type=hidden name=about>
-    <button type=submit>Save</button>
+    <div class=toolbar>
+      <input type=hidden name=username>
+      <input type=hidden name=about>
+      <button type=submit>Save</button>
+    </div>
   </form>
   <script>
     document.forms[0].addEventListener('submit', event => {
