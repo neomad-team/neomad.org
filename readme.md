@@ -2,16 +2,15 @@
 
 ## Installation
 
-> You may want to install a full-dockerized version.
-> In which case you don't need Python or any of the following steps and you may
-> go the the dedicated _Full Docker Installation_ section below.
+Choose between a manual installation (best for dev) or a _docker_ installation
+(easy for testing or deploying).
 
 
-### Non-docker server installation
+### Manual installation
 
-Manual installation of the server is ideal for developement.
+Manual installation of the server is ideal for development.
 
-The project requires your OS to have the following working:
+Requires:
 
 - Python3.5 or above
 - [MongoDB](http://mongodb.com/) 3.4 or above,  or [Docker-compose](https://docs.docker.com/compose/)
@@ -24,42 +23,38 @@ To install the project, run the following:
     pip install -r requirements.txt
     cp settings.example.py settings.py
 
+If don't have a MongoDB running you can easily run one with
+`docker-compose up -d`.
+
+You should now be able to run your server with `python app.py`.
+Open your browser at http://localhost:5000
 
 ### Full Docker Installation
 
 You can install the database and the server with Docker.
-In which case you don't need to do any of the steps above, you won't need Python
-nor a virtualenv.
+In which case you don't need to do any of the steps above, you won't need
+anything like Python or a virtualenv.
 
-Just add the server setup to your Docker Compose:
+Create the settings.py file: `cp settings.example.py settings.py`.
 
-    cp docker-compose.server.yml docker-compose.override.yml
+And add the server setup to your Docker Compose: `cp docker-compose.server.yml docker-compose.override.yml`.
 
 Then run `docker-compose up` and open your browser at http://localhost:5000.
-You still may tune your settings with the section below.
 
-You may then access your python service machine with
+You can access your python server machine with
 `docker-compose exec -it web` (you may need it to create a user for example).
+
+The sources in your docker server are in the _/app_ folder (`cd /app`).
 
 
 ## Configuring
 
 In the previous commands you created a file called _settings.py_ at the root of
-the project. Tune your settings there.
+the project.
+Tune your settings there.
 
 
-## Running the project
-
-### MongoDB
-
-If you want to use MongoDB with docker, a _docker-compose_ file is ready.
-Run `docker-compose up` to install and start the database.
-
-### Python server
-
-Simply run `app.py` to have a running server.
-You can then open [http://localhost:5000](http://localhost:5000).
-
+## Extra commands
 
 ### Creating a user
 
