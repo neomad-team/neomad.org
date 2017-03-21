@@ -14,8 +14,9 @@ DATABASE = {
 }
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
-UPLOAD_PATH = '{}/uploads'.format(PROJECT_PATH)
+UPLOAD_PATH = '{}/static/uploads'.format(PROJECT_PATH)
 AVATARS_PATH = '{}/avatars'.format(UPLOAD_PATH)
+AVATARS_URL = '/static/uploads/avatars'
 
 DEBUG_TB_ENABLED = DEBUG
 

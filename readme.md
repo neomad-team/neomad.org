@@ -8,6 +8,7 @@ Choose between a manual installation (best for dev) or a _docker_ installation
 In both case, create an _uploads_ folder:
 
     mkdir -p static/uploads/avatars
+    chmod -R 777 static/uploads
 
 
 ### Manual installation
