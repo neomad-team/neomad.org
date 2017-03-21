@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, request, abort
+from flask import render_template, redirect, url_for, request, abort, Markup
 from flask_login import current_user, login_required
 
 from core import app
@@ -25,10 +25,9 @@ def profile_edit():
         data = request.form
         picture = request.files.get('picture')
         if 'username' in data:
-            username = data['username'].replace('<br>', '')
-            user.username = username
+            user.username = Markup(data['username']).striptags()
         if 'about' in data:
-            user.about = data['about']
+            user.about = Markup(data['about']).striptags()
         user.save()
         if picture:
             picture.save('{}/{}'.format(app.config.get('AVATARS_PATH'),
