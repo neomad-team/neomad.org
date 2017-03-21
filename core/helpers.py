@@ -3,6 +3,7 @@ import re
 import unicodedata
 
 from flask import url_for
+from jinja2.filters import do_mark_safe
 
 from . import app
 
@@ -23,6 +24,11 @@ def slugify(value):
 @app.template_filter()
 def boolean(value):
     return str(bool(value)).lower()
+
+
+@app.template_filter()
+def htmlnewline(value):
+    return do_mark_safe(value.replace('\n', '<br>'))
 
 
 @app.context_processor

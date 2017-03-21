@@ -16,7 +16,7 @@
   <div>
     <h1 contenteditable={{edit|boolean}} name=username>{{ user.username or 'My username' }}</h1>
     <!--<section>{{ user.about }}</section>-->
-    <p contenteditable={{edit|boolean}} name=about>{{ user.about }}</p>
+    <p contenteditable={{edit|boolean}} name=about>{{ user.about|htmlnewline }}</p>
   </div>
 {% if edit %}
   <div class=toolbar>

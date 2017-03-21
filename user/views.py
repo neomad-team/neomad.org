@@ -27,7 +27,8 @@ def profile_edit():
         if 'username' in data:
             user.username = Markup(data['username']).striptags()
         if 'about' in data:
-            user.about = Markup(data['about']).striptags()
+            user.about = (Markup(data['about'].replace('<br>', '\^n^'))
+                          .striptags().replace('\^n^', '\n'))
         user.save()
         if picture:
             picture.save('{}/{}'.format(app.config.get('AVATARS_PATH'),
