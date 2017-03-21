@@ -16,9 +16,15 @@ main header {
   margin-bottom: 3em;
   line-height: 1.3em;
 }
-main > header > img {
-  flex: 3 3;
-  width: 100px;
+main header > form {
+  display: inline-flex;
+}
+main header > form input[type=file] {
+  width: 100%;
+  overflow: auto;
+}
+main > header figure {
+  flex: 0 0 100px;
   height: 100px;
   order: 1;
   align-content: flex-end;
@@ -29,11 +35,25 @@ main > header > section {
   color: #888;
   font-size: .9em;
 }
-main > header > div {
+main > header div {
   padding-right: 2em;
+  flex: 1 1;
 }
-
-main > header > h1 {
+main > header h1 {
   font-weight: bold;
   margin: 0 auto;
+}
+
+.newtext {
+  display: block;
+  border-radius: 10px;
+  width: 90%;
+  background-color: #333;
+  opacity: .1;
+  line-height: 70%;
+  margin-bottom: 10px;
+}
+.newtext.title {
+  opacity: .2;
+  width: 50%;
 }

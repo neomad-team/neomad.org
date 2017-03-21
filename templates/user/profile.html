@@ -2,49 +2,36 @@
 
 {% block extra_css %}
 <link rel=stylesheet href={{ url_for('static', filename='css/profile.css') }}>
-<style>
-  .newtext {
-    display: block;
-    border-radius: 10px;
-    width: 90%;
-    background-color: #333;
-    opacity: .1;
-    line-height: 70%;
-    margin-bottom: 10px;
-  }
-  .newtext.title {
-    opacity: .2;
-    width: 50%;
-  }
-</style>
 {% endblock %}
 
 {% block main %}
 <header>
-  {% if edit %}
-  <form edit method=post action={{ url_for('profile_edit') }} enctype=multipart/form-data>
-    <input type=file name=picture>
-  {% endif %}
-  <img class=avatar src={{ user.avatar }} width=100 height=100>
+{% if edit %}
+<form edit method=post action={{ url_for('profile_edit') }} enctype=multipart/form-data>
+{% endif %}
+  <figure>
+    <img class=avatar src={{ user.avatar }} width=100 height=100>
+    {% if edit %}<input type=file name=picture>{% endif %}
+  </figure>
   <div>
     <h1 contenteditable={{edit|boolean}} name=username>{{ user.username or 'My username' }}</h1>
     <!--<section>{{ user.about }}</section>-->
     <p contenteditable={{edit|boolean}} name=about>{{ user.about }}</p>
   </div>
-  {% if edit %}
-    <div class=toolbar>
-      <input type=hidden name=username>
-      <input type=hidden name=about>
-      <button type=submit>Save</button>
-    </div>
-  </form>
-  <script>
-    document.forms[0].addEventListener('submit', event => {
-      event.target.username.value = document.querySelector('[contenteditable][name=username]').innerHTML
-      event.target.about.value = document.querySelector('[contenteditable][name=about]').innerHTML
-    })
-  </script>
-  {% endif %}
+{% if edit %}
+  <div class=toolbar>
+    <input type=hidden name=username>
+    <input type=hidden name=about>
+    <button type=submit>Save</button>
+  </div>
+</form>
+<script>
+  document.forms[0].addEventListener('submit', event => {
+    event.target.username.value = document.querySelector('[contenteditable][name=username]').innerHTML
+    event.target.about.value = document.querySelector('[contenteditable][name=about]').innerHTML
+  })
+</script>
+{% endif %}
 </header>
 
 <section class=articles>
