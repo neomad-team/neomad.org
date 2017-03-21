@@ -44,6 +44,15 @@ main > header h1 {
   margin: 0 auto;
 }
 
+article > a:not(.read) {
+  color: inherit;
+  text-decoration: none;
+}
+article > a.read,
+article > a.write {
+  display: block;
+}
+
 .newtext {
   display: block;
   border-radius: 10px;

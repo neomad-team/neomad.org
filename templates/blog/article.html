@@ -19,6 +19,7 @@
 
   <h1 contenteditable={{edit|boolean}} name=title>{{ article.title or 'Article title' }}</h1>
 
+  {# this is not `contenteditable` as MediumEditor below will make it editable #}
   <div class=content name=content>
     {{ article.content|safe or '<p>Insert your content here</p>'|safe }}
   </div>
