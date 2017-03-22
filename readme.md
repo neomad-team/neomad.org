@@ -10,8 +10,12 @@ In both case, create an _uploads_ folder:
     mkdir -p static/uploads/avatars
     chmod -R 777 static/uploads
 
+and as settings.py file:
 
-### Manual installation
+    cp settings.example.py settings.py
+
+
+### Manual server installation
 
 Manual installation of the server is ideal for development.
 
@@ -26,33 +30,30 @@ To install the project, run the following:
     python3.5 -m venv ./venv
     source ./venv/bin/activate
     pip install -r requirements.txt
-    cp settings.example.py settings.py
 
-If don't have a MongoDB running you can easily run one with
-`docker-compose up -d`.
+If don't have a MongoDB running you can seamlessly run one with
+`docker-compose up -d db`.
 
 You should now be able to run your server with `python app.py`.
 Open your browser at http://localhost:5000
 
+
 ### Full Docker Installation
 
-You can install the database and the server with Docker.
-In which case you don't need to do any of the steps above, you won't need
-anything like Python or a virtualenv.
+You can run both the database and the server with Docker.
+In which case you don't need to do any of the steps above; you won't need
+anything like Python nor a virtualenv.
 
-Add the server setup to your Docker Compose: `cp docker-compose.server.yml docker-compose.override.yml`.
-
-Create the _settings.py_ file: `cp settings.example.py settings.py`.
-In that _settings.py_ file, set the `DATABASE = {…, 'host': 'db', …}` to
+In the _settings.py_ file, set the `DATABASE = {…, 'host': 'db', …}` to
 connect the server to the database (`'db'` is the actual name you want as
 _host_, it is the name of the docker _link_).
 
 Then run `docker-compose up` and open your browser at http://localhost:5000.
 
-You can access your python server machine with
-`docker-compose exec -it web` (you may need it to create a user for example).
-
-The sources in your docker server are in the _/app_ folder (`cd /app`).
+> You can access your python server machine with
+> `docker-compose exec -it web` (you may need it to create a user for example).
+>
+> The sources in your docker server are in the _/app_ folder (`cd /app`).
 
 
 ## Configuring

@@ -10,3 +10,13 @@ services:
       - "27017"
     ports:
       - "27017:27017"
+      
+  web:
+    image: jazzdd/alpine-flask:python3
+    restart: "always"
+    links:
+      - db
+    volumes:
+      - .:/app
+    ports:
+      - 5000:80
