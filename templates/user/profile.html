@@ -31,6 +31,17 @@
     event.target.about.value = document.querySelector('[contenteditable][name=about]').innerHTML
   })
 </script>
+<label><input type=checkbox name=localize {% if user.allow_localization %}value=on{% endif %}>Save my locations</label>
+<script>
+  document.querySelector('[name=localize]').addEventListener('change', event => {
+    fetch("{{ url_for('profile_edit_localize') }}", {
+      method: 'patch',
+      body: JSON.stringify(!!event.target.checked),
+      credentials: 'same-origin',
+      headers: {'Content-Type': 'application/json'}
+    })
+  })
+</script>
 {% endif %}
 </header>
 
