@@ -33,12 +33,16 @@ def htmlnewline(value):
     return do_mark_safe(value).replace('\n', '<br>')
 
 
+def url_for_user(user):
+    return url_for('profile', username=user.slug).replace('%40', '@')
+
+
+def url_for_article(article):
+    return url_for('article', author=article.author.slug, slug=article.slug,
+                   id=article.id).replace('%40', '@')
+
+
 @app.context_processor
 def utility_processor():
-    def url_for_user(user):
-        return url_for('profile', username=user.slug).replace('%40', '@')
-
-    def url_for_article(article):
-        return url_for('article', author=article.author.slug, slug=article.slug,
-                       id=article.id).replace('%40', '@')
-    return dict(url_for_user=url_for_user, url_for_article=url_for_article)
+    return dict(url_for_user=url_for_user,
+                url_for_article=url_for_article)

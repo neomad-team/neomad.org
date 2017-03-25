@@ -6,6 +6,7 @@ from flask import (
 from flask_login import current_user, login_required
 
 from core import app, db
+from core.helpers import url_for_article
 from user.models import User
 from .models import Article
 
@@ -36,7 +37,7 @@ def article_create():
 @app.route('/article/<string:id>/edit', methods=['post'])
 @login_required
 def article_edit(id):
-    user = User.object.get(id=current_user.id)
+    user = User.objects.get(id=current_user.id)
     try:
         article = Article.objects.get(author=user, id=id)
     except Article.DoesNotExist:
@@ -44,4 +45,4 @@ def article_edit(id):
     article.title = Markup(request.form.get('title')).striptags()
     article.content = request.form.get('content')
     article.save()
-    return redirect(request.url)
+    return redirect(url_for_article(article))

@@ -1,4 +1,4 @@
-{% if user.allow_localization %}
+{% if user and user.allow_localization %}
 <script>
 navigator.geolocation.getCurrentPosition(function(position) {
   fetch("{{ url_for('localize_add') }}", {
