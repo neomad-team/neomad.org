@@ -42,7 +42,7 @@
   </article>
 {% endif %}
 {% for article in articles %}
-  {% set url = url_for('article', author=user.slug, slug=article.slug) | replace('%40', '@') %}
+  {% set url = url_for_article(article) %}
   <article class=preview>
     <a href={{ url }}>
       <h1>{{ article.title|title }}</h1>
