@@ -7,6 +7,12 @@ from core import db, app
 from core.helpers import slugify
 
 
+class UserLocation(db.EmbeddedDocument):
+    date = db.DateTimeField(default=datetime.datetime.utcnow)
+    position = db.GeoPointField()
+    duration = db.IntField()
+
+
 class User(UserMixin, db.Document):
     email = db.EmailField(unique=True)
     password = db.StringField(required=True, min_length=32, max_length=120)
@@ -14,6 +20,8 @@ class User(UserMixin, db.Document):
     username = db.StringField()
     about = db.StringField()
     slug = db.StringField()
+    locations = db.EmbeddedDocumentListField(UserLocation, default=[])
+    allow_localization = db.BooleanField()
 
     def set_password(self, password):
         self.password = generate_password_hash(password)

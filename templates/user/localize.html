@@ -1,0 +1,14 @@
+{% if user.allow_localization %}
+<script>
+navigator.geolocation.getCurrentPosition(function(position) {
+  fetch("{{ url_for('localize_add') }}", {
+    method: 'post',
+    body: JSON.stringify([position.coords.latitude, position.coords.longitude]),
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+})
+</script>
+{% endif %}
