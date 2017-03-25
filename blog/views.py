@@ -33,12 +33,12 @@ def article_create():
     return render_template('blog/article.html', article=article, edit=True)
 
 
-@app.route('/@<string:author>/<string:slug>', methods=['post'])
+@app.route('/article/<string:id>/edit', methods=['post'])
 @login_required
-def article_edit(author, slug):
+def article_edit(id):
+    user = User.object.get(id=current_user.id)
     try:
-        author = User.objects.get(id=current_user.id)
-        article = Article.objects.get(author=author, slug=slug)
+        article = Article.objects.get(author=user, id=id)
     except Article.DoesNotExist:
         abort(404)
     article.title = Markup(request.form.get('title')).striptags()

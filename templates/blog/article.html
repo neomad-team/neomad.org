@@ -33,7 +33,7 @@
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.23.0/css/themes/tim.min.css>
 <link rel=stylesheet href=https://cdn.rawgit.com/orthes/medium-editor-insert-plugin/3.0/dist/css/medium-editor-insert.min.css>
 <script src=https://cdn.rawgit.com/orthes/medium-editor-insert-plugin/3.0/dist/js/medium-editor-insert.min.js></script>
-<form method=post action="" edit>
+<form method=post action={{ url_for('article_edit', id=article.id) }} edit>
   <div class=toolbar>
     <input type=hidden name=title>
     <input type=hidden name=content>
