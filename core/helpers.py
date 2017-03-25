@@ -37,4 +37,8 @@ def htmlnewline(value):
 def utility_processor():
     def url_for_user(user):
         return url_for('profile', username=user.slug).replace('%40', '@')
-    return dict(url_for_user=url_for_user)
+
+    def url_for_article(article):
+        return url_for('article', author=article.user.slug, slug=article.slug,
+                       id=article.id).replace('%40', '@')
+    return dict(url_for_user=url_for_user, url_for_article=url_for_article)
