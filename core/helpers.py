@@ -39,6 +39,6 @@ def utility_processor():
         return url_for('profile', username=user.slug).replace('%40', '@')
 
     def url_for_article(article):
-        return url_for('article', author=article.user.slug, slug=article.slug,
+        return url_for('article', author=article.author.slug, slug=article.slug,
                        id=article.id).replace('%40', '@')
     return dict(url_for_user=url_for_user, url_for_article=url_for_article)
