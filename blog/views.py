@@ -10,11 +10,11 @@ from user.models import User
 from .models import Article
 
 
-@app.route('/@<string:author>/<string:slug>', methods=['get'])
-def article(author, slug):
+@app.route('/@<string:author>/<string:slug>-<string:id>', methods=['get'])
+def article(author, slug, id):
     try:
         author = User.objects.get(slug=author)
-        article = Article.objects.get(author=author, slug=slug)
+        article = Article.objects.get(author=author, slug=slug, id=id)
     except Article.DoesNotExist:
         abort(404)
     return render_template('blog/article.html', article=article,
