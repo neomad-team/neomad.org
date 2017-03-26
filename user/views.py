@@ -10,44 +10,34 @@ from blog.models import Article
 from .models import User, UserLocation
 
 
-@app.route('/@<string:username>', methods=['get'])
+@app.route('/@<string:username>')
 def profile(username):
     try:
         user = User.objects.get(slug=username)
     except User.DoesNotExist:
         abort(404)
     return render_template('user/profile.html', user=user,
-                           articles=Article.objects(author=user))
+                           articles=Article.objects(author=user),
+                           edit=user.id == current_user.id)
 
 
-@app.route('/profile', methods=['get', 'post'])
+@app.route('/profile/edit', methods=['patch'])
 @login_required
 def profile_edit():
+    data = request.json
+    permitted_fields = ['username', 'about', 'allow_localization']
     user = User.objects.get(id=current_user.id)
-    if request.method == 'POST':
-        data = request.form
-        picture = request.files.get('picture')
-        if 'username' in data:
-            user.username = Markup(data['username']).striptags()
-        if 'about' in data:
-            user.about = (Markup(data['about'].replace('<br>', '\^n^'))
-                          .striptags().replace('\^n^', '\n'))
-        user.save()
-        if picture:
-            picture.save('{}/{}'.format(app.config.get('AVATARS_PATH'),
-                         user.id))
-        return redirect(request.url)
-    articles = Article.objects(author=user)
-    return render_template('user/profile.html', user=user, articles=articles,
-                           edit=True)
-
-
-@app.route('/profile/edit/localize', methods=['patch'])
-def profile_edit_localize():
-    user = User.objects.get(id=current_user.id)
-    user.allow_localization = bool(request.json)
+    for field, value in data.items():
+        if not field in permitted_fields:
+            return '', 403
+        setattr(user, field, value)
     user.save()
-    return '', 200
+    return '', 400
+
+    if picture:
+        picture.save('{}/{}'.format(app.config.get('AVATARS_PATH'),
+                     user.id))
+    return redirect(request.url)
 
 
 @app.route('/localize/add', methods=['post'])
@@ -68,4 +58,4 @@ def localize_add():
     if new_location:
         user.locations.append(UserLocation(position=user_position))
     user.save()
-    return ''
+    return '', 200

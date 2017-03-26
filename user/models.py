@@ -1,7 +1,8 @@
 import datetime
 
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Markup
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from core import db, app
 from core.helpers import slugify
@@ -33,6 +34,13 @@ class User(UserMixin, db.Document):
     @property
     def avatar(self):
         return '{}/{}'.format(app.config.get('AVATARS_URL'), self.id)
+
+    def clean_username(self):
+        self.username = Markup(self.username).striptags()
+
+    def clean_about(self):
+        self.about = (Markup(self.about.replace('<br>', '\^n^'))
+                      .striptags().replace('\^n^', '\n'))
 
     def __str__(self):
         return self.username

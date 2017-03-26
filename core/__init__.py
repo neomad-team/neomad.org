@@ -1,8 +1,9 @@
 import os
 
-import mongoengine as db
+import mongoengine
 from flask import Flask, render_template
 
+from . import mongoengine as db
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__) + '/..')
 os.environ.setdefault('SETTINGS', PROJECT_PATH + '/settings.py')
