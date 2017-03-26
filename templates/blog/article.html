@@ -12,16 +12,14 @@
     </a>
     <div>
       <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
-      <p>{{ article.author.about }}</p>
+      <p>{{ article.author.about|htmlnewline }}</p>
       <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date|datetime }}</time>
     </div>
   </section>
 
-  <h1 contenteditable={{edit|boolean}} name=title>{{ article.title or 'Article title' }}</h1>
-
-  {# this is not `contenteditable` as MediumEditor below will make it editable #}
+  <h1 name=title>{{ article.title or 'Insert your title here' }}</h1>
   <div class=content name=content>
-    {{ article.content|safe or '<p>Insert your content here</p>'|safe }}
+    {{ (article.content or '<p>Insert your title here</p>')|safe }}
   </div>
 </article>
 
@@ -33,7 +31,9 @@
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.23.0/css/themes/tim.min.css>
 <link rel=stylesheet href=https://cdn.rawgit.com/orthes/medium-editor-insert-plugin/3.0/dist/css/medium-editor-insert.min.css>
 <script src=https://cdn.rawgit.com/orthes/medium-editor-insert-plugin/3.0/dist/js/medium-editor-insert.min.js></script>
-<form method=post action={{ url_for('article_edit', id=article.id) }} edit>
+
+{% set url = url_for('article_edit', id=article.id) if article.id else url_for('article_create')  %}
+<form method=post action={{ url }} edit>
   <div class=toolbar>
     <input type=hidden name=title>
     <input type=hidden name=content>
@@ -41,17 +41,28 @@
   </div>
 </form>
 <script>
-  var markDownEl = document.createElement('div')
-  var editor = new MediumEditor('.content', {
+  document.querySelector('[name=title]').setAttribute('contenteditable', true)
+
+  new MediumEditor('article .content', {
     toolbar: {
       buttons: ['h2', 'h3', 'bold', 'italic', 'anchor', 'quote']
     },
     extensions: {
       insert: new MediumEditorInsert()
-    }
-  });
-  document.forms[0].addEventListener('submit', event => {
-    event.target.title.value = document.querySelector('[contenteditable][name=title]').innerHTML
+    },
+    paste: {
+        forcePlainText: true,
+        cleanPastedHTML: true,
+        cleanReplacements: [],
+        cleanAttrs: ['class', 'style', 'dir'],
+        cleanTags: ['meta'],
+        unwrapTags: []
+    },
+    disableDoubleReturn: true,
+    disableExtraSpaces: true
+  })
+  document.querySelector('form[edit]').addEventListener('submit', event => {
+    event.target.title.value = document.querySelector('[contenteditable][name=title]').textContent
     event.target.content.value = document.querySelector('[contenteditable][name=content]').innerHTML
   })
 </script>

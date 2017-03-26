@@ -18,8 +18,10 @@ def article(author, slug, id):
         article = Article.objects.get(author=author, slug=slug, id=id)
     except Article.DoesNotExist:
         abort(404)
+    except db.errors.ValidationError:
+        abort(404)
     return render_template('blog/article.html', article=article,
-                           edit=author==current_user)
+                           edit=(author == current_user))
 
 
 @app.route('/article/write', methods=['get', 'post'])
