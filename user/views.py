@@ -19,8 +19,7 @@ def profile(username):
         abort(404)
     return render_template('user/profile.html', user=user,
                            articles=Article.objects(author=user),
-                           edit=(current_user.is_authenticated and
-                                 user.id == current_user.id))
+                           edit=(user == current_user))
 
 
 @app.route('/profile/edit', methods=['patch'])
