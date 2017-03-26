@@ -3,6 +3,7 @@ from flask_login import login_user, logout_user
 
 from core import app
 from user.models import User
+from core.helpers import url_for_user
 
 
 @app.route('/login', methods=['get', 'post'])
@@ -14,7 +15,7 @@ def login():
             user = User.objects.get(email=request.form['email'])
             if user.check_password(password=request.form['password']):
                 login_user(user)
-                return redirect(url_for('profile'))
+                return redirect(url_for_user(user))
         except User.DoesNotExist:
             errors.append(invalid)
         else:

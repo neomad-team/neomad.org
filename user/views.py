@@ -1,4 +1,5 @@
 import datetime
+import base64
 
 from flask import render_template, redirect, url_for, request, abort, Markup
 from flask_login import current_user, login_required
@@ -18,7 +19,8 @@ def profile(username):
         abort(404)
     return render_template('user/profile.html', user=user,
                            articles=Article.objects(author=user),
-                           edit=user.id == current_user.id)
+                           edit=(current_user.is_authenticated and
+                                 user.id == current_user.id))
 
 
 @app.route('/profile/edit', methods=['patch'])
@@ -33,11 +35,21 @@ def profile_edit():
         setattr(user, field, value)
     user.save()
     return '', 200
-    #
-    # if picture:
-    #     picture.save('{}/{}'.format(app.config.get('AVATARS_PATH'),
-    #                  user.id))
-    # return redirect(request.url)
+
+
+@app.route('/profile/edit/avatar', methods=['patch'])
+@login_required
+def profile_edit_avatar():
+    try:
+        user = User.objects.get(id=current_user.id)
+    except User.DoesNotExist:
+        abort(404)
+    meta, data = request.json['data'].split(',')
+    stream = open('{}/{}'.format(app.config.get('AVATARS_PATH'), user.id),
+                  'wb')
+    stream.write(base64.b64decode(data))
+    stream.close()
+    return user.avatar, 200
 
 
 @app.route('/localize/add', methods=['post'])

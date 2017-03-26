@@ -7,7 +7,7 @@
 {% block main %}
 <header>
   <figure>
-    <img class=avatar src={{ user.avatar }} width=100 height=100 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
+    <img class=avatar name=avatar src={{ user.avatar }} width=100 height=100 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
   </figure>
   <div>
     <h1 name=username>{{ user.username or 'Insert a username' }}</h1>
@@ -56,7 +56,7 @@
   const localizeField = document.querySelector('[name=localize]')
   localizeField.addEventListener('change', event => {
     const call = api.send('patch', "{{ url_for('profile_edit') }}",
-      JSON.stringify({allow_localization: event.target.checked})
+      {allow_localization: event.target.checked}
     )
     apiFeedback(call, 'Your localization preference has been updated.')
   })
@@ -65,14 +65,37 @@
   aboutField.setAttribute('contenteditable', true)
   aboutField.addEventListener('blur', event => {
     const call = api.send('patch', "{{ url_for('profile_edit') }}",
-      JSON.stringify({about: event.target.innerHTML})
+      {about: event.target.innerHTML}
     )
     apiFeedback(call, 'You description has been updated.')
   })
 
+  const avatarField = document.querySelector('[name=avatar]')
+  const uploadField = document.createElement('input')
+  uploadField.type = 'file'
+  uploadField.name = 'avatar'
+  avatarField.after(uploadField)
+  uploadField.addEventListener('change', event => {
+    const reader = new FileReader()
+    reader.addEventListener('load', event => {
+      const call = api.send('patch', "{{ url_for('profile_edit_avatar') }}",
+        {data: event.target.result}
+      )
+      apiFeedback(call, "Your profile picture has been updated.")
+      .then(response => {
+        return response.text()
+      })
+      .then(url => {
+        // url is cached
+        avatarField.src = url + '?' + Math.random()
+      })
+    })
+    reader.readAsDataURL(event.target.files[0])
+  })
+
 
   function apiFeedback(caller, confirmation) {
-    caller.then(response => {
+    return caller.then(response => {
       const status = response.status
       if(status == 200) {
         alert('success', confirmation)
@@ -81,8 +104,10 @@
         alert('error', `An error occured. Technical detail: response status ${status}`)
         console.error(response)
       }
+      return response
     }, error => {
       alert('error', error)
+      return error
     })
   }
 
@@ -90,7 +115,7 @@
     send(method, url, data) {
       return fetch(url, {
         method: method,
-        body: data,
+        body: JSON.stringify(data),
         credentials: 'same-origin',
         headers: {'Content-Type': 'application/json'}
       })
