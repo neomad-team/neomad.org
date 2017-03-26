@@ -1,14 +1,21 @@
-{% if user and user.allow_localization %}
 <script>
-navigator.geolocation.getCurrentPosition(function(position) {
-  fetch("{{ url_for('localize_add') }}", {
-    method: 'post',
-    body: JSON.stringify([position.coords.latitude, position.coords.longitude]),
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json'
-    }
+function localize() {
+  navigator.geolocation.getCurrentPosition(position => {
+    fetch("{{ url_for('localize_add') }}", {
+      method: 'post',
+      body: JSON.stringify([position.coords.latitude, position.coords.longitude]),
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
   })
+}
+document.querySelector('[name=localize]').addEventListener('change', event => {
+  const toggle = event.target
+  if(toggle.checked) {
+    localize()
+  }
 })
+{% if user and user.allow_localization %}localize(){% endif %}
 </script>
-{% endif %}
