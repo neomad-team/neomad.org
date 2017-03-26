@@ -6,7 +6,7 @@ from flask import (
 from flask_login import current_user, login_required
 
 from core import app, db
-from core.helpers import url_for_article
+from core.helpers import url_for_user, url_for_article
 from user.models import User
 from .models import Article
 
@@ -22,7 +22,7 @@ def article(author, slug, id):
                            edit=author==current_user)
 
 
-@app.route('/article/new', methods=['get', 'post'])
+@app.route('/article/write', methods=['get', 'post'])
 @login_required
 def article_create():
     article = Article(content='')
@@ -46,3 +46,15 @@ def article_edit(id):
     article.content = request.form.get('content')
     article.save()
     return redirect(url_for_article(article))
+
+
+
+@app.route('/article/<string:id>/delete', methods=['get'])
+@login_required
+def article_delete(id):
+    user = User.objects.get(id=current_user.id)
+    try:
+        article = Article.objects.get(author=user, id=id).delete()
+    except Article.DoesNotExist:
+        abort(404)
+    return redirect(url_for_user(user))

@@ -32,12 +32,12 @@ def profile_edit():
             return '', 403
         setattr(user, field, value)
     user.save()
-    return '', 400
-
-    if picture:
-        picture.save('{}/{}'.format(app.config.get('AVATARS_PATH'),
-                     user.id))
-    return redirect(request.url)
+    return '', 200
+    #
+    # if picture:
+    #     picture.save('{}/{}'.format(app.config.get('AVATARS_PATH'),
+    #                  user.id))
+    # return redirect(request.url)
 
 
 @app.route('/localize/add', methods=['post'])

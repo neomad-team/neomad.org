@@ -14,7 +14,7 @@ def login():
             user = User.objects.get(email=request.form['email'])
             if user.check_password(password=request.form['password']):
                 login_user(user)
-                return redirect(url_for('profile_edit'))
+                return redirect(url_for('profile'))
         except User.DoesNotExist:
             errors.append(invalid)
         else:

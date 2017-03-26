@@ -30,7 +30,7 @@ def boolean(value):
 def htmlnewline(value):
     if not value:
         return ''
-    return do_mark_safe(value).replace('\n', '<br>')
+    return do_mark_safe(value.replace('\n', '<br>'))
 
 
 def url_for_user(user):
