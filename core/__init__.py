@@ -1,6 +1,5 @@
 import os
 
-import mongoengine
 from flask import Flask, render_template
 
 from . import mongoengine as db
