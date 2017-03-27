@@ -1,5 +1,5 @@
 from flask import request, render_template, redirect, url_for
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 
 from core import app
 from user.models import User
@@ -8,6 +8,11 @@ from core.helpers import url_for_user
 
 @app.route('/login', methods=['get', 'post'])
 def login():
+    try:
+        user = User.objects.get(id=current_user.id)
+        return redirect(url_for_user(user))
+    except:
+        pass
     errors = []
     invalid = 'Do you have an account? Please check your email and password.'
     if request.method == 'POST':
