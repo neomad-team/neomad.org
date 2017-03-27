@@ -47,15 +47,15 @@
   const usernameField = document.querySelector('[name=username]')
   usernameField.setAttribute('contenteditable', true)
   usernameField.addEventListener('blur', event => {
-    const call = api.send('patch', "{{ url_for('profile_edit') }}",
-      JSON.stringify({username: event.target.textContent})
+    const call = api.send('post', "{{ url_for('profile_edit') }}",
+      {username: event.target.textContent}
     )
     apiFeedback(call, 'Your username has been updated.')
   })
 
   const localizeField = document.querySelector('[name=localize]')
   localizeField.addEventListener('change', event => {
-    const call = api.send('patch', "{{ url_for('profile_edit') }}",
+    const call = api.send('post', "{{ url_for('profile_edit') }}",
       {allow_localization: event.target.checked}
     )
     apiFeedback(call, 'Your localization preference has been updated.')
@@ -65,7 +65,7 @@
   const aboutField = document.querySelector('[name=about]')
   aboutField.setAttribute('contenteditable', true)
   aboutField.addEventListener('blur', event => {
-    const call = api.send('patch', "{{ url_for('profile_edit') }}",
+    const call = api.send('post', "{{ url_for('profile_edit') }}",
       {about: event.target.innerHTML}
     )
     apiFeedback(call, 'You description has been updated.')
@@ -79,7 +79,7 @@
   uploadField.addEventListener('change', event => {
     const reader = new FileReader()
     reader.addEventListener('load', event => {
-      const call = api.send('patch', "{{ url_for('profile_edit_avatar') }}",
+      const call = api.send('post', "{{ url_for('profile_edit_avatar') }}",
         {data: event.target.result}
       )
       apiFeedback(call, "Your profile picture has been updated.")
