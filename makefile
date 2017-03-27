@@ -40,7 +40,7 @@ install:
 	python3 -m venv venv
 	@echo "/venv/" >> `pwd`/.git/info/exclude
 	source `pwd`/venv/bin/activate
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
 
 	@make title text="Running your dabase"
 	docker-compose up -d db
