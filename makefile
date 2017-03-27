@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 git_update=git fetch origin master && git reset --hard FETCH_HEAD
 goto_src=cd ~/src
 
@@ -13,8 +15,9 @@ server_reload:
 deploy: server_update server_reload
 
 title:
+	echo $SHELL
 	@echo "\n\033[92m>>> $(text)\033[0m"
-	
+
 start:
 	@make title text="Running your project. Open your browser at http://localhost:5000"
 	source `pwd`/venv/bin/activate
@@ -39,7 +42,7 @@ install:
 	@make title text="Installing your Python environment"
 	python3 -m venv venv
 	@echo "/venv/" >> `pwd`/.git/info/exclude
-	source `pwd`/venv/bin/activate
+	. `pwd`/venv/bin/activate
 	pip3 install -r requirements.txt
 
 	@make title text="Running your dabase"
