@@ -4,7 +4,9 @@ MongoDocument = Document
 
 
 class Document(MongoDocument):
-    meta = {'allow_inheritance': True}
+    meta = {
+        'abstract': True,
+    }
 
     def clean(self):
         for field in self._get_changed_fields():
