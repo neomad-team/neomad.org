@@ -26,6 +26,7 @@ form[edit] .toolbar button {
 
 [contenteditable=true] {
   position: relative;
+  line-height: 1;
   border-bottom: 1px dashed transparent;
   transition: .2s border-bottom-color;
 }
@@ -52,10 +53,11 @@ form[edit] .toolbar button {
 [type="checkbox"] {
   position: absolute;
   opacity: 0.01;
-  width: 60px;
-  height: 20px;
+  width: 6rem;
+  height: 3rem;
   cursor: pointer;
 }
+
 [type="checkbox"] + label {
   position: relative;
   padding-left: 4.5em;
@@ -97,12 +99,11 @@ form[edit] .toolbar button {
 }
 [type="checkbox"]:checked + label:after {
   background: #fff;
-  left: 1.5em;
+  left: 2.5rem;
 }
 [type="checkbox"]:focus + label:before {
   border: 1px dashed #777;
-  box-sizing: border-box;
-  margin-top: -1px;
+  margin-top: 1px;
 }
 
 #notification[class=""] {
