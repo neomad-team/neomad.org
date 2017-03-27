@@ -1,3 +1,4 @@
+{% if current_user and current_user.is_authenticated %}
 <script>
 function localize() {
   navigator.geolocation.getCurrentPosition(position => {
@@ -11,5 +12,6 @@ function localize() {
     })
   })
 }
-{% if user and user.allow_localization %}localize(){% endif %}
+{% if current_user and current_user.allow_localization %}localize(){% endif %}
 </script>
+{% endif %}

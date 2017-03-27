@@ -75,7 +75,8 @@
   const uploadField = document.createElement('input')
   uploadField.type = 'file'
   uploadField.name = 'avatar'
-  avatarField.after(uploadField)
+  // avatarField.after(uploadField)  # is not cross compatible
+  avatarField.parentNode.insertBefore(uploadField, avatarField.nextSibling )
   uploadField.addEventListener('change', event => {
     const reader = new FileReader()
     reader.addEventListener('load', event => {
