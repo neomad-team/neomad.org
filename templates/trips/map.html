@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+<link href=https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css rel=stylesheet>
+<link rel=stylesheet href={{ url_for('static', filename='css/trips-map.css') }}>
+<script src=https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.js></script>
+ {% endblock %}
+
+{% block main %}
+<h1>Where <em>{{ user }}</em> has traveled</h1>
+<div id=map></div>
+{% for point in points %}
+<p>{{ point }}</p>
+{% endfor %}
+{% if not user.allow_localization %}
+<p>{{user}} did not permit localization. Unfortunatly we cannot build the maps with his trips.</p>
+{% endif %}
+<script>
+  var locations = [
+  {% for location in locations %}
+    {
+      date: '{{ location.date|datetime }}',
+      position: {{ location.position }}
+    },
+  {% endfor %}
+  ]
+</script>
+<script src={{ url_for('static', filename='js/trips-map.js') }}></script>
+{% endblock %}
