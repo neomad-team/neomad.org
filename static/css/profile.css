@@ -70,3 +70,14 @@ article > a.write {
   opacity: .2;
   width: 50%;
 }
+
+@media screen and (max-width:700px) {
+  main header {
+    padding: 5rem 3rem;
+  }
+  main > header figure {
+    order: 0;
+    margin-bottom: 5rem;
+    text-align: left;
+  }
+}

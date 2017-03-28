@@ -146,3 +146,11 @@ form[edit] .toolbar button {
   color: #a27c43;
   border-color: #dacab2;
 }
+
+@media screen and (max-width:800px) {
+  #notification {
+    width: 100%;
+    min-width: 0;
+    margin-left: 0;
+  }
+}
