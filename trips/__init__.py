@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, abort
 
 from core import app
 from user.models import User
