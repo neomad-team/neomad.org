@@ -13,6 +13,9 @@ class UserLocation(db.EmbeddedDocument):
     position = db.GeoPointField()
     duration = db.IntField()
 
+    def __str__(self):
+        return str(self.position)
+
 
 class User(UserMixin, db.Document):
     email = db.EmailField(unique=True)
