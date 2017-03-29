@@ -5,6 +5,7 @@ from flask_login import login_required, current_user
 
 from core import app
 from user.models import User
+from .models import UserLocation
 from .utils import distance
 
 
@@ -24,17 +25,23 @@ def trips(user):
 def trips_add():
     user = User.objects.get(id=current_user.id)
     user_position = request.json
-    new_location = False
-    if user.locations:
-        index = user.locations.count() - 1
-        latest_location = user.locations[index]
-        # user is still in the same area
-        if distance(latest_location.position, user_position) < 25:
-            duration = ((datetime.datetime.utcnow() - latest_location.date)
-                        .seconds)
-            latest_location.duration += duration
-            user.locations[index] = latest_location
-    if new_location:
+    if not user.locations:
+        user.locations = [UserLocation(position=user_position)]
+        user.save()
+        return '', 201
+
+    index = user.locations.count() - 1
+    latest_location = user.locations[index]
+    # user is still in the same area
+    if distance(latest_location.position, user_position) < 25:
+        duration = ((datetime.datetime.utcnow() - latest_location.date)
+                    .seconds)
+        latest_location.duration += duration
+        user.locations[index] = latest_location
+        status = 202
+    # user has moved consistently
+    else:
         user.locations.append(UserLocation(position=user_position))
+        status = 201
     user.save()
-    return '', 200
+    return '', status
