@@ -44,5 +44,9 @@ def url_for_article(article):
 
 @app.context_processor
 def utility_processor():
-    return dict(url_for_user=url_for_user,
-                url_for_article=url_for_article)
+    return dict(
+        url_for_user=url_for_user,
+        url_for_article=url_for_article,
+        url_for_trips=url_for_trips,
+        is_debug=app.debug,
+    )
