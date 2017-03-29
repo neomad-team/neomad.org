@@ -18,11 +18,15 @@ main header {
   margin-bottom: 3rem;
   line-height: 1.3rem;
 }
-main header > form {
+main header > section {
   flex-basis: 100%;
-  display: inline-flex;
+  /*display: inline-flex;*/
   order: 2;
   margin-top: 5rem;
+}
+main header > section > a {
+  display: block;
+  margin-top: 2rem;
 }
 main header > form input[type=file] {
   width: 100%;
@@ -34,13 +38,7 @@ main > header figure {
   align-content: flex-end;
   text-align: right;
 }
-/*main > header > section {
-  max-width: 85%;
-  color: #888;
-  font-size: .9em;
-}*/
 main > header div {
-  /*padding-right: 2em;*/
   flex: 1 1;
 }
 main > header h1 {
