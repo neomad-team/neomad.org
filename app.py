@@ -4,6 +4,7 @@ from core import app
 from auth import *
 from core.helpers import *
 from blog import *
+from trips import *
 if app.config['DEBUG']:
     from core.debug import *
 

@@ -13,13 +13,16 @@
     <h1 name=username>{{ user.username or 'Insert a username' }}</h1>
     <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
   </div>
-  {% if edit %}
-  <form>
-    <div>
-      <input type=checkbox name=localize {% if user.allow_localization %}checked{% endif %} id=localize><label for=localize title="enable travel tracking services">Save my locations</label>
-    </div>
-  </form>
-  {% endif %}
+  <section>
+    {% if edit %}
+    <form>
+      <div>
+        <input type=checkbox name=localize {% if user.allow_localization %}checked{% endif %} id=localize><label for=localize title="enable travel tracking services">Follow my trips</label>
+      </div>
+    </form>
+    {% endif %}
+    <a href={{ url_for_trips(user) }}>{% if edit %}View my trips.{% else %}View {{ user }}'s trips.{% endif %}</a>
+  </section>
 </header>
 
 <section class=articles>

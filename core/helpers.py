@@ -42,6 +42,9 @@ def url_for_article(article):
                    id=article.id).replace('%40', '@')
 
 
+def url_for_trips(user):
+    return url_for('trips', user=user.slug).replace('%40', '@')
+
 @app.context_processor
 def utility_processor():
     return dict(
