@@ -1,10 +1,11 @@
 import os
 
 from core import app
-from auth import *
 from core.helpers import *
-from blog import *
-from trips import *
+from user.views import *
+from auth.views import *
+from blog.views import *
+from trips.views import *
 if app.config['DEBUG']:
     from core.debug import *
 
