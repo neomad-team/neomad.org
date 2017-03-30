@@ -11,6 +11,12 @@ from user.models import User
 from .models import Article
 
 
+@app.route('/articles')
+def article_list():
+    articles = Article.objects.all()
+    return render_template('blog/article_list.html', articles=articles)
+
+
 @app.route('/@<string:author>/<string:slug>-<string:id>', methods=['get'])
 def article(author, slug, id):
     try:
