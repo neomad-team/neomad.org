@@ -1,12 +1,8 @@
-import base64
-import re
-from io import BytesIO
-
 from flask import render_template, request, abort
 from flask_login import current_user, login_required
-from PIL import Image
 
 from core import app
+from core.utils import save_base64_image
 from blog.models import Article
 from .models import User
 
@@ -45,14 +41,7 @@ def profile_edit_avatar():
         user = User.objects.get(id=current_user.id)
     except User.DoesNotExist:
         abort(404)
-    meta, data = request.json['data'].split(',')
-    try:
-        format_ = re.findall('data:\w+/(\w+);base64', meta)[0]
-    except KeyError:
-        format_ = 'jpeg'
-    image_data = BytesIO(base64.b64decode(data))
-    image = Image.open(image_data)
-    image.thumbnail((200, 200))
-    image.save('{}/{}'.format(app.config.get('AVATARS_PATH'), user.id),
-               format=format_)
+    save_base64_image(request.json['data'],
+                      '{}/{}'.format(app.config.get('AVATARS_PATH'), user.id),
+                      (200, 200))
     return user.avatar, 201
