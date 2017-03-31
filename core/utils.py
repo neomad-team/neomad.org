@@ -5,6 +5,9 @@ from io import BytesIO
 from PIL import Image
 
 
+def is_base64(data):
+    return len(re.findall('^data:\w+/(\w+);base64,', data))
+
 def save_base64_image(data, output, size=None):
     meta, data = data.split(',')
     try:
