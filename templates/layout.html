@@ -10,7 +10,12 @@
 <header>
   <h1><a href="/">Neomad</a></h1>
   {% if current_user and current_user.is_authenticated %}
-  <a href={{ url_for('logout') }}>Logout</a>
+  <nav>
+    <a href={{ url_for_user(current_user) }} title="My profile">
+      <img class=avatar src="{{ current_user.avatar }}" width=35 height=35>
+    </a>
+    <a class=button href={{ url_for('logout') }}>Logout</a>
+  </nav>
   {% endif %}
 </header>
 
