@@ -33,3 +33,7 @@ install_files:
 
 	@make title text="Creating your config file"
 	test -e settings.py || cp settings.example.py settings.py
+
+fixtures:
+	@make title text="Inserting fixtures data"
+	bash -c "source ./venv/bin/activate && python3 bin/fixtures.py"

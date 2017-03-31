@@ -25,6 +25,7 @@ The next steps are also simple. Choose your story:
 - for lazy testers: choose the [full-docker install](#full-docker-installation)
 - for developers who want to keep control: read the [Manual installation](#manual-installation)
 
+> You may then want to [create a user](#creating-a-user) or to insert dummy data (`make fixtures`).
 
 ### Lazy developer installation
 
@@ -80,10 +81,13 @@ Tune your settings there.
 ### Creating a user
 
 Users must currently be created manually.
-To do so, activate your virtualenv `source ./venv/bin/activate` and run the
+To do so, activate your _virtualenv_ `source ./venv/bin/activate` and run the
 following command:
 
     make create_user email=me@home.net password=mypass
 
 You can now log on http://localhost/5000/login with "_me@home.net_" email
 and "_mypass_" as password.
+
+> For development, you may want to create a whole set of dummy data.
+> To do so, just run: `make fixtures`
