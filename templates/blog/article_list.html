@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+{% for article in articles %}
+<article>
+  <h1>{{ article.title }}</h1>
+  <p>{{ article.content|truncate(200) }}</p>
+</article>
+{% endfor %}
+{% endblock %}

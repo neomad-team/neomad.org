@@ -2,7 +2,7 @@
 <script>
 function localize() {
   navigator.geolocation.getCurrentPosition(position => {
-    fetch("{{ url_for('localize_add') }}", {
+    fetch("{{ url_for('trips_add') }}", {
       method: 'post',
       body: JSON.stringify([position.coords.latitude, position.coords.longitude]),
       credentials: 'same-origin',

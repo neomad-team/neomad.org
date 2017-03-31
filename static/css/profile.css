@@ -3,40 +3,42 @@ body > header {
 }
 
 main {
-  margin-top: 60px;
+  margin-top: 6rem;
 }
 
 main header {
   width: 100%;
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: space;
+  flex-wrap: wrap;
   background-color: #fff;
   border-bottom: 3px solid #eee;
-  padding: 3em calc(50% - 300px);
-  margin-bottom: 3em;
-  line-height: 1.3em;
+  padding: 3em calc(50% - 30rem);
+  margin-bottom: 3rem;
+  line-height: 1.3rem;
 }
-main header > form {
-  display: inline-flex;
+main header > section {
+  flex-basis: 100%;
+  /*display: inline-flex;*/
+  order: 2;
+  margin-top: 5rem;
+}
+main header > section > a {
+  display: block;
+  margin-top: 2rem;
 }
 main header > form input[type=file] {
   width: 100%;
   overflow: auto;
 }
 main > header figure {
-  flex: 0 0 100px;
-  height: 100px;
+  flex-basis: 10rem;
   order: 1;
   align-content: flex-end;
-  display: block;
-}
-main > header > section {
-  max-width: 85%;
-  color: #888;
-  font-size: .9em;
+  text-align: right;
 }
 main > header div {
-  padding-right: 2em;
   flex: 1 1;
 }
 main > header h1 {
@@ -65,4 +67,15 @@ article > a.write {
 .newtext.title {
   opacity: .2;
   width: 50%;
+}
+
+@media screen and (max-width:700px) {
+  main header {
+    padding: 5rem 3rem;
+  }
+  main > header figure {
+    order: 0;
+    margin-bottom: 5rem;
+    text-align: left;
+  }
 }

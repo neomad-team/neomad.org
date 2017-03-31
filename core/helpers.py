@@ -51,4 +51,5 @@ def utility_processor():
         url_for_user=url_for_user,
         url_for_article=url_for_article,
         url_for_trips=url_for_trips,
+        is_debug=app.debug,
     )

@@ -1,15 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:700');
 @import url('https://fonts.googleapis.com/css?family=Lora');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 * {
   box-sizing: border-box;
 }
 
 html {
+  font-size: 62.5%; /* 10px */
+  font-size: calc(1em * 0.625); /* fix */
   background-color: #fafafa;
 }
+
 body {
-  font-size: 17px;
+  font-size: 1.7rem;
   line-height: 1.5;
   margin: 0;
   color: rgba(0, 0, 0, .73);
@@ -135,4 +139,11 @@ figure {
 img.avatar {
   border-radius: 100%;
   margin-right: 10px;
+}
+
+@media screen and (max-width:700px) {
+  article {
+    width: 100%;
+    padding: 0 2rem;
+  }
 }

@@ -3,8 +3,6 @@ from flask_login import LoginManager
 from core import app
 from user.models import User
 
-from . import views
-
 
 login_manager = LoginManager(app)
 

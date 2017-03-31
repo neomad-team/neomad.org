@@ -7,11 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from core import db, app
 from core.helpers import slugify
 
-
-class UserLocation(db.EmbeddedDocument):
-    date = db.DateTimeField(default=datetime.datetime.utcnow)
-    position = db.GeoPointField()
-    duration = db.IntField()
+from trips.models import UserLocation
 
     def __str__(self):
         return str(self.position)

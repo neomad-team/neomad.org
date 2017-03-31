@@ -12,20 +12,19 @@ server_reload:
 
 deploy: server_update server_reload
 
-title:
-	@echo "\n\033[92m>>> $(text)\033[0m"
+install:
+	bash -c "bin/install.sh"
 
 start:
-	@make title text="Running your project. Open your browser at http://localhost:5000"
-	( \
-		source ./venv/bin/activate; \
-		python app.py; \
-	)
+	bash -c "bin/start.sh"
 
 create_user:  # arguments: email="" password=""
 	@make title text="Creating a user. Email: $(email), password: $(password)"
 	@python3 -c "from user.models import User;\
 	User(email='$(email)').set_password('$(password)').save()"
+
+title:
+	@echo "\n\033[92m>>> $(text)\033[0m"
 
 install_files:
 	@make title text="Creating uploads dir"
@@ -34,21 +33,3 @@ install_files:
 
 	@make title text="Creating your config file"
 	test -e settings.py || cp settings.example.py settings.py
-
-install:
-	make install_files
-
-	@make title text="Installing your Python environment"
-	(python3 -m venv venv)
-	@echo "/venv/" >> `pwd`/.git/info/exclude
-	( \
-		source ./venv/bin/activate; \
-		pip3 install -r requirements.txt; \
-	)
-
-	@make title text="Running your dabase"
-	docker-compose up -d db
-
-	make create_user email="my@email.com" password="mypass"
-
-	@make start
