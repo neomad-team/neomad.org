@@ -59,7 +59,7 @@
         unwrapTags: []
     },
     disableDoubleReturn: true,
-    disableExtraSpaces: true
+    disableExtraSpaces: false
   })
   document.querySelector('form[edit]').addEventListener('submit', event => {
     event.target.title.value = document.querySelector('[contenteditable][name=title]').textContent
