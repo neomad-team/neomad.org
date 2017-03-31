@@ -102,7 +102,7 @@
   function apiFeedback(caller, confirmation) {
     return caller.then(response => {
       const status = response.status
-      if(status == 200) {
+      if(200 <= status < 300) {
         alert('success', confirmation)
       }
       else {
