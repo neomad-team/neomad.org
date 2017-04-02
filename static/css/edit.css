@@ -49,16 +49,18 @@ form[edit] .toolbar .delete {
 [type="checkbox"] {
   position: absolute;
   opacity: 0.01;
-  width: 6rem;
-  height: 3rem;
+  width: 4.5rem;
+  height: 2rem;
   cursor: pointer;
 }
 
 [type="checkbox"] + label {
   position: relative;
-  padding-left: 4.5em;
+  padding-left: 6rem;
   cursor: pointer;
+  padding-top: .5rem;
   z-index: 5;
+
 }
 [type="checkbox"] + label:before,
 [type="checkbox"] + label:after {
