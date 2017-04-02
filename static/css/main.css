@@ -147,3 +147,21 @@ img.avatar {
     padding: 0 2rem;
   }
 }
+
+button,
+.button {
+  font-size: inherit;
+  font-weight: bold;
+  display: inline-block;
+  padding: 5px 20px;
+  border-radius: 3px;
+  background-color: #e7fee7;
+  color: #43a243;
+  border: 1px solid #b2dab2;
+  text-decoration: none;
+}
+.delete {
+  background-color: #fee7e7;
+  color: #a24343;
+  border-color: #dab2b2;
+}

@@ -38,6 +38,9 @@
     <input type=hidden name=title>
     <input type=hidden name=content>
     <button type=submit>Save</button>
+    {% if article.id %}
+    <a class="button delete" href={{ url_for('article_delete', id=article.id) }}>Delete</a>
+    {% endif %}
   </div>
 </form>
 <script>

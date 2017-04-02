@@ -12,18 +12,9 @@ form[edit] .toolbar {
   padding: 10px 20px;
   text-align: right;
 }
-
-form[edit] .toolbar button {
-  font-size: inherit;
-  font-weight: bold;
-  display: inline-block;
-  padding: 5px 20px;
-  background-color: #71d459;
-  color: #154110;
-  border: 1px solid #309226;
-  border-radius: 3px;
+form[edit] .toolbar .delete {
+  float: left;
 }
-
 [contenteditable=true] {
   position: relative;
   line-height: 1;
