@@ -79,10 +79,15 @@
 
   const avatarField = document.querySelector('[name=avatar]')
   const uploadField = document.createElement('input')
+  const uploadLabel = document.createElement('label')
   uploadField.type = 'file'
   uploadField.name = 'avatar'
+  uploadField.id = 'avatar-field'
+  uploadLabel.textContent = 'Change'
+  uploadLabel.setAttribute('for', uploadField.id)
   // avatarField.after(uploadField)  # is not cross compatible
-  avatarField.parentNode.insertBefore(uploadField, avatarField.nextSibling )
+  avatarField.parentNode.insertBefore(uploadField, avatarField.nextSibling)
+  avatarField.parentNode.insertBefore(uploadLabel, avatarField.nextSibling)
   uploadField.addEventListener('change', event => {
     const reader = new FileReader()
     reader.addEventListener('load', event => {
