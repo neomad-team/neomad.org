@@ -181,8 +181,8 @@ img.avatar {
 }
 #notification.success {
   background-color: #e7fee7;
-  color: #43a243;
-  border-color: #b2dab2;
+  color: #3ba53b;
+  border-color: #7fc27f;
 }
 #notification.error {
   background-color: #fee7e7;
@@ -212,13 +212,13 @@ img.avatar {
 button,
 .button {
   font-size: inherit;
-  font-weight: bold;
+  line-height: inherit;
   display: inline-block;
   padding: 5px 20px;
   border-radius: 3px;
-  background-color: #e7fee7;
-  color: #43a243;
-  border: 1px solid #b2dab2;
+  background-color: #eee;
+  color: #888;
+  border: 1px solid #888;
   text-decoration: none;
 }
 .delete {

@@ -12,6 +12,11 @@ form[edit] .toolbar {
   padding: 10px 20px;
   text-align: right;
 }
+form[edit] .toolbar .save {
+  background-color: #e7fee7;
+  color: #3ba53b;
+  border-color: #7fc27f;
+}
 form[edit] .toolbar .delete {
   float: left;
 }
