@@ -33,6 +33,7 @@
     <a href={{ url_for('article_create') }} class=read>Write this article</a>
   </article>
 {% endif %}
+
 {% for article in articles %}
   {% set url = url_for_article(article) %}
   <article class=preview>

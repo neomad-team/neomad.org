@@ -71,7 +71,7 @@ header > a:hover {
 
 .articles article {
   box-shadow: 0 0 3px #eee;
-  padding: 1em;
+  padding: 3rem;
   margin: 0 auto;
   margin-bottom: .5em;
   border-radius: 3px;
@@ -103,7 +103,7 @@ article p {
 
 article h1 {
   font-size: 1.5em;
-  margin-bottom: 0;
+  margin-bottom: 2rem;
 }
 
 article .content > a {

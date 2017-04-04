@@ -16,7 +16,7 @@ main header {
   border-bottom: 3px solid #eee;
   padding: 3em calc(50% - 30rem);
   margin-bottom: 3rem;
-  line-height: 1.3rem;
+  line-height: 1.3;
 }
 main header > section {
   flex-basis: 100%;
@@ -53,6 +53,7 @@ article > a:not(.read) {
 article > a.read,
 article > a.write {
   display: block;
+  margin-top: 2rem;
 }
 
 .newtext {
