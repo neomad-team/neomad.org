@@ -19,6 +19,7 @@ main header {
   align-items: space;
   flex-wrap: wrap;
   padding-bottom: 3rem;
+  margin-bottom: 1rem;
  }
 .profile-intro form input[type=file] {
   width: 100%;
