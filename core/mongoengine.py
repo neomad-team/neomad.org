@@ -1,6 +1,5 @@
 from mongoengine import *
-
-MongoDocument = Document
+from mongoengine import Document as MongoDocument
 
 
 class Document(MongoDocument):

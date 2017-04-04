@@ -12,7 +12,7 @@ services:
       - "27017:27017"
 
   web:
-    build: https://github.com/vinyll/alpine-flask.git
+    image: jazzdd/alpine-flask:python3
     links:
       - db
     volumes:
