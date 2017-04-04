@@ -19,7 +19,7 @@ def profile(username):
 
 
 # cannot use _patch_ method, nginx does not accept it
-@app.route('/profile/patch', methods=['post'])
+@app.route('/profile', methods=['patch'])
 @login_required
 def profile_edit():
     data = request.json
@@ -34,7 +34,7 @@ def profile_edit():
 
 
 # cannot use _patch_ method, nginx does not accept it
-@app.route('/profile/patch/avatar', methods=['post'])
+@app.route('/profile/avatar', methods=['patch'])
 @login_required
 def profile_edit_avatar():
     try:

@@ -8,7 +8,7 @@ server_update:
 	ssh neomad "${goto_src} && ${git_update}"
 
 server_reload:
-	ssh neomad "${goto_src} && docker-compose down && docker-compose up"
+	ssh neomad "${goto_src} && docker-compose down && docker-compose up -d"
 
 deploy: server_update server_reload
 
