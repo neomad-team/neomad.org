@@ -1,7 +1,8 @@
 import datetime
+import re
 
 from flask import (
-    Flask, request, render_template, redirect, url_for, abort, Markup
+    Flask, request, render_template, redirect, url_for, abort, Markup, flash
 )
 from flask_login import current_user, login_required
 
@@ -65,4 +66,5 @@ def article_delete(id):
         article = Article.objects.get(author=user, id=id).delete()
     except Article.DoesNotExist:
         abort(404)
+    flash('You article was deleted.', 'success')
     return redirect(url_for_user(user))

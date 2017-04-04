@@ -1,9 +1,8 @@
-import base64
-
 from flask import render_template, request, abort
 from flask_login import current_user, login_required
 
 from core import app
+from core.utils import save_base64_image
 from blog.models import Article
 from .models import User
 
@@ -42,9 +41,7 @@ def profile_edit_avatar():
         user = User.objects.get(id=current_user.id)
     except User.DoesNotExist:
         abort(404)
-    meta, data = request.json['data'].split(',')
-    stream = open('{}/{}'.format(app.config.get('AVATARS_PATH'), user.id),
-                  'wb')
-    stream.write(base64.b64decode(data))
-    stream.close()
-    return user.avatar, 200
+    save_base64_image(request.json['data'],
+                      '{}/{}'.format(app.config.get('AVATARS_PATH'), user.id),
+                      (200, 200))
+    return user.avatar, 201

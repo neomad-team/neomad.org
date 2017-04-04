@@ -5,16 +5,32 @@
 <link rel=stylesheet href={{ url_for('static', filename='css/main.css') }}>
 <link href="https://fonts.googleapis.com/css?family=Raleway:600|Crimson+Text|Libre+Baskerville|Libre+Franklin|Poppins|Lora|Roboto|Oxygen|Open+Sans:600" rel=stylesheet>
 <link rel=stylesheet href={{ url_for('static', filename='css/edit.css') }}>
+<script src={{ url_for('static', filename='js/utils.js') }}></script>
 {% block extra_css %}{% endblock %}
 
 <header>
   <h1><a href="/">Neomad</a></h1>
   {% if current_user and current_user.is_authenticated %}
-  <a href={{ url_for('logout') }}>Logout</a>
+  <nav>
+    <a href={{ url_for_user(current_user) }} title="My profile">
+      <img class=avatar src="{{ current_user.avatar }}" width=35 height=35>
+    </a>
+    <a class=button href={{ url_for('logout') }}>Logout</a>
+  </nav>
   {% endif %}
 </header>
 
 <main>{% block main %}{% endblock %}</main>
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% set message = messages[0] %}
+<script>
+alert("{{message[0]}}", '{{message[1]}}')
+</script>
+{% endif %}
+{% endwith %}
 
 {% include 'user/localize.html' %}
 

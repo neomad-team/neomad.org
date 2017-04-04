@@ -17,7 +17,7 @@
     {% if edit %}
     <form>
       <div>
-        <input type=checkbox name=localize {% if user.allow_localization %}checked{% endif %} id=localize><label for=localize title="enable travel tracking services">Follow my trips</label>
+        <input type=checkbox name=localize {% if user.allow_localization %}checked{% endif %} id=localize><label for=localize title="enable tracking my trips">Enable trip tracking</label>
       </div>
     </form>
     {% endif %}
@@ -37,6 +37,9 @@
   {% set url = url_for_article(article) %}
   <article class=preview>
     <a href={{ url }}>
+      {% if article.image %}
+      <img src="{{ article.image }}" width=100%>
+      {% endif %}
       <h1>{{ article.title|title }}</h1>
       {{ article.content|striptags|truncate(200) }}
     </a>
@@ -76,10 +79,15 @@
 
   const avatarField = document.querySelector('[name=avatar]')
   const uploadField = document.createElement('input')
+  const uploadLabel = document.createElement('label')
   uploadField.type = 'file'
   uploadField.name = 'avatar'
+  uploadField.id = 'avatar-field'
+  uploadLabel.textContent = 'Change'
+  uploadLabel.setAttribute('for', uploadField.id)
   // avatarField.after(uploadField)  # is not cross compatible
-  avatarField.parentNode.insertBefore(uploadField, avatarField.nextSibling )
+  avatarField.parentNode.insertBefore(uploadField, avatarField.nextSibling)
+  avatarField.parentNode.insertBefore(uploadLabel, avatarField.nextSibling)
   uploadField.addEventListener('change', event => {
     const reader = new FileReader()
     reader.addEventListener('load', event => {
@@ -102,7 +110,7 @@
   function apiFeedback(caller, confirmation) {
     return caller.then(response => {
       const status = response.status
-      if(status == 200) {
+      if(200 <= status < 300) {
         alert('success', confirmation)
       }
       else {
@@ -124,23 +132,6 @@
         credentials: 'same-origin',
         headers: {'Content-Type': 'application/json'}
       })
-    }
-  }
-
-  function alert(type, message, delay) {
-    console.info(type, message)
-    let notification = document.querySelector('#notification')
-    if(!notification) {
-      notification = document.createElement('div')
-      notification.id = 'notification'
-      document.body.append(notification)
-    }
-    notification.textContent = message
-    notification.classList = [type]
-    if(delay !== 0) {
-      this.timer = setTimeout(_ => {
-        notification.classList = []
-      }, delay || 5000)
     }
   }
 </script>
