@@ -17,9 +17,24 @@ form[edit] .toolbar .save {
   color: #3ba53b;
   border-color: #7fc27f;
 }
+form[edit] .toolbar .save:hover {
+  background-color: #c5f5c5;
+  color: #217421;
+  border-color: #4b8f4b;
+}
+
 form[edit] .toolbar .delete {
   float: left;
+  background-color: #fee7e7;
+  color: #a24343;
+  border-color: #dab2b2;
 }
+form[edit] .toolbar .delete:hover {
+  background-color: #f2c3c3;
+  color: #771515;
+  border-color: #a25151;
+}
+
 [contenteditable=true] {
   position: relative;
   line-height: 1;

@@ -6,26 +6,28 @@
 
 {% block main %}
 <header>
-  <figure>
-    <img class=avatar name=avatar src={{ user.avatar }} width=100 height=100 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
-  </figure>
-  <div>
-    <h1 name=username>{{ user.username or 'Insert a username' }}</h1>
-    <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
-  </div>
-  <section>
-    {% if edit %}
-    <form>
-      <div>
-        <input type=checkbox name=localize {% if user.allow_localization %}checked{% endif %} id=localize><label for=localize title="enable tracking my trips">Enable trip tracking</label>
-      </div>
-    </form>
-    {% endif %}
-    <a href={{ url_for_trips(user) }}>{% if edit %}View my trips.{% else %}View {{ user }}'s trips.{% endif %}</a>
+  <div class="profile-intro wrapper">
+    <figure>
+      <img class=avatar name=avatar src={{ user.avatar }} width=100 height=100 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
+    </figure>
+    <div>
+      <h1 name=username>{{ user.username or 'Insert a username' }}</h1>
+      <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
+    </div>
+    <section>
+      {% if edit %}
+      <form>
+        <div>
+          <input type=checkbox name=localize {% if user.allow_localization %}checked{% endif %} id=localize><label for=localize title="enable tracking my trips">Enable trip tracking</label>
+        </div>
+      </form>
+      {% endif %}
+      <a href={{ url_for_trips(user) }}>{% if edit %}View my trips.{% else %}View {{ user }}'s trips.{% endif %}</a>
+    </div>
   </section>
 </header>
 
-<section class=articles>
+<section class="articles wrapper">
 {% if edit %}
   <article class=preview>
     <h1><span class="newtext title">&nbsp;</span></h1>
@@ -43,7 +45,7 @@
       <h1>{{ article.title|title }}</h1>
       {{ article.content|striptags|truncate(200) }}
     </a>
-    <a href={{ url }} class=read>Read</a>
+    <a href={{ url }} class=read>Read more</a>
   </article>
 {% endfor %}
 </section>

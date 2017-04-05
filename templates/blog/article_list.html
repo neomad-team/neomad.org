@@ -1,10 +1,14 @@
 {% extends 'layout.html' %}
 
 {% block main %}
-{% for article in articles %}
-<article>
-  <h1>{{ article.title }}</h1>
-  <p>{{ article.content|truncate(200) }}</p>
-</article>
-{% endfor %}
+<div class=wrapper>
+  <h1>Articles</h1>
+  {% for article in articles %}
+  <article>
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.content|striptags|truncate(200) }}</p>
+    <a href={{ url }} class=read>Read more</a>
+  </article>
+  {% endfor %}
+</div>
 {% endblock %}
