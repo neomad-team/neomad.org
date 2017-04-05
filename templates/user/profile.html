@@ -99,7 +99,6 @@
     loadingField.classList.remove('ready')
     const reader = new FileReader()
     reader.addEventListener('load', event => {
-      loadingField.classList.add('ready')
       const call = api.send('patch', "{{ url_for('profile_edit_avatar') }}",
         {data: event.target.result}
       )
@@ -107,6 +106,7 @@
       .then(response => response.text())
       .then(url => {
         // url is cached
+        loadingField.classList.add('ready')
         avatarField.src = url + '?' + Math.random()
       })
     })
@@ -134,7 +134,7 @@
   const api = {
     send(method, url, data) {
       return fetch(url, {
-        method: method,
+        method: method.toUpperCase(),
         body: JSON.stringify(data),
         credentials: 'same-origin',
         headers: {'Content-Type': 'application/json'}
