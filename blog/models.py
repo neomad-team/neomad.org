@@ -15,7 +15,7 @@ class Article(db.Document):
     title = db.StringField(required=True)
     content = db.StringField(required=True)
     creation_date = db.DateTimeField(default=datetime.datetime.utcnow)
-    slug = db.StringField(required=True)
+    slug = db.StringField(required=True, default='no-title')
     author = db.ReferenceField(User)
     language = db.StringField(min_length=2, max_length=2, default='en')
     images = db.ListField()
@@ -67,7 +67,7 @@ class Article(db.Document):
         if not self.creation_date:
             self.creation_date = datetime.datetime.utcnow()
         self.slug = slugify(self.title)
-        is_new =  not self.id
+        is_new = not self.id
         # when new, the id must exist before extracting images
         if is_new:
             super(Article, self).save(*args, **kwargs)
