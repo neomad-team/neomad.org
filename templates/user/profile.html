@@ -88,7 +88,7 @@
   uploadField.id = 'avatar-field'
   uploadLabel.textContent = 'Change'
   uploadLabel.setAttribute('for', uploadField.id)
-  loadingField.src = 'insertme.jpg'
+  loadingField.src = '{{ url_for('static', filename='images/loading.svg') }}'
   loadingField.setAttribute('class', 'loading')
   loadingField.classList.add('ready')
   // avatarField.after(uploadField)  # is not cross compatible
@@ -99,7 +99,7 @@
     loadingField.classList.remove('ready')
     const reader = new FileReader()
     reader.addEventListener('load', event => {
-      loadingField.classList.add('ready')
+      // loadingField.classList.add('ready')
       const call = api.send('patch', "{{ url_for('profile_edit_avatar') }}",
         {data: event.target.result}
       )
