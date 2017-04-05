@@ -10,7 +10,7 @@
 <header>
   <h1><a href="/">Neomad</a></h1>
   {% if current_user and current_user.is_authenticated %}
-  <a href={{ url_for('logout') }}>Logout</a>
+  <a href={{ url_for('logout') }} class=btn>Logout</a>
   {% endif %}
 </header>
 

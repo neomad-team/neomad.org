@@ -1,3 +1,4 @@
+/* Basics, every styles which applies everywhere */
 @import url('https://fonts.googleapis.com/css?family=Lato:700');
 @import url('https://fonts.googleapis.com/css?family=Lora');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
@@ -21,41 +22,16 @@ body {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
-body > header {
-  position: fixed;
-  z-index: 9;
-  top: 0;
-  width: 100%;
-  padding: .5em;
-  background-color: rgba(255, 255, 255, .98);
-  font-family: Arial, Helvetica, sans-serif;
-  box-shadow: 0 2px 2px rgba(50, 50, 50, .2);
-}
-header > h1 {
-  font-weight: 300;
-  font-size: 1.8em;
-}
-header > h1 > a {
-  text-decoration: inherit;
-  color: inherit;
+.wrapper {
+  width: 70rem;
+  margin: 0 auto;
 }
 
-main {
-  margin-top: 100px;
-}
-
-main a {
-  color: #4fdbaa;
-}
-
-header > h1 {
-  padding: 0;
+figure {
   margin: 0;
 }
 
-header > a {
-  float: right;
-  margin: -35px 10px 0 0;
+.btn {
   display: block;
   color: inherit;
   text-decoration: none;
@@ -63,24 +39,64 @@ header > a {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 3px 15px;
+  transition: all .3s ease;
 }
-header > a:hover {
+.btn:hover {
   color: #000;
   background-color: #eee;
 }
 
-.articles article {
-  box-shadow: 0 0 3px #eee;
-  padding: 3rem;
-  margin: 0 auto;
-  margin-bottom: .5em;
-  border-radius: 3px;
-  border: 1px solid #e9e9e9;
+/* Header */
+body > header {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgba(255, 255, 255, .98);
+  box-shadow: 0 2px 2px rgba(50, 50, 50, .2);
+  z-index: 9;
 }
 
+body > header h1 {
+  margin: 0;
+  font-weight: 300;
+  font-size: 3rem;
+}
+
+body > header h1 a {
+  padding: 1rem;
+  color: inherit;
+  text-decoration: inherit;
+  transition: all .3s ease;
+}
+
+body > header a:hover {
+  color: #000;
+  background-color: #eee;
+}
+
+/* Main */
+main {
+  margin-top: 10rem;
+}
+
+main a {
+  color: #4fdbaa;
+}
+
+/* Article */
+
 article {
-  max-width: 700px;
+  margin: 0 auto .5rem;
+  padding: 3rem;
   background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid #e9e9e9;
+  box-shadow: 0 0 3px #eee;
 }
 
 article .content {
@@ -97,13 +113,13 @@ article h3 {
   margin: 0;
 }
 
-article p {
-  margin-top: .35em;
-}
-
 article h1 {
   font-size: 1.5em;
   margin-bottom: 2rem;
+}
+
+article p {
+  margin-top: .35em;
 }
 
 article .content > a {
@@ -111,31 +127,6 @@ article .content > a {
   text-decoration: none;
 }
 
-figure {
-  margin: 0;
-}
-
-.meta {
-  font-size: .8em;
-  text-decoration: none;
-  display: flex;
-  border-bottom: 10px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #aaa;
-  line-height: 1.2em;
-}
-.meta p {
-  margin: 0;
-}
-.meta a {
-  text-decoration: none;
-  vertical-align: top;
-  font-size: 1.1em;
-}
-.meta time {
-  display: block;
-  font-size: .9em;
-}
 img.avatar {
   border-radius: 100%;
   margin-right: 10px;
