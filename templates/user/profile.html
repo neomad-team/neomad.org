@@ -55,7 +55,7 @@
   const usernameField = document.querySelector('[name=username]')
   usernameField.setAttribute('contenteditable', true)
   usernameField.addEventListener('blur', event => {
-    const call = api.send('post', "{{ url_for('profile_edit') }}",
+    const call = api.send('patch', "{{ url_for('profile_edit') }}",
       {username: event.target.textContent}
     )
     apiFeedback(call, 'Your username has been updated.')
@@ -63,7 +63,7 @@
 
   const localizeField = document.querySelector('[name=localize]')
   localizeField.addEventListener('change', event => {
-    const call = api.send('post', "{{ url_for('profile_edit') }}",
+    const call = api.send('patch', "{{ url_for('profile_edit') }}",
       {allow_localization: event.target.checked}
     )
     apiFeedback(call, 'Your localization preference has been updated.')
@@ -73,7 +73,7 @@
   const aboutField = document.querySelector('[name=about]')
   aboutField.setAttribute('contenteditable', true)
   aboutField.addEventListener('blur', event => {
-    const call = api.send('post', "{{ url_for('profile_edit') }}",
+    const call = api.send('patch', "{{ url_for('profile_edit') }}",
       {about: event.target.innerHTML}
     )
     apiFeedback(call, 'You description has been updated.')
@@ -82,24 +82,29 @@
   const avatarField = document.querySelector('[name=avatar]')
   const uploadField = document.createElement('input')
   const uploadLabel = document.createElement('label')
+  const loadingField = document.createElement('img')
   uploadField.type = 'file'
   uploadField.name = 'avatar'
   uploadField.id = 'avatar-field'
   uploadLabel.textContent = 'Change'
   uploadLabel.setAttribute('for', uploadField.id)
+  loadingField.src = 'insertme.jpg'
+  loadingField.setAttribute('class', 'loading')
+  loadingField.classList.add('ready')
   // avatarField.after(uploadField)  # is not cross compatible
   avatarField.parentNode.insertBefore(uploadField, avatarField.nextSibling)
   avatarField.parentNode.insertBefore(uploadLabel, avatarField.nextSibling)
+  avatarField.parentNode.insertBefore(loadingField, avatarField.nextSibling)
   uploadField.addEventListener('change', event => {
+    loadingField.classList.remove('ready')
     const reader = new FileReader()
     reader.addEventListener('load', event => {
-      const call = api.send('post', "{{ url_for('profile_edit_avatar') }}",
+      loadingField.classList.add('ready')
+      const call = api.send('patch', "{{ url_for('profile_edit_avatar') }}",
         {data: event.target.result}
       )
       apiFeedback(call, "Your profile picture has been updated.")
-      .then(response => {
-        return response.text()
-      })
+      .then(response => response.text())
       .then(url => {
         // url is cached
         avatarField.src = url + '?' + Math.random()
