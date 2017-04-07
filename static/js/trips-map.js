@@ -6,15 +6,31 @@ const map = new mapboxgl.Map({
   zoom: 2
 })
 
+// Previous trips
 locations.forEach(point => {
   const popup = new mapboxgl.Popup({offset: [10, -20]})
       .setText(point.date)
 
   const el = document.createElement('div');
-  el.id = 'marker'
+  el.classList.add('marker')
 
   new mapboxgl.Marker(el, {offset:[0, -30]})
       .setLngLat(point.position.reverse())
       .setPopup(popup)
       .addTo(map)
 })
+
+// Current location
+if(current_location.length) {
+  const popup = new mapboxgl.Popup({offset: [10, -20]})
+      .setText('Latest location')
+
+  const el = document.createElement('div');
+  el.classList.add('marker')
+  el.classList.add('current')
+
+  new mapboxgl.Marker(el, {offset:[0, -30]})
+      .setLngLat(current_location.reverse())
+      .setPopup(popup)
+      .addTo(map)
+}

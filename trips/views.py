@@ -24,16 +24,16 @@ def trips(user):
 @login_required
 def trips_add():
     user = User.objects.get(id=current_user.id)
-    user_position = request.json
+    user.current_location = request.json
     if not user.locations:
-        user.locations = [UserLocation(position=user_position)]
+        user.locations = [UserLocation(position=user.current_location)]
         user.save()
         return '', 201
 
     index = user.locations.count() - 1
     latest_location = user.locations[index]
-    # user is still in the same area
-    if distance(latest_location.position, user_position) < 25:
+    # user is still in the same area, less than 10km away
+    if distance(latest_location.position, user.current_location) < 10:
         duration = ((datetime.datetime.utcnow() - latest_location.date)
                     .seconds)
         latest_location.duration += duration
@@ -41,7 +41,7 @@ def trips_add():
         status = 202
     # user has moved consistently
     else:
-        user.locations.append(UserLocation(position=user_position))
+        user.locations.append(UserLocation(position=user.current_location))
         status = 201
     user.save()
     return '', status
