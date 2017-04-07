@@ -2,6 +2,7 @@ import os
 
 from core import app
 from core.helpers import *
+from core.views import *
 from user.views import *
 from auth.views import *
 from blog.views import *
