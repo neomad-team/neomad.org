@@ -1,12 +1,20 @@
 {% extends 'layout.html' %}
 
 {% block main %}
-<div class=wrapper>
-  <h1>Articles</h1>
+<div class="articles wrapper">
+  <h1>Latest articles</h1>
   {% for article in articles %}
-  <article>
-    <h1>{{ article.title }}</h1>
-    <p>{{ article.content|striptags|truncate(200) }}</p>
+  {% set url = url_for_article(article) %}
+  <article class=preview>
+    <a href={{ url }}>
+      {% if article.image %}
+      <figure>
+        <img src="{{ article.image }}" width=100%>
+      </figure>
+      {% endif %}
+      <h1>{{ article.title|title }}</h1>
+      {{ article.content|striptags|truncate(200) }}
+    </a>
     <a href={{ url }} class=read>Read more</a>
   </article>
   {% endfor %}
