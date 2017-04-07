@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block title %}{{ article.title }}, by {{ user }}{% endblock %}
+{% block title %}{{ article.title }}, by {{ article.author }}{% endblock %}
 
 {% block extra_css %}
 <link rel=stylesheet href={{ url_for('static', filename='css/article.css') }}>
