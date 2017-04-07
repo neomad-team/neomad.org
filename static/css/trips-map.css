@@ -1,3 +1,7 @@
+h1 {
+  margin-bottom: 3rem;
+}
+
 #map {
   width: 100%;
   min-height: 500px;

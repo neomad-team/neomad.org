@@ -9,7 +9,10 @@
  {% endblock %}
 
 {% block main %}
-<h1>Where <em>{{ user }}</em> has traveled</h1>
+
+<div class=wrapper>
+  <h1>Where <em>{{ user }}</em> has traveled</h1>
+</div>
 <div id=map></div>
 {% for point in points %}
 <p>{{ point }}</p>
