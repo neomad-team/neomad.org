@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 
+{% block title %}{{ user }} travels around the world{% endblock %}
+
 {% block extra_css %}
 <link href=https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css rel=stylesheet>
 <link rel=stylesheet href={{ url_for('static', filename='css/trips-map.css') }}>
