@@ -1,0 +1,17 @@
+{% macro article_list(articles) %}
+  {% for article in articles %}
+  {% set url = url_for_article(article) %}
+  <article class=preview>
+    <a href={{ url }}>
+      {% if article.image %}
+      <figure>
+        <img src="{{ article.image }}" width=100%>
+      </figure>
+      {% endif %}
+      <h1>{{ article.title|title }}</h1>
+      {{ article.content|striptags|truncate(200) }}
+    </a>
+    <a href={{ url }} class=read>Read more</a>
+  </article>
+  {% endfor %}
+{% endmacro %}
