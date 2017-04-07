@@ -93,27 +93,6 @@ main a {
 }
 
 /* Article */
-.articles article {
-  box-shadow: 0 0 3px #eee;
-  padding: 1em;
-  margin: 0 auto;
-  margin-bottom: .5em;
-  border-radius: 3px;
-  border: 1px solid #e9e9e9;
-}
-.articles article figure {
-  max-height: 300px;
-  overflow: hidden;
-}
-.articles article > a:not(.read) {
-  color: inherit;
-  text-decoration: none;
-}
-.articles article > a.read,
-.articles article > a.write {
-  display: block;
-}
-
 article {
   max-width: 700px;
   background-color: #fff;

@@ -1,6 +1,10 @@
 {% from 'blog/macros.html' import article_list with context %}
 {% extends 'layout.html' %}
 
+{% block extra_css %}
+<link rel=stylesheet href={{ url_for('static', filename='css/_article_list.css') }}>
+{% endblock %}
+
 {% block main %}
 <div class="articles wrapper">
   <h1>Latest articles</h1>
