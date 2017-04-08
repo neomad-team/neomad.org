@@ -6,9 +6,10 @@ onmessage = _ => {
     .then(json => {
       const items = json;
       items.forEach(item => {
+        let name = item.name;
         let lng = item.position.longitude;
         let lat = item.position.latitude;
-        postMessage([lng, lat]);
+        postMessage([name, lng, lat]);
       });
     });
 };

@@ -10,11 +10,17 @@ const map = new mapboxgl.Map({
 const giveData = new Worker("/static/js/webworker-around.js");
 
 giveData.onmessage = (informations) => {
-  const el = document.createElement('div');
+  const [name, lat, lng] = informations.data
+
+  const el = document.createElement('div')
   el.classList.add('marker')
 
+  const popup = new mapboxgl.Popup({offset: [10, -20]})
+      .setText(name)
+
   new mapboxgl.Marker(el, {offset:[0, -30]})
-      .setLngLat(informations.data)
+      .setLngLat([lat, lng])
+      .setPopup(popup)
       .addTo(map)
 };
 
