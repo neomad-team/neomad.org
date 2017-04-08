@@ -31,6 +31,17 @@ figure {
   margin: 0;
 }
 
+a {
+  color: #279e6a;
+  color: #279e6aee;
+  text-decoration: none;
+  transition: color .3s;
+}
+a:hover {
+  color: #00bf6b;
+  color: #00bf6bee;
+}
+
 /* Header */
 body > header {
   position: fixed;
@@ -63,13 +74,9 @@ body > header nav {
   display: block;
 }
 body > header nav a {
-  color: inherit;
   padding: 3px 15px;
   font-size: .9em;
   text-decoration: none;
-}
-body > header nav a:not(.avatar):not(.button):hover {
-  text-decoration: underline;
 }
 
 body > header nav a > img {
@@ -90,10 +97,6 @@ body > header nav a.button:hover {
 /* Main */
 main {
   margin-top: 10rem;
-}
-
-main a {
-  color: #4fdbaa;
 }
 
 /* Article */
@@ -220,6 +223,7 @@ img.avatar {
 button,
 .button {
   font-size: inherit;
+  color: inherit;
   line-height: inherit;
   display: inline-block;
   text-decoration: none;
