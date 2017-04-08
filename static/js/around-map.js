@@ -6,6 +6,20 @@ const map = new mapboxgl.Map({
   zoom: 2
 })
 
+// users interesting points
+const giveData = new Worker("/static/js/webworker-around.js");
+
+giveData.onmessage = (informations) => {
+  const el = document.createElement('div');
+  el.classList.add('marker')
+
+  new mapboxgl.Marker(el, {offset:[0, -30]})
+      .setLngLat(informations.data)
+      .addTo(map)
+};
+
+giveData.postMessage("info-requested");
+
 // user last location
 if(current_location.length) {
   const popup = new mapboxgl.Popup({offset: [10, -20]})
