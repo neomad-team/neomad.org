@@ -1,15 +1,4 @@
-#map {
-  width: 100%;
-  min-height: 500px;
-}
-
-.marker {
-    background-image: url('/static/images/marker-blue.png');
-    background-size: cover;
-    width: 20px;
-    height: 30px;
-    cursor: pointer;
-}
-.marker.you {
+.marker.current-location {
     background-image: url('/static/images/marker-red.png');
+    z-index: 9999;
 }
