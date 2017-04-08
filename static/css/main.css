@@ -56,9 +56,6 @@ body > header h1 a {
   color: #333;
   text-decoration: inherit;
 }
-body > header nav a.login:hover {
-  text-decoration: underline;
-}
 
 body > header nav {
   float: right;
@@ -67,10 +64,14 @@ body > header nav {
 }
 body > header nav a {
   color: inherit;
-  text-decoration: none;
   padding: 3px 15px;
   font-size: .9em;
+  text-decoration: none;
 }
+body > header nav a:not(.avatar):not(.button):hover {
+  text-decoration: underline;
+}
+
 body > header nav a > img {
   display: inline-block;
   vertical-align: middle;
