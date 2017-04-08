@@ -74,7 +74,8 @@ main > header {
 
 @media screen and (max-width:700px) {
   main header {
-    padding: 5rem 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
   main > header figure {
     order: 0;
