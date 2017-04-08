@@ -16,7 +16,7 @@ giveData.onmessage = (informations) => {
   el.classList.add('marker')
 
   const popup = new mapboxgl.Popup({offset: [10, -20]})
-      .setText(name)
+      .setHTML('<h2>{{name}}</h2><p>wifiQuality:{{wifi}}<br>powerAvailable:{{power}}<br>comments:{{comment}}<br></p>')
 
   new mapboxgl.Marker(el, {offset:[0, -30]})
       .setLngLat([lat, lng])
