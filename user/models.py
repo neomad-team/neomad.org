@@ -40,7 +40,7 @@ class User(UserMixin, db.Document):
                       .striptags().replace('\^n^', '\n'))
 
     def __str__(self):
-        return self.username
+        return str(self.username or 'Unknown')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.username)
