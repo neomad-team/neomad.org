@@ -7,9 +7,11 @@ onmessage = _ => {
       const items = json;
       items.forEach(item => {
         let name = item.name;
+        let wifi = item.wifiQuality;
+        let power = item.powerAvailable;
         let lng = item.position.longitude;
         let lat = item.position.latitude;
-        postMessage([name, lng, lat]);
+        postMessage([name, wifi, power, lng, lat]);
       });
     });
 };
