@@ -21,14 +21,16 @@ def article_list():
 @app.route('/@<string:author>/<string:slug>-<string:id>', methods=['get'])
 def article(author, slug, id):
     try:
-        author = User.objects.get(slug=author)
-        article = Article.objects.get(author=author, slug=slug, id=id)
-    except Article.DoesNotExist:
-        abort(404)
+        article = Article.objects.get(id=id)
     except db.errors.ValidationError:
         abort(404)
+    except Article.DoesNotExist:
+        abort(404)
+    if article.slug != slug or article.author.slug != author:
+        return redirect(url_for_article(article), 301)
     return render_template('blog/article.html', article=article,
-                           edit=(author == current_user))
+                           edit=(current_user.is_authenticated and
+                                 author == current_user.slug))
 
 
 @app.route('/article/write', methods=['get', 'post'])
