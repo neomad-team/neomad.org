@@ -1,7 +1,14 @@
 {% from 'blog/macros.html' import article_list with context %}
 {% extends 'layout.html' %}
 
-{% block title %}{{ user }}'s profile{% endblock %}
+{% block title %}{{ user|capitalize }}'s profile{% endblock %}
+{% block description %}{{ user|capitalize }} is on Neomad with {{ articles.count() }} articles published and travels tracking {% if user.allow_localization %}enabled{% else %}disabled{% endif %}.{% endblock %}
+
+{% block extra_og %}
+<meta property=og:image content="{{ request.url_root[:-1] }}{{ user.avatar }}">
+<meta property=og:profile content={{ request.url }}>
+<meta property=og:profile:username content="{{ user.username }}">
+{% endblock %}
 
 {% block extra_css %}
 <link rel=stylesheet href={{ url_for('static', filename='css/profile.css') }}>

@@ -1,6 +1,16 @@
 {% extends 'layout.html' %}
 
-{% block title %}{{ article.title }}, by {{ article.author }}{% endblock %}
+{% block title %}{{ article.title }}, by {{ article.author|capitalize }}{% endblock %}
+{% block description %}{{ article.content|truncate(200) }} by {{ article.author|capitalize }}.{% endblock %}
+
+{% block extra_og %}
+{% if article.image %}
+<meta property=og:image content="{% if article.image[:4] == 'http' %}{{ article.image }}{% else %}{{ request.url_root[:-1] }}{{ article.image }}{% endif %}">
+{% endif %}
+<meta property=og:article:published_time content="{{ article.creation_date }}">
+<meta property=og:article:author content="{{ article.author|capitalize }}">
+<meta property=og:description content="Article « {{ article|striptags|truncate(200) }} », by {{ article.author|capitalize }} on {{ article.creation_date|datetime }}">
+{% endblock %}
 
 {% block extra_css %}
 <link rel=stylesheet href={{ url_for('static', filename='css/article.css') }}>
