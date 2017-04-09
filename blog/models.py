@@ -2,14 +2,20 @@ import datetime
 import hashlib
 import os
 
+from flask import Markup
 from bs4 import BeautifulSoup
-
-from core.utils import is_base64, save_base64_image
 
 from core import db, app
 from core.helpers import slugify
+from core.utils import is_base64, save_base64_image, clean_html
 from user.models import User
 
+
+ALLOWED_TAGS = {
+        'a': ('href', 'name', 'target', 'title'), 'img': ('src', 'title'),
+        'h2': ('id'), 'h3': ('id'), 'strong': (), 'em': (), 'p': (),
+        'br': (), 'blockquote': (),
+}
 
 class Article(db.Document):
     title = db.StringField(required=True)
@@ -62,7 +68,6 @@ class Article(db.Document):
         if len(self.images):
             return self.images[0]
 
-
     def save(self, *args, **kwargs):
         if not self.creation_date:
             self.creation_date = datetime.datetime.utcnow()
@@ -72,6 +77,8 @@ class Article(db.Document):
         if is_new:
             super(Article, self).save(*args, **kwargs)
         self.extract_images()
+        self.title = Markup(self.title).striptags()
+        self.content = clean_html(self.content, ALLOWED_TAGS)
         return super(Article, self).save(*args, **kwargs)
 
     meta = {

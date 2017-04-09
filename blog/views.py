@@ -2,7 +2,7 @@ import datetime
 import re
 
 from flask import (
-    Flask, request, render_template, redirect, url_for, abort, Markup, flash
+    Flask, request, render_template, redirect, url_for, abort, flash
 )
 from flask_login import current_user, login_required
 
@@ -39,7 +39,7 @@ def article_create():
     article = Article(content='')
     article.author = User.objects.get(id=current_user.id)
     if request.method == 'POST':
-        article.title = Markup(request.form.get('title')).striptags()
+        article.title = request.form.get('title')
         article.content = request.form.get('content')
         article.save()
     return render_template('blog/article.html', article=article, edit=True)
@@ -53,7 +53,7 @@ def article_edit(id):
         article = Article.objects.get(author=user, id=id)
     except Article.DoesNotExist:
         abort(404)
-    article.title = Markup(request.form.get('title')).striptags()
+    article.title = request.form.get('title')
     article.content = request.form.get('content')
     article.save()
     return redirect(url_for_article(article))
