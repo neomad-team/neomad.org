@@ -2,7 +2,7 @@ FROM python:3-alpine
 
 # basic flask environment
 RUN apk add --update --no-cache bash py-gunicorn \
-		build-base python-dev py-pip jpeg-dev zlib-dev && \
+		build-base libxml2-dev libxslt-dev python-dev py-pip jpeg-dev zlib-dev && \
 		pip install gunicorn
 
 # application folder
