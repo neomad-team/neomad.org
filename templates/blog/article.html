@@ -1,5 +1,7 @@
 {% extends 'layout.html' %}
 
+{% block language %}{{ article.language }}{% endblock %}
+
 {% block title %}{{ article.title }}, by {{ article.author|capitalize }}{% endblock %}
 {% block description %}{{ article.content|truncate(200) }} by {{ article.author|capitalize }}.{% endblock %}
 
