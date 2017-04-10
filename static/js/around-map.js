@@ -7,15 +7,21 @@ const map = new mapboxgl.Map({
 })
 
 // users interesting points
-const giveData = new Worker("/static/js/webworker-around.js");
+const pois = new Worker('/static/js/webworker-around.js');
 
-giveData.onmessage = (informations) => {
-  const [name,wifi,power,comment,lng,lat] = informations.data
+pois.onmessage = informations => {
+  const [name, wifi, power, comment, lng, lat] = informations.data
 
   const el = document.createElement('div')
   el.classList.add('marker')
 
-  let content = "<h2>"+name+"</h2><p>Wifi quality: "+ wifi+"<br>Power available: "+power+"<br>Comments: "+comment+"</p>"
+  let content = `<h2>Hello ${name}</h2>
+                 <ul>
+                    <li>Wifi quality: ${wifi}</li>
+                    <li>Power available: ${power}</li>
+                    <li>Comments: ${comment}</li>
+                  </ul>`
+
   const popup = new mapboxgl.Popup({offset: [10, -20]})
       .setHTML(content)
 
@@ -25,22 +31,22 @@ giveData.onmessage = (informations) => {
       .addTo(map)
 };
 
-giveData.postMessage("info-requested");
+pois.postMessage('info-requested');
 
 // user last location
-if(current_location.length) {
+if(currentLocation.length) {
   const popup = new mapboxgl.Popup({offset: [10, -20]})
-      .setText('you')
+      .setText('You current location')
 
   const el = document.createElement('div');
   el.classList.add('marker')
-  el.classList.add('you')
+  el.classList.add('current-location')
 
   new mapboxgl.Marker(el, {offset:[0, -30]})
-      .setLngLat(current_location.reverse())
+      .setLngLat(currentLocation.reverse())
       .setPopup(popup)
       .addTo(map)
 
-  map.setCenter(current_location)
+  map.setCenter(currentLocation)
   map.setZoom(11)
 }
