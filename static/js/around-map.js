@@ -15,7 +15,7 @@ giveData.onmessage = (informations) => {
   const el = document.createElement('div')
   el.classList.add('marker')
 
-  let content = "<h2>"+ name+"</h2><p>Wifi quality:"+ wifi+"<br>Power available:"+ power+"<br>Comments:"+ comment+"<br></p>"
+  let content = "<h2>"+name+"</h2><p>Wifi quality: "+ wifi+"<br>Power available: "+power+"<br>Comments: "+comment+"</p>"
   const popup = new mapboxgl.Popup({offset: [10, -20]})
       .setHTML(content)
 
@@ -40,4 +40,7 @@ if(current_location.length) {
       .setLngLat(current_location.reverse())
       .setPopup(popup)
       .addTo(map)
+
+  map.setCenter(current_location)
+  map.setZoom(11)
 }
