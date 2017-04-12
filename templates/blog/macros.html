@@ -15,7 +15,7 @@
       <time datetime={{ article.creation_date }} pubdate>Published on {{ article.creation_date|datetime }}</time>
       {% endif %}
     </header>
-    <a href={{ url }}>
+    <a href={{ url }} lang={{ article.language }}>
       <h1>{{ article.title|title }}</h1>
       {% if article.image %}
       <figure>
@@ -24,7 +24,7 @@
       {% endif %}
       {{ article.content|striptags|truncate(200) }}
     </a>
-    <a href={{ url }} class=read>Read more</a>
+    <a href={{ url }} lang={{ article.language }} class=read>Read more</a>
   </article>
   {% endfor %}
 {% endmacro %}

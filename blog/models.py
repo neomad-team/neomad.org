@@ -4,6 +4,7 @@ import os
 
 from flask import Markup
 from bs4 import BeautifulSoup
+from langdetect import detect
 
 from core import db, app
 from core.helpers import slugify
@@ -11,7 +12,6 @@ from core.utils import (
     is_base64, save_base64_image, clean_html as base_clean_html
 )
 from user.models import User
-
 
 ALLOWED_TAGS = {
         'a': ('href', 'name', 'target', 'title'), 'img': ('src', 'title'),
@@ -92,6 +92,7 @@ class Article(db.Document):
         self.extract_images()
         self.title = Markup(self.title).striptags()
         self.content = clean_html(self.content, ALLOWED_TAGS)
+        self.language = detect(self.content)
         return super(Article, self).save(*args, **kwargs)
 
     meta = {
