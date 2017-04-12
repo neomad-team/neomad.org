@@ -7,15 +7,28 @@ from bs4 import BeautifulSoup
 
 from core import db, app
 from core.helpers import slugify
-from core.utils import is_base64, save_base64_image, clean_html
+from core.utils import (
+    is_base64, save_base64_image, clean_html as base_clean_html
+)
 from user.models import User
 
 
 ALLOWED_TAGS = {
         'a': ('href', 'name', 'target', 'title'), 'img': ('src', 'title'),
-        'h2': ('id'), 'h3': ('id'), 'strong': (), 'em': (), 'p': (),
-        'br': (), 'blockquote': (),
+        'h2': ('id'), 'h3': ('id'), 'strong': (), 'em': (), 'i': (), 'b': (),
+         'p': (), 'br': (), 'blockquote': (),
 }
+
+
+def clean_html(html, *args, **kwargs):
+    html = base_clean_html(html, *args, **kwargs)
+    parser = BeautifulSoup(html, 'html.parser')
+    for i in parser.find_all('i'):
+        i.name = 'em'
+    for b in parser.find_all('b'):
+        b.name = 'strong'
+    return str(parser)
+
 
 class Article(db.Document):
     title = db.StringField(required=True)

@@ -17,3 +17,6 @@ class ArticleTest(TestCase):
         article = Article(title='',
                           content='<p><img src="/static/img"></p>').save()
         self.assertEqual(article.content, '<p><img src="/static/img"/></p>')
+        article = Article(title='',
+                          content='<p><em>emphased content</em><i>also emphased</i></p>').save()
+        self.assertEqual(article.content, '<p><em>emphased content</em><em>also emphased</em></p>')
