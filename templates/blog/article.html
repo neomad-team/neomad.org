@@ -1,7 +1,5 @@
 {% extends 'layout.html' %}
 
-{% block language %}{{ article.language }}{% endblock %}
-
 {% block title %}{{ article.title }}, by {{ article.author|capitalize }}{% endblock %}
 {% block description %}{{ article.content|truncate(200) }} by {{ article.author|capitalize }}.{% endblock %}
 
@@ -19,7 +17,7 @@
 {% endblock %}
 
 {% block main %}
-<article>
+<article lang={{ article.language }}>
   <section class=meta>
     <a href={{ url_for_user(article.author) }}>
       <img class=avatar src={{ article.author.avatar }} width=70 height=70>
