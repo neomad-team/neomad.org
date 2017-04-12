@@ -36,7 +36,7 @@ pois.postMessage('info-requested');
 // user last location
 if(currentLocation.length) {
   const popup = new mapboxgl.Popup({offset: [10, -20]})
-      .setText('You current location')
+      .setText('Your current location')
 
   const el = document.createElement('div');
   el.classList.add('marker')

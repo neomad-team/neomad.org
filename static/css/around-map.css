@@ -1,4 +1,8 @@
 .marker.current-location {
     background-image: url('/static/images/marker-red.png');
-    z-index: 9999;
+    z-index: 1;
+}
+
+.mapboxgl-popup {
+    z-index: 2;
 }

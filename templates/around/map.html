@@ -16,7 +16,7 @@
     <div id=map></div>
 
     <script>
-      var current_location = {{ user.current_location or [] }}
+      var currentLocation = {{ user.current_location or [] }}
       var locations = [
       {% for location in locations %}
         {

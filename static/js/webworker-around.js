@@ -1,8 +1,8 @@
 onmessage = _ => {
-  fetch('/static/test.json')
+
+  fetch('/around/spots.json')
     .then(response => response.json())
-    .then(json => {
-      const items = json
+    .then(items => {
       items.forEach(item => {
         let name = item.name
         let wifi = item.wifiQuality
