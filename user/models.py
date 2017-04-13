@@ -19,6 +19,7 @@ class User(UserMixin, db.Document):
     slug = db.StringField(unique=True)
     locations = db.EmbeddedDocumentListField(UserLocation, default=[])
     allow_localization = db.BooleanField()
+    current_location = db.GeoPointField()
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -39,7 +40,7 @@ class User(UserMixin, db.Document):
                       .striptags().replace('\^n^', '\n'))
 
     def __str__(self):
-        return self.username
+        return str(self.username or 'Unknown')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.username)

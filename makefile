@@ -1,13 +1,15 @@
-git_update=git fetch origin master && git reset --hard FETCH_HEAD
+git_update=git fetch origin prod && git reset --hard FETCH_HEAD
 goto_src=cd ~/src
 
 help:
 	return "Make tasks for deployment. Checkout the makefile content."
 
 server_update:
+	@make title text="Fetching prod branch and updating sources."
 	ssh neomad "${goto_src} && ${git_update}"
 
 server_reload:
+	@make title text="Recreating the server."
 	ssh neomad "${goto_src} && docker-compose stop web && docker-compose rm -f web && docker-compose up -d"
 
 deploy: server_update server_reload

@@ -1,14 +1,25 @@
+{% from 'blog/macros.html' import article_list with context %}
 {% extends 'layout.html' %}
 
+{% block title %}Nomad articles - {{ articles[0].title|truncate(40) }}{% endblock %}
+
+{% block description %}Read the latest Nomad's articles on Neomad. Hotest article is « {{ articles[0].title }} ».{% endblock %}
+
+{% block extra_og %}
+<meta property=og:image content="{{ articles[0].image }}">
+<meta property=og:title content="Latest articles ({{ articles[0].title }})">
+<meta property=og:description content="{{ articles[0]|striptags|truncate(200) }}">
+{% endblock %}
+
+
+{% block extra_css %}
+<link rel=stylesheet href={{ url_for('static', filename='css/_article_list.css') }}>
+{% endblock %}
+
 {% block main %}
-<div class="wrapper">
-  <h1>Articles</h1>
-  {% for article in articles %}
-  <article>
-    <h1>{{ article.title }}</h1>
-    <p>{{ article.content|truncate(200) }}</p>
-    <a href={{ url }} class=read>Read more</a>
-  </article>
-  {% endfor %}
+
+<div class="articles wrapper">
+  <h1>Latest articles</h1>
+  {{ article_list(articles=articles) }}
 </div>
 {% endblock %}

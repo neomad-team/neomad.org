@@ -32,8 +32,9 @@ article .content p {
   margin: 1.7em 0;
 }
 article .content img {
-  display: block;
+  display: inline-block;
   margin: 0 auto;
+  max-width: 100%;
 }
 
 article .date {

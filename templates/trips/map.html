@@ -1,5 +1,13 @@
 {% extends "layout.html" %}
 
+{% block title %}Nomad trips - where {{ user|capitalize }} has travaled{% endblock %}
+{% block description %}Follow {{ user|capitalize }}'s trips on Neomad.{% endblock %}
+
+{% block extra_og %}
+<meta property=og:image content="{{ user.avatar }}">
+<meta property=og:title content="Nomad trips: where {{ user|capitalize }} has traveled">
+{% endblock %}
+
 {% block extra_css %}
 <link href=https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css rel=stylesheet>
 <link rel=stylesheet href={{ url_for('static', filename='css/trips-map.css') }}>
@@ -16,6 +24,7 @@
 <p>{{user}} did not permit localization. Unfortunatly we cannot build the maps with his trips.</p>
 {% endif %}
 <script>
+  var current_location = {{ user.current_location or [] }}
   var locations = [
   {% for location in locations %}
     {

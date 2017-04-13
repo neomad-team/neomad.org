@@ -17,6 +17,8 @@ PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 UPLOAD_PATH = '{}/static/uploads'.format(PROJECT_PATH)
 AVATARS_PATH = '{}/avatars'.format(UPLOAD_PATH)
 AVATARS_URL = '/static/uploads/avatars'
+ARTICLE_IMG_PATH = '{}/articles'.format(UPLOAD_PATH)
+ARTICLE_IMG_URL = '/static/uploads/articles'
 
 DEBUG_TB_ENABLED = DEBUG
 

@@ -12,7 +12,7 @@ services:
       - "27017:27017"
 
   web:
-    image: jazzdd/alpine-flask:python3
+    build: docker
     links:
       - db
     volumes:

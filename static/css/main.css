@@ -23,13 +23,14 @@ body {
 }
 
 .wrapper {
-  width: 70rem;
+  max-width: 70rem;
   margin: 0 auto;
 }
 
 figure {
   margin: 0;
 }
+
 
 .btn {
   display: block;
@@ -60,7 +61,7 @@ body > header {
   box-shadow: 0 2px 2px rgba(50, 50, 50, .2);
   z-index: 9;
 }
-
+  
 body > header h1 {
   margin: 0;
   font-weight: 300;
@@ -82,14 +83,15 @@ body > header a:hover {
 /* Main */
 main {
   margin-top: 10rem;
-}
 
-main a {
-  color: #4fdbaa;
+}
+body > header nav a {
+  padding: 3px 15px;
+  font-size: .9em;
+  text-decoration: none;
 }
 
 /* Article */
-
 article {
   margin: 0 auto .5rem;
   padding: 3rem;
@@ -122,9 +124,35 @@ article p {
   margin-top: .35em;
 }
 
+article p {
+  margin-top: .35em;
+}
+
 article .content > a {
   color: inherit;
   text-decoration: none;
+}
+
+.meta {
+  font-size: .9em;
+  text-decoration: none;
+  display: flex;
+  border-bottom: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #aaa;
+  line-height: 1.2em;
+}
+.meta p {
+  margin: 0;
+}
+.meta a {
+  text-decoration: none;
+  vertical-align: top;
+  font-size: 1.1em;
+}
+.meta time {
+  display: block;
+  font-size: .9em;
 }
 
 img.avatar {
@@ -137,4 +165,124 @@ img.avatar {
     width: 100%;
     padding: 0 2rem;
   }
+}
+
+#notification[class=""] {
+  top: -5em;
+}
+
+#notification {
+  position: fixed;
+  z-index: 99;
+  top: 1em;
+  left: 0;
+  background: rgba(50, 50, 50, .8);
+  color: white;
+  min-width: 500px;
+  padding: 1em;
+  max-width: 800px;
+  margin-left: 25%;
+  width: 50%;
+  box-shadow: 0 0 3px #ccc;
+  transition: .3s;
+  border: 1px solid #333;
+  border-radius: .2em;
+}
+#notification.success {
+  background-color: #e7fee7;
+  color: #3ba53b;
+  border-color: #7fc27f;
+}
+#notification.error {
+  background-color: #fee7e7;
+  color: #a24343;
+  border-color: #dab2b2;
+}
+#notification.info {
+  background-color: #e7eafe;
+  color: #434ea2;
+  border-color: #b2b2da;
+}
+#notification.warning {
+  background-color: #fef6e7;
+  color: #a27c43;
+  border-color: #dacab2;
+}
+
+@media screen and (max-width:800px) {
+  #notification {
+    width: 100%;
+    min-width: 0;
+    margin-left: 0;
+  }
+}
+
+button,
+.button {
+  font-size: inherit;
+  color: inherit;
+  line-height: inherit;
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  padding: 3px 15px;
+  transition: all .3s ease;
+  cursor: pointer;
+}
+button:hover,
+.button:hover {
+  color: #000;
+  background-color: #eee;
+}
+
+/* Loading spinner */
+
+@keyframes loading-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.loading {
+	float: left;
+	background: transparent url(Vector Loading fallback.gif) right bottom no-repeat;
+	background-image: linear-gradient(transparent, transparent), url(Vector Loading.svg);
+	background-size: 100%;
+	animation-name: loading-spin;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	height: 34px;
+	width: 34px;
+	backface-visibility: hidden;
+}
+
+/* Loading spinner */
+
+@keyframes loading-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.loading {
+	float: left;
+	background: transparent url(Vector Loading fallback.gif) right bottom no-repeat;
+	background-image: linear-gradient(transparent, transparent), url(Vector Loading.svg);
+	background-size: 100%;
+	animation-name: loading-spin;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	height: 34px;
+	width: 34px;
+	backface-visibility: hidden;
 }

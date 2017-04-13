@@ -19,6 +19,7 @@ main header {
   flex-wrap: wrap;
   padding-bottom: 3rem;
 }
+
 .profile-intro form input[type=file] {
   width: 100%;
   overflow: auto;
@@ -51,10 +52,18 @@ article > a:not(.read) {
   color: inherit;
   text-decoration: none;
 }
-article > a.read,
-article > a.write {
-  display: block;
+.profile-intro section .trips {
+  display: inline-block;
   margin-top: 2rem;
+}
+.profile-intro section .trips::before {
+  content: " ";
+  display: block;
+  width: 100%;
+  height: 50px;
+  background: transparent url('/static/images/trips.png') no-repeat 50% 0;
+  background-size: 50px;
+  vertical-align: middle;
 }
 
 .newtext {
@@ -73,7 +82,8 @@ article > a.write {
 
 @media screen and (max-width:700px) {
   main header {
-    padding: 5rem 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
   main > header figure {
     order: 0;
