@@ -2,6 +2,7 @@ import base64
 import re
 from io import BytesIO
 
+from feincms_cleanse import Cleanse
 from PIL import Image
 
 
@@ -19,3 +20,11 @@ def save_base64_image(data, output, size=None):
     if size:
         image.thumbnail(size)
     return image.save(output, format=format_)
+
+
+def clean_html(html, allowed_tags=None):
+    cleaner = Cleanse()
+    if allowed_tags:
+        cleaner.allowed_tags = allowed_tags
+    cleaner.empty_tags = ('br', 'img',)
+    return cleaner.cleanse(html)

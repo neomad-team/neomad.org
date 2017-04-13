@@ -42,11 +42,20 @@ main > header {
 .profile-intro section {
   flex-basis: 100%;
   order: 2;
-  margin-top: 5rem;
-}
-.profile-intro section  a {
-  display: block;
   margin-top: 2rem;
+}
+.profile-intro section .trips {
+  display: inline-block;
+  margin-top: 2rem;
+}
+.profile-intro section .trips::before {
+  content: " ";
+  display: block;
+  width: 100%;
+  height: 50px;
+  background: transparent url('/static/images/trips.png') no-repeat 50% 0;
+  background-size: 50px;
+  vertical-align: middle;
 }
 
 .newtext {
@@ -65,7 +74,8 @@ main > header {
 
 @media screen and (max-width:700px) {
   main header {
-    padding: 5rem 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
   main > header figure {
     order: 0;

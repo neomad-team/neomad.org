@@ -1,6 +1,12 @@
 {% extends "layout.html" %}
 
-{% block title %}{{ user }} travels around the world{% endblock %}
+{% block title %}Nomad trips - where {{ user|capitalize }} has travaled{% endblock %}
+{% block description %}Follow {{ user|capitalize }}'s trips on Neomad.{% endblock %}
+
+{% block extra_og %}
+<meta property=og:image content="{{ user.avatar }}">
+<meta property=og:title content="Nomad trips: where {{ user|capitalize }} has traveled">
+{% endblock %}
 
 {% block extra_css %}
 <link href=https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css rel=stylesheet>
