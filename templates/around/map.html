@@ -10,22 +10,20 @@
  {% endblock %}
 
 {% block main %}
-  {% for user in users %}
-    <h1>Find someone or something close to <em>{{ user }}</em></h1>
+  <h1>Find someone or something close to <em>you</em></h1>
 
-    <div id=map></div>
+  <div id=map></div>
 
-    <script>
-      var currentLocation = {{ user.current_location or [] }}
-      var locations = [
-      {% for location in locations %}
-        {
-          date: '{{ location.date|datetime }}',
-          position: {{ location.position }}
-        },
-      {% endfor %}
-      ]
-    </script>
-  {% endfor %}
-  <script src={{ url_for('static', filename='js/around-map.js') }}></script>
+  <script>
+    var currentLocation = {{ current_user.current_location or [] }}
+    var locations = [
+    {% for user in users %}
+      {
+        location: {{ user.current_location }},
+        user: "{{ user }}"
+      },
+    {% endfor %}
+    ]
+  </script>
+<script src={{ url_for('static', filename='js/around-map.js') }}></script>
 {% endblock %}
