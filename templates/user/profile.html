@@ -25,7 +25,10 @@
       <h1 name=username>{{ user.username or 'Insert a username' }}</h1>
       <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
     </div>
-    <section>
+    <section class=social>
+      <a class=email href=mailto:{{ user.email }} title="Send an email">Send an email</a>
+    </section>
+    <nav>
       {% if edit %}
       <form>
         <div>
@@ -35,7 +38,7 @@
       {% endif %}
       <a class=trips href={{ url_for_trips(user) }}>{% if edit %}View my trips{% else %}View {{ user }}'s trips{% endif %}</a>
     </div>
-  </section>
+  </nav>
 </header>
 
 <section class="articles wrapper">
