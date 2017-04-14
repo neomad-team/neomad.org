@@ -43,8 +43,9 @@
   <article class=preview>
     <h1><span class="newtext title">&nbsp;</span></h1>
     <p><span class=newtext>&nbsp;</span><span class=newtext>&nbsp;</span><span class=newtext>&nbsp;</span></p>
-    <a href={{ url_for('article_create') }} class=read>Write this article</a>
+    <a href={{ url_for('article_create') }} class=read>Write an article</a>
   </article>
+
 {% endif %}
 {{ article_list(articles=articles, with_author=false) }}
 </section>
@@ -111,8 +112,9 @@
     })
     reader.readAsDataURL(event.target.files[0])
   })
-
-
+})
+reader.readAsDataURL(event.target.files[0])
+})
   function apiFeedback(caller, confirmation) {
     return caller.then(response => {
       const status = response.status
@@ -129,7 +131,7 @@
       return error
     })
   }
-
+}
   const api = {
     send(method, url, data) {
       return fetch(url, {

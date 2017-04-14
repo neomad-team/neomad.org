@@ -6,11 +6,10 @@ main {
   margin-top: 6rem;
 }
 
-main > header {
+main header {
   background-color: #fff;
   border-bottom: 3px solid #eee;
   margin-bottom: 3rem;
-  padding-top: 3rem;
 }
 
 .profile-intro {
@@ -19,8 +18,8 @@ main > header {
   align-items: space;
   flex-wrap: wrap;
   padding-bottom: 3rem;
-  margin-bottom: 1rem;
- }
+}
+
 .profile-intro form input[type=file] {
   width: 100%;
   overflow: auto;
@@ -42,7 +41,16 @@ main > header {
 .profile-intro section {
   flex-basis: 100%;
   order: 2;
+  margin-top: 5rem;
+}
+.profile-intro section  a {
+  display: block;
   margin-top: 2rem;
+}
+
+article > a:not(.read) {
+  color: inherit;
+  text-decoration: none;
 }
 .profile-intro section .trips {
   display: inline-block;
