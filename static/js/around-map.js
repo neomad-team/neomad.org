@@ -23,18 +23,18 @@ pois.onmessage = informations => {
                   </ul>`
 
   const popup = new mapboxgl.Popup({offset: [10, -20]})
-      .setHTML(content)
+    .setHTML(content)
 
   new mapboxgl.Marker(el, {offset:[0, -30]})
-      .setLngLat([lng, lat])
-      .setPopup(popup)
-      .addTo(map)
+    .setLngLat([lng, lat])
+    .setPopup(popup)
+    .addTo(map)
 };
 
 pois.postMessage('info-requested');
 
-// user last location
-if(currentLocation.length) {
+// create the current marker
+currentMarker = position => {
   const popup = new mapboxgl.Popup({offset: [10, -20]})
       .setText('Your current location')
 
@@ -43,10 +43,22 @@ if(currentLocation.length) {
   el.classList.add('current-location')
 
   new mapboxgl.Marker(el, {offset:[0, -30]})
-      .setLngLat(currentLocation.reverse())
-      .setPopup(popup)
-      .addTo(map)
+    .setLngLat(position)
+    .setPopup(popup)
+    .addTo(map)
 
-  map.setCenter(currentLocation)
+  map.setCenter(position)
   map.setZoom(11)
 }
+
+const userCenter = _  => {
+  if(currentLocation.length > 0) {
+    currentMarker(currentLocation.reverse())
+  } else {
+    navigator.geolocation.getCurrentPosition(position => {
+      currentMarker([position.coords.longitude, position.coords.latitude])
+    })
+  }
+}
+
+userCenter()
