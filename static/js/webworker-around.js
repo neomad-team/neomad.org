@@ -10,7 +10,8 @@ onmessage = _ => {
         let comment = item.comments[0]
         let lng = item.position.longitude
         let lat = item.position.latitude
-        postMessage([name, wifi, power, comment, lng, lat])
+        let id = item._id
+        postMessage([name, wifi, power, comment, lng, lat, id])
       })
     })
 }
