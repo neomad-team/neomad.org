@@ -20,6 +20,7 @@ class User(UserMixin, db.Document):
     locations = db.EmbeddedDocumentListField(UserLocation, default=[])
     allow_localization = db.BooleanField()
     current_location = db.GeoPointField()
+    socials = db.DictField()
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
