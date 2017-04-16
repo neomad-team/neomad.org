@@ -10,8 +10,8 @@ const map = new mapboxgl.Map({
 const pois = new Worker('/static/js/webworker-around.js');
 
 pois.onmessage = informations => {
-  const [name, wifi, power, comment, lng, lat] = informations.data
-
+  const [name, wifi, power, comment, lng, lat, id] = informations.data
+  console.debug(id)
   const el = document.createElement('div')
   el.classList.add('marker')
 
