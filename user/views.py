@@ -18,22 +18,20 @@ def profile(username):
                            edit=(user == current_user))
 
 
-# cannot use _patch_ method, nginx does not accept it
 @app.route('/profile', methods=['patch'])
 @login_required
 def profile_edit():
     data = request.json
-    permitted_fields = ['username', 'about', 'allow_localization']
+    permitted_fields = ['username', 'about', 'allow_localization', 'socials']
     user = User.objects.get(id=current_user.id)
     for field, value in data.items():
         if not field in permitted_fields:
             return '', 403
         setattr(user, field, value)
     user.save()
-    return '', 200
+    return '', 204
 
 
-# cannot use _patch_ method, nginx does not accept it
 @app.route('/profile/avatar', methods=['patch'])
 @login_required
 def profile_edit_avatar():

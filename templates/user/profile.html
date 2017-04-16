@@ -27,6 +27,9 @@
     </div>
     <section class=social>
       <a class=email href=mailto:{{ user.email }} title="Send an email">Send an email</a>
+      {% for name, url in user.socials.items() %}
+      <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
+      {% endfor %}
     </section>
     <nav>
       {% if edit %}
@@ -114,6 +117,41 @@
     })
     reader.readAsDataURL(event.target.files[0])
   })
+
+  const socialField = document.querySelector('.social')
+  ;[].map.call(socialField.querySelectorAll('a'), a => a.style.display = 'none')
+
+  const emailWrapper = document.createElement('span')
+  emailWrapper.classList.add('edit')
+  emailWrapper.classList.add('email')
+  const email = document.createElement('input')
+  email.type = 'email'
+  email.placeholder = 'My contact email'
+  emailWrapper.append(email)
+  socialField.append(emailWrapper)
+
+  const socials = ['Twitter', 'Facebook', 'Instagram']
+  const userSocial = {{ user.socials.json or {} }}
+  socials.forEach(social => {
+    const wrapper = document.createElement('span')
+    wrapper.classList.add('edit')
+    wrapper.classList.add(social.toLowerCase())
+    const input = document.createElement('input')
+    input.name = social.toLowerCase()
+    input.value = userSocial[social] || ''
+    input.type = 'url'
+    input.placeholder = `My ${social} (https://…)`
+    input.addEventListener('blur', event => {
+      userSocial[input.name] = input.value
+      if(input.checkValidity()) {
+        const call = api.send('patch', "{{ url_for('profile_edit') }}", {socials: userSocial})
+        apiFeedback(call, 'Your social accounts were updated.')
+      }
+    })
+    wrapper.append(input)
+    socialField.append(wrapper)
+  })
+
 
 
   function apiFeedback(caller, confirmation) {

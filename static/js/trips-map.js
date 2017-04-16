@@ -20,6 +20,17 @@ locations.forEach(point => {
       .addTo(map)
 })
 
+// Zoom to view all markers
+const latitudes = locations.map(loc => loc.position[0])
+const longitudes = locations.map(loc => loc.position[1])
+map.fitBounds([[
+    Math.min.apply(null, latitudes) - 1,
+    Math.min.apply(null, longitudes) - 1
+], [
+    Math.max.apply(null, latitudes) + 1,
+    Math.max.apply(null, longitudes) + 1
+]]);
+
 // Current location
 if(current_location.length) {
   const popup = new mapboxgl.Popup({offset: [10, -20]})

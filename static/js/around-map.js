@@ -6,39 +6,40 @@ const map = new mapboxgl.Map({
   zoom: 2
 })
 
+map.addControl(new mapboxgl.NavigationControl());
+map.addControl(new mapboxgl.GeolocateControl());
+
 // users interesting points
-const pois = new Worker('/static/js/webworker-around.js');
+const worker = new Worker('/static/js/webworker-around.js')
 
-pois.onmessage = informations => {
-  const [name, wifi, power, comment, lng, lat, id] = informations.data
-  console.debug(id)
-  const el = document.createElement('div')
-  el.classList.add('marker')
+worker.onmessage = response => {
+  response.data.forEach(poi => {
+    const el = document.createElement('div')
+    el.classList.add('marker')
 
-  let content = `<h2>Hello ${name}</h2>
-                 <ul>
-                    <li>Wifi quality: ${wifi}</li>
-                    <li>Power available: ${power}</li>
-                    <li>Comments: ${comment}</li>
-                  </ul>`
+    const popup = new mapboxgl.Popup({offset: [10, -20]})
+      .setHTML(`<h2>Hello ${poi.name}</h2>
+                   <ul>
+                      <li>Wifi quality: ${poi.wifiQuality}</li>
+                      <li>Power available: ${poi.powerAvailable}</li>
+                    </ul>`
+            )
 
-  const popup = new mapboxgl.Popup({offset: [10, -20]})
-    .setHTML(content)
+    new mapboxgl.Marker(el, {offset:[0, -30]})
+      .setLngLat([poi.position.longitude, poi.position.latitude])
+      .setPopup(popup)
+      .addTo(map)
+  })
+}
 
-  new mapboxgl.Marker(el, {offset:[0, -30]})
-    .setLngLat([lng, lat])
-    .setPopup(popup)
-    .addTo(map)
-};
-
-pois.postMessage('info-requested');
+worker.postMessage('info-requested')
 
 // create the current marker
-currentMarker = position => {
+const currentMarker = position => {
   const popup = new mapboxgl.Popup({offset: [10, -20]})
       .setText('Your current location')
 
-  const el = document.createElement('div');
+  const el = document.createElement('div')
   el.classList.add('marker')
   el.classList.add('current-location')
 
@@ -51,7 +52,7 @@ currentMarker = position => {
   map.setZoom(11)
 }
 
-const userCenter = _  => {
+const userCenter = _ => {
   if(currentLocation.length > 0) {
     currentMarker(currentLocation.reverse())
   } else {
@@ -61,4 +62,27 @@ const userCenter = _  => {
   }
 }
 
-userCenter()
+const sharePosition = id => {
+  window.location.hash = id
+}
+
+// center the map according context
+if (window.location.hash.indexOf('#') == 0) {
+  const hash = window.location.hash.split('#')[1]
+  fetch('/around/spots.json')
+    .then(response => response.json())
+    .then(items => {
+      const hashData = items.find(item => item._id == hash)
+      const hashLng = hashData.position.longitude
+      const hashLat = hashData.position.latitude
+
+      const lng = parseFloat(hashLng)
+      const lat = parseFloat(hashLat)
+
+      const hashCoords = [lng, lat]
+      map.setCenter(hashCoords)
+      map.setZoom(16)
+    })
+} else {
+  userCenter()
+}
