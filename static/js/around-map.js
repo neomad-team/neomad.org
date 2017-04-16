@@ -11,7 +11,6 @@ const pois = new Worker('/static/js/webworker-around.js');
 
 pois.onmessage = informations => {
   const [name, wifi, power, comment, lng, lat, id] = informations.data
-  console.debug(id)
   const el = document.createElement('div')
   el.classList.add('marker')
 
@@ -20,7 +19,8 @@ pois.onmessage = informations => {
                     <li>Wifi quality: ${wifi}</li>
                     <li>Power available: ${power}</li>
                     <li>Comments: ${comment}</li>
-                  </ul>`
+                  </ul>
+                  <button value=${id} onclick=sharePosition(value)>share this position</button>`
 
   const popup = new mapboxgl.Popup({offset: [10, -20]})
     .setHTML(content)
@@ -61,4 +61,28 @@ const userCenter = _  => {
   }
 }
 
-userCenter()
+sharePosition = id => {
+  window.location.hash = id
+}
+
+// center the map according context
+if (window.location.hash.indexOf("#") == 0) {
+  let hash = window.location.hash.split('#')[1]
+  fetch('/around/spots.json')
+    .then(response => response.json())
+    .then(items => {
+      let hashData = items.find(item => item._id == hash)
+      let hashLng = hashData.position.longitude
+      let hashLat = hashData.position.latitude
+
+      let lng = parseFloat(hashLng)
+      let lat = parseFloat(hashLat)
+
+      let hashCoords = [lng,lat]
+      console.log(hashCoords);
+      map.setCenter(hashCoords)
+      map.setZoom(16)
+    })
+} else {
+  userCenter()
+}
