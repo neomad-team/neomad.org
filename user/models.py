@@ -43,5 +43,7 @@ class User(UserMixin, db.Document):
         return str(self.username or 'Unknown')
 
     def save(self, *args, **kwargs):
+        if self.username is None:
+            self.username = self.email.split('@')[0]
         self.slug = slugify(self.username)
         return super().save(*args, **kwargs)
