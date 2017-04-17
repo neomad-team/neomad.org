@@ -7,7 +7,7 @@ const map = new mapboxgl.Map({
 })
 
 // users interesting points
-const pois = new Worker('/static/js/webworker-around.js');
+const pois = new Worker('/static/js/webworker-around.js')
 
 pois.onmessage = informations => {
   const [name, wifi, power, comment, lng, lat, id] = informations.data
@@ -31,14 +31,14 @@ pois.onmessage = informations => {
     .addTo(map)
 };
 
-pois.postMessage('info-requested');
+pois.postMessage('info-requested')
 
 // create the current marker
 currentMarker = position => {
   const popup = new mapboxgl.Popup({offset: [10, -20]})
       .setText('Your current location')
 
-  const el = document.createElement('div');
+  const el = document.createElement('div')
   el.classList.add('marker')
   el.classList.add('current-location')
 
@@ -74,12 +74,11 @@ if (window.location.hash.indexOf("#") == 0) {
       let hashData = items.find(item => item._id == hash)
       let hashLng = hashData.position.longitude
       let hashLat = hashData.position.latitude
-
+      
       let lng = parseFloat(hashLng)
       let lat = parseFloat(hashLat)
 
       let hashCoords = [lng,lat]
-      console.log(hashCoords);
       map.setCenter(hashCoords)
       map.setZoom(16)
     })
