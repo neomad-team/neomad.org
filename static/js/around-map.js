@@ -74,7 +74,7 @@ if (window.location.hash.indexOf("#") == 0) {
       let hashData = items.find(item => item._id == hash)
       let hashLng = hashData.position.longitude
       let hashLat = hashData.position.latitude
-      
+
       let lng = parseFloat(hashLng)
       let lat = parseFloat(hashLat)
 
