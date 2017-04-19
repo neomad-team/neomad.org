@@ -26,9 +26,13 @@
       <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
     </div>
     <section class=social>
-      <a class=email href=mailto:{{ user.email }} title="Send an email">Send an email</a>
+      {% if user.socials.email %}
+      <a class=email href=mailto:{{ user.socials.email }} title="Send an email">Send an email</a>
+      {% endif %}
       {% for name, url in user.socials.items() %}
+      {% if name != 'email' and url %}
       <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
+      {% endif %}
       {% endfor %}
     </section>
     <nav>
@@ -125,31 +129,37 @@
   emailWrapper.classList.add('edit')
   emailWrapper.classList.add('email')
   const email = document.createElement('input')
+  email.name ='email'
   email.type = 'email'
+  email.value = '{{ user.socials.email }}'
   email.placeholder = 'My contact email'
   emailWrapper.append(email)
   socialField.append(emailWrapper)
 
   const socials = ['Twitter', 'Facebook', 'Instagram']
-  const userSocial = {{ user.socials.json or {} }}
+  const userSocial = {{ user.socials|safe }}
   socials.forEach(social => {
+    const name = social.toLowerCase()
     const wrapper = document.createElement('span')
     wrapper.classList.add('edit')
-    wrapper.classList.add(social.toLowerCase())
+    wrapper.classList.add(name)
     const input = document.createElement('input')
-    input.name = social.toLowerCase()
-    input.value = userSocial[social] || ''
+    input.name = name
+    input.value = userSocial[name] || ''
     input.type = 'url'
     input.placeholder = `My ${social} (https://…)`
+    wrapper.append(input)
+    socialField.append(wrapper)
+  })
+  ;[].forEach.call(socialField.querySelectorAll('input'), input => {
     input.addEventListener('blur', event => {
-      userSocial[input.name] = input.value
-      if(input.checkValidity()) {
+      const field = event.currentTarget
+      if(field.checkValidity()) {
+        userSocial[field.name] = field.value
         const call = api.send('patch', "{{ url_for('profile_edit') }}", {socials: userSocial})
         apiFeedback(call, 'Your social accounts were updated.')
       }
     })
-    wrapper.append(input)
-    socialField.append(wrapper)
   })
 
 
