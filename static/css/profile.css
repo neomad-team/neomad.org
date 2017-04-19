@@ -51,20 +51,37 @@ main > header {
 }
 .profile-intro .social a,
 .profile-intro .social input {
+<<<<<<< HEAD
   font-size: .9em;
   font-style: italic;
   margin-right: 1rem;
   vertical-align: top;
+=======
+  display: inline-block;
+  font-size: .9em;
+  font-style: italic;
+  margin-right: 1rem;
+  vertical-align: middle;
+  height: 3rem;
+>>>>>>> ceb15d84702789fc49a518cec71dae2fdab8a0a6
 }
 .profile-intro .social a.email {
   margin-right: 3rem;
 }
 .profile-intro .social a:not(.email) {
   width: 2rem;
+<<<<<<< HEAD
   height: 3rem;
   display: inline-block;
   overflow: hidden;
 }
+=======
+  overflow: hidden;
+}
+.profile-intro .social .edit {
+  margin-right: 2rem;
+}
+>>>>>>> ceb15d84702789fc49a518cec71dae2fdab8a0a6
 .profile-intro .social a::before,
 .profile-intro .social .edit::before {
   font-size: 2rem;
@@ -74,6 +91,10 @@ main > header {
   display: inline-block;
   text-decoration: inherit;
   margin-right: .5rem;
+  vertical-align: middle;
+}
+.profile-intro .social a::before {
+  margin-top: -0.5rem;
 }
 .profile-intro .social .email::before {
   content: "\f003";

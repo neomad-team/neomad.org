@@ -26,9 +26,19 @@
       <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
     </div>
     <section class=social>
+<<<<<<< HEAD
       <a class=email href=mailto:{{ user.email }} title="Send an email">Send an email</a>
       {% for name, url in user.socials.items() %}
       <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
+=======
+      {% if user.socials.email %}
+      <a class=email href=mailto:{{ user.socials.email }} title="Send an email">Send an email</a>
+      {% endif %}
+      {% for name, url in user.socials.items() %}
+      {% if name != 'email' and url %}
+      <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
+      {% endif %}
+>>>>>>> ceb15d84702789fc49a518cec71dae2fdab8a0a6
       {% endfor %}
     </section>
     <nav>
@@ -125,12 +135,19 @@
   emailWrapper.classList.add('edit')
   emailWrapper.classList.add('email')
   const email = document.createElement('input')
+<<<<<<< HEAD
   email.type = 'email'
+=======
+  email.name ='email'
+  email.type = 'email'
+  email.value = '{{ user.socials.email }}'
+>>>>>>> ceb15d84702789fc49a518cec71dae2fdab8a0a6
   email.placeholder = 'My contact email'
   emailWrapper.append(email)
   socialField.append(emailWrapper)
 
   const socials = ['Twitter', 'Facebook', 'Instagram']
+<<<<<<< HEAD
   const userSocial = {{ user.socials.json or {} }}
   socials.forEach(social => {
     const wrapper = document.createElement('span')
@@ -144,12 +161,36 @@
     input.addEventListener('blur', event => {
       userSocial[input.name] = input.value
       if(input.checkValidity()) {
+=======
+  const userSocial = {{ user.socials|safe }}
+  socials.forEach(social => {
+    const name = social.toLowerCase()
+    const wrapper = document.createElement('span')
+    wrapper.classList.add('edit')
+    wrapper.classList.add(name)
+    const input = document.createElement('input')
+    input.name = name
+    input.value = userSocial[name] || ''
+    input.type = 'url'
+    input.placeholder = `My ${social} (https://…)`
+    wrapper.append(input)
+    socialField.append(wrapper)
+  })
+  ;[].forEach.call(socialField.querySelectorAll('input'), input => {
+    input.addEventListener('blur', event => {
+      const field = event.currentTarget
+      if(field.checkValidity()) {
+        userSocial[field.name] = field.value
+>>>>>>> ceb15d84702789fc49a518cec71dae2fdab8a0a6
         const call = api.send('patch', "{{ url_for('profile_edit') }}", {socials: userSocial})
         apiFeedback(call, 'Your social accounts were updated.')
       }
     })
+<<<<<<< HEAD
     wrapper.append(input)
     socialField.append(wrapper)
+=======
+>>>>>>> ceb15d84702789fc49a518cec71dae2fdab8a0a6
   })
 
 

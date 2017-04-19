@@ -14,7 +14,7 @@ locations.forEach(point => {
   const el = document.createElement('div');
   el.classList.add('marker')
 
-  new mapboxgl.Marker(el, {offset:[0, -30]})
+  new mapboxgl.Marker(el, {offset:[4, -6]})
       .setLngLat(point.position.reverse())
       .setPopup(popup)
       .addTo(map)
