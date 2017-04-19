@@ -6,8 +6,8 @@ const map = new mapboxgl.Map({
   zoom: 2
 })
 
-map.addControl(new mapboxgl.NavigationControl());
-map.addControl(new mapboxgl.GeolocateControl());
+map.addControl(new mapboxgl.NavigationControl())
+map.addControl(new mapboxgl.GeolocateControl())
 
 // users interesting points
 const worker = new Worker('/static/js/webworker-around.js')
