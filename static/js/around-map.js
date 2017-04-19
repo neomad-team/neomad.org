@@ -30,7 +30,7 @@ worker.onmessage = response => {
   })
 }
 
-pois.postMessage('info-requested')
+worker.postMessage('info-requested')
 
 // create the current marker
 const currentMarker = position => {
