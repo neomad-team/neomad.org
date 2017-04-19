@@ -7,6 +7,7 @@ const map = new mapboxgl.Map({
 })
 
 map.addControl(new mapboxgl.NavigationControl());
+map.addControl(new mapboxgl.GeolocateControl());
 
 // users interesting points
 const worker = new Worker('/static/js/webworker-around.js')
@@ -22,7 +23,7 @@ worker.onmessage = response => {
                       <li>Wifi quality: ${poi.wifiQuality}</li>
                       <li>Power available: ${poi.powerAvailable}</li>
                     </ul>`
-              )
+            )
 
     new mapboxgl.Marker(el, {offset:[0, -30]})
       .setLngLat([poi.position.longitude, poi.position.latitude])
