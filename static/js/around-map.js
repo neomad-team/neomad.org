@@ -6,6 +6,8 @@ const map = new mapboxgl.Map({
   zoom: 2
 })
 
+map.addControl(new mapboxgl.NavigationControl());
+
 // users interesting points
 const worker = new Worker('/static/js/webworker-around.js')
 
@@ -19,8 +21,7 @@ worker.onmessage = response => {
                    <ul>
                       <li>Wifi quality: ${poi.wifiQuality}</li>
                       <li>Power available: ${poi.powerAvailable}</li>
-                    </ul>
-                    <button value=${poi._id} onclick=sharePosition(value)>share this position</button>`
+                    </ul>`
               )
 
     new mapboxgl.Marker(el, {offset:[0, -30]})
