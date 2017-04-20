@@ -68,20 +68,15 @@ const sharePosition = id => {
 
 // center the map according context
 if (window.location.hash.indexOf('#') == 0) {
-  const hash = window.location.hash.split('#')[1]
+  const hash = window.location.hash.slice(1)
   fetch('/around/spots.json')
     .then(response => response.json())
     .then(items => {
       const hashData = items.find(item => item._id == hash)
-      const hashLng = hashData.position.longitude
-      const hashLat = hashData.position.latitude
-
-      const lng = parseFloat(hashLng)
-      const lat = parseFloat(hashLat)
-
-      const hashCoords = [lng, lat]
-      map.setCenter(hashCoords)
-      map.setZoom(16)
+      const lng = parseFloat(hashData.position.longitude)
+      const lat = parseFloat(hashData.position.latitude)
+      map.setCenter([lng, lat])
+      map.setZoom(13)
     })
 } else {
   userCenter()
