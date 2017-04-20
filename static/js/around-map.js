@@ -18,14 +18,14 @@ worker.onmessage = response => {
     el.classList.add('marker')
 
     const popup = new mapboxgl.Popup({offset: [10, -20]})
-      .setHTML(`<h2>Hello ${poi.name}</h2>
+      .setHTML(`<h2>${poi.name}</h2>
                    <ul>
                       <li>Wifi quality: ${poi.wifiQuality}</li>
                       <li>Power available: ${poi.powerAvailable}</li>
                     </ul>`
             )
 
-    new mapboxgl.Marker(el, {offset:[4, -6})
+    const marker = new mapboxgl.Marker(el, {offset:[4, -6]})
       .setLngLat([poi.position.longitude, poi.position.latitude])
       .setPopup(popup)
       .addTo(map)
