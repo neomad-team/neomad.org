@@ -40,6 +40,7 @@ main > header {
   margin: 0 auto;
 }
 .profile-intro .social {
+  display: flex;
   flex-wrap: wrap;
   flex-basis: 100%;
   order: 2;
