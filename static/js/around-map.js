@@ -19,11 +19,11 @@ worker.onmessage = response => {
 
     const popup = new mapboxgl.Popup({offset: [10, -20]})
       .setHTML(`<h2>${poi.name}</h2>
-                   <ul>
-                      <li>Wifi quality: ${poi.wifiQuality}</li>
-                      <li>Power available: ${poi.powerAvailable}</li>
-                    </ul>`
-            )
+                <ul>
+                  <li>Wifi quality: ${poi.wifiQuality}</li>
+                  <li>Power available: ${poi.powerAvailable}</li>
+                  <li>Comment: ${poi.comments}</li>
+                </ul>`)
 
     const marker = new mapboxgl.Marker(el, {offset:[4, -6]})
       .setLngLat([poi.position.longitude, poi.position.latitude])
