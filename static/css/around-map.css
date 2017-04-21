@@ -1,4 +1,4 @@
-.marker.current-location {
+.marker.current {
     background-image: url('/static/images/marker-red.png');
     z-index: 1;
 }
