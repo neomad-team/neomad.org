@@ -22,7 +22,7 @@ worker.onmessage = response => {
                 <ul>
                   <li>Wifi quality: ${poi.wifiQuality}</li>
                   <li>Power available: ${poi.powerAvailable}</li>
-                  <li>Comment: ${poi.comments}</li>
+                  <li>Comments: ${poi.comments}</li>
                 </ul>`)
 
     const marker = new mapboxgl.Marker(el, {offset:[4, -6]})
@@ -41,7 +41,7 @@ const currentMarker = position => {
 
   const el = document.createElement('div')
   el.classList.add('marker')
-  el.classList.add('current-location')
+  el.classList.add('current')
 
   new mapboxgl.Marker(el, {offset:[0, -30]})
     .setLngLat(position)
