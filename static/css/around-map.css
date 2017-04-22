@@ -1,3 +1,13 @@
+#wrap {
+  display: flex;
+}
+#poisCards {
+  min-width: 25%;
+}
+#map {
+  width: 75%;
+}
+
 .marker.current {
     background-image: url('/static/images/marker-red.png');
     z-index: 1;
