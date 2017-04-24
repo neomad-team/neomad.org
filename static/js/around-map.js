@@ -6,41 +6,42 @@ var map = new mapboxgl.Map({
   zoom: 2
 })
 
+map.addControl(new mapboxgl.NavigationControl())
+map.addControl(new mapboxgl.GeolocateControl())
+
 // users interesting points
-const pois = new Worker('/static/js/webworker-around.js');
+const worker = new Worker('/static/js/webworker-around.js')
 
-pois.onmessage = informations => {
-  const [name, wifi, power, comment, lng, lat] = informations.data
+worker.onmessage = response => {
+  response.data.forEach(poi => {
+    const el = document.createElement('div')
+    el.classList.add('marker')
 
-  const el = document.createElement('div')
-  el.classList.add('marker')
+    const popup = new mapboxgl.Popup({offset: [10, -20]})
+      .setHTML(`<h2>${poi.name}</h2>
+                <ul>
+                  <li>Wifi quality: ${poi.wifiQuality}</li>
+                  <li>Power available: ${poi.powerAvailable}</li>
+                  <li>Comments: ${poi.comments}</li>
+                </ul>`)
 
-  let content = `<h2>Hello ${name}</h2>
-                 <ul>
-                    <li>Wifi quality: ${wifi}</li>
-                    <li>Power available: ${power}</li>
-                    <li>Comments: ${comment}</li>
-                  </ul>`
+    const marker = new mapboxgl.Marker(el, {offset:[4, -6]})
+      .setLngLat([poi.position.longitude, poi.position.latitude])
+      .setPopup(popup)
+      .addTo(map)
+  })
+}
 
-  const popup = new mapboxgl.Popup({offset: [10, -20]})
-    .setHTML(content)
-
-  new mapboxgl.Marker(el, {offset:[0, -30]})
-    .setLngLat([lng, lat])
-    .setPopup(popup)
-    .addTo(map)
-};
-
-pois.postMessage('info-requested');
+worker.postMessage('info-requested')
 
 // create the current marker
-currentMarker = position => {
+const currentMarker = position => {
   const popup = new mapboxgl.Popup({offset: [10, -20]})
       .setText('Your current location')
 
-  const el = document.createElement('div');
+  const el = document.createElement('div')
   el.classList.add('marker')
-  el.classList.add('current-location')
+  el.classList.add('current')
 
   new mapboxgl.Marker(el, {offset:[0, -30]})
     .setLngLat(position)
@@ -51,7 +52,7 @@ currentMarker = position => {
   map.setZoom(11)
 }
 
-const userCenter = _  => {
+const userCenter = _ => {
   if(currentLocation.length > 0) {
     currentMarker(currentLocation.reverse())
   } else {
@@ -61,4 +62,22 @@ const userCenter = _  => {
   }
 }
 
-userCenter()
+const sharePosition = id => {
+  window.location.hash = id
+}
+
+// center the map according context
+if (window.location.hash.indexOf('#') == 0) {
+  const hash = window.location.hash.slice(1)
+  fetch('/around/spots.json')
+    .then(response => response.json())
+    .then(items => {
+      const hashData = items.find(item => item._id == hash)
+      const lng = parseFloat(hashData.position.longitude)
+      const lat = parseFloat(hashData.position.latitude)
+      map.setCenter([lng, lat])
+      map.setZoom(13)
+    })
+} else {
+  userCenter()
+}
