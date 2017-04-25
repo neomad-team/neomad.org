@@ -1,11 +1,19 @@
 #wrap {
   display: flex;
+  flex-direction: column;
 }
 #poisCards {
-  min-width: 25%;
+  margin: auto;
 }
 #map {
-  width: 75%;
+}
+
+.poisCard {
+  display: inline-block;
+  height: 50px;
+  padding: 10px;
+  margin: 10px;
+  border: 1px grey solid;
 }
 
 .marker.current {
