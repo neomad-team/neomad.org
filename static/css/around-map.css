@@ -1,18 +1,21 @@
 #wrap {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
 }
 #poisCards {
-  margin: auto;
+  display: flex;
+  flex-direction: column;
 }
 #map {
+  width: 60%;
+  position: fixed;
+  right: 0;
 }
 
-.poisCard {
-  display: inline-block;
-  height: 50px;
+.card {
+
   padding: 10px;
-  margin: 10px;
+  margin: 0 1rem 1rem 2rem;
   border: 1px grey solid;
 }
 
