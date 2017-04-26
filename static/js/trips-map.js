@@ -8,7 +8,7 @@ var map = new mapboxgl.Map({
 
 // Previous trips
 locations.forEach(point => {
-  const popup = new mapboxgl.Popup({offset: [10, -20]})
+  const popup = new mapboxgl.Popup({offset: [10, 0]})
       .setText(point.date)
 
   const el = document.createElement('div');

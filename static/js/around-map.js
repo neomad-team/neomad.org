@@ -17,7 +17,7 @@ worker.onmessage = response => {
     const el = document.createElement('div')
     el.classList.add('marker')
 
-    const popup = new mapboxgl.Popup({offset: [10, -20]})
+    const popup = new mapboxgl.Popup({offset: [10, 0]})
       .setHTML(`<h2>${poi.name}</h2>
                 <ul>
                   <li>Wifi quality: ${poi.wifiQuality}</li>
