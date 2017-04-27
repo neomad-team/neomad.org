@@ -1,4 +1,4 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog';
+mapboxgl.accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog'
 var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v9',
@@ -12,10 +12,12 @@ map.addControl(new mapboxgl.GeolocateControl())
 // users interesting points
 const worker = new Worker('/static/js/webworker-around.js')
 
-worker.onmessage = response => {
-  response.data.forEach(poi => {
+worker.addEventListener('message', response => {
+  pois = response.data
+  pois.forEach(poi => {
     const el = document.createElement('div')
     el.classList.add('marker')
+    el.id = poi._id
 
     const popup = new mapboxgl.Popup({offset: [10, 0]})
       .setHTML(`<h2>${poi.name}</h2>
@@ -30,14 +32,14 @@ worker.onmessage = response => {
       .setPopup(popup)
       .addTo(map)
   })
-}
+})
 
-worker.postMessage('info-requested')
+worker.postMessage('')
 
 // create the current marker
-const currentMarker = position => {
-  const popup = new mapboxgl.Popup({offset: [10, -20]})
-      .setText('Your current location')
+function currentMarker (position) {
+  const popup = new mapboxgl.Popup({offset: [10, 0]})
+    .setText('Your current location')
 
   const el = document.createElement('div')
   el.classList.add('marker')
@@ -52,32 +54,53 @@ const currentMarker = position => {
   map.setZoom(11)
 }
 
-const userCenter = _ => {
-  if(currentLocation.length > 0) {
-    currentMarker(currentLocation.reverse())
-  } else {
-    navigator.geolocation.getCurrentPosition(position => {
-      currentMarker([position.coords.longitude, position.coords.latitude])
-    })
+// a étudier
+
+map.on('click', event => {
+  const poi = findPoi(event.originalEvent.target.id)
+  if(poi) {
+    urlFor(poi._id)
+    map.flyTo({center: [poi.position.longitude, poi.position.latitude]})
+
   }
+})
+
+function findPoi (id) {
+  return pois.find(poi => poi._id == id)
 }
 
-const sharePosition = id => {
+function getHash () {
+  return window.location.hash.slice(1)
+}
+
+function urlFor (id) {
   window.location.hash = id
 }
 
+function focusUser () {
+  navigator.geolocation.getCurrentPosition(position => {
+  map.setZoom(11)
+  map.flyTo({center: [position.coords.longitude, position.coords.latitude]})
+  currentMarker([position.coords.longitude, position.coords.latitude])
+  })
+}
+
 // center the map according context
-if (window.location.hash.indexOf('#') == 0) {
-  const hash = window.location.hash.slice(1)
-  fetch('/around/spots.json')
-    .then(response => response.json())
-    .then(items => {
-      const hashData = items.find(item => item._id == hash)
-      const lng = parseFloat(hashData.position.longitude)
-      const lat = parseFloat(hashData.position.latitude)
-      map.setCenter([lng, lat])
-      map.setZoom(13)
-    })
-} else {
-  userCenter()
+window.onload = _ => {
+  if (window.location.hash.indexOf('#') == 0) {
+    const hash = getHash()
+    fetch('/around/spots.json')
+      .then(response => response.json())
+      .then(items => {
+        const hashData = items.find(item => item._id == hash)
+        const lng = parseFloat(hashData.position.longitude)
+        const lat = parseFloat(hashData.position.latitude)
+        map.flyTo([lat, lng])
+        map.setZoom(11)
+      })
+  } else if (currentLocation.length == 0) {
+    focusUser()
+  } else if (position) {
+    currentMarker()
+  }
 }
