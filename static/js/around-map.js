@@ -1,3 +1,5 @@
+// Init Map
+
 mapboxgl.accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog'
 var map = new mapboxgl.Map({
   container: 'map',
@@ -5,11 +7,17 @@ var map = new mapboxgl.Map({
   center: [-10, 45],
   zoom: 2
 })
-
 map.addControl(new mapboxgl.NavigationControl())
 map.addControl(new mapboxgl.GeolocateControl())
 
-// users interesting points
+// detectionLocation
+if(currentLocation.length == 0) {
+  focusUser()
+} else {
+  currentMarker(currentLocation)
+}
+
+// pois
 const worker = new Worker('/static/js/webworker-around.js')
 
 worker.addEventListener('message', response => {
@@ -31,13 +39,30 @@ worker.addEventListener('message', response => {
       .setLngLat([poi.position.longitude, poi.position.latitude])
       .setPopup(popup)
       .addTo(map)
+
+    if(window.location.hash) {
+      const hash = getHash()
+      if(hash == el.id) {
+        moveTo([poi.position.longitude, poi.position.latitude])
+      }
+    }
   })
 })
 
 worker.postMessage('')
 
-// create the current marker
-function currentMarker (position) {
+// event
+map.on('click', event => {
+  map.setZoom(2)
+  const poi = findPoi(event.originalEvent.target.id)
+  if(poi) {
+    urlFor(poi._id)
+    moveTo([poi.position.longitude, poi.position.latitude])
+  }
+})
+
+// functions
+function currentMarker (currentLocation) {
   const popup = new mapboxgl.Popup({offset: [10, 0]})
     .setText('Your current location')
 
@@ -46,27 +71,29 @@ function currentMarker (position) {
   el.classList.add('current')
 
   new mapboxgl.Marker(el, {offset:[0, -30]})
-    .setLngLat(position)
+    .setLngLat(currentLocation)
     .setPopup(popup)
     .addTo(map)
 
-  map.setCenter(position)
-  map.setZoom(11)
+  moveTo(currentLocation)
 }
 
-// a étudier
+function focusUser () {
+  navigator.geolocation.getCurrentPosition(position => {
+    const userPosition = [position.coords.longitude, position.coords.latitude]
+    moveTo(userPosition)
+    currentMarker(userPosition)
+  })
+}
 
-map.on('click', event => {
-  const poi = findPoi(event.originalEvent.target.id)
-  if(poi) {
-    urlFor(poi._id)
-    map.flyTo({center: [poi.position.longitude, poi.position.latitude]})
-
-  }
-})
-
-function findPoi (id) {
-  return pois.find(poi => poi._id == id)
+function moveTo (position) {
+  map.flyTo({
+    center: position,
+    zoom: 11,
+    bearing: 0,
+    speed: 1.7,
+    curve: 1
+  })
 }
 
 function getHash () {
@@ -77,30 +104,6 @@ function urlFor (id) {
   window.location.hash = id
 }
 
-function focusUser () {
-  navigator.geolocation.getCurrentPosition(position => {
-  map.setZoom(11)
-  map.flyTo({center: [position.coords.longitude, position.coords.latitude]})
-  currentMarker([position.coords.longitude, position.coords.latitude])
-  })
-}
-
-// center the map according context
-window.onload = _ => {
-  if (window.location.hash.indexOf('#') == 0) {
-    const hash = getHash()
-    fetch('/around/spots.json')
-      .then(response => response.json())
-      .then(items => {
-        const hashData = items.find(item => item._id == hash)
-        const lng = parseFloat(hashData.position.longitude)
-        const lat = parseFloat(hashData.position.latitude)
-        map.flyTo([lat, lng])
-        map.setZoom(11)
-      })
-  } else if (currentLocation.length == 0) {
-    focusUser()
-  } else if (position) {
-    currentMarker()
-  }
+function findPoi (id) {
+  return pois.find(poi => poi._id == id)
 }
