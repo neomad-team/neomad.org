@@ -10,14 +10,14 @@ var map = new mapboxgl.Map({
 map.addControl(new mapboxgl.NavigationControl())
 map.addControl(new mapboxgl.GeolocateControl())
 
-//
+// detectionLocation
 if (currentLocation.length == 0) {
   focusUser()
 } else if (currentLocation.length > 0) {
   currentMarker(currentLocation)
 }
 
-// Pois marker
+// pois
 const worker = new Worker('/static/js/webworker-around.js')
 
 worker.addEventListener('message', response => {
@@ -40,24 +40,24 @@ worker.addEventListener('message', response => {
       .setPopup(popup)
       .addTo(map)
 
-      if (window.location.hash.indexOf('#') == 0) {
-        const hash = getHash()
-        if (hash == el.id) {
-          map.flyTo({
-            center: [poi.position.longitude, poi.position.latitude],
-            zoom: 11,
-            bearing: 0,
-            speed: 1.7,
-            curve: 1
-          })
-        }
+    if (window.location.hash.indexOf('#') == 0) {
+      const hash = getHash()
+      if (hash == el.id) {
+        map.flyTo({
+          center: [poi.position.longitude, poi.position.latitude],
+          zoom: 11,
+          bearing: 0,
+          speed: 1.7,
+          curve: 1
+        })
       }
+    }
   })
 })
 
 worker.postMessage('')
 
-// Event On Map
+// event
 map.on('click', event => {
   map.setZoom(2)
   const poi = findPoi(event.originalEvent.target.id)
@@ -83,7 +83,7 @@ function currentMarker (currentLocation) {
   el.classList.add('current')
 
   new mapboxgl.Marker(el, {offset:[0, -30]})
-    .setLngLat(currentLocation.reverse())
+    .setLngLat(currentLocation)
     .setPopup(popup)
     .addTo(map)
 
