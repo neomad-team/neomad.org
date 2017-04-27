@@ -11,9 +11,9 @@ map.addControl(new mapboxgl.NavigationControl())
 map.addControl(new mapboxgl.GeolocateControl())
 
 // detectionLocation
-if (currentLocation.length == 0) {
+if(currentLocation.length == 0) {
   focusUser()
-} else if (currentLocation.length > 0) {
+} else if(currentLocation.length > 0) {
   currentMarker(currentLocation)
 }
 
@@ -40,17 +40,11 @@ worker.addEventListener('message', response => {
       .setPopup(popup)
       .addTo(map)
 
-    if (window.location.hash.indexOf('#') == 0) {
+    if(window.location.hash) {
       const hash = getHash()
-      if (hash == el.id) {
-        map.flyTo({
-          center: [poi.position.longitude, poi.position.latitude],
-          zoom: 11,
-          bearing: 0,
-          speed: 1.7,
-          curve: 1
-        })
-      marker.openPopup()
+      if(hash == el.id) {
+        const position = [poi.position.longitude, poi.position.latitude]
+        moveTo(position)
       }
     }
   })
@@ -64,19 +58,12 @@ map.on('click', event => {
   const poi = findPoi(event.originalEvent.target.id)
   if(poi) {
     urlFor(poi._id)
-    map.flyTo({
-      center: [poi.position.longitude, poi.position.latitude],
-      zoom: 11,
-      bearing: 0,
-      speed: 1.7,
-      curve: 1
-    })
+    const position = [poi.position.longitude, poi.position.latitude]
+    moveTo(position)
   }
 })
 
 // functions
-const params =
-
 function currentMarker (currentLocation) {
   const popup = new mapboxgl.Popup({offset: [10, 0]})
     .setText('Your current location')
@@ -90,25 +77,24 @@ function currentMarker (currentLocation) {
     .setPopup(popup)
     .addTo(map)
 
-  map.flyTo({
-    center: currentLocation,
-    zoom: 11,
-    bearing: 0,
-    speed: 1.7,
-    curve: 1
-  })
+  moveTo(currentLocation)
 }
 
 function focusUser () {
   navigator.geolocation.getCurrentPosition(position => {
-    map.flyTo({
-      center: [position.coords.longitude, position.coords.latitude],
-      zoom: 11,
-      bearing: 0,
-      speed: 1.7,
-      curve: 1
-    })
-  currentMarker([position.coords.longitude, position.coords.latitude])
+  const position = [position.coords.longitude, position.coords.latitude]
+  moveTo(position)
+  currentMarker(position)
+  })
+}
+
+function moveTo (position) {
+  map.flyTo({
+    center: position,
+    zoom: 11,
+    bearing: 0,
+    speed: 1.7,
+    curve: 1
   })
 }
 
