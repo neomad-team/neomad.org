@@ -7,7 +7,10 @@ class App extends React.Component {
 
   constructor(props) {
       super(props);
-      this.state = {pois: {}};
+      this.state = {
+        pois: {},
+        currentLocation: currentLocation
+      };
     }
 
   componentDidMount() {
@@ -23,7 +26,7 @@ class App extends React.Component {
   render() {
     const cards = Object
       .keys(this.state.pois)
-      .map(key => <Card key={key} details={this.state.pois[key]} currentLocation={this.props.currentLocation} />)
+      .map(key => <Card key={key} details={this.state.pois[key]} />)
 
     return (
       <div>{cards}</div>
@@ -32,6 +35,6 @@ class App extends React.Component {
  }
 
   ReactDOM.render(
-    <App currentLocation={currentLocation}/>,
+    <App />,
     document.getElementById('poiCards')
   )
