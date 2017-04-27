@@ -13,7 +13,7 @@ map.addControl(new mapboxgl.GeolocateControl())
 // detectionLocation
 if(currentLocation.length == 0) {
   focusUser()
-} else if(currentLocation.length > 0) {
+} else {
   currentMarker(currentLocation)
 }
 
@@ -43,8 +43,7 @@ worker.addEventListener('message', response => {
     if(window.location.hash) {
       const hash = getHash()
       if(hash == el.id) {
-        const position = [poi.position.longitude, poi.position.latitude]
-        moveTo(position)
+        moveTo([poi.position.longitude, poi.position.latitude])
       }
     }
   })
@@ -58,8 +57,7 @@ map.on('click', event => {
   const poi = findPoi(event.originalEvent.target.id)
   if(poi) {
     urlFor(poi._id)
-    const position = [poi.position.longitude, poi.position.latitude]
-    moveTo(position)
+    moveTo([poi.position.longitude, poi.position.latitude])
   }
 })
 
@@ -82,9 +80,8 @@ function currentMarker (currentLocation) {
 
 function focusUser () {
   navigator.geolocation.getCurrentPosition(position => {
-  const position = [position.coords.longitude, position.coords.latitude]
-  moveTo(position)
-  currentMarker(position)
+    moveTo([position.coords.longitude, position.coords.latitude])
+    currentMarker(location)
   })
 }
 
