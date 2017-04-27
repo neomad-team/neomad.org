@@ -80,7 +80,7 @@ function currentMarker (currentLocation) {
 
 function focusUser () {
   navigator.geolocation.getCurrentPosition(position => {
-    userPosition = [position.coords.longitude, position.coords.latitude]
+    const userPosition = [position.coords.longitude, position.coords.latitude]
     moveTo(userPosition)
     currentMarker(userPosition)
   })
