@@ -2,6 +2,10 @@ import React from 'react'
 
 class Card extends React.Component {
 
+  closeCard = _ => {
+
+  }
+
   render() {
     return (
       <div className="card">
