@@ -23,7 +23,7 @@ class App extends React.Component {
   render() {
     const cards = Object
       .keys(this.state.pois)
-      .map(key => <Card key={key} details={this.state.pois[key]} />)
+      .map(key => <Card key={key} details={this.state.pois[key]} currentLocation={this.props.currentLocation} />)
 
     return (
       <div>{cards}</div>
@@ -32,6 +32,6 @@ class App extends React.Component {
  }
 
   ReactDOM.render(
-    <App />,
+    <App currentLocation={currentLocation}/>,
     document.getElementById('poiCards')
   )
