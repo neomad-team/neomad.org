@@ -50,6 +50,7 @@ worker.addEventListener('message', response => {
           speed: 1.7,
           curve: 1
         })
+      marker.openPopup()
       }
     }
   })
@@ -74,6 +75,8 @@ map.on('click', event => {
 })
 
 // functions
+const params =
+
 function currentMarker (currentLocation) {
   const popup = new mapboxgl.Popup({offset: [10, 0]})
     .setText('Your current location')
