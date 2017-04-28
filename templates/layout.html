@@ -21,11 +21,11 @@
     {% if current_user and current_user.is_authenticated %}
     <a href="">Around you</a>
     <!-- <a  href title="My profile"> -->
-    <div class=avatar>
+    <div id=avatarMenu class=avatar>
       <img src="{{ current_user.avatar }}" width=35 height=35>
     </div>
     <!-- </a> -->
-    <ul class="profile-menu">
+    <ul id=menu class="profile-menu">
       <li><a href={{ url_for_user(current_user) }}>Profile</a></li>
       <li><a href="">Privacy settings</a></li>
       <li><a class=button href={{ url_for('logout') }}>Logout</a></li>
