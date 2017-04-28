@@ -7,6 +7,7 @@ from user.views import *
 from auth.views import *
 from blog.views import *
 from trips.views import *
+from around.views import *
 if app.config['DEBUG']:
     from core.debug import *
 

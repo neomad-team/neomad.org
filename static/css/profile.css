@@ -39,16 +39,73 @@ main > header {
   font-weight: bold;
   margin: 0 auto;
 }
-.profile-intro section {
+.profile-intro .social {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 100%;
+  order: 2;
+}
+/* edit */
+.profile-intro .social input {
+  border: none;
+  width: auto;
+}
+.profile-intro .social a,
+.profile-intro .social input {
+  display: inline-block;
+  font-size: .9em;
+  font-style: italic;
+  margin-right: 1rem;
+  vertical-align: middle;
+  height: 3rem;
+}
+.profile-intro .social a.email {
+  margin-right: 3rem;
+}
+.profile-intro .social a:not(.email) {
+  width: 2rem;
+  overflow: hidden;
+}
+.profile-intro .social .edit {
+  margin-right: 2rem;
+}
+.profile-intro .social a::before,
+.profile-intro .social .edit::before {
+  font-size: 2rem;
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  margin-right: .5rem;
+  vertical-align: middle;
+}
+.profile-intro .social a::before {
+  margin-top: -0.5rem;
+}
+.profile-intro .social .email::before {
+  content: "\f003";
+}
+.profile-intro .social .twitter::before {
+  content: "\f099";
+}
+.profile-intro .social .facebook::before {
+  content: "\f09a";
+}
+.profile-intro .social .instagram::before {
+  content: "\f16d";
+}
+
+.profile-intro nav {
   flex-basis: 100%;
   order: 2;
   margin-top: 2rem;
 }
-.profile-intro section .trips {
+.profile-intro nav .trips {
   display: inline-block;
   margin-top: 2rem;
 }
-.profile-intro section .trips::before {
+.profile-intro nav .trips::before {
   content: " ";
   display: block;
   width: 100%;

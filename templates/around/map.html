@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block title %}Around you{% endblock %}
+
+{% block extra_css %}
+  <link rel=stylesheet href=https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css >
+  <link rel=stylesheet href={{ url_for('static', filename='css/trips-map.css') }}>
+  <link rel=stylesheet href={{ url_for('static', filename='css/around-map.css') }}>
+  <script src=https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.js></script>
+ {% endblock %}
+
+{% block main %}
+  <h1>Find someone or something close to <em>you</em></h1>
+
+  <div id=map></div>
+
+  <script>
+    var currentLocation = {{ current_user.current_location or [] }}
+    var locations = [
+    {% for user in users %}
+      {
+        location: {{ user.current_location }},
+        user: "{{ user }}"
+      },
+    {% endfor %}
+    ]
+  </script>
+<script src={{ url_for('static', filename='js/around-map.js') }}></script>
+{% endblock %}
