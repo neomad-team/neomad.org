@@ -6,11 +6,11 @@ import Card from './Card'
 class App extends React.Component {
 
   constructor(props) {
-      super(props);
+      super(props)
       this.state = {
         pois: {},
-        currentLocation: currentLocation
-      };
+        userLocation: {}
+      }
     }
 
   componentDidMount() {
@@ -21,12 +21,28 @@ class App extends React.Component {
           pois: response
         })
       })
+    navigator.geolocation.getCurrentPosition(position => {
+      this.setState({
+        userLocation: [position.coords.latitude, position.coords.longitude]
+      })
+    })
   }
 
   render() {
     const cards = Object
       .keys(this.state.pois)
-      .map(key => <Card key={key} details={this.state.pois[key]} />)
+      .filter(key => {
+        return (
+          Math.round(this.state.pois[key].position.latitude) == Math.round(this.state.userLocation[0])
+          &&
+          Math.round(this.state.pois[key].position.longitude) == Math.round(this.state.userLocation[1]))
+      })
+      .map(key =>
+        <Card
+          key={key}
+          details={this.state.pois[key]}
+        />
+      )
 
     return (
       <div>{cards}</div>

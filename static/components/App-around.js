@@ -80,7 +80,7 @@
 
 	    _this.state = {
 	      pois: {},
-	      currentLocation: currentLocation
+	      userLocation: {}
 	    };
 	    return _this;
 	  }
@@ -97,14 +97,24 @@
 	          pois: response
 	        });
 	      });
+	      navigator.geolocation.getCurrentPosition(function (position) {
+	        _this2.setState({
+	          userLocation: [position.coords.latitude, position.coords.longitude]
+	        });
+	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this3 = this;
 
-	      var cards = Object.keys(this.state.pois).map(function (key) {
-	        return _react2.default.createElement(_Card2.default, { key: key, details: _this3.state.pois[key] });
+	      var cards = Object.keys(this.state.pois).filter(function (key) {
+	        return Math.round(_this3.state.pois[key].position.latitude) == Math.round(_this3.state.userLocation[0]) && Math.round(_this3.state.pois[key].position.longitude) == Math.round(_this3.state.userLocation[1]);
+	      }).map(function (key) {
+	        return _react2.default.createElement(_Card2.default, {
+	          key: key,
+	          details: _this3.state.pois[key]
+	        });
 	      });
 
 	      return _react2.default.createElement(
@@ -21897,7 +21907,25 @@
 	        _react2.default.createElement(
 	          "ul",
 	          null,
-	          _react2.default.createElement("li", null)
+	          _react2.default.createElement(
+	            "li",
+	            null,
+	            "Wifi quality: ",
+	            this.props.details.wifiQuality,
+	            "/5"
+	          ),
+	          _react2.default.createElement(
+	            "li",
+	            null,
+	            "Power available: ",
+	            this.props.details.powerAvailable
+	          ),
+	          _react2.default.createElement(
+	            "li",
+	            null,
+	            "Comments: ",
+	            this.props.details.comments
+	          )
 	        )
 	      );
 	    }
