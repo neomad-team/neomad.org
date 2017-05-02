@@ -80,6 +80,9 @@ body > header nav a {
   font-size: 1.5rem;
   text-decoration: none;
 }
+.avatar {
+  cursor: pointer;
+}
 .avatar img {
   display: inline-block;
   vertical-align: middle;
@@ -101,34 +104,34 @@ body > header nav .button:hover {
   top: 6rem;
   right: 0;
   margin: 0;
-  padding: 1rem;
+  padding: 1rem 2rem;
   height: 0;
   opacity: 0;
   background-color: #fff;
   box-shadow: 0 0 6px rgba(50, 50, 50, .2);
   border-radius: 3px;
-  transition: all .5s;
+  transition: all .3s;
 }
 .profile-menu::before {
   content: '';
   position: absolute;
-  top: -3rem;
-  right: 0;
-  border: 1.5rem solid black;
-  border-color:  transparent transparent #279e6a transparent;
+  top: -1rem;
+  right: 2rem;
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  background-color: #fff;
+  box-shadow: -1px -1px 1px -1px rgba(50, 50, 50, .2);
+  transform: rotate(45deg);
+  transition: all .3s;
 }
 .profile-menu li {
   display: none;
   list-style-type: none;
 }
 .profile-menu li a {
-  padding: 0;
-}
-.profile-menu li .button {
-  font-size: initial;
-  color: #bd0d0d;
-  background: none;
-  border: none;
+  display: block;
+  padding: 1rem 0;
 }
 
 .profile-menu.active {
@@ -203,7 +206,7 @@ figure {
   display: block;
   font-size: .9em;
 }
-img.avatar {
+.avatar-img {
   border-radius: 100%;
   margin-right: 10px;
 }
