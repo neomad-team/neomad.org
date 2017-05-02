@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 // Component
-import Card from './Card'
+import PoiCard from './PoiCard'
 
 class App extends React.Component {
 
@@ -38,9 +38,11 @@ class App extends React.Component {
           Math.round(this.state.pois[key].position.longitude) == Math.round(this.state.userLocation[1]))
       })
       .map(key =>
-        <Card
+        <PoiCard
           key={key}
           details={this.state.pois[key]}
+          userLat={this.state.userLocation[0]}
+          userLng={this.state.userLocation[1]}
         />
       )
 

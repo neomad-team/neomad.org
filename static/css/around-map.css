@@ -19,6 +19,11 @@
   border: 1px grey solid;
 }
 
+.cardDistance {
+  position: relative;
+  right: -34rem;
+}
+
 .marker.current {
     background-image: url('/static/images/marker-red.png');
     z-index: 1;

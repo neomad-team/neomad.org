@@ -56,9 +56,9 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Card = __webpack_require__(182);
+	var _PoiCard = __webpack_require__(185);
 
-	var _Card2 = _interopRequireDefault(_Card);
+	var _PoiCard2 = _interopRequireDefault(_PoiCard);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -111,9 +111,11 @@
 	      var cards = Object.keys(this.state.pois).filter(function (key) {
 	        return Math.round(_this3.state.pois[key].position.latitude) == Math.round(_this3.state.userLocation[0]) && Math.round(_this3.state.pois[key].position.longitude) == Math.round(_this3.state.userLocation[1]);
 	      }).map(function (key) {
-	        return _react2.default.createElement(_Card2.default, {
+	        return _react2.default.createElement(_PoiCard2.default, {
 	          key: key,
-	          details: _this3.state.pois[key]
+	          details: _this3.state.pois[key],
+	          userLat: _this3.state.userLocation[0],
+	          userLng: _this3.state.userLocation[1]
 	        });
 	      });
 
@@ -21861,10 +21863,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 182 */
+/* 182 */,
+/* 183 */,
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -21884,46 +21888,125 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Card = function (_React$Component) {
-	  _inherits(Card, _React$Component);
+	var PoiDistance = function (_React$Component) {
+	  _inherits(PoiDistance, _React$Component);
 
-	  function Card() {
-	    _classCallCheck(this, Card);
+	  function PoiDistance() {
+	    _classCallCheck(this, PoiDistance);
 
-	    return _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (PoiDistance.__proto__ || Object.getPrototypeOf(PoiDistance)).apply(this, arguments));
 	  }
 
-	  _createClass(Card, [{
-	    key: "render",
+	  _createClass(PoiDistance, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      var distance = function distance(distance) {
+	        var lat1 = parseFloat(_this2.props.lat1);
+	        var lat2 = parseFloat(_this2.props.lat2);
+	        var lng1 = parseFloat(_this2.props.lng1);
+	        var lng2 = parseFloat(_this2.props.lng2);
+
+	        var R = 6371e3; // metres
+	        var num_lat1 = lat1 * Math.PI / 180;
+	        var num_lat2 = lat2 * Math.PI / 180;
+	        var gapLat = num_lat2 * Math.PI / 180 - num_lat1 * Math.PI / 180;
+	        var gapLng = lng2 * Math.PI / 180 - lng1 * Math.PI / 180;
+
+	        var a = Math.sin(gapLat / 2) * Math.sin(gapLat / 2) + Math.cos(num_lat1) * Math.cos(num_lat2) * Math.sin(gapLng / 2) * Math.sin(gapLng / 2);
+	        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+	        var distance = Math.trunc(R * c);
+	        return distance;
+	      };
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'cardDistance' },
+	        distance(distance),
+	        'm from you'
+	      );
+	    }
+	  }]);
+
+	  return PoiDistance;
+	}(_react2.default.Component);
+
+	exports.default = PoiDistance;
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _PoiDistance = __webpack_require__(184);
+
+	var _PoiDistance2 = _interopRequireDefault(_PoiDistance);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PoiCard = function (_React$Component) {
+	  _inherits(PoiCard, _React$Component);
+
+	  function PoiCard() {
+	    _classCallCheck(this, PoiCard);
+
+	    return _possibleConstructorReturn(this, (PoiCard.__proto__ || Object.getPrototypeOf(PoiCard)).apply(this, arguments));
+	  }
+
+	  _createClass(PoiCard, [{
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "card" },
+	        'div',
+	        { className: 'card' },
+	        _react2.default.createElement(_PoiDistance2.default, {
+	          lat1: this.props.details.position.latitude,
+	          lng1: this.props.details.position.longitude,
+	          lat2: this.props.userLat,
+	          lng2: this.props.userLng }),
 	        _react2.default.createElement(
-	          "h2",
+	          'h2',
 	          null,
 	          this.props.details.name
 	        ),
 	        _react2.default.createElement(
-	          "ul",
+	          'ul',
 	          null,
 	          _react2.default.createElement(
-	            "li",
+	            'li',
 	            null,
-	            "Wifi quality: ",
+	            'Wifi quality: ',
 	            this.props.details.wifiQuality,
-	            "/5"
+	            '/5'
 	          ),
 	          _react2.default.createElement(
-	            "li",
+	            'li',
 	            null,
-	            "Power available: ",
+	            'Power available: ',
 	            this.props.details.powerAvailable
 	          ),
 	          _react2.default.createElement(
-	            "li",
+	            'li',
 	            null,
-	            "Comments: ",
+	            'Comments: ',
 	            this.props.details.comments
 	          )
 	        )
@@ -21931,10 +22014,10 @@
 	    }
 	  }]);
 
-	  return Card;
+	  return PoiCard;
 	}(_react2.default.Component);
 
-	exports.default = Card;
+	exports.default = PoiCard;
 
 /***/ })
 /******/ ]);
