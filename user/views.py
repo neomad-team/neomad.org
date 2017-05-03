@@ -1,3 +1,5 @@
+import json
+
 from flask import render_template, request, abort
 from flask_login import current_user, login_required
 
@@ -16,6 +18,30 @@ def profile(username):
     return render_template('user/profile.html', user=user,
                            articles=Article.objects(author=user),
                            edit=(user == current_user))
+
+
+@app.route('/privacy', methods=['get'])
+@login_required
+def privacy():
+    user = User.objects.get(id=current_user.id)
+    return render_template('user/privacy.html',
+                           user=user,
+                           locations=user.locations)
+
+
+@app.route('/privacy/<string:location>/<string:date>', methods=['post'])
+@login_required
+def privacy_delete_trip(location, date):
+    user = User.objects.get(id=current_user.id)
+    location_json = json.loads(location)
+    trip = user.locations
+    trip_list = trip.remove(user.locations.get(date=date,
+                                               position=location_json))
+    user.locations = trip_list
+    user.save()
+    return render_template('user/privacy.html',
+                           user=user,
+                           locations=user.locations)
 
 
 @app.route('/profile', methods=['patch'])
