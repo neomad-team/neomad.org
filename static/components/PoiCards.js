@@ -55,4 +55,8 @@ class App extends React.Component {
   ReactDOM.render(
     <App />,
     document.getElementById('poiCards')
+<<<<<<< HEAD
 )
+=======
+  )
+>>>>>>> 7dfc3678b1194544a151df93743fa11b39078ca7
