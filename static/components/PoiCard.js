@@ -1,17 +1,35 @@
 import React from 'react'
 
-import PoiDistance from './PoiDistance'
-
 class PoiCard extends React.Component {
 
   render() {
+    const distance = distance => {
+      var lat1 = parseFloat(this.props.details.position.latitude)
+      var lat2 = parseFloat(this.props.userLat)
+      var lng1 = parseFloat(this.props.details.position.longitude)
+      var lng2 = parseFloat(this.props.userLng)
+
+      var R = 6371e3; // metres
+      var num_lat1 = lat1 * Math.PI / 180;
+      var num_lat2 = lat2 * Math.PI / 180;
+      var gapLat = ((num_lat2 * Math.PI / 180 )-(num_lat1 * Math.PI / 180))
+      var gapLng = ((lng2 * Math.PI / 180)-(lng1 * Math.PI / 180));
+
+      var a = Math.sin(gapLat/2) * Math.sin(gapLat/2) +
+              Math.cos(num_lat1) * Math.cos(num_lat2) *
+              Math.sin(gapLng/2) * Math.sin(gapLng/2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+      var distance = Math.trunc(R * c)
+      return distance
+    }
+    const divStyle = {
+      order: distance(distance),
+    };
+
     return (
-      <div id={'card_'+this.props.details._id} className='card'>
-        <PoiDistance
-          lat1={this.props.details.position.latitude}
-          lng1={this.props.details.position.longitude}
-          lat2={this.props.userLat}
-          lng2={this.props.userLng} />
+      <div id={'card_'+this.props.details._id} className='card' style={divStyle}>
+        <div className='cardDistance'>{distance(distance)}meters</div>
         <h2>{this.props.details.name}</h2>
         <ul>
           <li>Wifi quality: {this.props.details.wifiQuality}/5</li>

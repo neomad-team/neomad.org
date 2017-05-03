@@ -23,7 +23,8 @@ class App extends React.Component {
       })
     navigator.geolocation.getCurrentPosition(position => {
       this.setState({
-        userLocation: [position.coords.latitude, position.coords.longitude]
+        // userLocation: [position.coords.latitude, position.coords.longitude]
+        userLocation: [40.4210195,-3.7118043]
       })
     })
   }
