@@ -24,7 +24,7 @@ class PoiDistance extends React.Component {
       var distance = Math.trunc(R * c)
       return distance
     }
-    return <div className='cardDistance'>{distance(distance)}m from you</div>
+    return <div className='cardDistance'>{distance(distance)}meters</div>
   }
 }
 

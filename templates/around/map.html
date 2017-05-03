@@ -10,10 +10,9 @@
  {% endblock %}
 
 {% block main %}
-  <div id=wrap>
+
     <div id=map></div>
     <div id=poiCards></div>
-  </div>
 
   <script>
     var currentLocation = {{ current_user.current_location or [] }}

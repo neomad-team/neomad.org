@@ -21930,12 +21930,6 @@
 	            null,
 	            'Power available: ',
 	            this.props.details.powerAvailable
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            'Comments: ',
-	            this.props.details.comments
 	          )
 	        )
 	      );
@@ -22007,7 +22001,7 @@
 	        'div',
 	        { className: 'cardDistance' },
 	        distance(distance),
-	        'm from you'
+	        'meters'
 	      );
 	    }
 	  }]);

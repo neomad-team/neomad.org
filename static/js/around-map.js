@@ -73,7 +73,7 @@ function currentMarker (currentLocation) {
   el.classList.add('current')
 
   new mapboxgl.Marker(el, {offset:[0, -30]})
-    .setLngLat(currentLocation.reverse())
+    .setLngLat(currentLocation)
     .setPopup(popup)
     .addTo(map)
 

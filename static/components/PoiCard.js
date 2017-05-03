@@ -16,7 +16,6 @@ class PoiCard extends React.Component {
         <ul>
           <li>Wifi quality: {this.props.details.wifiQuality}/5</li>
           <li>Power available: {this.props.details.powerAvailable}</li>
-          <li>Comments: {this.props.details.comments}</li>
         </ul>
       </div>
     )
