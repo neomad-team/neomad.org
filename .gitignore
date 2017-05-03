@@ -4,5 +4,3 @@ __pycache__/
 settings.py
 static/uploads/*
 /node_modules/
-package.json
-webpack.config.js
