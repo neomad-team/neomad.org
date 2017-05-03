@@ -16,9 +16,17 @@ function alert(type, message, delay) {
 }
 
 window.onload = _ => {
-  const avatar = document.getElementById('avatarMenu')
   const menu = document.getElementById('menu')
-  avatar.addEventListener('click', appears = _ => {
-    menu.classList.toggle('active')
+  const avatar = document.getElementById('avatarMenu')
+  const main = document.getElementsByTagName('main')
+  avatar.addEventListener('mouseenter', open = _ => {
+    if (menu.className == 'profile-menu') {
+      menu.classList.toggle('active')
+    }
+  })
+  menu.addEventListener('mouseleave', close = _ => {
+    if (menu.className == 'profile-menu active') {
+      menu.classList.toggle('active')
+    }
   })
 }
