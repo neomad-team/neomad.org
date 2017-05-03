@@ -1,10 +1,17 @@
 import React from 'react'
 
-class Card extends React.Component {
+import PoiDistance from './PoiDistance'
+
+class PoiCard extends React.Component {
 
   render() {
     return (
-      <div className="card">
+      <div className='card'>
+        <PoiDistance
+          lat1={this.props.details.position.latitude}
+          lng1={this.props.details.position.longitude}
+          lat2={this.props.userLat}
+          lng2={this.props.userLng} />
         <h2>{this.props.details.name}</h2>
         <ul>
           <li>Wifi quality: {this.props.details.wifiQuality}/5</li>
@@ -16,4 +23,4 @@ class Card extends React.Component {
    }
  }
 
-export default Card
+export default PoiCard
