@@ -9,6 +9,7 @@ class App extends React.Component {
       super(props)
       this.state = {
         pois: {},
+        userView: {},
         userLocation: {}
       }
     }
@@ -21,11 +22,16 @@ class App extends React.Component {
           pois: response
         })
       })
+    map.on('moveend', move => {
+      const centerMap = map.getCenter()
+      this.setState({
+        userView: centerMap
+      })
+    })
     navigator.geolocation.getCurrentPosition(position => {
       this.setState({
-        // userLocation: [position.coords.latitude, position.coords.longitude]
-        userLocation: [40.4210195,-3.7118043]
-      })
+        userLocation: [position.coords.latitude, position.coords.longitude]
+       })
     })
   }
 
@@ -34,9 +40,9 @@ class App extends React.Component {
       .keys(this.state.pois)
       .filter(key => {
         return (
-          Math.round(this.state.pois[key].position.latitude) == Math.round(this.state.userLocation[0])
+          Math.round(this.state.pois[key].position.latitude) == Math.round(this.state.userView.lat)
           &&
-          Math.round(this.state.pois[key].position.longitude) == Math.round(this.state.userLocation[1]))
+          Math.round(this.state.pois[key].position.longitude) == Math.round(this.state.userView.lng))
       })
       .map(key =>
         <PoiCard

@@ -23,13 +23,13 @@ class PoiCard extends React.Component {
       var distance = Math.trunc(R * c)
       return distance
     }
-    const divStyle = {
-      order: distance(distance),
-    };
+    const order = {
+      order: distance(distance)
+    }
 
     return (
-      <div id={'card_'+this.props.details._id} className='card' style={divStyle}>
-        <div className='cardDistance'>{distance(distance)}meters</div>
+      <div id={'card_'+this.props.details._id} className='card' style={order}>
+        <div className='cardDistance'>{distance(distance)} meters</div>
         <h2>{this.props.details.name}</h2>
         <ul>
           <li>Wifi quality: {this.props.details.wifiQuality}/5</li>

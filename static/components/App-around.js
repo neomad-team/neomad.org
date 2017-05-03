@@ -80,6 +80,7 @@
 
 	    _this.state = {
 	      pois: {},
+	      userView: {},
 	      userLocation: {}
 	    };
 	    return _this;
@@ -97,10 +98,15 @@
 	          pois: response
 	        });
 	      });
+	      map.on('moveend', function (move) {
+	        var centerMap = map.getCenter();
+	        _this2.setState({
+	          userView: centerMap
+	        });
+	      });
 	      navigator.geolocation.getCurrentPosition(function (position) {
 	        _this2.setState({
-	          // userLocation: [position.coords.latitude, position.coords.longitude]
-	          userLocation: [40.4210195, -3.7118043]
+	          userLocation: [position.coords.latitude, position.coords.longitude]
 	        });
 	      });
 	    }
@@ -110,7 +116,7 @@
 	      var _this3 = this;
 
 	      var cards = Object.keys(this.state.pois).filter(function (key) {
-	        return Math.round(_this3.state.pois[key].position.latitude) == Math.round(_this3.state.userLocation[0]) && Math.round(_this3.state.pois[key].position.longitude) == Math.round(_this3.state.userLocation[1]);
+	        return Math.round(_this3.state.pois[key].position.latitude) == Math.round(_this3.state.userView.lat) && Math.round(_this3.state.pois[key].position.longitude) == Math.round(_this3.state.userView.lng);
 	      }).map(function (key) {
 	        return _react2.default.createElement(_PoiCard2.default, {
 	          key: key,
@@ -21919,18 +21925,18 @@
 	        var distance = Math.trunc(R * c);
 	        return distance;
 	      };
-	      var divStyle = {
+	      var order = {
 	        order: distance(distance)
 	      };
 
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'card_' + this.props.details._id, className: 'card', style: divStyle },
+	        { id: 'card_' + this.props.details._id, className: 'card', style: order },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'cardDistance' },
 	          distance(distance),
-	          'meters'
+	          ' meters'
 	        ),
 	        _react2.default.createElement(
 	          'h2',
