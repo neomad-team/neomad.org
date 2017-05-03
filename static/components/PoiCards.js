@@ -52,11 +52,7 @@ class App extends React.Component {
    }
  }
 
-  ReactDOM.render(
-    <App />,
-    document.getElementById('poiCards')
-<<<<<<< HEAD
+ReactDOM.render(
+  <App />,
+  document.getElementById('poiCards')
 )
-=======
-  )
->>>>>>> 7dfc3678b1194544a151df93743fa11b39078ca7

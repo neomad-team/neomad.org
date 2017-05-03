@@ -44,6 +44,7 @@ worker.addEventListener('message', response => {
       const hash = getHash()
       if(hash == el.id) {
         moveTo([poi.position.longitude, poi.position.latitude])
+        highligth(el.id)
       }
     }
   })
@@ -56,6 +57,7 @@ map.on('click', event => {
   map.setZoom(2)
   const poi = findPoi(event.originalEvent.target.id)
   if(poi) {
+    highligth(poi._id)
     urlFor(poi._id)
     moveTo([poi.position.longitude, poi.position.latitude])
   }
@@ -71,7 +73,7 @@ function currentMarker (currentLocation) {
   el.classList.add('current')
 
   new mapboxgl.Marker(el, {offset:[0, -30]})
-    .setLngLat(currentLocation)
+    .setLngLat(currentLocation.reverse())
     .setPopup(popup)
     .addTo(map)
 
@@ -106,4 +108,20 @@ function urlFor (id) {
 
 function findPoi (id) {
   return pois.find(poi => poi._id == id)
+}
+
+function highligth(poi_id) {
+  const poiID = poi_id
+  const cardActive = document.getElementsByClassName('currentCard')
+  if (cardActive[0]) {
+    cardActive[0].classList.toggle('currentCard')
+  }
+  const card = document.getElementById('card_'+poiID)
+  if (card == null) {
+    const cardNull = setInterval( _ => {
+      highligth()
+    }, 300)
+    clearInterval(cardNull)
+  }
+  card.classList.toggle('currentCard')
 }

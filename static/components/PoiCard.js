@@ -6,7 +6,7 @@ class PoiCard extends React.Component {
 
   render() {
     return (
-      <div className='card'>
+      <div id={'card_'+this.props.details._id} className='card'>
         <PoiDistance
           lat1={this.props.details.position.latitude}
           lng1={this.props.details.position.longitude}

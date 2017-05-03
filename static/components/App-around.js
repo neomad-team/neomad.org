@@ -21904,7 +21904,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'card' },
+	        { id: 'card_' + this.props.details._id, className: 'card' },
 	        _react2.default.createElement(_PoiDistance2.default, {
 	          lat1: this.props.details.position.latitude,
 	          lng1: this.props.details.position.longitude,
