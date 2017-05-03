@@ -19,14 +19,20 @@ window.onload = _ => {
   const menu = document.getElementById('menu')
   const avatar = document.getElementById('avatarMenu')
   const main = document.getElementsByTagName('main')
-  avatar.addEventListener('mouseenter', open = _ => {
+  const active = _ => {
+    menu.classList.toggle('active')
+  }
+  avatar.addEventListener('click', function() {
+    active()
+  })
+  avatar.addEventListener('mouseenter', function() {
     if (menu.className == 'profile-menu') {
-      menu.classList.toggle('active')
+      active()
     }
   })
-  menu.addEventListener('mouseleave', close = _ => {
+  menu.addEventListener('mouseleave', function() {
     if (menu.className == 'profile-menu active') {
-      menu.classList.toggle('active')
+      active()
     }
   })
 }
