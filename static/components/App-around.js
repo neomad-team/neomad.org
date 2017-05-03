@@ -56,7 +56,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _PoiCard = __webpack_require__(185);
+	var _PoiCard = __webpack_require__(182);
 
 	var _PoiCard2 = _interopRequireDefault(_PoiCard);
 
@@ -21863,9 +21863,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 182 */,
-/* 183 */,
-/* 184 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21880,77 +21878,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var PoiDistance = function (_React$Component) {
-	  _inherits(PoiDistance, _React$Component);
-
-	  function PoiDistance() {
-	    _classCallCheck(this, PoiDistance);
-
-	    return _possibleConstructorReturn(this, (PoiDistance.__proto__ || Object.getPrototypeOf(PoiDistance)).apply(this, arguments));
-	  }
-
-	  _createClass(PoiDistance, [{
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-
-	      var distance = function distance(distance) {
-	        var lat1 = parseFloat(_this2.props.lat1);
-	        var lat2 = parseFloat(_this2.props.lat2);
-	        var lng1 = parseFloat(_this2.props.lng1);
-	        var lng2 = parseFloat(_this2.props.lng2);
-
-	        var R = 6371e3; // metres
-	        var num_lat1 = lat1 * Math.PI / 180;
-	        var num_lat2 = lat2 * Math.PI / 180;
-	        var gapLat = num_lat2 * Math.PI / 180 - num_lat1 * Math.PI / 180;
-	        var gapLng = lng2 * Math.PI / 180 - lng1 * Math.PI / 180;
-
-	        var a = Math.sin(gapLat / 2) * Math.sin(gapLat / 2) + Math.cos(num_lat1) * Math.cos(num_lat2) * Math.sin(gapLng / 2) * Math.sin(gapLng / 2);
-	        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-	        var distance = Math.trunc(R * c);
-	        return distance;
-	      };
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'cardDistance' },
-	        distance(distance),
-	        'm from you'
-	      );
-	    }
-	  }]);
-
-	  return PoiDistance;
-	}(_react2.default.Component);
-
-	exports.default = PoiDistance;
-
-/***/ }),
-/* 185 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _PoiDistance = __webpack_require__(184);
+	var _PoiDistance = __webpack_require__(183);
 
 	var _PoiDistance2 = _interopRequireDefault(_PoiDistance);
 
@@ -22018,6 +21946,76 @@
 	}(_react2.default.Component);
 
 	exports.default = PoiCard;
+
+/***/ }),
+/* 183 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PoiDistance = function (_React$Component) {
+	  _inherits(PoiDistance, _React$Component);
+
+	  function PoiDistance() {
+	    _classCallCheck(this, PoiDistance);
+
+	    return _possibleConstructorReturn(this, (PoiDistance.__proto__ || Object.getPrototypeOf(PoiDistance)).apply(this, arguments));
+	  }
+
+	  _createClass(PoiDistance, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      var distance = function distance(distance) {
+	        var lat1 = parseFloat(_this2.props.lat1);
+	        var lat2 = parseFloat(_this2.props.lat2);
+	        var lng1 = parseFloat(_this2.props.lng1);
+	        var lng2 = parseFloat(_this2.props.lng2);
+
+	        var R = 6371e3; // metres
+	        var num_lat1 = lat1 * Math.PI / 180;
+	        var num_lat2 = lat2 * Math.PI / 180;
+	        var gapLat = num_lat2 * Math.PI / 180 - num_lat1 * Math.PI / 180;
+	        var gapLng = lng2 * Math.PI / 180 - lng1 * Math.PI / 180;
+
+	        var a = Math.sin(gapLat / 2) * Math.sin(gapLat / 2) + Math.cos(num_lat1) * Math.cos(num_lat2) * Math.sin(gapLng / 2) * Math.sin(gapLng / 2);
+	        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+	        var distance = Math.trunc(R * c);
+	        return distance;
+	      };
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'cardDistance' },
+	        distance(distance),
+	        'm from you'
+	      );
+	    }
+	  }]);
+
+	  return PoiDistance;
+	}(_react2.default.Component);
+
+	exports.default = PoiDistance;
 
 /***/ })
 /******/ ]);
