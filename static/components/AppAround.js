@@ -21910,7 +21910,7 @@
 	    value: function render() {
 	      var _this2 = this;
 
-	      var distance = function distance(distance) {
+	      var distance = function distance(_distance) {
 	        var lat1 = parseFloat(_this2.props.details.position.latitude);
 	        var lat2 = parseFloat(_this2.props.userLat);
 	        var lng1 = parseFloat(_this2.props.details.position.longitude);
@@ -21925,8 +21925,7 @@
 	        var a = Math.sin(gapLat / 2) * Math.sin(gapLat / 2) + Math.cos(num_lat1) * Math.cos(num_lat2) * Math.sin(gapLng / 2) * Math.sin(gapLng / 2);
 	        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-	        var distance = Math.trunc(R * c);
-	        return distance;
+	        return Math.trunc(R * c);
 	      };
 	      var order = {
 	        order: distance(distance)

@@ -109,7 +109,7 @@ function findPoi (id) {
   return pois.find(poi => poi._id == id)
 }
 
-function highlight(poi_id) {
+function highlight (poi_id) {
   const cardActive = document.getElementsByClassName('current-card')
   const card = document.getElementById('card-'+poi_id)
   if (cardActive[0]) {
