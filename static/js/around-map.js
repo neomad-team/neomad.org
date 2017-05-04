@@ -13,7 +13,7 @@ map.addControl(new mapboxgl.GeolocateControl())
 if(currentLocation.length == 0) {
   focusUser()
 } else {
-  currentMarker(currentLocation)
+  currentMarker(currentLocation.reverse())
 }
 
 // pois
@@ -80,9 +80,7 @@ function currentMarker (currentLocation) {
 }
 
 function focusUser () {
-    console.log("demande de zoom sur");
     const position = [parseFloat(localStorage.userLng),parseFloat(localStorage.userLat)]
-    console.log(position);
     moveTo(position)
     currentMarker(position)
 }
