@@ -21934,7 +21934,7 @@
 	        { id: 'card-' + this.props.details._id, className: 'card', style: order },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'card_distance' },
+	          { className: 'card-distance' },
 	          distance(distance),
 	          ' meters'
 	        ),
