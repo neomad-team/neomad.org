@@ -81,7 +81,8 @@
 	    _this.state = {
 	      pois: {},
 	      userView: {},
-	      userLocation: {},
+	      userLat: {},
+	      userLng: {},
 	      mapBounds: {}
 	    };
 	    return _this;
@@ -108,12 +109,11 @@
 	        });
 	      });
 	      navigator.geolocation.getCurrentPosition(function (position) {
-	        var userPosition = [position.coords.longitude, position.coords.latitude];
-	        moveTo(userPosition);
-	        currentMarker(userPosition);
-	        console.log(userPosition);
+	        localStorage.setItem('userLat', position.coords.latitude);
+	        localStorage.setItem('userLng', position.coords.longitude);
 	        _this2.setState({
-	          userLocation: userPosition
+	          userLat: parseFloat(localStorage.userLat),
+	          userLng: parseFloat(localStorage.userLng)
 	        });
 	      });
 	    }
@@ -128,8 +128,8 @@
 	        return _react2.default.createElement(_PoiCard2.default, {
 	          key: key,
 	          details: _this3.state.pois[key],
-	          userLng: _this3.state.userLocation[0],
-	          userLat: _this3.state.userLocation[1]
+	          userLat: _this3.state.userLat,
+	          userLng: _this3.state.userLng
 	        });
 	      });
 

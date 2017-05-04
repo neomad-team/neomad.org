@@ -80,11 +80,11 @@ function currentMarker (currentLocation) {
 }
 
 function focusUser () {
-  navigator.geolocation.watchPosition(position => {
-    const userPosition = [position.coords.longitude, position.coords.latitude]
-    moveTo(userPosition)
-    currentMarker(userPosition)
-  })
+    console.log("demande de zoom sur");
+    const position = [parseFloat(localStorage.userLng),parseFloat(localStorage.userLat)]
+    console.log(position);
+    moveTo(position)
+    currentMarker(position)
 }
 
 function moveTo (position) {
