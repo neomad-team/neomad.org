@@ -10,8 +10,7 @@ class App extends React.Component {
       this.state = {
         pois: {},
         userView: {},
-        userLat: {},
-        userLng: {},
+        userPosition: {},
         mapBounds: {}
       }
     }
@@ -33,12 +32,11 @@ class App extends React.Component {
       })
     })
     navigator.geolocation.getCurrentPosition(position => {
-      localStorage.setItem('userLat', position.coords.latitude)
-      localStorage.setItem('userLng', position.coords.longitude)
+      localStorage.setItem('userPosition', [position.coords.latitude, position.coords.longitude])
+      const localPosition = localStorage.userPosition.split(',', 2)
       this.setState({
-        userLat: parseFloat(localStorage.userLat),
-        userLng: parseFloat(localStorage.userLng)
-       })
+        userPosition: [parseFloat(localPosition[0]), parseFloat(localPosition[1])]
+      })
     })
   }
 
@@ -46,15 +44,10 @@ class App extends React.Component {
     const cards = Object
       .keys(this.state.pois)
       .filter(key => {
-        return (
-          this.state.pois[key].position.latitude <=  this.state.mapBounds._ne.lat
-          &&
-          this.state.pois[key].position.latitude >=  this.state.mapBounds._sw.lat
-          &&
-          this.state.pois[key].position.longitude <=  this.state.mapBounds._ne.lng
-          &&
-          this.state.pois[key].position.longitude >=  this.state.mapBounds._sw.lng
-        )
+        return (this.state.pois[key].position.latitude <= this.state.mapBounds._ne.lat
+          && this.state.pois[key].position.latitude >= this.state.mapBounds._sw.lat
+          && this.state.pois[key].position.longitude <= this.state.mapBounds._ne.lng
+          && this.state.pois[key].position.longitude >= this.state.mapBounds._sw.lng)
       })
       .map(key =>
         <PoiCard
@@ -68,8 +61,8 @@ class App extends React.Component {
     return (
       <div>{cards}</div>
     )
-   }
- }
+  }
+}
 
 ReactDOM.render(
   <App />,

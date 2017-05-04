@@ -27,7 +27,7 @@ class PoiCard extends React.Component {
     }
 
     return (
-      <div id={'card-'+this.props.details._id} className='card' style={order}>
+      <div id={`card-${this.props.details._id}`} className='card' style={order}>
         <div className='card-distance'>{distance(distance)} meters</div>
         <h2>{this.props.details.name}</h2>
         <ul>

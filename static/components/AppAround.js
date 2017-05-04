@@ -81,8 +81,7 @@
 	    _this.state = {
 	      pois: {},
 	      userView: {},
-	      userLat: {},
-	      userLng: {},
+	      userPosition: {},
 	      mapBounds: {}
 	    };
 	    return _this;
@@ -109,11 +108,10 @@
 	        });
 	      });
 	      navigator.geolocation.getCurrentPosition(function (position) {
-	        localStorage.setItem('userLat', position.coords.latitude);
-	        localStorage.setItem('userLng', position.coords.longitude);
+	        localStorage.setItem('userPosition', [position.coords.latitude, position.coords.longitude]);
+	        var localPosition = localStorage.userPosition.split(',', 2);
 	        _this2.setState({
-	          userLat: parseFloat(localStorage.userLat),
-	          userLng: parseFloat(localStorage.userLng)
+	          userPosition: [parseFloat(localPosition[0]), parseFloat(localPosition[1])]
 	        });
 	      });
 	    }

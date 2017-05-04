@@ -2,10 +2,10 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: "./static/components/around-cards.js",
+  entry: './static/components/around-cards.js',
   output: {
-    path: "./static/components",
-    filename: "AppAround.js"
+    path: './static/components',
+    filename: 'AppAround.js'
   },
   watch: true,
 

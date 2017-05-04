@@ -80,7 +80,8 @@ function currentMarker (currentLocation) {
 }
 
 function focusUser () {
-    const position = [parseFloat(localStorage.userLng),parseFloat(localStorage.userLat)]
+    const localPosition = localStorage.userPosition.split(',', 2)
+    const position = [parseFloat(localPosition[0]), parseFloat(localPosition[1])]
     moveTo(position)
     currentMarker(position)
 }
