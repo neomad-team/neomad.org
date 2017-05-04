@@ -126,8 +126,8 @@
 	        return _react2.default.createElement(_PoiCard2.default, {
 	          key: key,
 	          details: _this3.state.pois[key],
-	          userLat: _this3.state.userLat,
-	          userLng: _this3.state.userLng
+	          userLat: _this3.state.userPosition[0],
+	          userLng: _this3.state.userPosition[1]
 	        });
 	      });
 

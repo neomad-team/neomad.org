@@ -53,8 +53,8 @@ class App extends React.Component {
         <PoiCard
           key={key}
           details={this.state.pois[key]}
-          userLat={this.state.userLat}
-          userLng={this.state.userLng}
+          userLat={this.state.userPosition[0]}
+          userLng={this.state.userPosition[1]}
         />
       )
 
