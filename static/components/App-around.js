@@ -81,7 +81,8 @@
 	    _this.state = {
 	      pois: {},
 	      userView: {},
-	      userLocation: {}
+	      userLocation: {},
+	      mapBounds: {}
 	    };
 	    return _this;
 	  }
@@ -100,8 +101,10 @@
 	      });
 	      map.on('moveend', function (move) {
 	        var centerMap = map.getCenter();
+	        var bounds = map.getBounds();
 	        _this2.setState({
-	          userView: centerMap
+	          userView: centerMap,
+	          mapBounds: bounds
 	        });
 	      });
 	      navigator.geolocation.getCurrentPosition(function (position) {

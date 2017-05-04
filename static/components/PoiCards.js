@@ -10,7 +10,8 @@ class App extends React.Component {
       this.state = {
         pois: {},
         userView: {},
-        userLocation: {}
+        userLocation: {},
+        mapBounds: {}
       }
     }
 
@@ -24,14 +25,16 @@ class App extends React.Component {
       })
     map.on('moveend', move => {
       const centerMap = map.getCenter()
+      const bounds = map.getBounds()
       this.setState({
-        userView: centerMap
+        userView: centerMap,
+        mapBounds: bounds
       })
     })
     navigator.geolocation.getCurrentPosition(position => {
       this.setState({
         userLocation: [position.coords.latitude, position.coords.longitude]
-       })
+      })
     })
   }
 

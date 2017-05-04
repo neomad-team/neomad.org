@@ -1,5 +1,4 @@
-// Init Map
-
+// init Map
 mapboxgl.accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog'
 var map = new mapboxgl.Map({
   container: 'map',
@@ -111,17 +110,12 @@ function findPoi (id) {
 }
 
 function highlight(poi_id) {
-  const poiID = poi_id
   const cardActive = document.getElementsByClassName('current-card')
+  const card = document.getElementById('card-'+poi_id)
   if (cardActive[0]) {
     cardActive[0].classList.toggle('current-card')
   }
-  const card = document.getElementById('card-'+poiID)
-  if (card == null) {
-    const cardNull = setInterval( _ => {
-      highlight()
-    }, 300)
-    clearInterval(cardNull)
+  if (card) {
+    card.classList.toggle('current-card')
   }
-  card.classList.toggle('current-card')
 }
