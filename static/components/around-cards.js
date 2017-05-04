@@ -47,9 +47,14 @@ class App extends React.Component {
       .keys(this.state.pois)
       .filter(key => {
         return (
-          Math.round(this.state.pois[key].position.latitude) == Math.round(this.state.userView.lat)
+          this.state.pois[key].position.latitude <=  this.state.mapBounds._ne.lat
           &&
-          Math.round(this.state.pois[key].position.longitude) == Math.round(this.state.userView.lng))
+          this.state.pois[key].position.latitude >=  this.state.mapBounds._sw.lat
+          &&
+          this.state.pois[key].position.longitude <=  this.state.mapBounds._ne.lng
+          &&
+          this.state.pois[key].position.longitude >=  this.state.mapBounds._sw.lng
+        )
       })
       .map(key =>
         <PoiCard

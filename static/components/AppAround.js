@@ -123,7 +123,7 @@
 	      var _this3 = this;
 
 	      var cards = Object.keys(this.state.pois).filter(function (key) {
-	        return Math.round(_this3.state.pois[key].position.latitude) == Math.round(_this3.state.userView.lat) && Math.round(_this3.state.pois[key].position.longitude) == Math.round(_this3.state.userView.lng);
+	        return _this3.state.pois[key].position.latitude <= _this3.state.mapBounds._ne.lat && _this3.state.pois[key].position.latitude >= _this3.state.mapBounds._sw.lat && _this3.state.pois[key].position.longitude <= _this3.state.mapBounds._ne.lng && _this3.state.pois[key].position.longitude >= _this3.state.mapBounds._sw.lng;
 	      }).map(function (key) {
 	        return _react2.default.createElement(_PoiCard2.default, {
 	          key: key,
