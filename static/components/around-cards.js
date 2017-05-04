@@ -32,9 +32,13 @@ class App extends React.Component {
       })
     })
     navigator.geolocation.getCurrentPosition(position => {
+      const userPosition = [position.coords.longitude, position.coords.latitude]
+      moveTo(userPosition)
+      currentMarker(userPosition)
+      console.log(userPosition)
       this.setState({
-        userLocation: [position.coords.latitude, position.coords.longitude]
-      })
+        userLocation: userPosition
+       })
     })
   }
 
@@ -51,8 +55,8 @@ class App extends React.Component {
         <PoiCard
           key={key}
           details={this.state.pois[key]}
-          userLat={this.state.userLocation[0]}
-          userLng={this.state.userLocation[1]}
+          userLng={this.state.userLocation[0]}
+          userLat={this.state.userLocation[1]}
         />
       )
 

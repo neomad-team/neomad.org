@@ -108,8 +108,12 @@
 	        });
 	      });
 	      navigator.geolocation.getCurrentPosition(function (position) {
+	        var userPosition = [position.coords.longitude, position.coords.latitude];
+	        moveTo(userPosition);
+	        currentMarker(userPosition);
+	        console.log(userPosition);
 	        _this2.setState({
-	          userLocation: [position.coords.latitude, position.coords.longitude]
+	          userLocation: userPosition
 	        });
 	      });
 	    }
@@ -124,8 +128,8 @@
 	        return _react2.default.createElement(_PoiCard2.default, {
 	          key: key,
 	          details: _this3.state.pois[key],
-	          userLat: _this3.state.userLocation[0],
-	          userLng: _this3.state.userLocation[1]
+	          userLng: _this3.state.userLocation[0],
+	          userLat: _this3.state.userLocation[1]
 	        });
 	      });
 
