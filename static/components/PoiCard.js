@@ -28,8 +28,8 @@ class PoiCard extends React.Component {
     }
 
     return (
-      <div id={'card_'+this.props.details._id} className='card' style={order}>
-        <div className='cardDistance'>{distance(distance)} meters</div>
+      <div id={'card-'+this.props.details._id} className='card' style={order}>
+        <div className='card_distance'>{distance(distance)} meters</div>
         <h2>{this.props.details.name}</h2>
         <ul>
           <li>Wifi quality: {this.props.details.wifiQuality}/5</li>

@@ -61,5 +61,5 @@ class App extends React.Component {
 
 ReactDOM.render(
   <App />,
-  document.getElementById('poiCards')
+  document.getElementById('poi-cards')
 )

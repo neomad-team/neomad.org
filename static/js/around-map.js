@@ -44,7 +44,7 @@ worker.addEventListener('message', response => {
       const hash = getHash()
       if(hash == el.id) {
         moveTo([poi.position.longitude, poi.position.latitude])
-        highligth(el.id)
+        highlight(el.id)
       }
     }
   })
@@ -57,7 +57,7 @@ map.on('click', event => {
   map.setZoom(2)
   const poi = findPoi(event.originalEvent.target.id)
   if(poi) {
-    highligth(poi._id)
+    highlight(poi._id)
     urlFor(poi._id)
     moveTo([poi.position.longitude, poi.position.latitude])
   }
@@ -110,18 +110,18 @@ function findPoi (id) {
   return pois.find(poi => poi._id == id)
 }
 
-function highligth(poi_id) {
+function highlight(poi_id) {
   const poiID = poi_id
-  const cardActive = document.getElementsByClassName('currentCard')
+  const cardActive = document.getElementsByClassName('current-card')
   if (cardActive[0]) {
-    cardActive[0].classList.toggle('currentCard')
+    cardActive[0].classList.toggle('current-card')
   }
-  const card = document.getElementById('card_'+poiID)
+  const card = document.getElementById('card-'+poiID)
   if (card == null) {
     const cardNull = setInterval( _ => {
-      highligth()
+      highlight()
     }, 300)
     clearInterval(cardNull)
   }
-  card.classList.toggle('currentCard')
+  card.classList.toggle('current-card')
 }

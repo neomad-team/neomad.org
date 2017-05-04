@@ -137,7 +137,7 @@
 	  return App;
 	}(_react2.default.Component);
 
-	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('poiCards'));
+	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('poi-cards'));
 
 /***/ }),
 /* 1 */
@@ -21931,10 +21931,10 @@
 
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'card_' + this.props.details._id, className: 'card', style: order },
+	        { id: 'card-' + this.props.details._id, className: 'card', style: order },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'cardDistance' },
+	          { className: 'card_distance' },
 	          distance(distance),
 	          ' meters'
 	        ),

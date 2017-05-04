@@ -3,7 +3,7 @@
   position: fixed;
   right: 0;
 }
-#poiCards > div {
+#poi-cards > div {
   display: flex;
   flex-wrap: wrap;
   width: 50%;
@@ -22,11 +22,11 @@
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.currentCard {
+.current-card {
   border: 0.35rem solid rgba(59,167,119, 0.5);
 }
 
-.cardDistance {
+.card-distance {
   float: right;
 }
 
