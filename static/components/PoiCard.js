@@ -17,8 +17,7 @@ class PoiCard extends React.Component {
     })
   }
 
-  calculDistance(from, to) {
-
+  calculateDistance(from, to) {
     const R = 6371e3 // metres
     const lat1 = this.state.from[0] * Math.PI / 180
     const lat2 = this.state.to[0] * Math.PI / 180
@@ -34,8 +33,8 @@ class PoiCard extends React.Component {
   render() {
 
     return (
-      <div id={`card-${this.props.details._id}`} className='card' style={{order: this.calculDistance(this.state.from, this.state.to)}}>
-        <div className='card-distance'>{this.calculDistance(this.state.from, this.state.to)} meters</div>
+      <div id={`card-${this.props.details._id}`} className='card' style={{order: this.calculateDistance(this.state.from, this.state.to)}}>
+        <div className='card-distance'>{this.calculateDistance(this.state.from, this.state.to)} meters</div>
         <h2>{this.props.details.name}</h2>
         <ul>
           <li>Wifi quality: {this.props.details.wifiQuality}/5</li>
