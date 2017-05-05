@@ -11,6 +11,8 @@
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
   width: 45%;
   padding: 10px;
   margin: 0 1rem 1rem 2rem;
@@ -22,12 +24,16 @@
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
+.card h2 {
+  font-size: 2rem;
+}
+
 .current-card {
   border: 0.35rem solid rgba(59,167,119, 0.5);
 }
 
 .card-distance {
-  float: right;
+  align-self: flex-end;
 }
 
 .marker.current {
