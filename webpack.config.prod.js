@@ -8,8 +8,6 @@ module.exports = {
     path: './static/components',
     filename: 'App.js'
   },
-  watch: true,
-
   module: {
     loaders: [
       {
@@ -20,5 +18,8 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new UglifyJSPlugin()
+  ]
 }

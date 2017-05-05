@@ -3,7 +3,8 @@
   "description": "Neomad is a open-source community project for nomad workers and people willing to _nomadize_ themselves.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "watch": "webpack",
+    "build": "webpack --config webpack.config.prod.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
     "babel-preset-react": "^6.5.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "uglifyjs-webpack-plugin": "^0.4.3",
     "webpack": "^1.13.1"
   },
   "version": "1.0.0",
