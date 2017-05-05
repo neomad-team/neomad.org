@@ -2,33 +2,40 @@ import React from 'react'
 
 class PoiCard extends React.Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      from: {},
+      to: {}
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      from: [this.props.details.position.latitude, this.props.details.position.longitude],
+      to: [this.props.userLat, this.props.userLng]
+    })
+  }
+
+  calculDistance(from, to) {
+
+    const R = 6371e3 // metres
+    const lat1 = this.state.from[0] * Math.PI / 180
+    const lat2 = this.state.to[0] * Math.PI / 180
+    const gapLat = ((lat2 * Math.PI / 180 )-(lat1 * Math.PI / 180))
+    const gapLng = ((this.state.to[1] * Math.PI / 180)-(this.state.from[1] * Math.PI / 180))
+
+    const a = Math.sin(gapLat/2) * Math.sin(gapLat/2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(gapLng/2) * Math.sin(gapLng/2)
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+
+    return Math.trunc(R * c)
+  }
+
   render() {
-    const distance = distance => {
-      const lat1 = parseFloat(this.props.details.position.latitude)
-      const lat2 = parseFloat(this.props.userLat)
-      const lng1 = parseFloat(this.props.details.position.longitude)
-      const lng2 = parseFloat(this.props.userLng)
-
-      const R = 6371e3 // metres
-      const num_lat1 = lat1 * Math.PI / 180
-      const num_lat2 = lat2 * Math.PI / 180
-      const gapLat = ((num_lat2 * Math.PI / 180 )-(num_lat1 * Math.PI / 180))
-      const gapLng = ((lng2 * Math.PI / 180)-(lng1 * Math.PI / 180))
-
-      const a = Math.sin(gapLat/2) * Math.sin(gapLat/2) +
-              Math.cos(num_lat1) * Math.cos(num_lat2) *
-              Math.sin(gapLng/2) * Math.sin(gapLng/2)
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
-
-      return Math.trunc(R * c)
-    }
-    const order = {
-      order: distance(distance)
-    }
 
     return (
-      <div id={`card-${this.props.details._id}`} className='card' style={order}>
-        <div className='card-distance'>{distance(distance)} meters</div>
+      <div id={`card-${this.props.details._id}`} className='card' style={{order: this.calculDistance(this.state.from, this.state.to)}}>
+        <div className='card-distance'>{this.calculDistance(this.state.from, this.state.to)} meters</div>
         <h2>{this.props.details.name}</h2>
         <ul>
           <li>Wifi quality: {this.props.details.wifiQuality}/5</li>
