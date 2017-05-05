@@ -3,10 +3,7 @@
   "description": "Neomad is a open-source community project for nomad workers and people willing to _nomadize_ themselves.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "babel": "babel",
-    "webpack": "webpack",
-    "build": "babel src -d lib"
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
