@@ -31,7 +31,6 @@ class PoiCard extends React.Component {
   }
 
   render() {
-
     return (
       <div id={`card-${this.props.details._id}`} className='card' style={{order: this.calculateDistance(this.state.from, this.state.to)}}>
         <div className='card-distance'>{this.calculateDistance(this.state.from, this.state.to)} meters</div>
