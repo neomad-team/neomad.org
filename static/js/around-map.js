@@ -1,9 +1,3 @@
-// init localStorage
-window.onload = _ => {
-localStorage.removeItem('userPosition')
-localStorage.removeItem('errorPosition')
-}
-
 // init Map
 mapboxgl.accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog'
 var map = new mapboxgl.Map({
