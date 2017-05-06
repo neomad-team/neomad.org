@@ -1,3 +1,9 @@
+// init localStorage
+window.onload = _ => {
+localStorage.removeItem('userPosition')
+localStorage.removeItem('errorPosition')
+}
+
 // init Map
 mapboxgl.accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog'
 var map = new mapboxgl.Map({
@@ -10,8 +16,17 @@ map.addControl(new mapboxgl.NavigationControl())
 map.addControl(new mapboxgl.GeolocateControl())
 
 // detectionLocation
-if(currentLocation.length == 0) {
-  focusUser()
+if (currentLocation.length == 0) {
+    navigator.geolocation.getCurrentPosition(position => {
+      localStorage.setItem('userPosition', [position.coords.latitude, position.coords.longitude])
+      focusUser()
+    }, function errorCallback(error) {
+      localStorage.setItem('errorPosition', error.code)
+    }, {
+      maximumAge:Infinity,
+      timeout: 5000
+    }
+  )
 } else {
   currentMarker(currentLocation.reverse())
 }

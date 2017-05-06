@@ -31,14 +31,17 @@ class App extends React.Component {
         mapBounds: bounds
       })
     })
-    navigator.geolocation.getCurrentPosition(position => {
-      localStorage.setItem('userPosition', [position.coords.latitude, position.coords.longitude])
+    if (currentLocation.length == 0) {
       const localPosition = localStorage.userPosition.split(',', 2)
       this.setState({
         userPosition: [parseFloat(localPosition[0]), parseFloat(localPosition[1])]
       })
-    })
-  }
+    } else {
+        this.setState({
+          userPosition: [currentLocation[1], currentLocation[0]]
+        })
+      }
+    }
 
   render() {
     const cards = Object
