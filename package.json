@@ -31,6 +31,8 @@
   },
   "homepage": "https://github.com/neomad-team/neomad.org#readme",
   "dependencies": {
+    "preact": "^8.1.0",
+    "preact-compat": "^3.16.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   }

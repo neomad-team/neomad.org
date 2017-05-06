@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'preact-compat'
 
 class PoiCard extends React.Component {
 
