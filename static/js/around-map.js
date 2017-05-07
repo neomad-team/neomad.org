@@ -1,3 +1,4 @@
+let userPosition = []
 // init Map
 mapboxgl.accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog'
 var map = new mapboxgl.Map({
@@ -10,20 +11,7 @@ map.addControl(new mapboxgl.NavigationControl())
 map.addControl(new mapboxgl.GeolocateControl())
 
 // detectionLocation
-if (currentLocation.length == 0) {
-    navigator.geolocation.getCurrentPosition(position => {
-      localStorage.setItem('userPosition', [position.coords.latitude, position.coords.longitude])
-      focusUser()
-    }, function errorCallback(error) {
-      localStorage.setItem('errorPosition', error.code)
-    }, {
-      maximumAge:Infinity,
-      timeout: 5000
-    }
-  )
-} else {
-  currentMarker(currentLocation.reverse())
-}
+
 
 // pois
 const worker = new Worker('/static/js/webworker-around.js')
@@ -88,16 +76,14 @@ function currentMarker (currentLocation) {
   moveTo(currentLocation)
 }
 
-function focusUser () {
-    const localPosition = localStorage.userPosition.split(',', 2)
-    const position = [parseFloat(localPosition[1]), parseFloat(localPosition[0])]
-    moveTo(position)
-    currentMarker(position)
+function focusUser (positions) {
+    moveTo(positions)
+    currentMarker(positions)
 }
 
-function moveTo (position) {
+function moveTo (positions) {
   map.flyTo({
-    center: position,
+    center: positions,
     zoom: 11,
     bearing: 0,
     speed: 1.7,

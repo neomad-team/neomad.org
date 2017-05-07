@@ -11,7 +11,8 @@ class App extends React.Component {
         pois: {},
         userView: {},
         userPosition: {},
-        mapBounds: {}
+        mapBounds: {},
+        errorGeolocation: {}
       }
     }
 
@@ -32,16 +33,28 @@ class App extends React.Component {
       })
     })
     if (currentLocation.length == 0) {
-      const localPosition = localStorage.userPosition.split(',', 2)
-      this.setState({
-        userPosition: [parseFloat(localPosition[0]), parseFloat(localPosition[1])]
-      })
+        navigator.geolocation.getCurrentPosition(position => {
+          userPosition = [position.coords.longitude, position.coords.latitude]
+          focusUser(userPosition)
+          this.setState({
+            userPosition: [userPosition[1], userPosition[0]]
+          })
+        }, function errorCallback(error) {
+          this.setState({
+            errorGeolocation: error
+          })
+        }, {
+          maximumAge: Infinity,
+          timeout: 5000
+        }
+      )
     } else {
-        this.setState({
-          userPosition: [currentLocation[1], currentLocation[0]]
-        })
-      }
+      currentMarker(currentLocation)
+      this.setState({
+        userPosition: [currentLocation[1], currentLocation[0]]
+      })
     }
+  }
 
   render() {
     const cards = Object
