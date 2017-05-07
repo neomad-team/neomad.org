@@ -10,9 +10,6 @@ var map = new mapboxgl.Map({
 map.addControl(new mapboxgl.NavigationControl())
 map.addControl(new mapboxgl.GeolocateControl())
 
-// detectionLocation
-
-
 // pois
 const worker = new Worker('/static/js/webworker-around.js')
 
