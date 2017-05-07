@@ -31,14 +31,14 @@ worker.addEventListener('message', response => {
                 </ul>`)
 
     const marker = new mapboxgl.Marker(el, {offset:[4, -6]})
-      .setLngLat([poi.position.longitude, poi.position.latitude])
+      .setLngLat([poi.position.latitude, poi.position.latitude.longitude])
       .setPopup(popup)
       .addTo(map)
 
     if(window.location.hash) {
       const hash = getHash()
       if(hash == el.id) {
-        moveTo([poi.position.longitude, poi.position.latitude])
+        moveTo([poi.position.latitude, poi.position.longitude])
         highlight(el.id)
       }
     }
@@ -54,7 +54,7 @@ map.on('click', event => {
   if(poi) {
     highlight(poi._id)
     urlFor(poi._id)
-    moveTo([poi.position.longitude, poi.position.latitude])
+    moveTo([poi.position.latitude, poi.position.longitude])
   }
 })
 
