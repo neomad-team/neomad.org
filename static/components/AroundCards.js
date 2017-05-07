@@ -37,7 +37,7 @@ class App extends React.Component {
           userPosition = [position.coords.longitude, position.coords.latitude]
           focusUser(userPosition)
           this.setState({
-            userPosition: [userPosition[0], userPosition[1]]
+            userPosition: [userPosition[1], userPosition[0]]
           })
         }, function errorCallback(error) {
           this.setState({
@@ -51,7 +51,7 @@ class App extends React.Component {
     } else {
       currentMarker(currentLocation)
       this.setState({
-        userPosition: [currentLocation[0], currentLocation[1]]
+        userPosition: [currentLocation[1], currentLocation[0]]
       })
     }
   }
@@ -69,8 +69,8 @@ class App extends React.Component {
         <PoiCard
           key={key}
           details={this.state.pois[key]}
-          userLng={this.state.userPosition[0]}
-          userLat={this.state.userPosition[1]}
+          userLat={this.state.userPosition[0]}
+          userLng={this.state.userPosition[1]}
         />
       )
 

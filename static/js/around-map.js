@@ -1,6 +1,4 @@
-// init userPosition
 let userPosition = []
-
 // init Map
 mapboxgl.accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog'
 var map = new mapboxgl.Map({
@@ -11,6 +9,9 @@ var map = new mapboxgl.Map({
 })
 map.addControl(new mapboxgl.NavigationControl())
 map.addControl(new mapboxgl.GeolocateControl())
+
+// detectionLocation
+
 
 // pois
 const worker = new Worker('/static/js/webworker-around.js')
