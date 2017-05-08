@@ -88,6 +88,7 @@ li > svg {
 
 /* power avaibility */
 
-.power-on svg{
+.power-on svg,
+.power-true {
   fill: #3BA777;
 }
