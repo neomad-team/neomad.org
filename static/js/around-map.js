@@ -65,8 +65,9 @@ function currentMarker (currentLocation) {
   el.classList.add('marker')
   el.classList.add('current')
 
+  reverseCoords(currentLocation)
   new mapboxgl.Marker(el, {offset:[0, -30]})
-    .setLngLat(currentLocation)
+    .setLngLat(reverseCoords)
     .setPopup(popup)
     .addTo(map)
 
@@ -109,4 +110,8 @@ function highlight (poi_id) {
   if (card) {
     card.classList.toggle('current-card')
   }
+}
+
+function reverseCoords (currentLocation) {
+  reverseCoords = currentLocation.reverse()
 }
