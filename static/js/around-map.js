@@ -71,7 +71,7 @@ function currentMarker (currentLocation) {
     .setPopup(popup)
     .addTo(map)
 
-  moveTo(currentLocation)
+  moveTo(reverseCoords)
 }
 
 function focusUser (positions) {
@@ -113,5 +113,5 @@ function highlight (poi_id) {
 }
 
 function reverseCoords (currentLocation) {
-  reverseCoords = currentLocation.reverse()
+  reverseCoords = [currentLocation[1], currentLocation[0]]
 }
