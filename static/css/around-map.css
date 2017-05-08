@@ -58,30 +58,36 @@ li > svg {
   display: inline-block;
   height: 1em;
   width: 1em;
-  fill: grey
+  fill: grey;
 }
 .rank-1 svg:nth-child(2) {
-  fill: #3BA777
+  fill: #3BA777;
 }
 .rank-2 svg:nth-child(2),
 .rank-2 svg:nth-child(3) {
-  fill: #3BA777
+  fill: #3BA777;
 }
 .rank-3 svg:nth-child(2),
 .rank-3 svg:nth-child(3),
 .rank-3 svg:nth-child(4) {
-  fill: #3BA777
+  fill: #3BA777;
 }
 .rank-4 svg:nth-child(2),
 .rank-4 svg:nth-child(3),
 .rank-4 svg:nth-child(4),
 .rank-4 svg:nth-child(5) {
-  fill: #3BA777
+  fill: #3BA777;
 }
 .rank-5 svg:nth-child(2),
 .rank-5 svg:nth-child(3),
 .rank-5 svg:nth-child(4),
 .rank-5 svg:nth-child(5),
 .rank-5 svg:nth-child(6) {
-  fill: #3BA777
+  fill: #3BA777;
+}
+
+/* power avaibility */
+
+.power-on svg{
+  fill: #3BA777;
 }

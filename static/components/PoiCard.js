@@ -1,6 +1,7 @@
 import React from 'preact-compat'
 // Component
 import WifiRank from './WifiRank'
+import Power from './Power'
 
 class PoiCard extends React.Component {
 
@@ -39,7 +40,7 @@ class PoiCard extends React.Component {
         <h2>{this.props.details.name}</h2>
         <ul>
           <WifiRank rank={this.props.details.wifiQuality} />
-          <li>Power available: {this.props.details.powerAvailable}</li>
+          <Power powerAvailability={this.props.details.powerAvailable} />
         </ul>
       </div>
     )
