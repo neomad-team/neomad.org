@@ -90,6 +90,13 @@ function moveTo (positions) {
   })
 }
 
+function focusTo (positions) {
+  map.flyTo({
+    center: positions,
+    zoom: 15
+  })
+}
+
 function getHash () {
   return window.location.hash.slice(1)
 }
@@ -105,11 +112,15 @@ function findPoi (id) {
 function highlight (poi_id) {
   const cardActive = document.getElementsByClassName('current-card')
   const card = document.getElementById('card-'+poi_id)
+  const marker = document.getElementById(poi_id)
   if (cardActive[0]) {
     cardActive[0].classList.toggle('current-card')
   }
   if (card) {
     card.classList.toggle('current-card')
+  }
+  if (marker) {
+    marker.classList.toggle('selected')
   }
 }
 
