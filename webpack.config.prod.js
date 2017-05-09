@@ -8,8 +8,6 @@ module.exports = {
     path: './static/components',
     filename: 'App.js'
   },
-  watch: true,
-
   module: {
     loaders: [
       {
@@ -26,5 +24,8 @@ module.exports = {
       'react': 'preact-compat',
       'react-dom': 'preact-compat'
     }
-  }
+  },
+  plugins: [
+    new UglifyJSPlugin()
+  ]
 }

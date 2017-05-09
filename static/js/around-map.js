@@ -1,5 +1,5 @@
-// Init Map
-
+let userPosition = []
+// init Map
 mapboxgl.accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog'
 var map = new mapboxgl.Map({
   container: 'map',
@@ -9,13 +9,6 @@ var map = new mapboxgl.Map({
 })
 map.addControl(new mapboxgl.NavigationControl())
 map.addControl(new mapboxgl.GeolocateControl())
-
-// detectionLocation
-if(currentLocation.length == 0) {
-  focusUser()
-} else {
-  currentMarker(currentLocation)
-}
 
 // pois
 const worker = new Worker('/static/js/webworker-around.js')
@@ -44,6 +37,7 @@ worker.addEventListener('message', response => {
       const hash = getHash()
       if(hash == el.id) {
         moveTo([poi.position.longitude, poi.position.latitude])
+        highlight(el.id)
       }
     }
   })
@@ -56,6 +50,7 @@ map.on('click', event => {
   map.setZoom(2)
   const poi = findPoi(event.originalEvent.target.id)
   if(poi) {
+    highlight(poi._id)
     urlFor(poi._id)
     moveTo([poi.position.longitude, poi.position.latitude])
   }
@@ -70,25 +65,23 @@ function currentMarker (currentLocation) {
   el.classList.add('marker')
   el.classList.add('current')
 
+  reverseCoords(currentLocation)
   new mapboxgl.Marker(el, {offset:[0, -30]})
-    .setLngLat(currentLocation)
+    .setLngLat(reverseCoords)
     .setPopup(popup)
     .addTo(map)
 
-  moveTo(currentLocation)
+  moveTo(reverseCoords)
 }
 
-function focusUser () {
-  navigator.geolocation.getCurrentPosition(position => {
-    const userPosition = [position.coords.longitude, position.coords.latitude]
-    moveTo(userPosition)
-    currentMarker(userPosition)
-  })
+function focusUser (positions) {
+    moveTo(positions)
+    currentMarker(positions)
 }
 
-function moveTo (position) {
+function moveTo (positions) {
   map.flyTo({
-    center: position,
+    center: positions,
     zoom: 11,
     bearing: 0,
     speed: 1.7,
@@ -106,4 +99,19 @@ function urlFor (id) {
 
 function findPoi (id) {
   return pois.find(poi => poi._id == id)
+}
+
+function highlight (poi_id) {
+  const cardActive = document.getElementsByClassName('current-card')
+  const card = document.getElementById('card-'+poi_id)
+  if (cardActive[0]) {
+    cardActive[0].classList.toggle('current-card')
+  }
+  if (card) {
+    card.classList.toggle('current-card')
+  }
+}
+
+function reverseCoords (currentLocation) {
+  reverseCoords = [currentLocation[1], currentLocation[0]]
 }

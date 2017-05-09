@@ -1,22 +1,38 @@
-#wrap {
-  display: flex;
-  justify-content: space-between;
-}
-#poisCards {
-  display: flex;
-  flex-direction: column;
-}
 #map {
-  width: 60%;
+  width: 50%;
   position: fixed;
   right: 0;
 }
+#poi-cards > div {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+}
 
 .card {
-  max-width: 50rem;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  padding: 2rem;
   margin: 0 1rem 1rem 2rem;
-  border: 1px grey solid;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  background-color: #fefefe;
+}
+.card:hover {
+  box-shadow: 0 1rem 2rem 0 rgba(0,0,0,0.2);
+}
+
+.card h2 {
+  font-size: 2rem;
+}
+
+.current-card {
+  border: 0.35rem solid rgba(59,167,119, 0.5);
+}
+
+.card-distance {
+  align-self: flex-end;
 }
 
 .marker.current {
@@ -26,4 +42,53 @@
 
 .mapboxgl-popup {
     z-index: 2;
+}
+
+li {
+  list-style: none;
+  padding: 0.3rem 0;
+}
+p {
+  display: inline-block;
+  margin: 0 1rem 0 0;
+}
+
+/* star rank */
+li > svg {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  fill: grey;
+}
+.rank-1 svg:nth-child(2) {
+  fill: #3BA777;
+}
+.rank-2 svg:nth-child(2),
+.rank-2 svg:nth-child(3) {
+  fill: #3BA777;
+}
+.rank-3 svg:nth-child(2),
+.rank-3 svg:nth-child(3),
+.rank-3 svg:nth-child(4) {
+  fill: #3BA777;
+}
+.rank-4 svg:nth-child(2),
+.rank-4 svg:nth-child(3),
+.rank-4 svg:nth-child(4),
+.rank-4 svg:nth-child(5) {
+  fill: #3BA777;
+}
+.rank-5 svg:nth-child(2),
+.rank-5 svg:nth-child(3),
+.rank-5 svg:nth-child(4),
+.rank-5 svg:nth-child(5),
+.rank-5 svg:nth-child(6) {
+  fill: #3BA777;
+}
+
+/* power avaibility */
+
+.power-on svg,
+.power-true svg {
+  fill: #3BA777;
 }
