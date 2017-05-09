@@ -9,8 +9,10 @@ class PoiCard extends React.Component {
     super(props)
     this.state = {
       from: {},
-      to: {}
+      to: {},
     }
+    this.hoverCard = this.hoverCard.bind(this)
+    this.clickCard = this.clickCard.bind(this)
   }
 
   componentDidMount() {
@@ -58,9 +60,9 @@ class PoiCard extends React.Component {
         className='card'
         id={`card-${this.props.details._id}`}
         style={{order: this.calculateDistance(this.state.from, this.state.to)}}
-        onMouseEnter={(e) => this.hoverCard(e)}
-        onMouseLeave={(e) => this.hoverCard(e)}
-        onClick={(e) => this.clickCard(e)}>
+        onMouseEnter={this.hoverCard}
+        onMouseLeave={this.hoverCard}
+        onClick={this.clickCard}>
         <div className='card-distance'>{this.calculateDistance(this.state.from, this.state.to)} meters</div>
         <h2>{this.props.details.name}</h2>
         <ul>
