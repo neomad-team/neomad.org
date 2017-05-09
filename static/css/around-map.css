@@ -40,7 +40,7 @@
 }
 
 .selected,
-.marker:hover {
+.marker:not(.current):hover {
   border: 4px solid #3BA777!important;
 }
 
