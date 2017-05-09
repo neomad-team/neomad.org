@@ -37,7 +37,6 @@ worker.addEventListener('message', response => {
       const hash = getHash()
       if(hash == el.id) {
         moveTo([poi.position.longitude, poi.position.latitude])
-        highlight(el.id)
       }
     }
   })
@@ -71,7 +70,9 @@ function currentMarker (currentLocation) {
     .setPopup(popup)
     .addTo(map)
 
-  moveTo(reverseCoords)
+  if (!window.location.hash) {
+    moveTo(reverseCoords)
+  }
 }
 
 function focusUser (positions) {

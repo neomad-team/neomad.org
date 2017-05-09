@@ -9,6 +9,10 @@
   width: 50%;
 }
 
+.mapboxgl-map {
+  overflow: inherit;
+}
+
 .card {
   display: flex;
   flex-direction: column;
