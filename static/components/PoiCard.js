@@ -40,7 +40,9 @@ class PoiCard extends React.Component {
   }
 
   clickCard() {
-    moveTo([this.props.details.position.latitude, this.props.details.position.longitude].reverse())
+    highlight(this.props.details._id)
+    urlFor(this.props.details._id)
+    moveTo([this.props.details.position.longitude, this.props.details.position.latitude])
   }
 
   render() {
