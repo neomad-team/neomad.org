@@ -14,10 +14,8 @@ class PoiCard extends React.Component {
   }
 
   componentDidMount() {
-    if (window.location.hash) {
-      if (this.props.details._id == getHash()) {
+    if (this.props.details._id == getHash()) {
       highlight(this.props.details._id)
-      }
     }
     this.setState({
       from: [this.props.details.position.latitude, this.props.details.position.longitude],
