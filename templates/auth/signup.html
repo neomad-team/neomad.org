@@ -1,5 +1,12 @@
 {% extends 'auth/login.html' %}
 
+{% block title %}Create a new account{% endblock %}
+{% block description %}Create a new personal account on Neomad.{% endblock %}
+
+{% block extra_css %}
+<link rel=stylesheet href={{ url_for('static', filename='css/auth.css') }}>
+{% endblock %}
+
 {% block login %}
 <form action={{ url_for('signup') }} method=post>
   {% if errors %}
@@ -9,6 +16,7 @@
     {% endfor %}
     </ul>
   {% endif %}
+  <h1>Create a new account</h1>
   <div>
     <label for=email>Email</label>
     <input type=email id=email name=email required>
@@ -17,6 +25,7 @@
     <label for=password>Password</label>
     <input type=password id=password name=password required>
   </div>
-  <button type=submit>Sign Up</button>
+  <button type=submit>Sign up</button>
+  <p class=alternative><a href={{ url_for('login') }}>I already have an account!</a></p>
 </form>
 {% endblock %}

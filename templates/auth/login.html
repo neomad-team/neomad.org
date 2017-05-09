@@ -3,6 +3,10 @@
 {% block title %}Log in with your account{% endblock %}
 {% block description %}Log in Neomad with your personal account.{% endblock %}
 
+{% block extra_css %}
+<link rel=stylesheet href={{ url_for('static', filename='css/auth.css') }}>
+{% endblock %}
+
 {% block main %}
 <style>
 form {
@@ -54,8 +58,8 @@ form button {
     margin: 0;
   }
 }
-
 </style>
+
 {% block login %}
 <form action={{ url_for('login') }} method=post>
   {% if errors %}
@@ -65,6 +69,7 @@ form button {
     {% endfor %}
     </ul>
   {% endif %}
+  <h1>Log into my account</h1>
   <div>
     <label for=email>Email</label>
     <input type=email id=email name=email required>
@@ -74,6 +79,7 @@ form button {
     <input type=password id=password name=password required>
   </div>
   <button type=submit>Log in</button>
+  <p class=alternative><a href={{ url_for('signup') }}>I don't have an account yet!</a></p>
 </form>
 {% endblock %}
 {% endblock %}
