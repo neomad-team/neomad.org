@@ -33,9 +33,25 @@ class PoiCard extends React.Component {
     return Math.trunc(R * c)
   }
 
+  hoverCard() {
+    this.base.classList.toggle('current-card')
+    const marker = document.getElementById(this.props.details._id)
+    marker.classList.toggle('selected')
+  }
+
+  clickCard() {
+    moveTo([this.props.details.position.latitude, this.props.details.position.longitude].reverse())
+  }
+
   render() {
     return (
-      <div id={`card-${this.props.details._id}`} className='card' style={{order: this.calculateDistance(this.state.from, this.state.to)}}>
+      <div
+        className='card'
+        id={`card-${this.props.details._id}`}
+        style={{order: this.calculateDistance(this.state.from, this.state.to)}}
+        onMouseEnter={(e) => this.hoverCard(e)}
+        onMouseLeave={(e) => this.hoverCard(e)}
+        onClick={(e) => this.clickCard(e)}>
         <div className='card-distance'>{this.calculateDistance(this.state.from, this.state.to)} meters</div>
         <h2>{this.props.details.name}</h2>
         <ul>
