@@ -19,13 +19,11 @@
   <nav>
     <a href={{ url_for('article_list') }} title="Read nomad's adventures">Read</a>
     {% if current_user and current_user.is_authenticated %}
-    <a href="">Around you</a>
-    <!-- <a  href title="My profile"> -->
+    <a href=''>Around you</a>
     <div id=avatarMenu class=avatar>
-      <img src="{{ current_user.avatar }}" class=avatar-img width=35 height=35>
+      <img src='{{ current_user.avatar }}' class=avatar-img width=35 height=35>
     </div>
-    <!-- </a> -->
-    <ul id=menu class="profile-menu">
+    <ul id=menu class=profile-menu>
       <li><a href={{ url_for_user(current_user) }}>Profile</a></li>
       <li><a href="">Privacy settings</a></li>
       <li><a href={{ url_for('logout') }}>Logout</a></li>
@@ -39,16 +37,16 @@
 <main>{% block main %}{% endblock %}</main>
 
 <footer>
-  <nav class="wrapper">
-    <a href="mailto:contact+website@neomad.org">Contact us</a>
-    <a href="https://github.com/neomad-team/neomad.org">Github repository</a>
+  <nav class=wrapper>
+    <a href=mailto:contact+website@neomad.org>Contact us</a>
+    <a href=https://github.com/neomad-team/neomad.org>Github repository</a>
   </nav>
 </footer>
 
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
 {% set message = messages[0] %}
-<script>alert("{{message[0]}}", '{{message[1]}}')</script>
+<script>alert('{{message[0]}}', '{{message[1]}}')</script>
 {% endif %}
 {% endwith %}
 
