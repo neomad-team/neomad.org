@@ -66,9 +66,8 @@ function currentMarker (currentLatLng) {
   el.classList.add('current')
 
   // OSM standard [Lng, Lat]
-  const lngLat = [currentLatLng[1], currentLatLng[0]]
   new mapboxgl.Marker(el, {offset:[0, -30]})
-    .setLngLat(lngLat)
+    .setLngLat([currentLatLng[1], currentLatLng[0]])
     .setPopup(popup)
     .addTo(map)
 
@@ -84,18 +83,16 @@ function currentMarker (currentLatLng) {
 
 function moveTo (latLng, zoom) {
   // OSM standard [Lng, Lat]
-  const lngLat = [latLng[1], latLng[0]]
   map.flyTo({
-    center: lngLat,
+    center: [latLng[1], latLng[0]],
     zoom: zoom
   })
 }
 
 function focusTo (latLng) {
   // OSM standard [Lng, Lat]
-  const lngLat = [latLng[1], latLng[0]]
   map.flyTo({
-    center: lngLat,
+    center: [latLng[1], latLng[0]],
     zoom: 15
   })
 }
