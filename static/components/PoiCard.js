@@ -45,13 +45,13 @@ class PoiCard extends React.Component {
 
   clickCard() {
     if (this.base.className == 'card current-card' && map.getZoom() < 14) {
-      focusTo([this.props.details.position.longitude, this.props.details.position.latitude])
+      focusTo([this.props.details.position.latitude, this.props.details.position.longitude])
     } else if (this.base.className == 'card current-card' && map.getZoom() >= 14) {
-        moveTo([this.props.details.position.longitude, this.props.details.position.latitude])
+        moveTo([this.props.details.position.latitude, this.props.details.position.longitude])
     } else {
         highlight(this.props.details._id)
         urlFor(this.props.details._id)
-        moveTo([this.props.details.position.longitude, this.props.details.position.latitude])
+        moveTo([this.props.details.position.latitude, this.props.details.position.longitude])
     }
   }
 

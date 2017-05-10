@@ -29,6 +29,7 @@ worker.addEventListener('message', response => {
                 </ul>`)
 
     const marker = new mapboxgl.Marker(el, {offset:[4, -6]})
+      // OSM standard [Lng, Lat]
       .setLngLat([poi.position.longitude, poi.position.latitude])
       .setPopup(popup)
       .addTo(map)
@@ -36,7 +37,7 @@ worker.addEventListener('message', response => {
     if(window.location.hash) {
       const hash = getHash()
       if(hash == el.id) {
-        moveTo([poi.position.longitude, poi.position.latitude])
+        moveTo([poi.position.latitude, poi.position.longitude])
       }
     }
   })
@@ -51,12 +52,12 @@ map.on('click', event => {
   if(poi) {
     highlight(poi._id)
     urlFor(poi._id)
-    moveTo([poi.position.longitude, poi.position.latitude])
+    moveTo([poi.position.latitude, poi.position.longitude])
   }
 })
 
 // functions
-function currentMarker (currentLocation) {
+function currentMarker (currentLatLng) {
   const popup = new mapboxgl.Popup({offset: [10, 0]})
     .setText('Your current location')
 
@@ -64,32 +65,37 @@ function currentMarker (currentLocation) {
   el.classList.add('marker')
   el.classList.add('current')
 
-  reverseCoords(currentLocation)
+  // OSM standard [Lng, Lat]
+  const lngLat = [currentLatLng[1], currentLatLng[0]]
   new mapboxgl.Marker(el, {offset:[0, -30]})
-    .setLngLat(reverseCoords)
+    .setLngLat(lngLat)
     .setPopup(popup)
     .addTo(map)
 
   if (!window.location.hash) {
-    moveTo(reverseCoords)
+    moveTo(currentLatLng)
   }
 }
 
-function focusUser (positions) {
-    moveTo(positions)
-    currentMarker(positions)
+  function focusUser (latLng) {
+    moveTo(latLng)
+    currentMarker(latLng)
 }
 
-function moveTo (positions) {
+function moveTo (latLng) {
+  // OSM standard [Lng, Lat]
+  const lngLat = [latLng[1], latLng[0]]
   map.flyTo({
-    center: positions,
+    center: lngLat,
     zoom: 11
   })
 }
 
-function focusTo (positions) {
+function focusTo (latLng) {
+  // OSM standard [Lng, Lat]
+  const lngLat = [latLng[1], latLng[0]]
   map.flyTo({
-    center: positions,
+    center: lngLat,
     zoom: 15
   })
 }
@@ -123,8 +129,4 @@ function highlight (poi_id) {
   if (marker) {
     marker.classList.toggle('selected')
   }
-}
-
-function reverseCoords (currentLocation) {
-  reverseCoords = [currentLocation[1], currentLocation[0]]
 }

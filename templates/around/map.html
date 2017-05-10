@@ -15,7 +15,7 @@
   <div id=poi-cards></div>
 
   <script>
-    var currentLocation = {{ current_user.current_location or [] }}
+    var currentLatLng = {{ current_user.current_location or [] }}
     var locations = [
     {% for user in users %}
       {
