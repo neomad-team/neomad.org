@@ -37,7 +37,7 @@ worker.addEventListener('message', response => {
     if(window.location.hash) {
       const hash = getHash()
       if(hash == el.id) {
-        moveTo([poi.position.latitude, poi.position.longitude])
+        moveTo([poi.position.latitude, poi.position.longitude], 11)
       }
     }
   })
@@ -52,7 +52,7 @@ map.on('click', event => {
   if(poi) {
     highlight(poi._id)
     urlFor(poi._id)
-    moveTo([poi.position.latitude, poi.position.longitude])
+    moveTo([poi.position.latitude, poi.position.longitude], 11)
   }
 })
 
@@ -73,21 +73,21 @@ function currentMarker (currentLatLng) {
     .addTo(map)
 
   if (!window.location.hash) {
-    moveTo(currentLatLng)
+    moveTo(currentLatLng, 11)
   }
 }
 
   function focusUser (latLng) {
-    moveTo(latLng)
+    moveTo(latLng, 11)
     currentMarker(latLng)
 }
 
-function moveTo (latLng) {
+function moveTo (latLng, zoom) {
   // OSM standard [Lng, Lat]
   const lngLat = [latLng[1], latLng[0]]
   map.flyTo({
     center: lngLat,
-    zoom: 11
+    zoom: zoom
   })
 }
 
