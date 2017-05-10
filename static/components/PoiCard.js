@@ -11,6 +11,7 @@ class PoiCard extends React.Component {
       from: {},
       to: {},
     }
+    // cf: https://facebook.github.io/react/docs/handling-events.html
     this.hoverCard = this.hoverCard.bind(this)
     this.clickCard = this.clickCard.bind(this)
   }
