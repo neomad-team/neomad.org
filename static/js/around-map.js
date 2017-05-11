@@ -38,6 +38,7 @@ worker.addEventListener('message', response => {
       const hash = getHash()
       if(hash == el.id) {
         moveTo([poi.position.latitude, poi.position.longitude], 11)
+        superCard(hash)
       }
     }
   })
@@ -47,7 +48,6 @@ worker.postMessage('')
 
 // event
 map.on('click', event => {
-  map.setZoom(2)
   const poi = findPoi(event.originalEvent.target.id)
   if(poi) {
     highlight(poi._id)
@@ -89,14 +89,6 @@ function moveTo (latLng, zoom) {
   })
 }
 
-function focusTo (latLng) {
-  // OSM standard [Lng, Lat]
-  map.flyTo({
-    center: [latLng[1], latLng[0]],
-    zoom: 15
-  })
-}
-
 function getHash () {
   return window.location.hash.slice(1)
 }
@@ -111,19 +103,22 @@ function findPoi (id) {
 
 function highlight (poi_id) {
   const cardActive = document.getElementsByClassName('current-card')[0]
-  const markerActive = document.getElementsByClassName('selected')[0]
+  const markerActive = document.getElementsByClassName('current-marker')[0]
   const card = document.getElementById('card-'+poi_id)
   const marker = document.getElementById(poi_id)
-  if (cardActive) {
+  if(cardActive) {
     cardActive.classList.toggle('current-card')
   }
-  if (markerActive) {
-    markerActive.classList.toggle('selected')
+  if(markerActive) {
+    markerActive.classList.toggle('current-marker')
   }
-  if (card) {
+  if(card) {
     card.classList.toggle('current-card')
+    marker.classList.toggle('current-marker')
   }
-  if (marker) {
-    marker.classList.toggle('selected')
-  }
+}
+
+function superCard (poi_id) {
+  const cardActive = document.getElementById('card-'+poi_id)
+  cardActive.classList.toggle('first-card')
 }

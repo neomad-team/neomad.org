@@ -17,13 +17,14 @@ class PoiCard extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.details._id == getHash()) {
-      highlight(this.props.details._id)
-    }
     this.setState({
       from: [this.props.details.position.latitude, this.props.details.position.longitude],
       to: [this.props.userLat, this.props.userLng]
     })
+    if(this.props.details._id == getHash()) {
+      highlight(this.props.details._id)
+      superCard(this.props.details._id)
+    }
   }
 
   calculateDistance(from, to) {
@@ -44,15 +45,16 @@ class PoiCard extends React.Component {
   }
 
   clickCard() {
-    if (this.base.className == 'card current-card' && map.getZoom() < 14) {
-      moveTo([this.props.details.position.latitude, this.props.details.position.longitude], 15)
-    } else if (this.base.className == 'card current-card' && map.getZoom() >= 14) {
+    if(this.props.details._id == getHash()) {
+      if( map.getZoom() < 14) {
+        moveTo([this.props.details.position.latitude, this.props.details.position.longitude], 14)
+      } else {
         moveTo([this.props.details.position.latitude, this.props.details.position.longitude], 11)
+      }
     } else {
-        highlight(this.props.details._id)
-        urlFor(this.props.details._id)
-        moveTo([this.props.details.position.latitude, this.props.details.position.longitude], 11)
+      moveTo([this.props.details.position.latitude, this.props.details.position.longitude], 11)
     }
+    urlFor(this.props.details._id)
   }
 
   render() {
