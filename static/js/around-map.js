@@ -29,6 +29,7 @@ worker.addEventListener('message', response => {
                 </ul>`)
 
     const marker = new mapboxgl.Marker(el, {offset:[4, -6]})
+      // OSM standard [Lng, Lat]
       .setLngLat([poi.position.longitude, poi.position.latitude])
       .setPopup(popup)
       .addTo(map)
@@ -36,8 +37,7 @@ worker.addEventListener('message', response => {
     if(window.location.hash) {
       const hash = getHash()
       if(hash == el.id) {
-        moveTo([poi.position.longitude, poi.position.latitude])
-        highlight(el.id)
+        moveTo([poi.position.latitude, poi.position.longitude], 11)
       }
     }
   })
@@ -52,12 +52,12 @@ map.on('click', event => {
   if(poi) {
     highlight(poi._id)
     urlFor(poi._id)
-    moveTo([poi.position.longitude, poi.position.latitude])
+    moveTo([poi.position.latitude, poi.position.longitude], 11)
   }
 })
 
 // functions
-function currentMarker (currentLocation) {
+function currentMarker (currentLatLng) {
   const popup = new mapboxgl.Popup({offset: [10, 0]})
     .setText('Your current location')
 
@@ -65,27 +65,35 @@ function currentMarker (currentLocation) {
   el.classList.add('marker')
   el.classList.add('current')
 
-  reverseCoords(currentLocation)
+  // OSM standard [Lng, Lat]
   new mapboxgl.Marker(el, {offset:[0, -30]})
-    .setLngLat(reverseCoords)
+    .setLngLat([currentLatLng[1], currentLatLng[0]])
     .setPopup(popup)
     .addTo(map)
 
-  moveTo(reverseCoords)
+  if (!window.location.hash) {
+    moveTo(currentLatLng, 11)
+  }
 }
 
-function focusUser (positions) {
-    moveTo(positions)
-    currentMarker(positions)
+  function focusUser (latLng) {
+    moveTo(latLng, 11)
+    currentMarker(latLng)
 }
 
-function moveTo (positions) {
+function moveTo (latLng, zoom) {
+  // OSM standard [Lng, Lat]
   map.flyTo({
-    center: positions,
-    zoom: 11,
-    bearing: 0,
-    speed: 1.7,
-    curve: 1
+    center: [latLng[1], latLng[0]],
+    zoom: zoom
+  })
+}
+
+function focusTo (latLng) {
+  // OSM standard [Lng, Lat]
+  map.flyTo({
+    center: [latLng[1], latLng[0]],
+    zoom: 15
   })
 }
 
@@ -102,16 +110,20 @@ function findPoi (id) {
 }
 
 function highlight (poi_id) {
-  const cardActive = document.getElementsByClassName('current-card')
+  const cardActive = document.getElementsByClassName('current-card')[0]
+  const markerActive = document.getElementsByClassName('selected')[0]
   const card = document.getElementById('card-'+poi_id)
-  if (cardActive[0]) {
-    cardActive[0].classList.toggle('current-card')
+  const marker = document.getElementById(poi_id)
+  if (cardActive) {
+    cardActive.classList.toggle('current-card')
+  }
+  if (markerActive) {
+    markerActive.classList.toggle('selected')
   }
   if (card) {
     card.classList.toggle('current-card')
   }
-}
-
-function reverseCoords (currentLocation) {
-  reverseCoords = [currentLocation[1], currentLocation[0]]
+  if (marker) {
+    marker.classList.toggle('selected')
+  }
 }

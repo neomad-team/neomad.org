@@ -1,6 +1,6 @@
 import React from 'preact-compat'
 // Component
-import WifiRank from './WifiRank'
+import Rank from './Rank'
 import Power from './Power'
 
 class PoiCard extends React.Component {
@@ -9,11 +9,17 @@ class PoiCard extends React.Component {
     super(props)
     this.state = {
       from: {},
-      to: {}
+      to: {},
     }
+    // cf: https://facebook.github.io/react/docs/handling-events.html
+    this.hoverCard = this.hoverCard.bind(this)
+    this.clickCard = this.clickCard.bind(this)
   }
 
   componentDidMount() {
+    if (this.props.details._id == getHash()) {
+      highlight(this.props.details._id)
+    }
     this.setState({
       from: [this.props.details.position.latitude, this.props.details.position.longitude],
       to: [this.props.userLat, this.props.userLng]
@@ -33,14 +39,36 @@ class PoiCard extends React.Component {
     return Math.trunc(R * c)
   }
 
+  hoverCard() {
+    highlight(this.props.details._id)
+  }
+
+  clickCard() {
+    if (this.base.className == 'card current-card' && map.getZoom() < 14) {
+      moveTo([this.props.details.position.latitude, this.props.details.position.longitude], 15)
+    } else if (this.base.className == 'card current-card' && map.getZoom() >= 14) {
+        moveTo([this.props.details.position.latitude, this.props.details.position.longitude], 11)
+    } else {
+        highlight(this.props.details._id)
+        urlFor(this.props.details._id)
+        moveTo([this.props.details.position.latitude, this.props.details.position.longitude], 11)
+    }
+  }
+
   render() {
     return (
-      <div id={`card-${this.props.details._id}`} className='card' style={{order: this.calculateDistance(this.state.from, this.state.to)}}>
+      <div
+        className='card'
+        id={`card-${this.props.details._id}`}
+        style={{order: this.calculateDistance(this.state.from, this.state.to)}}
+        onMouseEnter={this.hoverCard}
+        onMouseLeave={this.hoverCard}
+        onClick={this.clickCard}>
         <div className='card-distance'>{this.calculateDistance(this.state.from, this.state.to)} meters</div>
         <h2>{this.props.details.name}</h2>
         <ul>
-          <WifiRank rank={this.props.details.wifiQuality} />
-          <Power powerAvailability={this.props.details.powerAvailable} />
+          <Rank value={this.props.details.wifiQuality} />
+          <Power value={this.props.details.powerAvailable} />
         </ul>
       </div>
     )

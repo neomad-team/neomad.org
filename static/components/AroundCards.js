@@ -9,7 +9,6 @@ class App extends React.Component {
       super(props)
       this.state = {
         pois: {},
-        userView: {},
         userPosition: {},
         mapBounds: {},
         errorGeolocation: {}
@@ -25,14 +24,12 @@ class App extends React.Component {
         })
       })
     map.on('moveend', move => {
-      const centerMap = map.getCenter()
       const bounds = map.getBounds()
       this.setState({
-        userView: centerMap,
         mapBounds: bounds
       })
     })
-    if (currentLocation.length == 0) {
+    if (currentLatLng.length == 0) {
         navigator.geolocation.getCurrentPosition(position => {
           userPosition = [position.coords.latitude, position.coords.longitude]
           focusUser(userPosition)
@@ -49,9 +46,9 @@ class App extends React.Component {
         }
       )
     } else {
-      currentMarker(currentLocation)
+      currentMarker(currentLatLng)
       this.setState({
-        userPosition: [currentLocation[0], currentLocation[1]]
+        userPosition: [currentLatLng[0], currentLatLng[1]]
       })
     }
   }
