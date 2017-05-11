@@ -23,7 +23,8 @@ class PoiCard extends React.Component {
     })
     if(this.props.details._id == getHash()) {
       highlight(this.props.details._id)
-      superCard(this.props.details._id)
+      borderCard(this.props.details._id)
+      firstCard(this.props.details._id)
     }
   }
 

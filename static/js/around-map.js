@@ -1,3 +1,4 @@
+let i = 0
 let userPosition = []
 // init Map
 mapboxgl.accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog'
@@ -22,11 +23,8 @@ worker.addEventListener('message', response => {
 
     const popup = new mapboxgl.Popup({offset: [10, 0]})
       .setHTML(`<h2>${poi.name}</h2>
-                <ul>
-                  <li>Wifi quality: ${poi.wifiQuality}</li>
-                  <li>Power available: ${poi.powerAvailable}</li>
-                  <li>Comments: ${poi.comments}</li>
-                </ul>`)
+                <h3>Comments:</h3>
+                <p>${poi.comments}</p>`)
 
     const marker = new mapboxgl.Marker(el, {offset:[4, -6]})
       // OSM standard [Lng, Lat]
@@ -38,7 +36,8 @@ worker.addEventListener('message', response => {
       const hash = getHash()
       if(hash == el.id) {
         moveTo([poi.position.latitude, poi.position.longitude], 11)
-        superCard(hash)
+        borderCard(hash)
+        firstCard(hash)
       }
     }
   })
@@ -55,6 +54,11 @@ map.on('click', event => {
     moveTo([poi.position.latitude, poi.position.longitude], 11)
   }
 })
+
+window.onhashchange = _ => {
+  const hash = getHash()
+  borderCard(hash)
+}
 
 // functions
 function currentMarker (currentLatLng) {
@@ -102,10 +106,10 @@ function findPoi (id) {
 }
 
 function highlight (poi_id) {
-  const cardActive = document.getElementsByClassName('current-card')[0]
-  const markerActive = document.getElementsByClassName('current-marker')[0]
-  const card = document.getElementById('card-'+poi_id)
-  const marker = document.getElementById(poi_id)
+  const cardActive = document.querySelector('.current-card')
+  const markerActive = document.querySelector('.current-marker')
+  const card = document.querySelector('#card-'+poi_id)
+  const marker = document.querySelector('#'+poi_id)
   if(cardActive) {
     cardActive.classList.toggle('current-card')
   }
@@ -118,7 +122,16 @@ function highlight (poi_id) {
   }
 }
 
-function superCard (poi_id) {
-  const cardActive = document.getElementById('card-'+poi_id)
-  cardActive.classList.toggle('first-card')
+function borderCard (poi_id) {
+  const masterCard = document.querySelector('.master-card')
+  if(masterCard) {
+    masterCard.classList.toggle('master-card')
+  }
+  const hashCard = document.querySelector('#card-'+poi_id)
+  hashCard.classList.toggle('master-card')
+}
+
+function firstCard (poi_id) {
+  const hashCard = document.querySelector('#card-'+poi_id)
+  hashCard.classList.toggle('first-card')
 }
