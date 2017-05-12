@@ -23,22 +23,24 @@ class PoiCard extends React.Component {
     })
     if(this.props.details._id == getHash()) {
       highlight(this.props.details._id)
-      borderCard(this.props.details._id)
+      masterCard(this.props.details._id)
       firstCard(this.props.details._id)
     }
   }
 
   calculateDistance(from, to) {
-    const R = 6371e3 // metres
-    const lat1 = this.state.from[0] * Math.PI / 180
-    const lat2 = this.state.to[0] * Math.PI / 180
-    const gapLat = ((lat2 * Math.PI / 180 )-(lat1 * Math.PI / 180))
-    const gapLng = ((this.state.to[1] * Math.PI / 180)-(this.state.from[1] * Math.PI / 180))
+    if(to[0] || to[1]) {
+      const R = 6371e3 // metres
+      const lat1 = this.state.from[0] * Math.PI / 180
+      const lat2 = this.state.to[0] * Math.PI / 180
+      const gapLat = ((lat2 * Math.PI / 180 )-(lat1 * Math.PI / 180))
+      const gapLng = ((this.state.to[1] * Math.PI / 180)-(this.state.from[1] * Math.PI / 180))
 
-    const a = Math.sin(gapLat/2) * Math.sin(gapLat/2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(gapLng/2) * Math.sin(gapLng/2)
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+      const a = Math.sin(gapLat/2) * Math.sin(gapLat/2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(gapLng/2) * Math.sin(gapLng/2)
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
 
-    return Math.trunc(R * c)
+      return `${Math.trunc(R * c)} meters`
+    }
   }
 
   hoverCard() {
@@ -67,7 +69,7 @@ class PoiCard extends React.Component {
         onMouseEnter={this.hoverCard}
         onMouseLeave={this.hoverCard}
         onClick={this.clickCard}>
-        <div className='card-distance'>{this.calculateDistance(this.state.from, this.state.to)} meters</div>
+        <div className='card-distance'>{this.calculateDistance(this.state.from, this.state.to)}</div>
         <h2>{this.props.details.name}</h2>
         <ul>
           <Rank value={this.props.details.wifiQuality} />

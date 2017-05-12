@@ -1,3 +1,7 @@
+main {
+  margin-top: 6.5rem;
+}
+
 #wrap {
   display: flex;
   justify-content: space-between;
@@ -5,7 +9,6 @@
 
 #map {
   position: fixed;
-  top: 6.65rem;
   right: 0;
   width: 50%;
   height: 100%;
@@ -17,12 +20,14 @@
   width: 50%;
   height: 100%;
   z-index: 1;
+  background-color: #fafafa;
 }
 
 #poi-cards > div {
   display: flex;
   flex-wrap: wrap;
-  background-color: #fafafa;
+  height: 100%;
+  margin-top: 2rem;
 }
 
 .card {
@@ -67,10 +72,20 @@
   z-index: 1;
 }
 
-.master-marker {
-  background-image: url('/static/images/marker-green.png') !important;
-}
 /* ================================================================= */
+
+.master-marker {
+  background-image: url('/static/images/marker-green.png');
+  background-size: cover;
+  cursor: pointer;
+  width: 20px;
+  height: 30px;
+  border-radius: 0;
+  background-color: transparent;
+  border: transparent;
+  z-index: 2;
+  left: -0.4rem;
+}
 
 .current-card > h2 {
   color: #3ba77c;
