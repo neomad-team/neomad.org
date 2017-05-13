@@ -21,7 +21,7 @@ class PoiCard extends React.Component {
       from: [this.props.details.position.latitude, this.props.details.position.longitude],
       to: [this.props.userLat, this.props.userLng]
     })
-    if(this.props.details._id == getHash()) {
+    if(this.props.details._id === getHash()) {
       highlight(this.props.details._id)
       masterCard(this.props.details._id)
       firstCard(this.props.details._id)
@@ -29,7 +29,7 @@ class PoiCard extends React.Component {
   }
 
   calculateDistance(from, to) {
-    if(to[0] || to[1]) {
+    if(to[0] && to[1]) {
       const R = 6371e3 // metres
       const lat1 = this.state.from[0] * Math.PI / 180
       const lat2 = this.state.to[0] * Math.PI / 180
@@ -39,7 +39,7 @@ class PoiCard extends React.Component {
       const a = Math.sin(gapLat/2) * Math.sin(gapLat/2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(gapLng/2) * Math.sin(gapLng/2)
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
 
-      return `${Math.trunc(R * c)} meters`
+      return Math.trunc(R * c)
     }
   }
 
@@ -48,7 +48,7 @@ class PoiCard extends React.Component {
   }
 
   clickCard() {
-    if(this.props.details._id == getHash()) {
+    if(this.props.details._id === getHash()) {
       if( map.getZoom() < 14) {
         moveTo([this.props.details.position.latitude, this.props.details.position.longitude], 14)
       } else {
@@ -69,7 +69,7 @@ class PoiCard extends React.Component {
         onMouseEnter={this.hoverCard}
         onMouseLeave={this.hoverCard}
         onClick={this.clickCard}>
-        <div className='card-distance'>{this.calculateDistance(this.state.from, this.state.to)}</div>
+        <div className='card-distance'>{this.calculateDistance(this.state.from, this.state.to)} meters</div>
         <h2>{this.props.details.name}</h2>
         <ul>
           <Rank value={this.props.details.wifiQuality} />
