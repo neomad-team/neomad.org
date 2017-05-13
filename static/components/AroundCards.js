@@ -10,8 +10,7 @@ class App extends React.Component {
       this.state = {
         pois: {},
         userPosition: {},
-        mapBounds: {},
-        errorGeolocation: {}
+        mapBounds: {}
       }
     }
 
@@ -29,6 +28,10 @@ class App extends React.Component {
         mapBounds: bounds
       })
     })
+    const bounds = map.getBounds()
+    this.setState({
+      mapBounds: bounds
+    })
     if (currentLatLng.length == 0) {
         navigator.geolocation.getCurrentPosition(position => {
           userPosition = [position.coords.latitude, position.coords.longitude]
@@ -37,9 +40,7 @@ class App extends React.Component {
             userPosition: [userPosition[0], userPosition[1]]
           })
         }, function errorCallback(error) {
-          this.setState({
-            errorGeolocation: error
-          })
+          alert(`error navigator code is ${error.code} meaning`, error.message, 2500)
         }, {
           maximumAge: Infinity,
           timeout: 5000

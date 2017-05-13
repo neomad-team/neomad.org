@@ -11,8 +11,10 @@
 
 {% block main %}
 
-  <div id=map></div>
-  <div id=poi-cards></div>
+  <div id=wrap>
+    <div id=map></div>
+    <div id=poi-cards></div>
+  </div>
 
   <script>
     var currentLatLng = {{ current_user.current_location or [] }}

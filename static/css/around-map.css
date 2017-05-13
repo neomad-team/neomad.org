@@ -1,12 +1,33 @@
+main {
+  margin-top: 6.5rem;
+}
+
+#wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
 #map {
-  width: 50%;
   position: fixed;
   right: 0;
+  width: 50%;
+  height: 100%;
+  order: 2;
 }
+
+#poi-cards {
+  order: 1;
+  width: 50%;
+  height: 100%;
+  z-index: 1;
+  background-color: #fafafa;
+}
+
 #poi-cards > div {
   display: flex;
   flex-wrap: wrap;
-  width: 50%;
+  height: 100%;
+  margin-top: 2rem;
 }
 
 .card {
@@ -16,7 +37,7 @@
   padding: 2rem;
   margin: 0 1rem 1rem 2rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
+  transition: 0.15s;
   background-color: #fefefe;
 }
 .card:hover {
@@ -27,17 +48,47 @@
   font-size: 2rem;
 }
 
-.current-card {
-  border: 0.35rem solid rgba(59,167,119, 0.5);
-}
-
 .card-distance {
   align-self: flex-end;
 }
 
-.selected,
-.marker:not(.current):hover {
-  border: 4px solid #3BA777!important;
+/* ================================================================= */
+/* OSM & Preact App build CSS and erase below without !important*/
+
+.mapboxgl-canvas-container {
+  position: fixed !important;
+}
+
+.master-card {
+  border: 0.2rem solid #3ba77c !important;
+}
+
+.first-card {
+  order: 0 !important;
+}
+
+.current-marker {
+  border: 0.4rem solid #3ba77c !important;
+  z-index: 1;
+}
+
+/* ================================================================= */
+
+.master-marker {
+  background-image: url('/static/images/marker-green.png');
+  background-size: cover;
+  cursor: pointer;
+  width: 20px;
+  height: 30px;
+  border-radius: 0;
+  background-color: transparent;
+  border: transparent;
+  z-index: 2;
+  left: -0.4rem;
+}
+
+.current-card > h2 {
+  color: #3ba77c;
 }
 
 .marker.current {
@@ -46,8 +97,22 @@
 }
 
 .mapboxgl-popup {
+  width: 50%;
   z-index: 2;
 }
+
+.mapboxgl-popup h2 {
+  color: #3ba77c;
+}
+
+.mapboxgl-popup h3 {
+  margin-bottom: 0;
+}
+
+.mapboxgl-popup p:first-letter {
+  text-transform: capitalize;
+}
+
 
 li {
   list-style: none;
@@ -66,34 +131,34 @@ li > svg {
   fill: grey;
 }
 .rank-1 svg:nth-child(2) {
-  fill: #3BA777;
+  fill: #3ba77c;
 }
 .rank-2 svg:nth-child(2),
 .rank-2 svg:nth-child(3) {
-  fill: #3BA777;
+  fill: #3ba77c;
 }
 .rank-3 svg:nth-child(2),
 .rank-3 svg:nth-child(3),
 .rank-3 svg:nth-child(4) {
-  fill: #3BA777;
+  fill: #3ba77c;
 }
 .rank-4 svg:nth-child(2),
 .rank-4 svg:nth-child(3),
 .rank-4 svg:nth-child(4),
 .rank-4 svg:nth-child(5) {
-  fill: #3BA777;
+  fill: #3ba77c;
 }
 .rank-5 svg:nth-child(2),
 .rank-5 svg:nth-child(3),
 .rank-5 svg:nth-child(4),
 .rank-5 svg:nth-child(5),
 .rank-5 svg:nth-child(6) {
-  fill: #3BA777;
+  fill: #3ba77c;
 }
 
 /* power avaibility */
 
 .power-on svg,
 .power-true svg {
-  fill: #3BA777;
+  fill: #3ba77c;
 }
