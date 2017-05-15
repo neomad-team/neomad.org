@@ -28,6 +28,18 @@ def login():
     return render_template('auth/login.html', errors=errors)
 
 
+@app.route('/signup', methods=['get', 'post'])
+def signup():
+    if request.method == 'POST':
+        email = request.form['email']
+        user = (User(email=email, username=request.form['email'].split('@')[0])
+                .set_password(request.form['password']).save())
+        login_user(user)
+        return redirect(url_for_user(user))
+    else:
+        return render_template('auth/signup.html')
+
+
 @app.route('/logout', methods=['get'])
 def logout():
     logout_user()
