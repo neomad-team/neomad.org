@@ -44,7 +44,7 @@ class App extends React.Component {
           focusUser(userPosition)
         }
       }, function errorCallback (error) {
-        alert(`error navigator code is ${error.code} meaning`, error.message, 2500)
+        alert(`error navigator code is ${error.code} meaning`, error.message)
       }, {
         maximumAge: Infinity,
         timeout: 5000

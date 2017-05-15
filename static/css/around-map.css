@@ -49,18 +49,33 @@ main {
   font-size: 2rem;
 }
 
+.card h3 {
+  font-size: 1.85rem;
+  font-weight: normal;
+  margin: 0 1.25rem 0 0;
+}
+
+.card ul {
+  padding: 0 0 0 2.5rem;
+}
+
+.card ul li {
+  display: flex;
+  padding: 0 0 1rem 0;
+}
+
 .card-distance {
   align-self: flex-end;
 }
 
-/* ======================================== */
-/* OSM & Preact build CSS into html tag so  */
+/* ===================================== */
+/* OSM & Preact build CSS into html tag  */
 
 .mapboxgl-canvas-container {
   position: fixed !important;
 }
 
-.master-card {
+.super-card {
   border: 0.2rem solid #3ba77c !important;
 }
 
@@ -73,9 +88,9 @@ main {
   z-index: 1;
 }
 
-/* ======================================== */
+/* ===================================== */
 
-.master-marker {
+.super-marker {
   background-image: url('/static/images/marker-green.png');
   background-size: cover;
   cursor: pointer;
@@ -104,34 +119,13 @@ main {
   top: -1.9rem;
 }
 
-.mapboxgl-popup h2 {
-  color: #3ba77c;
-}
-
-.mapboxgl-popup h3 {
-  margin-bottom: 0;
-}
-
-.mapboxgl-popup p:first-letter {
-  text-transform: capitalize;
-}
-
-
-li {
-  list-style: none;
-  padding: 0.3rem 0;
-}
-p {
-  display: inline-block;
-  margin: 0 1rem 0 0;
-}
-
 /* star rank */
 li > svg {
   display: inline-block;
   height: 1em;
   width: 1em;
   fill: grey;
+  margin-top: 0.5rem;
 }
 .rank-1 svg:nth-child(2) {
   fill: #3ba77c;
@@ -164,4 +158,29 @@ li > svg {
 .power-on svg,
 .power-true svg {
   fill: #3ba77c;
+}
+
+/* comments */
+
+.comments {
+  flex-direction: column;
+}
+
+.comments p,
+.no-comments p {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.no-comments p {
+  font-style: italic;
+}
+
+.comments ul {
+  padding: 0 0 0 1rem;
+}
+
+.comments li {
+  font-size: 1.5rem;
+  padding: 0;
 }

@@ -20,38 +20,26 @@ worker.addEventListener('message', response => {
     el.classList.add('marker')
     el.id = poi._id
 
-    let popup = new mapboxgl.Popup({offset: [10, 0]})
-    if(poi.comments.length === 0 || poi.comments[0] == [""]) {
-      popup.setHTML(`<h2>${poi.name}</h2>`)
-    } else {
-      popup.setHTML(`<h2>${poi.name}</h2>
-                    <h3>Comments:</h3>
-                    <p>${poi.comments}</p>`)
-    }
-
     const marker = new mapboxgl.Marker(el, {offset:[4, -6]})
       // OSM standard [Lng, Lat]
       .setLngLat([poi.position.longitude, poi.position.latitude])
-      .setPopup(popup)
       .addTo(map)
 
-    if(window.location.hash) {
-      const hash = getHash()
-      if(hash === el.id) {
-        masterCard(hash)
-        firstCard(hash)
-        moveTo([poi.position.latitude, poi.position.longitude], 11)
-      }
+    const hash = getHash()
+    if(hash && hash === el.id) {
+      superCard(hash)
+      firstCard(hash)
+      moveTo([poi.position.latitude, poi.position.longitude], 11)
     }
   })
 })
 
 worker.postMessage('')
 
-// event
+// events
 window.onhashchange = _ => {
   const hash = getHash()
-  masterCard(hash)
+  superCard(hash)
 }
 
 window.onload = _ => {
@@ -66,6 +54,7 @@ map.on('click', event => {
   if(poi) {
     moveTo([poi.position.latitude, poi.position.longitude], 11)
     urlFor(poi._id)
+    scrollCard(poi._id)
   }
 })
 
@@ -115,17 +104,17 @@ function findPoi (id) {
 }
 
 function highlight (poi_id) {
-  const cardActive = document.querySelector('.current-card')
-  const markerActive = document.querySelector('.current-marker')
-  const superMarker = document.querySelector('.master-marker')
+  const currentCard = document.querySelector('.current-card')
+  const currentMarker = document.querySelector('.current-marker')
+  const superMarker = document.querySelector('.super-marker')
   // querySelector don't works if poi_id begin with a number
   const marker = document.getElementById(poi_id)
   const card = document.querySelector(`#card-${poi_id}`)
-  if(cardActive) {
-    cardActive.classList.remove('current-card')
+  if(currentCard) {
+    currentCard.classList.remove('current-card')
   }
-  if(markerActive) {
-    markerActive.classList.remove('current-marker')
+  if(currentMarker) {
+    currentMarker.classList.remove('current-marker')
   }
   if(card) {
     marker.classList.toggle('current-marker')
@@ -134,24 +123,24 @@ function highlight (poi_id) {
   superMarker.classList.remove('current-marker')
 }
 
-function masterCard (poi_id) {
-  const masterCard = document.querySelector('.master-card')
-  const masterMarker = document.querySelector('.master-marker')
+function superCard (poi_id) {
+  const superCard = document.querySelector('.super-card')
+  const superMarker = document.querySelector('.super-marker')
   // querySelector don't works if poi_id begin with a number
   const selectedMarker = document.getElementById(poi_id)
   const selectedCard = document.querySelector(`#card-${poi_id}`)
-  if(masterCard) {
-    masterCard.classList.toggle('master-card')
+  if(superCard) {
+    superCard.classList.toggle('super-card')
   }
   if(selectedCard) {
-    selectedCard.classList.toggle('master-card')
+    selectedCard.classList.toggle('super-card')
   }
-  if(masterMarker) {
-    masterMarker.classList.toggle('master-marker')
-    masterMarker.classList.toggle('marker')
+  if(superMarker) {
+    superMarker.classList.toggle('super-marker')
+    superMarker.classList.toggle('marker')
   }
   if(selectedMarker) {
-    selectedMarker.classList.add('master-marker')
+    selectedMarker.classList.add('super-marker')
     selectedMarker.classList.remove('current-marker')
     selectedMarker.classList.remove('marker')
   }
@@ -162,4 +151,11 @@ function firstCard (poi_id) {
   if(hashCard) {
     hashCard.classList.toggle('first-card')
   }
+}
+
+function scrollCard (poi_id) {
+  const card = document.querySelector(`#card-${poi_id}`)
+  const cardTop = card.offsetTop
+  const cardHeight = card.offsetHeight
+  window.scrollTo(0, (cardTop - cardHeight/2))  
 }
