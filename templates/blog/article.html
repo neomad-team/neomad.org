@@ -31,6 +31,14 @@
     </div>
   </section>
 
+  {% if errors %}
+    <ul>
+    {% for error in errors %}
+      <li class=error>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+
   <h1 name=title>{{ article.title or 'Insert your title here' }}</h1>
   <div class=content name=content>
     {{ (article.content or '<p>Insert your text here</p>')|safe }}
