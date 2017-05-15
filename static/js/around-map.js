@@ -7,8 +7,17 @@ var map = new mapboxgl.Map({
   center: [-10, 45],
   zoom: 2
 })
+
+// specific non-native move into GeolocateControl
+class GeolocateControlWrapper extends mapboxgl.GeolocateControl {
+  _onSuccess(position) {
+    const latLng = [position.coords.latitude, position.coords.longitude]
+    moveTo(latLng, 11)
+  }
+}
+
 map.addControl(new mapboxgl.NavigationControl())
-map.addControl(new mapboxgl.GeolocateControl())
+map.addControl(new GeolocateControlWrapper())
 
 // pois
 const worker = new Worker('/static/js/webworker-around.js')
