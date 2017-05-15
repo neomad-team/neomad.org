@@ -70,10 +70,6 @@ class PoiCard extends React.Component {
     urlFor(this.props.details._id)
   }
 
-  filter() {
-    
-  }
-
   render() {
     return (
       <div
