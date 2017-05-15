@@ -1,15 +1,12 @@
-import datetime
-import re
-
 from flask import (
-    Flask, request, render_template, redirect, url_for, abort, flash
+    request, render_template, redirect, url_for, abort, flash
 )
 from flask_login import current_user, login_required
 
 from core import app, db
 from core.helpers import url_for_user, url_for_article
 from user.models import User
-from .models import Article
+from .models import Article, clean_html
 
 
 @app.route('/articles')
@@ -38,11 +35,16 @@ def article(author, slug, id):
 def article_create():
     article = Article(content='')
     article.author = User.objects.get(id=current_user.id)
+    errors = []
     if request.method == 'POST':
         article.title = request.form.get('title')
         article.content = request.form.get('content')
-        article.save()
-    return render_template('blog/article.html', article=article, edit=True)
+        if article.title != '' and clean_html(article.content) != '':
+            article.save()
+        else:
+            errors.append('Your article must have a title and a content')
+    return render_template('blog/article.html', article=article, edit=True,
+                           errors=errors)
 
 
 @app.route('/article/<string:id>/edit', methods=['post'])
@@ -55,9 +57,13 @@ def article_edit(id):
         abort(404)
     article.title = request.form.get('title')
     article.content = request.form.get('content')
-    article.save()
-    return redirect(url_for_article(article))
-
+    errors = []
+    if article.title != '' and clean_html(article.content) != '':
+        article.save()
+    else:
+        errors.append('Your article must have a title and a content')
+    return render_template('blog/article.html', article=article, edit=True,
+                           errors=errors)
 
 
 @app.route('/article/<string:id>/delete', methods=['get'])
