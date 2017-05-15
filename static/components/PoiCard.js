@@ -11,6 +11,7 @@ class PoiCard extends React.Component {
     this.state = {
       from: {},
       to: {},
+      unit: ['meters', 'km']
     }
     // cf: https://facebook.github.io/react/docs/handling-events.html
     this.hoverCard = this.hoverCard.bind(this)
@@ -29,7 +30,7 @@ class PoiCard extends React.Component {
     }
   }
 
-  calculateDistance(from, to, typeDistance) {
+  calculateDistance(from, to, unit) {
     if(to[0] && to[1]) {
       const R = 6371e3 // metres
       const lat1 = this.state.from[0] * Math.PI / 180
@@ -41,15 +42,18 @@ class PoiCard extends React.Component {
 
       let distance = Math.trunc(R * c)
       
-      if(typeDistance === 0) {
-        return distance
-      } else {
-        if(distance > 10000) {
-          distance = Math.round(distance/1000)
-          typeDistance = 'km'
-        }
-        return `${distance + ' ' + typeDistance}`
+      if(unit) {
+        return this.renderDistance(distance, unit)
       }
+    }
+  }
+
+  renderDistance(distance, unit) {
+    if(distance > 1000) {
+      distance = Math.round(distance/1000)
+      return `${distance} ${unit[1]}`
+    } else {
+      return `${distance} ${unit[0]}`
     }
   }
 
@@ -78,8 +82,8 @@ class PoiCard extends React.Component {
         onMouseEnter={this.hoverCard}
         onMouseLeave={this.hoverCard}
         onClick={this.clickCard}
-        style={{order: this.calculateDistance(this.state.from, this.state.to, 0)}}>
-        <div className='card-distance'>{this.calculateDistance(this.state.from, this.state.to, 'meters')}</div>
+        style={{order: this.calculateDistance(this.state.from, this.state.to)}}>
+        <div className='card-distance'>{this.calculateDistance(this.state.from, this.state.to, this.state.unit)}</div>
         <h2>{this.props.details.name}</h2>
         <ul>
           <Rank value={this.props.details.wifiQuality} />
