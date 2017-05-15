@@ -31,7 +31,8 @@ def login():
 @app.route('/signup', methods=['get', 'post'])
 def signup():
     if request.method == 'POST':
-        user = (User(email=request.form['email'])
+        email = request.form['email']
+        user = (User(email=email, username=request.form['email'].split('@')[0])
                 .set_password(request.form['password']).save())
         login_user(user)
         return redirect(url_for_user(user))
