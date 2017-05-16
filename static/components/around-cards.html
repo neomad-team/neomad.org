@@ -1,0 +1,62 @@
+<link rel=import href=./component.html>
+<link rel=import href=./around-poicard.html>
+
+<script>
+class AroundCards extends Component {
+
+  connectedCallback() {
+    this.data = {}
+    fetch('/around/spots.json')
+      .then(response => response.json())
+      .then(response => {
+        this.data.pois = response
+        super.connectedCallback()
+      })
+  }
+
+  ready() {
+    map.on('moveend', move => {
+      this.data.mapBounds = map.getBounds()
+    })
+    this.data.mapBounds = map.getBounds()
+    if(currentLatLng.length === 0) {
+      navigator.geolocation.getCurrentPosition(position => {
+        userPosition = [position.coords.latitude, position.coords.longitude]
+        focusUser(userPosition)
+        this.data.userPosition = [userPosition[0], userPosition[1]]
+        }, function errorCallback(error) {
+          alert(`error navigator code is ${error.code} meaning`, error.message)
+        }, {
+          maximumAge: Infinity,
+          timeout: 5000
+        }
+      )
+    } else {
+      currentMarker(currentLatLng)
+      this.data.userPosition = [currentLatLng[0], currentLatLng[1]]
+    }
+  }
+
+  render() {
+    const cards = Object
+      .keys(this.data.pois)
+      .filter(key => {
+        const position = this.data.pois[key]
+        const mapBounds = this.data.mapBounds
+        return (position.latitude <= mapBounds._ne.lat
+          && position.latitude >= mapBounds._sw.lat
+          && position.longitude <= mapBounds._ne.lng
+          && position.longitude >= mapBounds._sw.lng)
+      })
+      .map(key => `
+        <around-poicard
+          details=${this.data.pois[key]}
+          userLat=${this.data.userPosition[0]}
+          userLng=${this.data.userPosition[1]}
+        ></around-poicard>`)
+
+    return `<div>${cards.join('')}</div>`
+  }
+}
+customElements.define('around-cards', AroundCards)
+</script>

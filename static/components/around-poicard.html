@@ -1,0 +1,79 @@
+<link rel=import href=./component.html>
+
+
+<script>
+class PoiCard extends Component {
+  constructor() {
+    super()
+    this.details = JSON.parse(this.getAttribute('details'))
+    this.from = JSON.parse(this.getAttribute('from'))
+    this.to = JSON.parse(this.getAttribute('to'))
+    this.id = this.id
+  }
+
+  getHash() {
+    const hash = window.location.hash
+    return hash ? hash.slice(1) : ''
+  }
+
+  calculateDistance(from, to) {
+    if(to[0] || to[1]) {
+      const R = 6371e3 // metres
+      const lat1 = this.from[0] * Math.PI / 180
+      const lat2 = this.to[0] * Math.PI / 180
+      const gapLat = ((lat2 * Math.PI / 180 )-(lat1 * Math.PI / 180))
+      const gapLng = ((this.to[1] * Math.PI / 180)-(this.from[1] * Math.PI / 180))
+
+      const a = Math.sin(gapLat/2) * Math.sin(gapLat/2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(gapLng/2) * Math.sin(gapLng/2)
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+
+      return `${Math.trunc(R * c)} meters`
+    }
+  }
+
+  hoverCard() {
+    highlight(this.id)
+  }
+
+  clickCard() {
+    if(this.id === this.getHash()) {
+      if( map.getZoom() < 14) {
+        moveTo([this.details.position.latitude, this.details.position.longitude], 14)
+      } else {
+        moveTo([this.details.position.latitude, this.details.position.longitude], 11)
+      }
+    } else {
+      moveTo([this.details.position.latitude, this.details.position.longitude], 11)
+    }
+    urlFor(this.id)
+  }
+
+  render() {
+    return `
+      <div class=card
+           id=card-${this.id}
+           style="order: ${this.calculateDistance(this.from, this.to)}"
+           onMouseEnter=this.hoverCard
+           onMouseLeave=this.hoverCard
+           onClick=this.clickCard>
+        <div class=card-distance>
+          ${this.calculateDistance(this.from, this.to)}
+        </div>
+        <h2>${this.details.name}</h2>
+        <ul>
+          <li-rank value=${this.details.wifiQuality}></li-rank>
+          <li-power value=${this.details.powerAvailable}></li-power>
+        </ul>
+      </div>`
+  }
+
+  ready() {
+    if(this.id === this.getHash()) {
+      highlight(this.id)
+      masterCard(this.id)
+      firstCard(this.id)
+    }
+  }
+}
+customElements.define('around-poicard', PoiCard)
+</script>
