@@ -20,3 +20,14 @@ class ArticleTest(TestCase):
         article = Article(title='',
                           content='<p><em>emphased content</em><i>also emphased</i></p>').save()
         self.assertEqual(article.content, '<p><em>emphased content</em><em>also emphased</em></p>')
+
+    def test_language_detection(self):
+        article = Article(title='Un titre en français',
+                          content='<p>Voici le contenu de l\'article qui est '
+                                  'lui aussi en français</p>').save()
+        self.assertEqual(article.language, 'fr')
+
+        article = Article(title='A title in English',
+                          content='<p>The content of the article is in '
+                                  'English</p>').save()
+        self.assertTrue(article.language, 'en')
