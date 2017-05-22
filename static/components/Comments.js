@@ -21,7 +21,8 @@ class Comments extends React.Component {
       .map(key =>
         <li><p>{this.state.comments[key]}</p></li>
       )
-    if(comments.length === 0) {
+    // webnomade API have two cases for empty comments - issue #96
+    if(comments.length === 0 || poi.comments[0] == [""]) {
       return (
         <li className='no-comments'>
           <p>No comments available</p>

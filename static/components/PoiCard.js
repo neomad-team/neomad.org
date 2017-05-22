@@ -30,7 +30,7 @@ class PoiCard extends React.Component {
     }
   }
 
-  calculateDistance(from, to, unit) {
+  calculateDistance(from, to) {
     if(to[0] && to[1]) {
       const R = 6371e3 // metres
       const lat1 = this.state.from[0] * Math.PI / 180
@@ -39,12 +39,9 @@ class PoiCard extends React.Component {
       const gapLng = ((this.state.to[1] * Math.PI / 180)-(this.state.from[1] * Math.PI / 180))
       const a = Math.sin(gapLat/2) * Math.sin(gapLat/2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(gapLng/2) * Math.sin(gapLng/2)
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
-
-      let distance = Math.trunc(R * c)
+      const distance = Math.trunc(R * c)
       
-      if(unit) {
-        return this.renderDistance(distance, unit)
-      }
+      return distance
     }
   }
 
@@ -83,7 +80,7 @@ class PoiCard extends React.Component {
         onMouseLeave={this.hoverCard}
         onClick={this.clickCard}
         style={{order: this.calculateDistance(this.state.from, this.state.to)}}>
-        <div className='card-distance'>{this.calculateDistance(this.state.from, this.state.to, this.state.unit)}</div>
+        <div className='card-distance'>{this.renderDistance(this.calculateDistance(this.state.from, this.state.to), this.state.unit)}</div>
         <h2>{this.props.details.name}</h2>
         <ul>
           <Rank value={this.props.details.wifiQuality} />

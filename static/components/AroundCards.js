@@ -34,9 +34,9 @@ class App extends React.Component {
     })
     if(currentLatLng.length === 0) {
       navigator.geolocation.getCurrentPosition(position => {
-        userPosition = [position.coords.latitude, position.coords.longitude]
+        const userPosition = [position.coords.latitude, position.coords.longitude]
         this.setState({
-          userPosition: [userPosition[0], userPosition[1]]
+          userPosition: userPosition
         })
         if(getHash()) {
           currentMarker(userPosition)
@@ -52,7 +52,7 @@ class App extends React.Component {
     } else {
       currentMarker(currentLatLng)
       this.setState({
-        userPosition: [currentLatLng[0], currentLatLng[1]]
+        userPosition: currentLatLng
       })
     }
   }
