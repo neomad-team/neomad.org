@@ -40,19 +40,19 @@ class PoiCard extends React.Component {
       const a = Math.sin(gapLat/2) * Math.sin(gapLat/2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(gapLng/2) * Math.sin(gapLng/2)
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
       const distance = Math.trunc(R * c)
-      
+
       return distance
     }
   }
 
   renderDistance(distance, unit) {
-    if(distance !== undefined) {
-      if(distance > 1000) {
-        distance = Math.round(distance/1000)
-        return `${distance} ${unit[1]}`
-      } else {
-        return `${distance} ${unit[0]}`
-      }
+    if(!distance){ 
+      return ''
+    } else if(distance > 1000) {
+      distance = Math.round(distance/1000)
+      return `${distance} ${unit[1]}`
+    } else {
+      return `${distance} ${unit[0]}`
     }
   }
 
