@@ -46,11 +46,9 @@ class PoiCard extends React.Component {
   }
 
   renderDistance(distance, unit) {
-    if(!distance){ 
-      return ''
-    } else if(distance > 1000) {
-      distance = Math.round(distance/1000)
-      return `${distance} ${unit[1]}`
+    if(!distance) return ''
+    if(distance > 1000) {
+      return `${Math.round(distance/1000)} ${unit[1]}`
     } else {
       return `${distance} ${unit[0]}`
     }
