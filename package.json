@@ -1,0 +1,33 @@
+{
+  "name": "neomad.org",
+  "description": "Neomad is a open-source community project for nomad workers and people willing to _nomadize_ themselves.",
+  "main": "index.js",
+  "scripts": {
+    "watch": "webpack",
+    "build": "webpack --config webpack.config.prod.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neomad-team/neomad.org.git"
+  },
+  "bugs": {
+    "url": "https://github.com/neomad-team/neomad.org/issues"
+  },
+  "homepage": "https://github.com/neomad-team/neomad.org#readme",
+  "devDependencies": {
+    "babel-browser": "^6.1.19",
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "uglifyjs-webpack-plugin": "^0.4.3",
+    "webpack": "^1.13.1",
+    "preact": "^8.1.0",
+    "preact-compat": "^3.16.0"
+  }
+}

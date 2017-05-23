@@ -10,12 +10,14 @@
  {% endblock %}
 
 {% block main %}
-  <h1>Find someone or something close to <em>you</em></h1>
 
-  <div id=map></div>
+  <div id=wrap>
+    <div id=map></div>
+    <div id=poi-cards></div>
+  </div>
 
   <script>
-    var currentLocation = {{ current_user.current_location or [] }}
+    var currentLatLng = {{ current_user.current_location or [] }}
     var locations = [
     {% for user in users %}
       {
@@ -25,5 +27,8 @@
     {% endfor %}
     ]
   </script>
-<script src={{ url_for('static', filename='js/around-map.js') }}></script>
+  {% block extra_js %}
+  <script src={{ url_for('static', filename='js/around-map.js') }}></script>
+  <script src={{ url_for('static', filename='components/App.js') }}></script>
+  {% endblock %}
 {% endblock %}
