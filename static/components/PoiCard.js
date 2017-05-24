@@ -11,7 +11,6 @@ class PoiCard extends React.Component {
     this.state = {
       from: {},
       to: {},
-      unit: ['meters', 'km']
     }
     // cf: https://facebook.github.io/react/docs/handling-events.html
     this.hoverCard = this.hoverCard.bind(this)
@@ -45,12 +44,12 @@ class PoiCard extends React.Component {
     }
   }
 
-  renderDistance(distance, unit) {
+  renderDistance(distance) {
     if(!distance) return ''
     if(distance > 1000) {
-      return `${Math.round(distance/1000)} ${unit[1]}`
+      return `${Math.round(distance/1000)} km`
     } else {
-      return `${distance} ${unit[0]}`
+      return `${distance} meters`
     }
   }
 
@@ -59,15 +58,11 @@ class PoiCard extends React.Component {
   }
 
   clickCard() {
-    if(this.props.details._id === getHash()) {
-      if( map.getZoom() < 14) {
-        moveTo([this.props.details.position.latitude, this.props.details.position.longitude], 14)
-      } else {
-        moveTo([this.props.details.position.latitude, this.props.details.position.longitude], 11)
-      }
-    } else {
-      moveTo([this.props.details.position.latitude, this.props.details.position.longitude], 11)
+    let zoomLevel = 11
+    if(this.props.details._id === getHash() && map.getZoom() < 14) {
+      zoomLevel = 14
     }
+    moveTo([this.props.details.position.latitude, this.props.details.position.longitude], zoomLevel)
     urlFor(this.props.details._id)
   }
 

@@ -10,9 +10,7 @@ class Comments extends React.Component {
     }
 
   componentDidMount() {
-    this.setState({
-      comments: this.props.value
-    })
+    this.setState({comments: this.props.value})
   }
 
   render() {
