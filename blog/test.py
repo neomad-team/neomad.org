@@ -27,3 +27,14 @@ class ArticleTest(TestCase):
         self.assertTrue(os.path.isdir(article.get_images_path()))
         Article.objects.get(id=article.id).delete()
         self.assertFalse(os.path.isdir(article.get_images_path()))
+
+    def test_language_detection(self):
+        article = Article(title='Un titre en français',
+                          content='<p>Voici le contenu de l\'article qui est '
+                                  'lui aussi en français</p>').save()
+        self.assertEqual(article.language, 'fr')
+
+        article = Article(title='A title in English',
+                          content='<p>The content of the article is in '
+                                  'English</p>').save()
+        self.assertTrue(article.language, 'en')
