@@ -19,9 +19,9 @@
   <nav>
     <a href={{ url_for('article_list') }} title="Read nomad's adventures">Read</a>
     {% if current_user and current_user.is_authenticated %}
-    <a href=''>Around you</a>
+    <a href={{ url_for('around') }}>Around you</a>
     <div id=avatarMenu class=avatar>
-      <img src='{{ current_user.avatar }}' class=avatar-img width=35 height=35>
+      <img src={{ current_user.avatar }} class=avatar-img width=35 height=35>
     </div>
     <ul id=menu class=profile-menu>
       <li><a href={{ url_for_user(current_user) }}>Profile</a></li>
@@ -46,7 +46,7 @@
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
 {% set message = messages[0] %}
-<script>alert('{{message[0]}}', '{{message[1]}}')</script>
+<script>alert("{{message[0]}}", "{{message[1]}}")</script>
 {% endif %}
 {% endwith %}
 
