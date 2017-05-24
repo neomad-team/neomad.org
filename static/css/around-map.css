@@ -189,32 +189,24 @@ li > svg {
   .card {
     width: 100%;
     margin-right: 2rem;
-  }
-}
-@media screen and (max-width:600px) {
-  #wrap {
-    flex-direction: column;
+    padding-bottom: 0;
   }
   
+  .card > h2 {
+    margin: -3rem 0 0 0;
+    max-width: 70%;
+  }
+
+  .card > ul li {
+    padding: 0.25rem;
+  }
+}
+
+@media screen and (max-width:600px) {  
   #poi-cards {
     width: 100%;
   }
   
   #map {
     display: none;
-  }
-  
-  .card {
-    width: 100%;
-    margin-right: 2rem;
-    padding-bottom: 0;
-  }
-  
-  .card > h2 {
-    margin-top: -3rem;
-    max-width: 70%;
-  }
-
-  .card > ul li {
-    padding: 0;
   }
