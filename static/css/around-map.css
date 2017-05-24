@@ -94,8 +94,8 @@ main {
   background-image: url('/static/images/marker-green.png');
   background-size: cover;
   cursor: pointer;
-  width: 20px;
-  height: 30px;
+  width: 2rem;
+  height: 3rem;
   border-radius: 0;
   background-color: transparent;
   border: transparent;
@@ -211,7 +211,7 @@ li > svg {
   }
   
   .card > h2 {
-    margin-top: -30px;
+    margin-top: -3rem;
     max-width: 70%;
   }
 
