@@ -9,7 +9,7 @@ class App extends React.Component {
       super(props)
       this.state = {
         pois: {},
-        userPosition: {},
+        userPosition: [],
         mapBounds: {}
       }
     }
@@ -22,22 +22,16 @@ class App extends React.Component {
           pois: response
         })
       })
+
     map.on('moveend', move => {
-      const bounds = map.getBounds()
-      this.setState({
-        mapBounds: bounds
-      })
+      this.setState({mapBounds: map.getBounds()})
     })
-    const bounds = map.getBounds()
-    this.setState({
-      mapBounds: bounds
-    })
+    this.setState({mapBounds: map.getBounds()})
+
     if(currentLatLng.length === 0) {
       navigator.geolocation.getCurrentPosition(position => {
         const userPosition = [position.coords.latitude, position.coords.longitude]
-        this.setState({
-          userPosition: userPosition
-        })
+        this.setState({userPosition: userPosition})
         if(getHash()) {
           currentMarker(userPosition)
         } else {
@@ -51,9 +45,7 @@ class App extends React.Component {
       })
     } else {
       currentMarker(currentLatLng)
-      this.setState({
-        userPosition: currentLatLng
-      })
+      this.setState({userPosition: currentLatLng})
     }
   }
 
