@@ -16,7 +16,6 @@ main > header {
 .profile-intro {
   display: flex;
   justify-content: space-between;
-  align-items: space;
   flex-wrap: wrap;
   padding-bottom: 3rem;
   margin-bottom: 1rem;

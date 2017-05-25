@@ -14,3 +14,11 @@ function alert(type, message, delay) {
     }, delay || 5000)
   }
 }
+
+window.onload = _ => {
+  const menu = document.getElementById('menu')
+  const avatar = document.getElementById('avatarMenu')
+  avatar.addEventListener('click', _ => {
+    menu.classList.toggle('active')
+  })
+}
