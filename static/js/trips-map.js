@@ -74,7 +74,7 @@ map.on('load', _ => {
             'line-cap': 'round'
         },
         'paint': {
-            'line-color': 'rgba(0, 0, 255, 0.5)',
+            'line-color': 'rgba(212, 85, 85, 0.3)',
             'line-width': 4,
             'line-translate': [10, 0],
             'line-translate-anchor': 'map'
