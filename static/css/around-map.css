@@ -189,7 +189,7 @@ li > svg {
   padding: 0;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1280px) {
   .card {
     width: 100%;
     margin-right: 2rem;
@@ -205,8 +205,68 @@ li > svg {
     padding: 0.25rem;
   }
 }
+
+@media screen and (max-width: 768px) {
+  #map {
+    display: block;
+    width: 70%;
+  }
   
-@media screen and (max-width: 320px) {
+  #poi-cards {
+    order: 1;
+    width: 30%;
+    height: 0;
+    z-index: 1;
+    min-width: 21rem;
+  }
+  
+  #poi-cards > div {
+    flex-wrap: no-wrap;
+    height: 0;
+  }
+  
+  .card-distance {
+    font-size: 1.5rem;
+    position: relative;
+    top: -1rem;
+  }
+  
+  .card {
+    padding: 1.5rem 1.25rem 0 2rem;
+  }
+  
+  .card > h2 {
+    max-width: 100%;
+    font-size: 1.8rem;
+    margin: -1rem;
+    max-height: 5.5rem;
+    overflow: scroll;
+  }
+  
+  .card h3 {
+    font-size: 1.6rem;
+  }
+  
+  .card > ul {
+    padding-left: 0;
+  }
+  
+  .card > ul li {
+    padding: 0.25rem;
+  }
+  
+  .card > ul li:last-child {
+    display: none;
+  }
+  
+  .card svg{
+    height: 0.9em;
+    width: 0.9em;
+  }
+  
+}
+  
+@media screen and (max-width: 478px) {
   #poi-cards {
     display: none;
   }

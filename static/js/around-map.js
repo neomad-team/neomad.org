@@ -35,7 +35,7 @@ worker.addEventListener('message', response => {
       .addTo(map)
 
     /* no pois-cards in mobile, using popup */
-    if(window.matchMedia('(max-width: 320px)').matches) {
+    if(window.matchMedia('(max-width: 478px)').matches) {
       const popup = new mapboxgl.Popup({offset: [10, 0]})
       .setHTML(`<h2>${poi.name}</h2>
                 <ul>
@@ -70,8 +70,6 @@ window.onload = _ => {
 }
 
 map.on('click', event => {
-  // find if popup open
-  // if oui close
   const poi = findPoi(event.originalEvent.target.id)
   if(poi) {
     moveTo([poi.position.latitude, poi.position.longitude], 11)
