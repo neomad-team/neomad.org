@@ -1,6 +1,7 @@
 import datetime
 import hashlib
 import os
+import shutil
 
 from flask import Markup
 from bs4 import BeautifulSoup
@@ -80,6 +81,12 @@ class Article(db.Document):
     def image(self):
         if len(self.images):
             return self.images[0]
+
+    def delete(self, *args, **kwargs):
+        parent = super(Article, self).delete(*args, **kwargs)
+        path = self.get_images_path()
+        shutil.rmtree(path)
+        return parent
 
     def save(self, *args, **kwargs):
         if not self.creation_date:
