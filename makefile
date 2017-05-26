@@ -10,7 +10,7 @@ server_update:
 
 server_reload:
 	@make title text="Recreating the server."
-	ssh neomad "${goto_src} && docker-compose stop web && docker-compose rm -f web && docker-compose up -d"
+	ssh neomad "${goto_src} && docker-compose restart web"
 
 deploy: server_update server_reload
 
