@@ -11,7 +11,6 @@
 <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
 <link href="https://fonts.googleapis.com/css?family=Raleway:600|Crimson+Text|Libre+Baskerville|Libre+Franklin|Poppins|Lora|Roboto|Oxygen|Open+Sans:600" rel=stylesheet>
 <link rel=stylesheet href={{ url_for('static', filename='css/edit.css') }}>
-<script src={{ url_for('static', filename='js/utils.js') }}></script>
 {% block extra_css %}{% endblock %}
 
 <header>
@@ -42,6 +41,8 @@
     <a href=https://github.com/neomad-team/neomad.org>Github repository</a>
   </nav>
 </footer>
+
+<script src={{ url_for('static', filename='js/utils.js') }}></script>
 
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}

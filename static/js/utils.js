@@ -17,7 +17,7 @@ function alert(type, message, delay) {
 
 window.onload = _ => {
   const menu = document.getElementById('menu')
-  const avatar = document.getElementById('avatar-img')
+  const avatar = document.getElementById('avatarMenu')
   avatar.addEventListener('click', _ => {
     menu.classList.toggle('active')
   })
