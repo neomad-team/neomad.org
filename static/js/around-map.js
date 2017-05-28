@@ -81,7 +81,7 @@ map.on('click', event => {
 // functions
 function currentMarker (currentLatLng) {
   const popup = new mapboxgl.Popup({offset: [10, 0]})
-    .setHTML('<p>Your current location</p>')
+    .setHTML('<p>My current location</p>')
 
   const el = document.createElement('div')
   el.classList.add('marker')
