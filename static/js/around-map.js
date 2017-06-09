@@ -34,6 +34,17 @@ worker.addEventListener('message', response => {
       .setLngLat([poi.position.longitude, poi.position.latitude])
       .addTo(map)
 
+    /* no pois-cards in mobile, using popup */
+    if(window.matchMedia('(max-width: 478px)').matches) {
+      const popup = new mapboxgl.Popup({offset: [10, 0]})
+      .setHTML(`<h2>${poi.name}</h2>
+                <ul>
+                  <li>Wifi quality: ${poi.wifiQuality}</li>
+                  <li>Power available: ${poi.powerAvailable}</li>
+                </ul>`)
+      marker.setPopup(popup)
+    }
+
     const hash = getHash()
     if(hash && hash === el.id) {
       superCard(hash)
@@ -70,7 +81,7 @@ map.on('click', event => {
 // functions
 function currentMarker (currentLatLng) {
   const popup = new mapboxgl.Popup({offset: [10, 0]})
-    .setText('Your current location')
+    .setHTML('<p>My current location</p>')
 
   const el = document.createElement('div')
   el.classList.add('marker')
