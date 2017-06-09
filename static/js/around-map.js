@@ -35,7 +35,7 @@ worker.addEventListener('message', response => {
       .addTo(map)
 
     /* no pois-cards in mobile, using popup */
-    if(window.matchMedia('(max-width: 478px)').matches) {
+    if(window.matchMedia('(max-width: 768px)').matches) {
       const popup = new mapboxgl.Popup({offset: [10, 0]})
       .setHTML(`<h2>${poi.name}</h2>
                 <ul>
@@ -60,13 +60,6 @@ worker.postMessage('')
 window.onhashchange = _ => {
   const hash = getHash()
   superCard(hash)
-}
-
-window.onload = _ => {
-  // section poisCards hidden marker overflow
-  const canvas = document.querySelector('canvas')
-  const poisCards = document.querySelector('#poi-cards')
-  poisCards.style.minHeight = `${canvas.height}px`
 }
 
 map.on('click', event => {

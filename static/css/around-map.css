@@ -16,6 +16,7 @@ main {
 }
 
 #poi-cards {
+  position: relative;
   order: 1;
   width: 50%;
   height: 100%;
@@ -26,7 +27,6 @@ main {
 #poi-cards > div {
   display: flex;
   flex-wrap: wrap;
-  height: 100%;
   margin-top: 2rem;
 }
 
@@ -68,6 +68,220 @@ main {
   align-self: flex-end;
 }
 
+/* poi form */
+
+.mapboxgl-canvas{
+  margin-top: -5rem;
+}
+
+#open-poiForm {
+  position: relative;
+  top: 1rem;
+  left: 1rem;
+  width: 5rem;
+  height: 5rem;
+  z-index: 1;
+  padding: 0.5rem;
+}
+
+#open-poiForm svg {
+  fill: #333;
+}
+
+#open-poiForm:hover svg {
+  fill: #3BA77C;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+#poi-form {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  overflow: scroll;
+}
+
+#poi-form form {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  padding: 1rem 0;
+  width: 70rem;
+}
+
+#poi-form h2 {
+  text-align: center;
+  font-size: 4rem;
+  margin-top: 0.5rem;
+  color: #279E6A;
+}
+
+#poi-form form ul {
+  list-style: none;
+}
+
+#poi-form form li {
+  display: flex;
+  padding: 1rem;
+}
+
+#poi-form label{
+  width: 20rem;
+  margin: auto 0;
+}
+
+#poi-form input[type="checkbox"] {
+  position: relative;
+  opacity: 1;
+  margin-left: -1.5rem;
+}
+
+#poi-form input[type="text"],
+#poi-form textarea,
+#poi-form select {
+  border: 1px solid #888;
+  border-radius: 5px;
+  padding: .5rem 1rem;
+  width: 50%;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+#poi-form input:focus,
+#poi-form textarea:focus,
+#poi-form select:focus {
+  border-color: #00BF6BEE;
+}
+
+#poi-form input[type=range] {
+  -webkit-appearance: none;
+  border: 1px solid white;
+  width: 50%;
+  padding: 1rem 0;
+  margin: 0;
+}
+
+#poi-form input[type=range]::-webkit-slider-runnable-track {
+  height: 0.5rem;
+  background: #ddd;
+  border: none;
+  border-radius: 0.3rem;
+}
+
+#poi-form input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  background: #00BF6BEE;
+  margin-top: -0.4rem;
+}
+
+#poi-form input[type=range]:focus {
+  outline: #00BF6BEE;
+}
+
+#poi-form input[type=range]::-webkit-slider-runnable-track {
+  background: #ccc;
+}
+
+#poi-form input[type=range]::-moz-range-track {
+  height: 0.5rem;
+  background: #ddd;
+  border: none;
+  border-radius: 0.3rem;
+}
+
+#poi-form input[type=range]::-moz-range-thumb {
+  border: none;
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  background: #00BF6BEE;
+}
+
+#poi-form input[type=range]:-moz-focusring{
+    outline: 0.1rem solid white;
+    outline-offset: -0.1rem;
+}
+
+#poi-form input[type=range]::-ms-track {
+    height: 0.5rem;
+    background: transparent;
+    border-color: transparent;
+    border-width: 0.6rem 0;
+    color: transparent;
+}
+
+#poi-form input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 1rem;
+}
+
+#poi-form input[type=range]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 1rem;
+}
+
+#poi-form input[type=range]::-ms-thumb {
+    border: none;
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: 50%;
+    background: #00BF6BEE;
+}
+
+#poi-form input[type=range]:focus::-ms-fill-lower {
+    background: #888;
+}
+
+#poi-form input[type=range]:focus::-ms-fill-upper {
+    background: #ccc;
+}
+
+#poi-form select option {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+#close-poiForm {
+  width: 5.5rem;
+  border: none;
+  background: none;
+  align-self: flex-end;
+  z-index: 1;
+}
+
+#close-poiForm svg circle {
+  fill: #C93636;
+}
+
+#close-poiForm svg path {
+  fill: #FFFFFF;
+}
+
+#save-poiForm {
+  width: 10rem;
+  align-self: center;
+  margin: 2rem 0 2rem 35rem;
+  color: #FFFFFF;
+  background-color: #279E6A;
+}
+
+#save-poiForm:hover {
+  background-color: #00BF6BEE;
+}
+
 /* ===================================== */
 /* OSM & Preact build CSS into html tag  */
 
@@ -86,6 +300,10 @@ main {
 .current-marker {
   border: 0.4rem solid #3ba77c !important;
   z-index: 1;
+}
+
+.display {
+  display: flex !important;
 }
 
 /* ===================================== */
@@ -207,66 +425,6 @@ li > svg {
 }
 
 @media screen and (max-width: 768px) {
-  #map {
-    display: block;
-    width: 70%;
-  }
-  
-  #poi-cards {
-    order: 1;
-    width: 30%;
-    height: 0;
-    z-index: 1;
-    min-width: 21rem;
-  }
-  
-  #poi-cards > div {
-    flex-wrap: no-wrap;
-    height: 0;
-  }
-  
-  .card-distance {
-    font-size: 1.5rem;
-    position: relative;
-    top: -1rem;
-  }
-  
-  .card {
-    padding: 1.5rem 1.25rem 0 2rem;
-  }
-  
-  .card > h2 {
-    max-width: 100%;
-    font-size: 1.8rem;
-    margin: -1rem;
-    max-height: 5.5rem;
-    overflow: scroll;
-  }
-  
-  .card h3 {
-    font-size: 1.6rem;
-  }
-  
-  .card > ul {
-    padding-left: 0;
-  }
-  
-  .card > ul li {
-    padding: 0.25rem;
-  }
-  
-  .card > ul li:last-child {
-    display: none;
-  }
-  
-  .card svg{
-    height: 0.9em;
-    width: 0.9em;
-  }
-  
-}
-  
-@media screen and (max-width: 478px) {
   #poi-cards {
     display: none;
   }
