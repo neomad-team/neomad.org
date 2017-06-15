@@ -63,4 +63,5 @@ class TripTest(TestCase):
                                   content_type='application/json')
         user = User.objects.first()
         self.assertEqual(user.locations.count(), 2)
+        self.assertEqual(user.locations[1].position, lat_lng)
         self.assertEqual(result.status_code, 201)

@@ -25,7 +25,7 @@ th, td {
   </tr>
 {% for location in locations %}
   <tr>
-    <td>{{ location.date }}</td>
+    <td>{{ location.date | datetime }}</td>
     <td>{{ location.position }}</td>
     <td><form method=post action={{ url_for('privacy_delete_trip',
                                             date=location.date,
@@ -34,16 +34,4 @@ th, td {
   </tr>
 {% endfor %}
 </table>
-
-<script>
-  var current_location = {{ user.current_location or [] }}
-  var locations = [
-  {% for location in locations %}
-    {
-      date: '{{ location.date|datetime }}',
-      position: {{ location.position }}
-    },
-  {% endfor %}
-  ]
-</script>
 {% endblock %}
