@@ -70,11 +70,11 @@ main {
 
 /* poi form */
 
-.mapboxgl-canvas{
+.mapboxgl-canvas {
   margin-top: -5rem;
 }
 
-#open-poiForm {
+#open-form {
   position: relative;
   top: 1rem;
   left: 1rem;
@@ -84,11 +84,11 @@ main {
   padding: 0.5rem;
 }
 
-#open-poiForm svg {
+#open-form svg {
   fill: #333;
 }
 
-#open-poiForm:hover svg {
+#open-form:hover svg {
   fill: #3BA77C;
 }
 
@@ -154,7 +154,7 @@ footer {
   border-radius: 5px;
   padding: .5rem 1rem;
   width: 50%;
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-family: inherit;
 }
 
 #poi-form input:focus,
@@ -254,7 +254,7 @@ footer {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
-#close-poiForm {
+#close-form {
   width: 5.5rem;
   border: none;
   background: none;
@@ -262,11 +262,11 @@ footer {
   z-index: 1;
 }
 
-#close-poiForm svg circle {
+#close-form svg circle {
   fill: #C93636;
 }
 
-#close-poiForm svg path {
+#close-form svg path {
   fill: #FFFFFF;
 }
 
@@ -302,7 +302,7 @@ footer {
   z-index: 1;
 }
 
-.display {
+.visible {
   display: flex !important;
 }
 

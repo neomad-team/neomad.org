@@ -25,12 +25,12 @@ window.onload = _ => {
   displayForm.forEach( button => {
     button.addEventListener('click', _ => {
       const poiForm = document.querySelector('#poi-form')
-      poiForm.classList.toggle('display')  
+      poiForm.classList.toggle('visible')  
     })
   })
   
-  const menu = document.getElementById('menu')
-  const avatar = document.getElementById('avatarMenu')
+  const menu = document.querySelector('#menu')
+  const avatar = document.querySelector('#avatar-menu')
   avatar.addEventListener('click', _ => {
     menu.classList.toggle('active')
   })
