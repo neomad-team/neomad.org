@@ -15,31 +15,33 @@ main {
   order: 2;
 }
 
-#poi-cards {
-  position: relative;
+#cards-wrap {
+  display: flex;
+  flex-direction: column;
   order: 1;
   width: 50%;
   height: 100%;
   z-index: 1;
   background-color: #fafafa;
+  padding: 1rem 2rem 10rem;
 }
 
-#poi-cards > div {
+#poi-cards > div{
   display: flex;
   flex-wrap: wrap;
-  margin-top: 6rem;
+  justify-content: space-between;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  width: 45%;
+  width: 49%;
   padding: 2rem;
-  margin: 0 1rem 1rem 2rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.2);
   transition: 0.15s;
   background-color: #fefefe;
   cursor: pointer;
+  margin-top: 2rem;
 }
 .card:hover {
   box-shadow: 0 1rem 2rem 0 rgba(0,0,0,0.2);
@@ -73,12 +75,7 @@ main {
 #open-form {
   display: flex;
   justify-content: center;
-  position: absolute;
-  top: 7rem;
-  left: 0;
-  width: 50%;
   height: 4rem;
-  z-index: 2;
   background-color: #FEFEFE;
   border: none;
   box-shadow: 0 0.25rem 0.25rem 0 rgba(0,0,0,0.2);
@@ -419,7 +416,6 @@ li > svg {
 @media screen and (max-width: 1280px) {
   .card {
     width: 100%;
-    margin-right: 2rem;
     padding-bottom: 0;
   }
   
@@ -456,13 +452,18 @@ li > svg {
     padding-left: 1rem;
   }
   
+  #cards-wrap {
+    width: auto;
+    padding: 0;
+    background: transparent;
+  }
+  
   #open-form {
     flex-direction: column-reverse;
     align-items: center;
-    top: 7.5rem;
-    left: 1rem;
+    margin: 1rem 0 0 1rem;
     width: 9rem;
-    height: 8rem;  
+    height: 8rem;
   }
   
   #open-form p {
