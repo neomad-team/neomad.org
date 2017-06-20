@@ -10,7 +10,7 @@
       <div>
         <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
         <time datetime={{ article.creation_date }} pubdate>Published on {{ article.creation_date|datetime }}</time>
-        <p class="reading-time">Reading time: <span>{{ article.content|count }}</span> min</p>
+        <p class="reading-time">Reading time: <span>{{ article.content|length / 6 / 250 }}</span> min</p>
       </div>
       {% else %}
       <time datetime={{ article.creation_date }} pubdate>Published on {{ article.creation_date|datetime }}</time>
