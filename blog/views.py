@@ -36,16 +36,20 @@ def article(author, slug, id):
 def article_create():
     article = Article(content='')
     article.author = User.objects.get(id=current_user.id)
+    status = 200
     errors = []
     if request.method == 'POST':
-        article.title = request.form.get('title')
-        article.content = request.form.get('content')
-        if article.title != '' and clean_html(article.content) != '':
-            article.save()
+        if (request.form.get('title') == ''
+                or request.form.get('content') == ''):
+            errors.append('Please, insert a title and a content')
+            status = 400
         else:
-            errors.append('Your article must have a title and a content')
-    return render_template('blog/article.html', article=article, edit=True,
-                           errors=errors)
+            article.title = request.form.get('title')
+            article.content = clean_html(request.form.get('content'))
+            article.save()
+            status = 201
+    return render_template('blog/article.html', article=article,
+                           errors=errors, edit=True), status
 
 
 @app.route('/article/<string:id>/edit', methods=['post'])
