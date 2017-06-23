@@ -11,7 +11,7 @@ from .models import Article, clean_html
 
 @app.route('/articles/')
 def article_list():
-    articles = Article.objects.all()
+    articles = Article.objects.filter(is_published__ne=False)
     return render_template('blog/article_list.html', articles=articles)
 
 
