@@ -9,7 +9,7 @@ from flask_login import current_user, login_required
 from core import app, db
 from core.helpers import url_for_user, url_for_article
 from user.models import User
-from .models import Article
+from .models import Article, clean_html
 
 
 @app.route('/articles')
@@ -38,11 +38,20 @@ def article(author, slug, id):
 def article_create():
     article = Article(content='')
     article.author = User.objects.get(id=current_user.id)
+    status = 200
+    errors = []
     if request.method == 'POST':
-        article.title = request.form.get('title')
-        article.content = request.form.get('content')
-        article.save()
-    return render_template('blog/article.html', article=article, edit=True)
+        if (request.form.get('title') == ''
+                or request.form.get('content') == ''):
+            errors.append('Please, insert a title and a content')
+            status = 400
+        else:
+            article.title = request.form.get('title')
+            article.content = clean_html(request.form.get('content'))
+            article.save()
+            status = 201
+    return render_template('blog/article.html', article=article,
+                           errors=errors, edit=True), status
 
 
 @app.route('/article/<string:id>/edit', methods=['post'])
@@ -57,7 +66,6 @@ def article_edit(id):
     article.content = request.form.get('content')
     article.save()
     return redirect(url_for_article(article))
-
 
 
 @app.route('/article/<string:id>/delete', methods=['get'])
