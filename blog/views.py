@@ -11,7 +11,7 @@ from .models import Article, clean_html
 
 @app.route('/articles')
 def article_list():
-    articles = Article.objects.all()
+    articles = Article.objects.filter(is_published__ne=False)
     return render_template('blog/article_list.html', articles=articles)
 
 
@@ -70,7 +70,6 @@ def article_edit(id):
         errors.append('Please insert a title and a content')
         return render_template('blog/article.html', article=article,
                                errors=errors, edit=True), 400
-
 
 @app.route('/article/<string:id>/delete', methods=['get'])
 @login_required
