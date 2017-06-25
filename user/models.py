@@ -1,4 +1,5 @@
 import datetime
+import re
 
 from flask import Markup
 from flask_login import UserMixin
@@ -8,6 +9,23 @@ from core import db, app
 from core.helpers import slugify
 
 from trips.models import UserLocation
+
+
+def uniquify_username(username):
+    try:
+        # We stop when the exception is caught
+        while True:
+            str_number = re.match('.*?([0-9]*)$', username).group(1)
+            if str_number == '':
+                username = username + '1'
+            else:
+                number = int(str_number) + 1
+                username = re.sub(r'\d+$', '', username)
+                username = username + str(number)
+            User.objects.get(username=username)
+    except User.DoesNotExist:
+        pass
+    return username
 
 
 class User(UserMixin, db.Document):
@@ -44,5 +62,12 @@ class User(UserMixin, db.Document):
         return str(self.username or 'Unknown')
 
     def save(self, *args, **kwargs):
+        try:
+            User.objects.get(username=self.username)
+            # If the code above is reach on the block try, it means that there
+            # is a duplicate
+            self.username = uniquify_username(self.username)
+        except User.DoesNotExist:
+            pass
         self.slug = slugify(self.username)
         return super().save(*args, **kwargs)
