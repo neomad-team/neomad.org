@@ -172,3 +172,21 @@ function scrollCard (poi_id) {
   const cardHeight = card.offsetHeight
   window.scrollTo(0, (cardTop - cardHeight/2))  
 }
+
+// saving/adding a spot - form
+
+document.querySelector('#poi-form form').addEventListener('submit', event => {
+  event.preventDefault()
+  const data = new FormData(event.target)
+  const formValues = {coordinates: currentLatLng}
+  data.forEach((v, k) => formValues[k] = v)
+  fetch(event.target.action, {
+    method: 'post',
+    body: JSON.stringify(formValues),
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  // .then(r => r.json())
+})
