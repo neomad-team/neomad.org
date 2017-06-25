@@ -23,3 +23,11 @@
   display: block;
   margin-top: 2rem;
 }
+
+.meta .reading-time {
+  font-size: 1.4rem;
+}
+
+.meta .avatar-img {
+  margin-top: 0.5rem;
+}

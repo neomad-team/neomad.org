@@ -10,6 +10,7 @@
       <div>
         <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
         <time datetime={{ article.creation_date }} pubdate>Published on {{ article.creation_date|datetime }}</time>
+        <p class=reading-time>Reading time: <span>{{ (article.content|length / 6 / 250)|int }}</span> min</p>
       </div>
       {% else %}
       <time datetime={{ article.creation_date }} pubdate>Published on {{ article.creation_date|datetime }}</time>
@@ -23,7 +24,6 @@
       </figure>
       {% endif %}
       {{ article.content|striptags|truncate(200) }}
-    </a>
     <a href={{ url }} lang={{ article.language }} class=read>Read more</a>
   </article>
   {% endfor %}

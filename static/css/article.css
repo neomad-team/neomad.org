@@ -18,6 +18,9 @@ article .meta {
 article .meta a {
   color: #666;
 }
+article .meta .reading-time {
+  font-size: 1.5rem;
+}
 
 article h1 {
   font-size: 1.9em;
