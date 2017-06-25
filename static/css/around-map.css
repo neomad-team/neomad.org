@@ -268,8 +268,12 @@ footer {
   z-index: 1;
 }
 
+#close-form svg {
+  width: 2rem;
+}
+
 #close-form svg circle {
-  fill: #C93636;
+  fill: #666;
 }
 
 #close-form svg path {
