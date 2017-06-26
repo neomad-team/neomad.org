@@ -9,11 +9,11 @@
       </a>
       <div>
         <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
-        <time datetime={{ article.creation_date }} pubdate>Published on {{ article.creation_date|datetime }}</time>
-        <p class=reading-time>Reading time: <span>{{ (article.content|length / 6 / 250)|int }}</span> min</p>
+        <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
+        <p class=reading-time><span>{{ (article.content|length / 6 / 250)|int }}</span> min read</p>
       </div>
       {% else %}
-      <time datetime={{ article.creation_date }} pubdate>Published on {{ article.creation_date|datetime }}</time>
+      <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
       {% endif %}
     </header>
     <a href={{ url }} lang={{ article.language }}>

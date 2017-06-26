@@ -25,8 +25,8 @@
     <div>
       <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
       <p>{{ article.author.about|htmlnewline }}</p>
-      <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date|datetime }}</time>
-      <p class=reading-time>Reading time: <span>{{ (article.content|length / 6 / 250)|int }}</span> min</p>
+      <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
+      <p class=reading-time><span>{{ (article.content|length / 6 / 250)|int }}</span> min read</p>
     </div>
   </section>
 

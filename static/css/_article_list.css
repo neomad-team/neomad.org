@@ -24,10 +24,17 @@
   margin-top: 2rem;
 }
 
+.meta div a {
+  display: block;
+}
+.meta time {
+  font-size: .9em;
+}
 .meta .reading-time {
+  display: inline;
   font-size: 1.4rem;
 }
-
-.meta .avatar-img {
-  margin-top: 0.5rem;
+.meta .reading-time::before {
+  content: "-";
+  margin-right: 0.5em;
 }
