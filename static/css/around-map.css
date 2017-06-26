@@ -116,6 +116,7 @@ footer {
   background: rgba(0, 0, 0, 0.6);
   z-index: 2;
   overflow: scroll;
+  z-index: 10;
 }
 
 #poi-form form {
@@ -281,9 +282,9 @@ footer {
 }
 
 #save-form {
-  width: 10rem;
-  align-self: center;
-  margin: 2rem 0 2rem 35rem;
+  width: 16rem;
+  align-self: flex-end;
+  margin: 0 13rem 1.5rem 0;
   color: #FFFFFF;
   background-color: #279E6A;
 }
@@ -461,7 +462,7 @@ li > svg {
     padding: 0;
     background: transparent;
   }
-  
+    
   #open-form {
     flex-direction: column-reverse;
     align-items: center;
@@ -473,5 +474,39 @@ li > svg {
   #open-form p {
     font-size: 1.25rem;
     margin: 0.25rem 0 0 0;
+  }
+  
+  #poi-form {
+    padding: 1rem;
+  }
+  
+  #poi-form form {
+    width: 50rem;
+  }
+  
+  #poi-form h2 {
+    font-size: 3rem;
+    margin: 0 0 0.5rem;
+  }
+
+  #poi-form ul {
+    margin: 0;
+    padding: 2rem 0 2rem 2rem;
+  }
+  
+  #poi-form label {
+    width: 15rem;
+    font-size: 1.5rem;
+  }
+  
+  #poi-form input[type="text"],
+  #poi-form input[type="range"],
+  #poi-form textarea,
+  #poi-form select {
+    width: 60%;
+  }
+  
+  #save-form {
+    margin-right: 4.5rem;
   }
 }
