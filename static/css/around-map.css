@@ -117,6 +117,7 @@ footer {
   z-index: 2;
   overflow: scroll;
   z-index: 10;
+  cursor: pointer;
 }
 
 #poi-form form {
@@ -125,6 +126,7 @@ footer {
   background-color: #FFFFFF;
   padding: 1rem 0;
   width: 70rem;
+  cursor: initial;
 }
 
 #poi-form h2 {

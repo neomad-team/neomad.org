@@ -173,6 +173,14 @@ function scrollCard (poi_id) {
   window.scrollTo(0, (cardTop - cardHeight/2))  
 }
 
+// close form
+const form = document.querySelector('#poi-form')
+form.addEventListener('click', event => {
+  if(form.classList[0] === 'visible') {
+    form.setAttribute('class','')
+  }
+})
+
 // saving/adding a spot - form
 
 document.querySelector('#poi-form form').addEventListener('submit', event => {
