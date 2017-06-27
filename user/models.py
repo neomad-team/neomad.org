@@ -62,12 +62,13 @@ class User(UserMixin, db.Document):
         return str(self.username or 'Unknown')
 
     def save(self, *args, **kwargs):
-        try:
-            User.objects.get(username=self.username)
-            # If the code above is reach on the block try, it means that there
-            # is a duplicate
-            self.username = uniquify_username(self.username)
-        except User.DoesNotExist:
-            pass
+        if self.slug is None:
+            try:
+                User.objects.get(username=self.username)
+                # If the code above is reach on the block try, it means that
+                # there is a duplicate
+                self.username = uniquify_username(self.username)
+            except User.DoesNotExist:
+                pass
         self.slug = slugify(self.username)
         return super().save(*args, **kwargs)
