@@ -8,6 +8,7 @@ form[edit] .toolbar {
   border-top: 1px solid #ccc;
   padding: 10px 20px;
   text-align: right;
+  z-index: 2;
 }
 form[edit] .toolbar .save {
   background-color: #e7fee7;
