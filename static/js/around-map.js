@@ -176,9 +176,7 @@ function scrollCard (poi_id) {
 // close form
 const form = document.querySelector('#poi-form')
 form.addEventListener('click', event => {
-  if(event.target === form) {
-    form.setAttribute('class','')
-  }
+  event.target.classList.remove('visible')
 })
 
 // saving/adding a spot - form
