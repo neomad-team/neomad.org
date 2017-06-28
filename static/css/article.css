@@ -2,7 +2,6 @@ html {
   background-color: #fff;
 }
 
-
 article {
   margin: 0 auto;
   font-family: Lora;
@@ -17,6 +16,9 @@ article .meta {
 }
 article .meta a {
   color: #666;
+}
+article .meta .reading-time {
+  font-size: 1.5rem;
 }
 
 article h1 {

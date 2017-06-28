@@ -29,6 +29,7 @@ def article(author, slug, id):
     if article.slug != slug or article.author.slug != author:
         return redirect(url_for_article(article), 301)
     return render_template('blog/article.html', article=article,
+                           articles=Article.objects.filter(id__ne=id),
                            edit=(current_user.is_authenticated and
                                  author == current_user.slug))
 

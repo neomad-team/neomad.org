@@ -45,8 +45,6 @@ if(current_location.length) {
   el.classList.add('marker')
   el.classList.add('current')
 
-  lineCoords.unshift(current_location)
-
   new mapboxgl.Marker(el, {offset:[0, -30]})
       .setLngLat(current_location.reverse())
       .setPopup(popup)

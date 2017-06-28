@@ -1,5 +1,5 @@
 onmessage = _ => {
-  fetch('/around/spots.json')
-    .then(response => response.json())
+  fetch('/api/spots')
+    .then(r => r.json())
     .then(postMessage)
 }

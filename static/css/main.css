@@ -221,13 +221,17 @@ figure {
   vertical-align: top;
   font-size: 1.1em;
 }
-.meta time {
-  display: block;
-  font-size: .9em;
+.meta .reading-time {
+  display: inline; 
 }
+.meta .reading-time::before {
+  content: "-";
+  margin-right: 0.5em;
+}
+
 .avatar-img {
   border-radius: 100%;
-  margin-right: 10px;
+  margin-right: 1rem;
 }
 
 @media screen and (max-width:700px) {
