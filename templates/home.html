@@ -6,18 +6,32 @@
 {% block extra_css %}<link rel=stylesheet href={{ url_for('static', filename='css/home.css') }}>{% endblock %}
 
 {% block main %}
-
-  <section id=notice class=empty></section>
-  <img src={{ url_for('static', filename='homebackground.jpg') }} alt="Nomad worker">
-  <h1>N<span>e</span>omad</h1>
-  <h2>Make the world your home. And workplace.</h2>
-  <section class=earlybird>
+  
+  <section>
+    <div>
+      <img src={{ url_for('static', filename='homebackground.jpg') }} alt="Nomad worker">
+      <h1>N<span>e</span>omad</h1>
+      <h2>Make the world your home. And workplace.</h2>
+    </div>
+  </section>
+  
+  <section id=concept>
+    <h2>Find out contents for nomad</h2>
+    <ul>
+      <li><p>Read, write and contribute to your nomad community</p></li>
+      <li><p>Follow yours nomad life on your own map</p></li>
+      <li><p>Find other nomad close to you</p></li>
+      <li><p>Find and share a place to work anywhere</p></li>
+    </ul>
+  </section>
+  
+  <section id=earlybird>
+    <!-- <img src={{ url_for('static', filename='homebackground.jpg') }} alt="Nomad worker"> -->
     <p>Do you want an early account? We are looking for <strong>beta users</strong>.</p>
     <link href=//cdn-images.mailchimp.com/embedcode/classic-081711.css rel=stylesheet type=text/css>
     <form method=post action=https://getsimpleform.com/messages?form_api_token=ec09216646c52506bc83161e4bc3e609>
-      <input type=hidden name=redirect_to value=http://neomad.org/#sent>
-      <input type=email name=email placeholder="Enter your email address" required>
-      <input class=valid type=submit value="Count me in!">
+      <input type=email name=email placeholder=Enter your email address required>
+      <button type=submit name=earlybird class=valid onclick="alert('earlybird', 'Thanks! We'll keep informed soon')">Count me in!</button>
       <label for=contribute>
         <input type=checkbox id=contribute name=contribute>
         I'd also like to contribute somehow! <small>(like: graphism, coding, ideas, …)</small>
@@ -26,17 +40,7 @@
     <!-- <small><a href={{ url_for('signup') }}>I'm a newcomer</a></small> -->
     <small><a href={{ url_for('login') }}>I already have an account</a></small>
   </section>
-
-
-<script>
-document.body.classList.add('loaded')
-if (document.location.hash) {
-  var notice = document.querySelector('#notice')
-  notice.innerHTML = "Thanks, we'll keep you informed!"
-  notice.classList.remove('empty')
-  var button = document.querySelector('[type=submit]')
-}
-</script>
+  
 {% endblock %}
 
 {% include '_analytics.html' %}

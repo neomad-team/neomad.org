@@ -1,56 +1,93 @@
 main {
   width: 100%;
   height: 100%;
-  margin-top: 0;
+  margin-top: 6.5rem;
 }
-main > img {
+
+main > section > div > img {
   width: 100%;
-  height: 100%;
-  transition: 3s filter;
-  filter: brightness(0%);
-}
-.loaded > main > img {
   filter: brightness(50%);
 }
 
-main > h1,
-main > h2 {
+main > section > div > h1,
+main > section > div > h2 {
   position: absolute;
   color: #fff;
-  text-shadow: 0 0 5px #000;
+  text-shadow: 0 0 5px #fff;
+  margin: 0 0 0 3rem;
 }
-main > h1 {
+main > section > div > h1 {
   font-size: 5em;
-  top: 35px;
-  left: 12.1%;
+  top: 40%;
 }
-main > h2 {
-  top: 170px;
-  left: 12.5%
+main > section > div > h2 {
+  margin-left: 3.5rem;
+  top: 52%;
 }
+
+#concept {
+  background-color: #fff;
+  padding: 3rem 0 0;
+  position: relative;
+}
+#concept h2 {
+  text-align: center;
+  margin: 3rem 0;
+  color: #00bf6bee;
+  text-shadow: 1px 1px 1px grey;
+}
+#concept ul {
+  list-style-type: none;
+  padding: 0 10rem;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+#concept ul li {
+  width: 25rem;
+  height: 20rem;
+  margin: 0 0 5rem 0;
+  border: 3px solid #00bf6bee;
+  text-align: center;
+  padding: 1rem;
+}
+#concept ul li::before {
+  font-family: FontAwesome;
+  color: #00bf6bee;
+  font-size: 4rem;
+  
+}
+#concept ul li:first-child::before {
+  content: "\f02d";
+}
+#concept ul li:nth-child(2)::before {
+  content: "\f040";
+}
+#concept ul li:nth-child(3)::before {
+  content: "\f277";
+}
+#concept ul li:nth-child(4)::before {
+  content: "\f0c0";
+}
+#concept ul li:last-child::before {
+  content: "\f041";
+}
+
 
 
 .earlybird {
-  position: absolute;
   background: rgba(0, 0, 0, .6);
-  width: 75%;
-  margin: auto;
-  padding: 30px 50px;
-  top: 260px;
-  left: 12.5%;
   color: #fff;
+  padding: 10rem;
 }
 .earlybird p {
   font-size: 1.2em;
 }
-
-main a {
+.earlybird a {
   color: inherit;
 }
 
-form {
-  padding: 0 !important;
-}
 form input[type=email] {
   border: 1px solid #ccc;
   width: 73%;
@@ -63,7 +100,7 @@ form input {
   display: inline;
   vertical-align: middle;
 }
-form input.valid {
+form button.valid {
   border: 1px solid #ccc;
   background-color: rgba(243, 174, 115, .85);
   color: #fff;
@@ -72,12 +109,11 @@ form input.valid {
   margin-left: 1%;
   background-color: #6B5;
 }
-form input.valid[disabled] {
+form button.valid[disabled] {
   background-color: #999;
   opacity: .6;
 }
 form input[type=checkbox] {
-  /*width: 35px;*/
   margin-right: 1em;
 }
 form input[type=checkbox] + label {
@@ -90,10 +126,8 @@ label:last-of-type {
   margin-bottom: 1.5rem;
 }
 
-#notice:not(.empty) {
-  padding: 20px;
-  font-weight: bold;
-  text-align: center;
+footer {
+  display: none;
 }
 
 @media screen and (max-width:960px) {
