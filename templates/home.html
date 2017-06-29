@@ -1,10 +1,12 @@
-<meta charset=utf-8>
-<title>Digital Nomad Community - Neomad</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name=description content="Find a local place to work, get connected to other remote workers.">
-<link rel=stylesheet href={{ url_for('static', filename='css/home.css') }}>
+{% extends 'layout.html' %}
 
-<header>
+{% block title %}Digital Nomad Community{% endblock %} 
+{% block description %}Find a local place to work, get connected to other remote workers.{% endblock %}
+
+{% block extra_css %}<link rel=stylesheet href={{ url_for('static', filename='css/home.css') }}>{% endblock %}
+
+{% block main %}
+
   <section id=notice class=empty></section>
   <img src={{ url_for('static', filename='homebackground.jpg') }} alt="Nomad worker">
   <h1>N<span>e</span>omad</h1>
@@ -24,7 +26,7 @@
     <!-- <small><a href={{ url_for('signup') }}>I'm a newcomer</a></small> -->
     <small><a href={{ url_for('login') }}>I already have an account</a></small>
   </section>
-</header>
+
 
 <script>
 document.body.classList.add('loaded')
@@ -35,5 +37,6 @@ if (document.location.hash) {
   var button = document.querySelector('[type=submit]')
 }
 </script>
+{% endblock %}
 
 {% include '_analytics.html' %}
