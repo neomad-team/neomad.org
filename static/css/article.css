@@ -2,8 +2,13 @@ html {
   background-color: #fff;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 article {
-  margin: 0 auto;
   font-family: Lora;
   font-size: 1.15em;
   letter-spacing: .02em;
@@ -43,4 +48,19 @@ article .date {
   display: block;
   margin-top: 3em;
   font-size: .7em;
+}
+
+aside a {
+  display: block;
+  padding: 2rem 4rem;
+  background-color: #79d;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  margin: 3rem;
+  transition: opacity .25s;
+}
+aside a:hover {
+  color: #fff;
+  opacity: .9;
 }
