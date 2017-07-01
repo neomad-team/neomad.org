@@ -27,19 +27,21 @@
   </section>
   
   <section id=earlybird>
-    <!-- <img src={{ url_for('static', filename='homebackground.jpg') }} alt="Nomad worker"> -->
-    <p>Do you want an early account? We are looking for <strong>beta users</strong>.</p>
-    <link href=//cdn-images.mailchimp.com/embedcode/classic-081711.css rel=stylesheet type=text/css>
-    <form method=post action=https://getsimpleform.com/messages?form_api_token=ec09216646c52506bc83161e4bc3e609>
-      <input type=email name=email placeholder=Enter your email address required>
-      <button type=submit name=earlybird class=valid onclick="alert('earlybird', 'Thanks! We'll keep informed soon')">Count me in!</button>
-      <label for=contribute>
-        <input type=checkbox id=contribute name=contribute>
-        I'd also like to contribute somehow! <small>(like: graphism, coding, ideas, …)</small>
-      </label>
-    </form>
-    <!-- <small><a href={{ url_for('signup') }}>I'm a newcomer</a></small> -->
-    <small><a href={{ url_for('login') }}>I already have an account</a></small>
+    <h2>Do you want an early account?</h2>
+    <div>
+      <p>Become <strong>beta user</strong>!</p>
+      <link href=//cdn-images.mailchimp.com/embedcode/classic-081711.css rel=stylesheet type=text/css>
+      <form method=post action=https://getsimpleform.com/messages?form_api_token=ec09216646c52506bc83161e4bc3e609>
+        <input type=email name=email placeholder='Enter your email address' required>
+        <button type=submit name=earlybird class=valid onclick="alert('earlybird', 'Thanks! We'll keep informed soon')">Count me in!</button>
+        <label for=contribute>
+          <input type=checkbox id=contribute name=contribute>
+          I'd also like to contribute somehow! <small>(like: graphism, coding, ideas, …)</small>
+        </label>
+      </form>
+      <!-- <small><a href={{ url_for('signup') }}>I'm a newcomer</a></small> -->
+      <small><a href={{ url_for('login') }}>I already have an account</a></small>
+    </div>
   </section>
   
 {% endblock %}
