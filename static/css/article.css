@@ -44,3 +44,15 @@ article .date {
   margin-top: 3em;
   font-size: .7em;
 }
+
+article aside a {
+  display: block;
+  margin: 1em auto;
+  width: 400px;
+  padding: 1em 2em;
+  background-color: #79d;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  margin: 1em;
+}

@@ -46,8 +46,7 @@
 </article>
 
 <aside>
-  <h2>{{ article.author }} also wrote:</h2>
-  {{ article_list(articles=articles, with_author=false) }}
+  <a href={{ url_for_user(article.author) }}>Read more from {{ article.author }}</a>
 </aside>
 
 {% if edit %}
