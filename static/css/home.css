@@ -1,14 +1,14 @@
 main {
   width: 100%;
   height: 100%;
-  margin-top: 6.5rem;
+  margin-top: -6rem;
 }
 
 main > section > div > img {
   width: 100%;
   filter: brightness(50%);
+  min-height: 50rem;
 }
-
 main > section > div > h1,
 main > section > div > h2 {
   position: absolute;
@@ -22,13 +22,25 @@ main > section > div > h1 {
 }
 main > section > div > h2 {
   margin-left: 3.5rem;
-  top: 52%;
+  top: 54%;
+}
+main > section > div > a::after {
+  font-family: FontAwesome;
+  content: "\f078";
+  position: relative;
+  font-size: 3.5rem;
+  color: white;
+  animation: 10s updown infinite ease-in-out;
+  top: -8rem;
+  left: 50%;
+  right: 50%;
 }
 
 #concept {
   background-color: #fff;
   padding: 3rem 0 0;
   position: relative;
+  top: -5.5rem;
 }
 #concept h2 {
   text-align: center;
@@ -73,8 +85,6 @@ main > section > div > h2 {
 #concept ul li:last-child::before {
   content: "\f041";
 }
-
-
 
 .earlybird {
   background: rgba(0, 0, 0, .6);
@@ -130,7 +140,22 @@ footer {
   display: none;
 }
 
+@media screen and (max-width:1200px) {
+  main > section > div > h1 {
+    top: 30%;
+  }
+  main > section > div > h2 {
+    top: 44%;
+  }
+}
+
 @media screen and (max-width:960px) {
+  main > section > div > h1 {
+    top: 20%;
+  }
+  main > section > div > h2 {
+    top: 34%;
+  }
   form input[type=email] {
     width: 100%;
   }
@@ -140,15 +165,63 @@ footer {
   }
 }
 
-@media screen and (max-width:620px) {
-  .earlybird {
-    left: auto;
-    width: 100%;
+@media screen and (max-width:480px) {
+  main > section > div > h1 {
+    font-size: 8rem;
   }
-  main > h1,
-  main > h2 {
-    left: 0;
-    width: 100%;
-    text-align: center;
+  main > section > div > h2 {
+    font-size: 2rem;
+    width: 30rem;
+  }
+}
+
+@media screen and (max-width:320px) {
+  main > section > div > h1 {
+    font-size: 5.5rem;
+    margin: 0 0 0 1rem;
+    top: 30%;
+  }
+  main > section > div > h2 {
+    margin: 0 0 0 1rem;
+    top: 43%;
+  }
+}
+
+@keyframes updown {
+  0% {
+    top: -8rem;
+    /*top: 0;*/
+    }
+  40% {
+    top: -8rem;
+    /*top: 0;*/
+  }
+  42% {
+    top: -2em;
+    /*top: -2em;*/
+  }
+  44% {
+    top: -8rem;
+    /*top: 0;*/
+  }
+  46% {
+    top: -2em;
+    /*top: -2em;*/
+  }
+  48% {
+    top: -8rem;
+    /*top: 0;*/
+  }
+  50% {
+    top: -2em;
+    /*top: -2em;*/
+  }
+  52% {
+    top: -8rem;
+    /*top: 0;*/
+  }
+  100% {
+    top: -8rem;
+    /*top: 0;*/
   }
 }
