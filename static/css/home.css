@@ -40,11 +40,19 @@ section:first-child > div > a::after {
   position: relative;
   top: -5.5rem;
 }
-#concept h2 {
+#concept h2,
+#concept h3 {
   text-align: center;
-  margin: 0 0 6rem;
   color: #00bf6bee;
-  text-shadow: 1px 1px 1px grey;
+  position: relative;
+}
+#concept h2 {
+  font-size: 3.5rem;
+  margin: 6rem 0 2rem;
+  top: -3rem;
+}
+#concept h3 {
+  top: -6rem
 }
 #concept ul {
   list-style-type: none;
@@ -56,11 +64,11 @@ section:first-child > div > a::after {
 }
 #concept ul li {
   width: 25rem;
-  height: 20rem;
+  height: auto;
   margin: 0 0 5rem 0;
   border: 3px solid #00bf6bee;
   text-align: center;
-  padding: 1rem;
+  padding: 3rem 1rem;
 }
 #concept ul li::before {
   font-family: FontAwesome;
