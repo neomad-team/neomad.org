@@ -16,10 +16,10 @@
     </div>
   </section>
   
-  <section id=concept>
+  <section class=content>
     <h2>Find out contents for nomad</h2>
     <h3>Inspire and be inspire!</h3>
-    <ul>
+    <ul id=feature>
       <li><p>Read, write and contribute with nomad community</p></li>
       <li><p>Follow your nomad life on your own blog and map</p></li>
       <li><p>Find other nomad close to you and enjoy with them</p></li>
@@ -27,24 +27,23 @@
     </ul>
   </section>
   
-  <section id=earlybird>
-    <h2>Do you want an early account?</h2>
-    <div>
-      <p>Become <strong>beta user</strong>!</p>
-      <link href=//cdn-images.mailchimp.com/embedcode/classic-081711.css rel=stylesheet type=text/css>
-      <form method=post action=https://getsimpleform.com/messages?form_api_token=ec09216646c52506bc83161e4bc3e609>
-        <input type=email name=email placeholder='Enter your email address' required>
-        <button type=submit name=earlybird class=valid onclick="alert('earlybird', 'Thanks! We'll keep informed soon')">Count me in!</button>
-        <label for=contribute>
-          <input type=checkbox id=contribute name=contribute>
-          I'd also like to contribute somehow! <small>(like: graphism, coding, ideas, …)</small>
-        </label>
-      </form>
-      <!-- <small><a href={{ url_for('signup') }}>I'm a newcomer</a></small> -->
-      <small><a href={{ url_for('login') }}>I already have an account</a></small>
-    </div>
+  <section id=join-us>
+    <h2>Do you want join the neomad community?</h2>
+    <ul>
+      <li><a href={{ url_for('signup') }}>Become a Neomad</a></li>
+      <li><a href={{ url_for('login') }}>I already have an account</a></li>
+    </ul>
   </section>
   
+  <section class=content>
+    <h2>Community last articles</h2>
+    <h3>Let's your discover</h3>
+    <ul>
+      <li><p>article 1</p></li>
+      <li><p>article 2</p></li>
+    </ul>
+  </section>
+    
 {% endblock %}
 
 {% include '_analytics.html' %}

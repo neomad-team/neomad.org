@@ -34,27 +34,28 @@ section:first-child > div > a::after {
   right: 50%;
 }
 
-#concept {
+.content {
   background-color: #fff;
   padding: 6rem 0;
   position: relative;
   top: -5.5rem;
 }
-#concept h2,
-#concept h3 {
+.content h2,
+.content h3 {
   text-align: center;
   color: #00bf6bee;
   position: relative;
 }
-#concept h2 {
+
+.content h2 {
   font-size: 3.5rem;
   margin: 6rem 0 2rem;
   top: -3rem;
 }
-#concept h3 {
+.content h3 {
   top: -6rem
 }
-#concept ul {
+.content ul {
   list-style-type: none;
   padding: 0 7.5rem;
   margin: 0;
@@ -62,7 +63,7 @@ section:first-child > div > a::after {
   flex-wrap: wrap;
   justify-content: space-around;
 }
-#concept ul li {
+.content ul li {
   width: 25rem;
   height: auto;
   margin: 0 0 5rem 0;
@@ -70,99 +71,60 @@ section:first-child > div > a::after {
   text-align: center;
   padding: 2rem 1rem;
 }
-#concept ul li::before {
+
+#feature li::before {
   font-family: FontAwesome;
   color: #00bf6bee;
   font-size: 4rem;
 }
-#concept ul li:first-child::before {
+#feature li:first-child::before {
   content: "\f02d";
 }
-#concept ul li:nth-child(2)::before {
+#feature li:nth-child(2)::before {
   content: "\f040";
 }
-#concept ul li:nth-child(3)::before {
+#feature li:nth-child(3)::before {
   content: "\f277";
 }
-#concept ul li:last-child::before {
+#feature li:last-child::before {
   content: "\f041";
 }
 
-#earlybird {
+#join-us {
   color: #fff;
   background-image: url(/static/earlybird.jpg);
   background-repeat: no-repeat;
-  background-position: top;
+  background-position: center;
   background-size: 100%;
-  padding: 13rem 0;
+  padding: 19rem 0;
   position: relative;
   top: -5.5rem;
 }
-#earlybird h2 {
+#join-us h2 {
   color: #fff;
   font-size: 3.5rem; 
   margin: 0;
   position: relative;
-  top: -7rem;
+  top: -8rem;
   text-align: center;
 }
-#earlybird div {
+#join-us ul {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  list-style: none;
   background: rgba(0, 0, 0, .6);
   width: 75%;
   margin: auto;
-  padding: 3rem 5rem;
+  padding: 4rem 5rem;
 }
-#earlybird p {
-  font-size: 1.2em;
-}
-#earlybird a {
-  color: inherit;
-  text-decoration: underline;
-}
-
-form input[type=email] {
-  border: 0.1rem solid #ccc;
-  width: 73%;
-  font-size: 1.2em;
-}
-form input {
-  font: inherit;
-  padding: 1.5rem 3rem;
-  display: inline;
-  vertical-align: middle;
-}
-form button.valid {
-  border: none;
-  color: #fff;
-  text-transform: uppercase;
-  margin-left: 1%;
-  background-color: #6B5;
-  border-radius: 0;
-  position: relative;
-  top: 0.2rem;
-  height: 6.25rem;
-}
-form button.valid[disabled] {
-  background-color: #999;
-  opacity: .6;
-}
-form input[type=checkbox] {
-  position: relative;
-  opacity: 1;
-  width: 2rem;
-  height: 2rem;
-  cursor: pointer;
-  margin: 0 1rem 0 0;
-
-}
-form input[type=checkbox] + label {
-  font-size: 1.1em;
-}
-
-label:last-of-type {
-  display: inline-block;
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
+#join-us ul li a {
+  background-color: #297ddb;
+  color: white;
+  border: 1px solid #6c6969;
+  border-radius: 7px;
+  padding: 5px 50px;
+  font-weight: bold;
 }
 
 footer {
@@ -177,13 +139,13 @@ footer {
   section:first-child  > div > h2 {
     top: 44%;
   }
-  #concept ul {
+  .content ul {
     padding: 0 15rem;
   }
-  #concept ul li {
+  .content ul li {
     margin: 0 3rem 5rem 3rem;
   }
-  #earlybird {
+  #join-us {
     background-size: 125%;
   }
 }
@@ -195,34 +157,19 @@ footer {
   section:first-child  > div > h2 {
     top: 34%;
   }
-  #concept ul {
+  .content ul {
     padding: 0 2rem;
   }
-  #earlybird {
-    background-size: 210%;
-    padding: 5rem 0;
+  #join-us {
+    padding: 15rem 0;
+    background-size: 180%;
   }
-  #earlybird div {
-    width: 90%;
-    padding: 2rem 3rem;
+  #join-us ul {
+    flex-direction: column;
+    align-items: center;
   }
-  #earlybird h2 {
-    top: -3rem;
-  }
-  form input[type="email"] {
-    width: 100%;
-  }
-  form button.valid {
-    margin: 0;
-    top: 5rem;
-  }
-  label:last-of-type {
-    position: relative;
-    top: -6rem;
-    width: 100%;
-  }
-  #earlybird label > small {
-    display: none;
+  #join-us li {
+    margin: 2rem 0;
   }
 }
 
@@ -234,18 +181,14 @@ footer {
     font-size: 2rem;
     width: 30rem;
   }
-  #concept h2 {
+  .content h2 {
     margin: 4rem 7rem 2rem;
   }
-  #concept h3 {
+  .content h3 {
     top: -4rem;
   }
-  #earlybird {
-    font-size: 80%;
+  #join-us {
     background-size: 260%;
-  }
-  #earlybird small a {
-    margin-top: 1rem;
   }
 }
 
@@ -259,20 +202,14 @@ footer {
     margin: 0 0 0 2rem;
     top: 30%;
   }
-  #concept h2 {
+  .content h2 {
     margin: 2rem 1rem 2rem;
   }
-  #concept h3 {
+  .content h3 {
     top: -5rem;
   }
-  #earlybird h2 {
+  #join-us h2 {
     font-size: 3rem;
-  }
-  #earlybird button.valid{
-    margin: 2rem 0;
-  }
-  #earlybird label:last-of-type {
-    top: -9rem;
   }
 }
 
