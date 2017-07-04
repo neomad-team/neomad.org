@@ -1,9 +1,14 @@
+{% from 'blog/macros.html' import article_list with context %}
+
 {% extends 'layout.html' %}
 
 {% block title %}Digital Nomad Community{% endblock %} 
 {% block description %}Find a local place to work, get connected to other remote workers.{% endblock %}
 
-{% block extra_css %}<link rel=stylesheet href={{ url_for('static', filename='css/home.css') }}>{% endblock %}
+{% block extra_css %}
+  <link rel=stylesheet href={{ url_for('static', filename='css/home.css') }}>
+  <link rel=stylesheet href={{ url_for('static', filename='css/_article_list.css') }}>
+{% endblock %}
 
 {% block main %}
   
@@ -12,36 +17,26 @@
       <img src={{ url_for('static', filename='homebackground.jpg') }} alt="Nomad worker">
       <h1>N<span>e</span>omad</h1>
       <h2>Make the world your home. And workplace.</h2>
-      <a href="#concept"></a>
+      <a href={{ url_for('login') }} id=join-us>Become a Neomad</a>
+      <a href=#features id=arrow-down></a>
     </div>
   </section>
   
-  <section class=content>
+  <section id=features>
     <h2>Find out contents for nomad</h2>
     <h3>Inspire and be inspire!</h3>
-    <ul id=feature>
+    <ul>
       <li><p>Read, write and contribute with nomad community</p></li>
       <li><p>Follow your nomad life on your own blog and map</p></li>
       <li><p>Find other nomad close to you and enjoy with them</p></li>
       <li><p>Find and share a place to work anywhere &amp; anytime</p></li>
     </ul>
   </section>
-  
-  <section id=join-us>
-    <h2>Do you want join the neomad community?</h2>
-    <ul>
-      <li><a href={{ url_for('signup') }}>Become a Neomad</a></li>
-      <li><a href={{ url_for('login') }}>I already have an account</a></li>
-    </ul>
-  </section>
-  
-  <section class=content>
+    
+  <section class=articles>
     <h2>Community last articles</h2>
     <h3>Let's your discover</h3>
-    <ul>
-      <li><p>article 1</p></li>
-      <li><p>article 2</p></li>
-    </ul>
+    {{ article_list(articles=articles) }}
   </section>
     
 {% endblock %}
