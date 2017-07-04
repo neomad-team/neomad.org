@@ -8,12 +8,17 @@
 }
 
 html {
+  height: 100%;
   font-size: 62.5%; /* 10px */
   font-size: calc(1em * 0.625); /* fix */
   background-color: #fafafa;
 }
 
 body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   font-size: 1.7rem;
   line-height: 1.5;
   margin: 0;
@@ -70,28 +75,90 @@ body > header h1 a {
 
 body > header nav {
   float: right;
+  position: relative;
   margin: 0 2rem 0 0;
-  display: block;
+  display: flex;
+  align-items: center;
 }
 body > header nav a {
   padding: 3px 15px;
-  font-size: .9em;
+  font-size: 1.5rem;
   text-decoration: none;
 }
-
-body > header nav a > img {
+.avatar {
+  cursor: pointer;
+}
+.avatar img {
   display: inline-block;
   vertical-align: middle;
   border: 1px solid #666;
+  border-radius: 50%;
 }
-body > header nav a.button {
+body > header nav .button {
   background-color: #f9f9f9;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-body > header nav a.button:hover {
+body > header nav .button:hover {
   color: #000;
   background-color: #eee;
+}
+
+.profile-menu {
+  position: absolute;
+  top: 6rem;
+  right: 0;
+  margin: 0;
+  padding: 1rem 2rem;
+  height: 0;
+  opacity: 0;
+  background-color: #fff;
+  box-shadow: 0 0 6px rgba(50, 50, 50, .2);
+  border-radius: 3px;
+  transition: all .3s;
+}
+.profile-menu::before {
+  content: '';
+  position: absolute;
+  top: -1rem;
+  right: 2rem;
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  background-color: #fff;
+  box-shadow: -1px -1px 1px -1px rgba(50, 50, 50, .2);
+  transform: rotate(45deg);
+  transition: all .3s;
+}
+.profile-menu li {
+  display: none;
+  list-style-type: none;
+}
+.profile-menu li a {
+  display: block;
+  padding: 1rem 0;
+}
+
+.profile-menu.active {
+  height: auto;
+  opacity: 1;
+  z-index: 1;
+}
+.profile-menu.active li {
+  display: block;
+}
+
+/* Footer */
+footer {
+  padding: 3rem 0;
+  border-top: 3px solid #eee;
+  background-color: #fff;
+  z-index: 1;
+}
+footer nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 /* Main */
@@ -154,13 +221,17 @@ figure {
   vertical-align: top;
   font-size: 1.1em;
 }
-.meta time {
-  display: block;
-  font-size: .9em;
+.meta .reading-time {
+  display: inline; 
 }
-img.avatar {
+.meta .reading-time::before {
+  content: "-";
+  margin-right: 0.5em;
+}
+
+.avatar-img {
   border-radius: 100%;
-  margin-right: 10px;
+  margin-right: 1rem;
 }
 
 @media screen and (max-width:700px) {
@@ -243,49 +314,49 @@ button:hover,
 /* Loading spinner */
 
 @keyframes loading-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .loading {
-	float: left;
-	background: transparent url(Vector Loading fallback.gif) right bottom no-repeat;
-	background-image: linear-gradient(transparent, transparent), url(Vector Loading.svg);
-	background-size: 100%;
-	animation-name: loading-spin;
-	animation-duration: 1.5s;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
-	height: 34px;
-	width: 34px;
-	backface-visibility: hidden;
+  float: left;
+  background: transparent url(Vector Loading fallback.gif) right bottom no-repeat;
+  background-image: linear-gradient(transparent, transparent), url(Vector Loading.svg);
+  background-size: 100%;
+  animation-name: loading-spin;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  height: 34px;
+  width: 34px;
+  backface-visibility: hidden;
 }
 
 /* Loading spinner */
 
 @keyframes loading-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .loading {
-	float: left;
-	background: transparent url(Vector Loading fallback.gif) right bottom no-repeat;
-	background-image: linear-gradient(transparent, transparent), url(Vector Loading.svg);
-	background-size: 100%;
-	animation-name: loading-spin;
-	animation-duration: 1.5s;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
-	height: 34px;
-	width: 34px;
-	backface-visibility: hidden;
+  float: left;
+  background: transparent url(Vector Loading fallback.gif) right bottom no-repeat;
+  background-image: linear-gradient(transparent, transparent), url(Vector Loading.svg);
+  background-size: 100%;
+  animation-name: loading-spin;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  height: 34px;
+  width: 34px;
+  backface-visibility: hidden;
 }

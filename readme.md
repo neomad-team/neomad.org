@@ -3,6 +3,8 @@
 Neomad is a open-source community project for nomad workers and people
 willing to _nomadize_ themselves.
 
+[![View continuous tests results](https://circleci.com/gh/neomad-team/neomad.org.svg?style=shield)](https://circleci.com/gh/neomad-team/neomad.org)
+
 
 ## Requirements
 

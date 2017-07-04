@@ -1,8 +1,477 @@
+main {
+  margin-top: 6.5rem;
+}
+
+#wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+#map {
+  position: fixed;
+  right: 0;
+  width: 50%;
+  min-height: 100%;
+  order: 2;
+}
+
+#cards-wrap {
+  display: flex;
+  flex-direction: column;
+  order: 1;
+  width: 50%;
+  height: 100%;
+  z-index: 1;
+  background-color: #fafafa;
+  padding: 1rem 2rem 10rem;
+}
+
+#poi-cards > div{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 49%;
+  padding: 2rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.2);
+  transition: 0.15s;
+  background-color: #fefefe;
+  cursor: pointer;
+  margin-top: 2rem;
+}
+.card:hover {
+  box-shadow: 0 1rem 2rem 0 rgba(0,0,0,0.2);
+}
+
+.card h2 {
+  font-size: 2rem;
+}
+
+.card h3 {
+  font-size: 1.85rem;
+  font-weight: normal;
+  margin: 0 1.25rem 0 0;
+}
+
+.card ul {
+  padding: 0 0 0 2.5rem;
+}
+
+.card ul li {
+  display: flex;
+  padding: 0 0 1rem 0;
+}
+
+.card-distance {
+  align-self: flex-end;
+}
+
+/* poi form */
+
+#open-form {
+  display: flex;
+  justify-content: center;
+  height: 4rem;
+  background-color: #FEFEFE;
+  border: none;
+  box-shadow: 0 0.25rem 0.25rem 0 rgba(0,0,0,0.2);
+}
+
+#open-form svg {
+  fill: #333;
+  width: 2.5rem;
+}
+
+#open-form p {
+  margin: 0 2rem;
+}
+
+#open-form:hover svg {
+  fill: #3BA77C;
+}
+
+#open-form:hover p {
+  color: #3BA77C;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+#poi-form {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  overflow: scroll;
+}
+
+#poi-form form {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  padding: 1rem 0;
+  width: 70rem;
+}
+
+#poi-form h2 {
+  text-align: center;
+  font-size: 4rem;
+  margin-top: 0.5rem;
+  color: #279E6A;
+}
+
+#poi-form form ul {
+  list-style: none;
+}
+
+#poi-form form li {
+  display: flex;
+  padding: 1rem;
+}
+
+#poi-form label{
+  width: 20rem;
+  margin: auto 0;
+}
+
+#poi-form input[type="checkbox"] {
+  position: relative;
+  opacity: 1;
+  margin-left: -1.5rem;
+}
+
+#poi-form input[type="text"],
+#poi-form textarea,
+#poi-form select {
+  border: 1px solid #888;
+  border-radius: 5px;
+  padding: .5rem 1rem;
+  width: 50%;
+  font-family: inherit;
+}
+
+#poi-form input:focus,
+#poi-form textarea:focus,
+#poi-form select:focus {
+  border-color: #00BF6BEE;
+}
+
+#poi-form input[type=range] {
+  -webkit-appearance: none;
+  border: 1px solid white;
+  width: 50%;
+  padding: 1rem 0;
+  margin: 0;
+}
+
+#poi-form input[type=range]::-webkit-slider-runnable-track {
+  height: 0.5rem;
+  background: #ddd;
+  border: none;
+  border-radius: 0.3rem;
+}
+
+#poi-form input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  background: #00BF6BEE;
+  margin-top: -0.4rem;
+}
+
+#poi-form input[type=range]:focus {
+  outline: #00BF6BEE;
+}
+
+#poi-form input[type=range]::-webkit-slider-runnable-track {
+  background: #ccc;
+}
+
+#poi-form input[type=range]::-moz-range-track {
+  height: 0.5rem;
+  background: #ddd;
+  border: none;
+  border-radius: 0.3rem;
+}
+
+#poi-form input[type=range]::-moz-range-thumb {
+  border: none;
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  background: #00BF6BEE;
+}
+
+#poi-form input[type=range]:-moz-focusring{
+    outline: 0.1rem solid white;
+    outline-offset: -0.1rem;
+}
+
+#poi-form input[type=range]::-ms-track {
+    height: 0.5rem;
+    background: transparent;
+    border-color: transparent;
+    border-width: 0.6rem 0;
+    color: transparent;
+}
+
+#poi-form input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 1rem;
+}
+
+#poi-form input[type=range]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 1rem;
+}
+
+#poi-form input[type=range]::-ms-thumb {
+    border: none;
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: 50%;
+    background: #00BF6BEE;
+}
+
+#poi-form input[type=range]:focus::-ms-fill-lower {
+    background: #888;
+}
+
+#poi-form input[type=range]:focus::-ms-fill-upper {
+    background: #ccc;
+}
+
+#poi-form select option {
+  font-family: inherit;
+}
+
+#close-form {
+  width: 5.5rem;
+  border: none;
+  background: none;
+  align-self: flex-end;
+  z-index: 1;
+}
+
+#close-form svg {
+  width: 2rem;
+}
+
+#close-form svg circle {
+  fill: #666;
+}
+
+#close-form svg path {
+  fill: #FFFFFF;
+}
+
+#save-form {
+  width: 10rem;
+  align-self: center;
+  margin: 2rem 0 2rem 35rem;
+  color: #FFFFFF;
+  background-color: #279E6A;
+}
+
+#save-form:hover {
+  background-color: #00BF6BEE;
+}
+
+/* ===================================== */
+/* OSM & Preact build CSS into html tag  */
+
+.mapboxgl-canvas-container {
+  position: fixed !important;
+}
+
+.super-card {
+  border: 0.2rem solid #3ba77c !important;
+}
+
+.first-card {
+  order: 0 !important;
+}
+
+.current-marker {
+  border: 0.4rem solid #3ba77c !important;
+  z-index: 1;
+}
+
+.visible {
+  display: flex !important;
+}
+
+/* ===================================== */
+
+.super-marker {
+  background-image: url('/static/images/marker-green.png');
+  background-size: cover;
+  cursor: pointer;
+  width: 2rem;
+  height: 3rem;
+  border-radius: 0;
+  background-color: transparent;
+  border: transparent;
+  z-index: 2;
+  left: -0.4rem;
+  top: -2rem;
+}
+
+.current-card > h2 {
+  color: #3ba77c;
+}
+
 .marker.current {
-    background-image: url('/static/images/marker-red.png');
-    z-index: 1;
+  background-image: url('/static/images/marker-red.png');
+  z-index: 1;
 }
 
 .mapboxgl-popup {
-    z-index: 2;
+  width: 50%;
+  z-index: 2;
+  top: -1.9rem;
+}
+
+.mapboxgl-popup-content p {
+  text-align: center;
+}
+
+/* star rank */
+li > svg {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  fill: grey;
+  margin-top: 0.5rem;
+}
+.rank-1 svg:nth-child(2) {
+  fill: #3ba77c;
+}
+.rank-2 svg:nth-child(2),
+.rank-2 svg:nth-child(3) {
+  fill: #3ba77c;
+}
+.rank-3 svg:nth-child(2),
+.rank-3 svg:nth-child(3),
+.rank-3 svg:nth-child(4) {
+  fill: #3ba77c;
+}
+.rank-4 svg:nth-child(2),
+.rank-4 svg:nth-child(3),
+.rank-4 svg:nth-child(4),
+.rank-4 svg:nth-child(5) {
+  fill: #3ba77c;
+}
+.rank-5 svg:nth-child(2),
+.rank-5 svg:nth-child(3),
+.rank-5 svg:nth-child(4),
+.rank-5 svg:nth-child(5),
+.rank-5 svg:nth-child(6) {
+  fill: #3ba77c;
+}
+
+/* power avaibility */
+
+.power-on svg,
+.power-true svg {
+  fill: #3ba77c;
+}
+
+/* comments */
+
+.comments {
+  flex-direction: column;
+}
+
+.comments p,
+.no-comments p {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.no-comments p {
+  font-style: italic;
+}
+
+.comments ul {
+  padding: 0 0 0 1rem;
+}
+
+.comments li {
+  font-size: 1.5rem;
+  padding: 0;
+}
+
+@media screen and (max-width: 1280px) {
+  .card {
+    width: 100%;
+    padding-bottom: 0;
+  }
+  
+  .card > h2 {
+    margin: -3rem 0 0 0;
+    max-width: 70%;
+  }
+
+  .card > ul li {
+    padding: 0.25rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #poi-cards {
+    display: none;
+  }
+  
+  #map {
+    display: block;
+    width: 100%;
+  }
+  
+  .mapboxgl-popup-content {
+    padding: 1rem;
+  }
+  
+  .mapboxgl-popup-content h2 {
+    margin: 1rem 0 0 0;
+  }
+  
+  .mapboxgl-popup-content ul {
+    list-style: none;
+    padding-left: 1rem;
+  }
+  
+  #cards-wrap {
+    width: auto;
+    padding: 0;
+    background: transparent;
+  }
+  
+  #open-form {
+    flex-direction: column-reverse;
+    align-items: center;
+    margin: 1rem 0 0 1rem;
+    width: 9rem;
+    height: 8rem;
+  }
+  
+  #open-form p {
+    font-size: 1.25rem;
+    margin: 0.25rem 0 0 0;
+  }
 }

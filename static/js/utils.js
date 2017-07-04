@@ -14,3 +14,26 @@ function alert(type, message, delay) {
     }, delay || 5000)
   }
 }
+
+window.onload = _ => {
+  // section poisCards hidden marker overflow
+  if(window.location.href.includes('around')) {
+    const canvas = document.querySelector('canvas')
+    const poisCards = document.querySelector('#poi-cards')
+    poisCards.style.minHeight = `${canvas.height}px`
+
+    const displayForm = document.querySelectorAll('.display-form')
+    displayForm.forEach( button => {
+      button.addEventListener('click', _ => {
+        const poiForm = document.querySelector('#poi-form')
+        poiForm.classList.toggle('visible')  
+      })
+    })
+  }
+  
+  const menu = document.querySelector('#menu')
+  const avatar = document.querySelector('#avatar-menu')
+  avatar.addEventListener('click', _ => {
+    menu.classList.toggle('active')
+  })
+}

@@ -1,8 +1,8 @@
-git_update=git fetch origin prod && git reset --hard FETCH_HEAD
-goto_src=cd ~/src
+goto_src=cd ~/$(env)
+git_update=git fetch origin $(env) && git checkout $(env) && git reset --hard FETCH_HEAD
 
 help:
-	return "Make tasks for deployment. Checkout the makefile content."
+	@echo "Make tasks for deployment. Checkout the makefile content."
 
 server_update:
 	@make title text="Fetching prod branch and updating sources."
@@ -10,7 +10,7 @@ server_update:
 
 server_reload:
 	@make title text="Recreating the server."
-	ssh neomad "${goto_src} && docker-compose stop web && docker-compose rm -f web && docker-compose up -d"
+	ssh neomad "${goto_src} && docker-compose restart web"
 
 deploy: server_update server_reload
 
@@ -19,11 +19,6 @@ install:
 
 start:
 	bash -c "bin/start.sh"
-
-create_user:  # arguments: email="" password=""
-	@make title text="Creating a user. Email: $(email), password: $(password)"
-	@python3 -c "from user.models import User;\
-	User(email='$(email)').set_password('$(password)').save()"
 
 title:
 	@echo "\n\033[92m>>> $(text)\033[0m"

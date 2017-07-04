@@ -25,7 +25,20 @@ def login():
             errors.append(invalid)
         else:
             errors.append(invalid)
-    return render_template('auth/login.html', errors=errors)
+    return (render_template('auth/login.html', errors=errors),
+            200 if not len(errors) else 401)
+
+
+@app.route('/signup', methods=['get', 'post'])
+def signup():
+    if request.method == 'POST':
+        email = request.form['email']
+        user = (User(email=email, username=email.split('@')[0])
+                .set_password(request.form['password']).save())
+        login_user(user)
+        return redirect(url_for_user(user))
+    else:
+        return render_template('auth/signup.html')
 
 
 @app.route('/logout', methods=['get'])
