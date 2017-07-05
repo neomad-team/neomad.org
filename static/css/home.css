@@ -30,12 +30,18 @@ section:first-child > div > h2 {
   top: 38rem;
   background-color: rgba(17,195,116, 0.8);
   color: #fff;
-  border: 0.05rem solid #fff;
-  padding: 0.5rem 5rem;
+  padding: 1rem 6rem;
   font-weight: bold;
+  border-radius: 0.75rem;
 }
 #join-us:hover {
   background-color: #11C374;
+}
+#join-us.sticky {
+  position: fixed;
+  top: 1.25rem;
+  z-index: 9;
+  padding: 0.75rem 5rem;
 }
 #arrow-down::after {
   font-family: FontAwesome;
@@ -109,20 +115,14 @@ section:first-child > div > h2 {
 }
 
 .articles {
-  padding: 5rem 0;
   position: relative;
   top: -3.5rem;
+  padding: 5rem 0;
 }
 
 footer {
   position: relative;
   top: -2.5rem;
-}
-
-#join-us.sticky {
-  position: fixed;
-  top: 1.5rem;
-  z-index: 9;
 }
 
 @media screen and (max-width:1200px) {
@@ -182,6 +182,7 @@ footer {
     background-color: rgba(17,195,116, 1);
     border: none;
     font-weight: 300;
+    border-radius: 0;
   }
   #join-us.sticky::after {
     font-family: FontAwesome;
@@ -238,7 +239,7 @@ footer {
     left: 2.45rem;
   }
   #features h2 {
-    margin: 2rem 1rem 2rem;
+    margin: 2rem 1rem;
   }
   #features h3 {
     top: -5rem;
