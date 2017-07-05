@@ -114,6 +114,11 @@ section:first-child > div > h2 {
   top: -3.5rem;
 }
 
+footer {
+  position: relative;
+  top: -2.5rem;
+}
+
 @media screen and (max-width:1200px) {
   section:first-child  > div > h1 {
     top: 16rem;
