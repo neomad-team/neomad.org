@@ -119,6 +119,12 @@ footer {
   top: -2.5rem;
 }
 
+#join-us.sticky {
+  position: fixed;
+  top: 1.5rem;
+  z-index: 9;
+}
+
 @media screen and (max-width:1200px) {
   section:first-child  > div > h1 {
     top: 16rem;
@@ -137,6 +143,9 @@ footer {
   }
   #features ul li {
     margin: 0 3rem 5rem 3rem;
+  }
+  #join-us.sticky {
+    left: 18rem;
   }
 }
 
@@ -161,6 +170,32 @@ footer {
   }
 }
 
+@media screen and (max-width:620px) {
+  body > header {
+    padding: 0;
+  }
+  #join-us.sticky {
+    top: 4.5rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background-color: rgba(17,195,116, 1);
+    border: none;
+    font-weight: 300;
+  }
+  #join-us.sticky::after {
+    font-family: FontAwesome;
+    content: "\f0a5";
+    font-size: 2rem;
+    color: #fff;
+    position: relative;
+    left: 2rem;
+  }
+  .articles {
+    padding: 5rem;
+  }
+}
+
 @media screen and (max-width:480px) {
   section:first-child > div > h1 {
     font-size: 7.5rem;
@@ -182,6 +217,9 @@ footer {
   }
   #features h3 {
     top: -4rem;
+  }
+  .articles {
+    padding: 5rem 3rem;
   }
 }
 

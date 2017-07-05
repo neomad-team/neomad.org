@@ -17,7 +17,10 @@
       <img src={{ url_for('static', filename='homebackground.jpg') }} alt="Nomad worker">
       <h1>N<span>e</span>omad</h1>
       <h2>Make the world your home. And workplace.</h2>
+      {% if current_user and current_user.is_authenticated %}
+      {% else %}
       <a href={{ url_for('login') }} id=join-us>Become a Neomad</a>
+      {% endif %}
       <a href=#features id=arrow-down></a>
     </div>
   </section>
@@ -39,6 +42,10 @@
     {{ article_list(articles=articles) }}
   </section>
     
+{% endblock %}
+
+{% block extra_js %}
+<script src={{ url_for('static', filename='js/home.js') }}></script>
 {% endblock %}
 
 {% include '_analytics.html' %}
