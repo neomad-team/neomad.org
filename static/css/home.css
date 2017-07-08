@@ -32,7 +32,7 @@ section:first-child > div > h2 {
   color: #fff;
   padding: 1rem 6rem;
   font-weight: bold;
-  border-radius: 0.75rem;
+  border-radius: 2.5rem;
 }
 #join-us:hover {
   background-color: #11C374;
