@@ -78,40 +78,61 @@ section:first-child > div > h2 {
   position: relative;
   top: -5.5rem;
 }
-#features ul {
+#features > ul {
   list-style-type: none;
   padding: 0 7.5rem;
   margin: 0;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: flex-start;
 }
-#features ul li {
-  width: 25rem;
+#features > ul > li {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
   height: auto;
   margin: 0 0 5rem 0;
-  border: 0.2rem solid #00bf6bee;
-  text-align: center;
   padding: 2rem 1rem;
-  border-radius: 0.5rem; 
+}
+#features > ul > li:nth-child(2) {
+  flex-direction: row-reverse;
 }
 
-#features li::before {
-  font-family: FontAwesome;
-  color: #00bf6bee;
-  font-size: 4rem;
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-#features li:first-child::before {
+#features .content > h2 {
+  font-size: 2.5rem;
+}
+.content > h2::before {
+  font-family: FontAwesome;
+  position: relative;
+  display: inline;
+  border-radius: 100%;
+  padding: 2rem;
+  background-color: lightgrey;
+  color: white;
+  font-size: 6rem;
+  top: 1rem;
+  right: 4rem;
   content: "\f02d";
 }
-#features li:nth-child(2)::before {
-  content: "\f040";
+
+.content > ul {
+  padding: 0 0 5rem;
+} 
+.content > div {
+  display: flex;
+  justify-content: space-around;
 }
-#features li:nth-child(3)::before {
-  content: "\f277";
+.content .button {
+  width: auto;
 }
-#features li:last-child::before {
-  content: "\f041";
+
+.button {
+  text-align: center; 
 }
 
 .articles {
