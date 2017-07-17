@@ -24,7 +24,7 @@
     </div>
     <ul id=menu class=profile-menu>
       <li><a href={{ url_for_user(current_user) }}>Profile</a></li>
-      <li><a href="">Privacy settings</a></li>
+      <li><a href={{ url_for('privacy') }}>Privacy settings</a></li>
       <li><a href={{ url_for('logout') }}>Logout</a></li>
     </ul>
     {% else %}

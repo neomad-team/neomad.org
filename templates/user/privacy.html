@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<style>
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid darkgray;
+}
+.delete {
+  float: left;
+  background-color: #fee7e7;
+  color: #a24343;
+  border-color: #dab2b2;
+}
+</style>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Location</th>
+    <th>Delete</th>
+  </tr>
+{% for location in locations %}
+  <tr>
+    <td>{{ location.date | datetime }}</td>
+    <td>{{ location.position }}</td>
+    <td><form method=post action={{ url_for('privacy_delete_trip',
+                                            date=location.date,
+                                            location=location.position) }}>
+      <button class=delete>Delete</button></form></td>
+  </tr>
+{% endfor %}
+</table>
+{% endblock %}
