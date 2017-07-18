@@ -50,7 +50,7 @@ def article_create():
             status = 201
     return render_template('blog/article.html', article=article,
                            errors=errors, edit=True), status
-  
+
 
 @app.route('/article/<string:id>/edit', methods=['post'])
 @login_required
@@ -69,6 +69,7 @@ def article_edit(id):
         errors.append('Your article must have a title and a content')
     return render_template('blog/article.html', article=article, edit=True,
                            errors=errors)
+
 
 @app.route('/article/<string:id>/delete', methods=['get'])
 @login_required
