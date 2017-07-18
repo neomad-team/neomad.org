@@ -1,13 +1,14 @@
 import os
 
 from core import app
-from core.helpers import *
-from core.views import *
-from user.views import *
-from auth.views import *
-from blog.views import *
-from trips.views import *
-from around.views import *
+from core import helpers  # noqa: F401, F801
+from core import views  # noqa: F401, F801
+from user import views  # noqa: F401, F801
+from auth import views  # noqa: F401, F801
+from blog import views  # noqa: F401, F801
+from trips import views  # noqa: F401, F801
+from around import views  # noqa: F401, F801
+from api import views  # noqa: F401, F801
 if app.config['DEBUG']:
     from core.debug import *
 

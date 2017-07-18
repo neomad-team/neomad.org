@@ -35,7 +35,7 @@ worker.addEventListener('message', response => {
       .addTo(map)
 
     /* no pois-cards in mobile, using popup */
-    if(window.matchMedia('(max-width: 478px)').matches) {
+    if(window.matchMedia('(max-width: 768px)').matches) {
       const popup = new mapboxgl.Popup({offset: [10, 0]})
       .setHTML(`<h2>${poi.name}</h2>
                 <ul>
@@ -60,13 +60,6 @@ worker.postMessage('')
 window.onhashchange = _ => {
   const hash = getHash()
   superCard(hash)
-}
-
-window.onload = _ => {
-  // section poisCards hidden marker overflow
-  const canvas = document.querySelector('canvas')
-  const poisCards = document.querySelector('#poi-cards')
-  poisCards.style.minHeight = `${canvas.height}px`
 }
 
 map.on('click', event => {
@@ -179,3 +172,21 @@ function scrollCard (poi_id) {
   const cardHeight = card.offsetHeight
   window.scrollTo(0, (cardTop - cardHeight/2))  
 }
+
+// saving/adding a spot - form
+
+document.querySelector('#poi-form form').addEventListener('submit', event => {
+  event.preventDefault()
+  const data = new FormData(event.target)
+  const formValues = {coordinates: currentLatLng}
+  data.forEach((v, k) => formValues[k] = v)
+  fetch(event.target.action, {
+    method: 'post',
+    body: JSON.stringify(formValues),
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  // .then(r => r.json())
+})

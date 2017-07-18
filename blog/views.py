@@ -1,8 +1,5 @@
-import datetime
-import re
-
 from flask import (
-    Flask, request, render_template, redirect, url_for, abort, flash
+    request, render_template, redirect, url_for, abort, flash
 )
 from flask_login import current_user, login_required
 
@@ -29,6 +26,7 @@ def article(author, slug, id):
     if article.slug != slug or article.author.slug != author:
         return redirect(url_for_article(article), 301)
     return render_template('blog/article.html', article=article,
+                           articles=Article.objects.filter(id__ne=id),
                            edit=(current_user.is_authenticated and
                                  author == current_user.slug))
 
@@ -52,7 +50,7 @@ def article_create():
             status = 201
     return render_template('blog/article.html', article=article,
                            errors=errors, edit=True), status
-
+  
 
 @app.route('/article/<string:id>/edit', methods=['post'])
 @login_required
@@ -64,9 +62,13 @@ def article_edit(id):
         abort(404)
     article.title = request.form.get('title')
     article.content = request.form.get('content')
-    article.save()
-    return redirect(url_for_article(article))
-
+    errors = []
+    if article.title != '' and clean_html(article.content) != '':
+        article.save()
+    else:
+        errors.append('Your article must have a title and a content')
+    return render_template('blog/article.html', article=article, edit=True,
+                           errors=errors)
 
 @app.route('/article/<string:id>/delete', methods=['get'])
 @login_required
