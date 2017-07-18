@@ -65,10 +65,11 @@ def article_edit(id):
     errors = []
     if article.title != '' and clean_html(article.content) != '':
         article.save()
+        return redirect(url_for_article(article))
     else:
-        errors.append('Your article must have a title and a content')
-    return render_template('blog/article.html', article=article, edit=True,
-                           errors=errors)
+        errors.append('Please insert a title and a content')
+        return render_template('blog/article.html', article=article,
+                               errors=errors, edit=True), 400
 
 
 @app.route('/article/<string:id>/delete', methods=['get'])
