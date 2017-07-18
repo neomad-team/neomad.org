@@ -1,6 +1,8 @@
 {% macro article_list(articles, with_author=true) %}
+  <ul>
   {% for article in articles %}
   {% set url = url_for_article(article) %}
+  <li class=articles>
   <article class=preview>
     <header class=meta>
       {% if with_author %}
@@ -24,5 +26,7 @@
       {{ article.content|striptags|truncate(200) }}
     <a href={{ url }} lang={{ article.language }} class='read action-button'>Read more</a>
   </article>
+  </li>
   {% endfor %}
+  </ul>
 {% endmacro %}
