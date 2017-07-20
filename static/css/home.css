@@ -1,7 +1,7 @@
 main {
   width: 100%;
   margin-top: -6rem;
-  background-color: #FFF;
+  background-color: #fff;
 }
 
 section:first-child > div > img {
@@ -37,7 +37,7 @@ section:first-child > div > h2 {
   transition: all .3s ease;
 }
 #join-us:hover {
-  background-color: #11C374;
+  background-color: #11c374;
 }
 #join-us.sticky {
   position: fixed;
@@ -57,21 +57,13 @@ section:first-child > div > h2 {
 }
 
 #features h2,
-#features h3,
-.articles > h2,
-.articles > h3 {
+.articles > h2 {
   text-align: center;
   position: relative;
 }
 #features h2,
 .articles > h2 {
   font-size: 3.5rem;
-}
-#features h3 {
-  top: -5rem
-}
-.articles > h3 {
-  top: -2rem;
 }
 
 #features {
@@ -98,7 +90,7 @@ section:first-child > div > h2 {
   margin-top: 3rem 0 0.5rem;
 }
 #features > ul > li:nth-child(2) {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 #features .action-button {
   margin: 4rem 9rem 1rem;
@@ -108,7 +100,7 @@ section:first-child > div > h2 {
   position: relative;
   top: -9rem;
   padding: 5rem 0;
-  background-color: #FAFAFA
+  background-color: #fafafa
 }
 .articles .preview {
   margin: 2rem;
@@ -117,8 +109,8 @@ section:first-child > div > h2 {
   min-height: 8rem;
   display: flex;
   align-items: center;
+  font-size: 1.4em;
 }
-
 .articles .row .preview img {
   max-height: 27rem;
 }
@@ -129,7 +121,7 @@ section:first-child > div > h2 {
 
 footer {
   position: relative;
-  top: -2.5rem;
+  top: -9rem;
 }
 
 @media screen and (max-width:1200px) {

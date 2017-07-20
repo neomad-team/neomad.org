@@ -1,8 +1,5 @@
 /* Basics, every styles which applies everywhere */
-@import url('https://fonts.googleapis.com/css?family=Lato:700');
-@import url('https://fonts.googleapis.com/css?family=Lora');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 @import url('https://fonts.googleapis.com/css?family=Merriweather');
 
@@ -173,17 +170,25 @@ article {
   background-color: #fff;
 }
 
-article .content {
-  font-family: 'Lora';
+.content {
+  font-family: 'Merryweather';
   letter-spacing: .025em;
+  font-size: 1.1em;
 }
 
+h1,
+h2,
+h3,
 article h1,
 article h2,
 article h3 {
-  font-family: 'Lato';
+  font-family: 'Poppins';
   font-weight: 700;
   font-size: 1.6em;
+}
+article h1,
+article h2,
+article h3 {
   margin: 0;
 }
 
