@@ -1,6 +1,7 @@
 main {
   width: 100%;
   margin-top: -6rem;
+  background-color: #FFF;
 }
 
 section:first-child > div > img {
@@ -33,6 +34,7 @@ section:first-child > div > h2 {
   padding: 1rem 6rem;
   font-weight: bold;
   border-radius: 2.5rem;
+  transition: all .3s ease;
 }
 #join-us:hover {
   background-color: #11C374;
@@ -59,118 +61,54 @@ section:first-child > div > h2 {
 .articles > h2,
 .articles > h3 {
   text-align: center;
-  color: rgba(17,195,116, 0.8);
   position: relative;
 }
 #features h2,
 .articles > h2 {
   font-size: 3.5rem;
-  top: -3rem;
 }
-#features h3,
+#features h3 {
+  top: -5rem
+}
 .articles > h3 {
-  top: -6rem
+  top: -2rem;
 }
 
 #features {
-  background-color: #fff;
-  padding: 6rem 0;
+  padding: 0;
   position: relative;
-  top: -5.5rem;
+  top: -7.5rem;
 }
-#features > ul {
-  list-style: inside;
-  padding: 0 2rem;
-  margin: 0;
+#features ul {
+  list-style-type: none;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  padding: 0;
 }
 #features > ul > li {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: auto;
-  margin: 0;
-  padding: 2rem 1rem;
-  box-shadow: 0 0 0.1rem 0.1rem rgba(50, 50, 50, .2);
-  border-radius: 1rem;
-}
-#features.content {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  padding: 5rem 2rem;
 }
-#features .content > h2 {
-  font-size: 2.5rem;
+#features > ul > li > ul > li{
+  margin: 0 0 1rem;
 }
-#features .content ul li {
-  margin-bottom: 0.5rem;
+#features h2 {
+  margin-top: 3rem 0 0.5rem;
 }
-#features > ul > li::after {
-  font-family: FontAwesome;
-  position: absolute;
-  border-radius: 100%;
-  background-color: rgba(17,195,116, 0.9);
-  text-align: center;
-  color: #fff;
-  width: 9rem;
-  font-size: 6rem;
+#features > ul > li:nth-child(2) {
+  background-color: #FAFAFA;
 }
-#features > ul > li:first-child::after {
-  top: 19rem;
-  right: 1rem;
-  content: "\f02d";
-}
-#features > ul > li:last-child::after {
-  bottom: 37rem;
-  right: 1rem;
-  content: "\f277";
-}
-
-#features > ul > li:last-child {
-  margin-top: 5rem;
-}
-#features > ul > li:last-child .content {
-  width: 30%;
-}
-#features > ul > li:last-child img {
-  border-radius: 100%;
-  height: 15%;
-  position: absolute;
-}
-
-.content > ul {
-  padding: 0 0 5rem;
-} 
-.content > div {
-  display: flex;
-  justify-content: space-around;
-}
-.content .button {
-  width: auto;
-}
-
-.button {
-  text-align: center;
-  border: 0.125rem solid #fff;
-  color: #fff;
-  background-color: rgba(17,195,116, 0.8);
-}
-.button:hover {
-  border: 0.125rem solid rgba(17,195,116, 0.8);
-  color: rgba(17,195,116, 0.8);
-  background-color: #fff;
+#features .action-button {
+  margin: 4rem 9rem 1rem;
 }
 
 .articles {
   position: relative;
-  top: -3.5rem;
+  top: -9rem;
   padding: 5rem 0;
-}
-.articles .row {
-  display: flex;
+  background-color: #FAFAFA
 }
 .articles .preview {
   margin: 2rem;
@@ -180,19 +118,13 @@ section:first-child > div > h2 {
   display: flex;
   align-items: center;
 }
-.articles .row .preview .read {
-  background-color: rgba(17,195,116, 0.8);
-  border: 0.1rem solid rgba(17,195,116, 0.8);
-  color: #fff;
-  padding: 1rem 1.5rem;
-  text-align: center;
-  border-radius: 2.5rem;
+
+.articles .row .preview img {
+  max-height: 27rem;
 }
-.articles .row .preview .read:hover {
-  
-  background-color: #fff;
-  color: rgba(17,195,116, 0.8);
-  border: 0.1rem solid rgba(17,195,116, 0.8);
+
+.row {
+  display: flex;
 }
 
 footer {
@@ -212,12 +144,6 @@ footer {
   #join-us {
     top: 31rem;
     left: 11.65rem;
-  }
-  #features ul {
-    padding: 0 15rem;
-  }
-  #features ul li {
-    margin: 0 3rem 5rem 3rem;
   }
   #join-us.sticky {
     left: 18rem;
@@ -239,9 +165,6 @@ footer {
   #join-us {
     top: 29rem;
     left: 7.15rem;
-  }
-  #features ul {
-    padding: 0 2rem;
   }
 }
 
@@ -288,12 +211,6 @@ footer {
     top: 27rem;
     left: 5.65rem;
   }
-  #features h2 {
-    margin: 4rem 7rem 2rem;
-  }
-  #features h3 {
-    top: -4rem;
-  }
   .articles {
     padding: 5rem 3rem;
   }
@@ -312,12 +229,6 @@ footer {
   #join-us {
     top: 25rem;
     left: 2.45rem;
-  }
-  #features h2 {
-    margin: 2rem 1rem;
-  }
-  #features h3 {
-    top: -5rem;
   }
 }
 
