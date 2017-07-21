@@ -68,8 +68,14 @@ class Article(db.Document):
                 images.append(img_url)
             else:
                 images.append(data)
-            self.images = images
-        self.content = str(html)
+        self.images = images
+        images_name = [os.path.basename(self.images[idx])
+                       for idx, image in enumerate(self.images)]
+        images_to_delete = [image for image in
+                            os.listdir(self.get_images_path())
+                            if image not in images_name]
+        for image in images_to_delete:
+            os.remove('{}/{}'.format(self.get_images_path(), image))
 
     def get_images_path(self):
         return '{}/{}'.format(app.config['ARTICLE_IMG_PATH'], self.id)
