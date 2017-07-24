@@ -16,10 +16,10 @@ def spot_create():
     response = request.json
     spot = Spot(
         name=response.get('name'),
-        wifi_quality=response.get('wifi'),
+        wifi=response.get('wifi'),
         user=current_user.id,
         location=response.get('coordinates'),
-        power_available=response.get('power'),
+        power=response.get('power'),
         category=response.get('type'),
         comments=[response.get('comment')]
     ).save()
