@@ -1,7 +1,7 @@
 /* Basics, every styles which applies everywhere */
-@import url('https://fonts.googleapis.com/css?family=Lato:700');
-@import url('https://fonts.googleapis.com/css?family=Lora');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+@import url('https://fonts.googleapis.com/css?family=Merriweather');
 
 * {
   box-sizing: border-box;
@@ -37,13 +37,11 @@ figure {
 }
 
 a {
-  color: #279e6a;
   color: #279e6aee;
   text-decoration: none;
   transition: color .3s;
 }
 a:hover {
-  color: #00bf6b;
   color: #00bf6bee;
 }
 
@@ -172,17 +170,25 @@ article {
   background-color: #fff;
 }
 
-article .content {
-  font-family: Lora;
+.content {
+  font-family: 'Merryweather';
   letter-spacing: .025em;
+  font-size: 1.1em;
 }
 
+h1,
+h2,
+h3,
 article h1,
 article h2,
 article h3 {
-  font-family: "Lato";
+  font-family: 'Poppins';
   font-weight: 700;
   font-size: 1.6em;
+}
+article h1,
+article h2,
+article h3 {
   margin: 0;
 }
 
@@ -234,11 +240,40 @@ figure {
   margin-right: 1rem;
 }
 
-@media screen and (max-width:700px) {
-  article {
-    width: 100%;
-    padding: 0 2rem;
-  }
+button,
+.button {
+  font-size: inherit;
+  color: inherit;
+  line-height: inherit;
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  padding: 3px 15px;
+  transition: all .3s ease;
+  cursor: pointer;
+}
+button:hover,
+.button:hover {
+  color: #000;
+  background-color: #eee;
+}
+
+.action-button {
+  width: auto;
+  text-align: center;
+  padding: 0.5rem 1.5rem;
+  border: 0.125rem solid #279e6aee;
+  color: #279e6aee;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  transition: all .3s ease;
+}
+.action-button:hover {
+  color: #fff;
+  background-color: rgba(17,195,116, 0.8);
+  border: 0.125rem solid rgba(17,195,116, 0.8);
 }
 
 #notification[class=""] {
@@ -283,80 +318,67 @@ figure {
   border-color: #dacab2;
 }
 
+/* Loading spinner */
+
+@keyframes loading-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  float: left;
+  background: transparent url(Vector Loading fallback.gif) right bottom no-repeat;
+  background-image: linear-gradient(transparent, transparent), url(Vector Loading.svg);
+  background-size: 100%;
+  animation-name: loading-spin;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  height: 34px;
+  width: 34px;
+  backface-visibility: hidden;
+}
+
+/* Loading spinner */
+
+@keyframes loading-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  float: left;
+  background: transparent url(Vector Loading fallback.gif) right bottom no-repeat;
+  background-image: linear-gradient(transparent, transparent), url(Vector Loading.svg);
+  background-size: 100%;
+  animation-name: loading-spin;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  height: 34px;
+  width: 34px;
+  backface-visibility: hidden;
+}
+
+@media screen and (max-width:700px) {
+  article {
+    width: 100%;
+    padding: 0 2rem;
+  }
+}
+
 @media screen and (max-width:800px) {
   #notification {
     width: 100%;
     min-width: 0;
     margin-left: 0;
   }
-}
-
-button,
-.button {
-  font-size: inherit;
-  color: inherit;
-  line-height: inherit;
-  display: inline-block;
-  text-decoration: none;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  padding: 3px 15px;
-  transition: all .3s ease;
-  cursor: pointer;
-}
-button:hover,
-.button:hover {
-  color: #000;
-  background-color: #eee;
-}
-
-/* Loading spinner */
-
-@keyframes loading-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.loading {
-  float: left;
-  background: transparent url(Vector Loading fallback.gif) right bottom no-repeat;
-  background-image: linear-gradient(transparent, transparent), url(Vector Loading.svg);
-  background-size: 100%;
-  animation-name: loading-spin;
-  animation-duration: 1.5s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  height: 34px;
-  width: 34px;
-  backface-visibility: hidden;
-}
-
-/* Loading spinner */
-
-@keyframes loading-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.loading {
-  float: left;
-  background: transparent url(Vector Loading fallback.gif) right bottom no-repeat;
-  background-image: linear-gradient(transparent, transparent), url(Vector Loading.svg);
-  background-size: 100%;
-  animation-name: loading-spin;
-  animation-duration: 1.5s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  height: 34px;
-  width: 34px;
-  backface-visibility: hidden;
 }

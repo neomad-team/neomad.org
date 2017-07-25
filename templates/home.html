@@ -14,32 +14,57 @@
   
   <section>
     <div>
-      <img src={{ url_for('static', filename='homebackground.jpg') }} alt="Nomad worker">
-      <h1>N<span>e</span>omad</h1>
+      <img src={{ url_for('static', filename='homebackground.jpg') }} alt='Nomad worker'>
+      <h1>Neomad</h1>
       <h2>Make the world your home. And workplace.</h2>
       {% if current_user and current_user.is_authenticated %}
       {% else %}
-      <a href={{ url_for('login') }} id=join-us>Become a Neomad</a>
+      <a href={{ url_for('signup') }} id=join-us>Become a Neomad</a>
       {% endif %}
-      <a href=#features id=arrow-down></a>
+      <a href=#features id=arrow-down>find out below our features</a>
     </div>
   </section>
   
   <section id=features>
-    <h2>Find out contents for nomad</h2>
-    <h3>Inspire and be inspire!</h3>
     <ul>
-      <li><p>Read, write and contribute with nomad community</p></li>
-      <li><p>Follow your nomad life on your own blog and map</p></li>
-      <li><p>Find other nomad close to you and enjoy with them</p></li>
-      <li><p>Find and share a place to work anywhere &amp; anytime</p></li>
+      <li>
+        <h2>Read and share nomad's stories</h2>
+        <ul>
+          <li>Share the best stories that happened on your trips,</li>
+          <li>Give others your good tips for a better journey,</li>
+          <li>Whatever your level of nomadism, there are things to give and take.</li>
+        </ul>
+        <div class=row>
+          <a href={{ url_for('article_list') }} class=action-button>Read from nomads</a>
+          <a href={{ url_for('signup') }} class=action-button>Write your stories</a>
+        </div>
+      </li>
+      <li>
+        <h2>Track your trips</h2>
+        <ul>
+          <li>Have you ever looked where you've been and how you traveled?</li>
+          <li>Are you interested to see how your trip-mates made their journey?</li>
+          <li>Follow travelers on their map and get inspired!</li>
+        </ul>
+        <a href={{ url_for('signup') }} class=action-button>Start sharing your trips</a>
+      </li>
+      <li>
+        <h2>Find out what is around you</h2>
+        <ul>
+          <li>Do you know that another nomad might be in the cafe next door?</li>
+          <li>Are you looking for a good spot with WiFi where to work from?</li>
+          <li>Did you find some super spot to share with other nomads?</li>
+        </ul>
+        <a href={{ url_for('around') }} class=action-button>What is around you</a>
+      </li>
     </ul>
   </section>
     
   <section class=articles>
     <h2>Community last articles</h2>
-    <h3>Let's your discover</h3>
-    {{ article_list(articles=articles) }}
+    <div class=row>
+      {{ article_list(articles=articles) }}
+    </div>
   </section>
     
 {% endblock %}
