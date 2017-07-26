@@ -4,6 +4,10 @@ main {
   background-color: #fff;
 }
 
+h2 {
+  margin: 0 0 3rem;
+}
+
 section:first-child > div > img {
   width: 100%;
   filter: brightness(50%);
@@ -62,6 +66,13 @@ section:first-child > div > h2 {
   color: #fff;
 }
 
+#features,
+.articles,
+footer {
+  position: relative;
+  top: -8.5rem;
+}
+
 #features h2,
 .articles > h2 {
   text-align: center;
@@ -74,26 +85,22 @@ section:first-child > div > h2 {
 
 #features {
   padding: 0;
-  position: relative;
-  top: -7.5rem;
 }
 #features ul {
   list-style-type: none;
   display: flex;
   flex-direction: column;
   padding: 0;
+  margin: 0;
 }
 #features > ul > li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5rem 2rem;
+  padding: 6rem 2rem;
 }
 #features > ul > li > ul > li{
   margin: 0 0 1rem;
-}
-#features h2 {
-  margin-top: 3rem 0 0.5rem;
 }
 #features > ul > li:nth-child(2) {
   background-color: #fafafa;
@@ -103,9 +110,7 @@ section:first-child > div > h2 {
 }
 
 .articles {
-  position: relative;
-  top: -9rem;
-  padding: 5rem 0;
+  padding: 6rem 0;
   background-color: #fafafa
 }
 .articles .preview {
