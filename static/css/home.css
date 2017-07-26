@@ -8,6 +8,11 @@ h2 {
   margin: 0 0 3rem;
 }
 
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
 section:first-child > div > img {
   width: 100%;
   filter: brightness(50%);
@@ -40,14 +45,15 @@ section:first-child > div > h2 {
   border-radius: 2.5rem;
   transition: all .3s ease;
 }
-#join-us:hover {
+#join-us:hover,
+#join-us.sticky:hover {
   background-color: #11c374;
 }
 #join-us.sticky {
   position: fixed;
   top: 1.25rem;
   z-index: 9;
-  padding: 0.75rem 5rem;
+  padding: 0.5rem auto;
 }
 #arrow-down {
   display: flex;
@@ -122,16 +128,12 @@ footer {
   align-items: center;
   font-size: 1.4em;
 }
-.articles .row .preview img {
-  max-height: 27rem;
+.articles article figure {
+  height: 25rem;
 }
 .read.action-button {
   width: 50%;
-  margin: 0 auto;
-}
-
-.row {
-  display: flex;
+  margin: 0 auto 0.5rem;
 }
 
 footer {
@@ -155,6 +157,14 @@ footer {
   #join-us.sticky {
     left: 18rem;
   }
+  .column {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 22rem;
+  }
+  .articles .column .preview a h1 {
+    min-height: auto;
+  }
 }
 
 @media screen and (max-width:960px) {
@@ -173,6 +183,9 @@ footer {
     top: 29rem;
     left: 7.15rem;
   }
+  .column {
+    padding: 0 10rem;
+  }
 }
 
 @media screen and (max-width:620px) {
@@ -184,7 +197,7 @@ footer {
     left: 0;
     right: 0;
     text-align: center;
-    background-color: rgba(17,195,116, 1);
+    background-color: #279e6aee;
     border: none;
     font-weight: 300;
     border-radius: 0;
@@ -197,8 +210,14 @@ footer {
     position: relative;
     left: 2rem;
   }
-  .articles {
-    padding: 5rem;
+  #features .action-button {
+    margin: 4rem 3rem 0rem;
+  }
+  .column {
+    padding: 0 5rem;
+  }
+  .articles article figure {
+    height: auto;
   }
 }
 
@@ -219,7 +238,10 @@ footer {
     left: 5.65rem;
   }
   .articles {
-    padding: 5rem 3rem;
+    padding: 5rem 0;
+  }
+  .column {
+    padding: 0 5rem;
   }
 }
 
@@ -232,10 +254,14 @@ footer {
     margin: 0;
     top: 16rem;
     left: 2.5rem;
+    width: 90%;
   }
   #join-us {
     top: 25rem;
     left: 2.45rem;
+  }
+  .column {
+    padding: 0 3.5rem;
   }
 }
 
