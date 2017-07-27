@@ -38,7 +38,7 @@ section:first-child > div > h2 {
   position: absolute;
   left: 16rem;
   top: 38rem;
-  background-color: rgba(17,195,116, 0.8);
+  background-color: rgba(17, 195, 116, 0.8);
   color: #fff;
   padding: 1rem 6rem;
   font-weight: bold;
@@ -68,6 +68,8 @@ section:first-child > div > h2 {
   content: "\f078";
   position: relative;
   font-size: 3.5rem;
+  position: relative;
+  top: -7rem;
   animation: 10s updown infinite ease-in-out;
   color: #fff;
 }
@@ -266,13 +268,13 @@ footer {
 }
 
 @keyframes updown {
-  0%   { top: -7rem; }
-  30%  { top: -7rem; }
-  32%  { top: -5rem; }
-  34%  { top: -7rem; }
-  36%  { top: -5rem; }
-  38%  { top: -7rem; }
-  40%  { top: -5rem; }
-  42%  { top: -7rem; }
-  100% { top: -7rem; }
+  0%   { margin-top: 0; }
+  30%  { margin-top: 0; }
+  32%  { margin-top: 2rem; }
+  34%  { margin-top: 0; }
+  36%  { margin-top: 2rem; }
+  38%  { margin-top: 0; }
+  40%  { margin-top: 2rem; }
+  42%  { margin-top: 0; }
+  100% { margin-top: 0; }
 }

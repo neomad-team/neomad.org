@@ -264,16 +264,16 @@ button:hover,
   width: auto;
   text-align: center;
   padding: 0.5rem 1.5rem;
-  border: 0.125rem solid #279e6aee;
-  color: #279e6aee;
+  border: 0.125rem solid #279e6a;
+  color: #279e6a;
   background-color: #fff;
   border-radius: 0.5rem;
   transition: all .3s ease;
 }
 .action-button:hover {
   color: #fff;
-  background-color: rgba(17,195,116, 0.8);
-  border: 0.125rem solid rgba(17,195,116, 0.8);
+  background-color: rgba(17, 195, 116, 0.8);
+  border: 0.125rem solid rgba(17, 195, 116, 0.8);
 }
 
 #notification[class=""] {
