@@ -176,15 +176,16 @@ function scrollCard (poi_id) {
 // form
 
 // display form with open/close button
-const form = document.querySelector('#poi-form')
+const formLayer = document.querySelector('#poi-form')
 const displayForm = document.querySelectorAll('.display-form')
 displayForm.forEach(button => {
   button.addEventListener('click', _ => {
-    form.classList.toggle('visible')
+    formLayer.classList.toggle('visible')
   })
 })
+
 // close form clicking outside form
-form.addEventListener('click', event => {
+formLayer.addEventListener('click', event => {
   event.target.classList.remove('visible')
 })
 
