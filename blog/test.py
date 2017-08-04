@@ -26,14 +26,14 @@ class ArticleTest(TestCase):
         self.assertEqual(result.status_code, 200)
 
     def test_articles_with_an_article(self):
-        article = Article(title='<h1>title<br></h1>', content='<p>content</p>')
+        article = Article(title='<h1>title</h1>', content='<p>content</p>')
         article.author = self.user
         article.save()
         result = self.client.get('/articles')
         self.assertIn(b'<article class=preview>', result.data)
 
     def test_read_article_unauthenticated(self):
-        article = Article(title='<h1>title<br></h1>', content='<p>content</p>')
+        article = Article(title='<h1>title</h1>', content='<p>content</p>')
         article.author = self.user
         article.save()
         result = self.client.get('/@emailtest/{}-{}'.format(article.slug,
@@ -96,7 +96,7 @@ class ArticleTest(TestCase):
         data = {'title': 'title', 'content': 'content'}
         self.client.post('/article/write', data=data)
         article = Article.objects.first()
-        data = {'title': 'title', 'content': 'another content'}
+        data = {'title': '<p>title<br></p>', 'content': 'another content'}
         result = self.client.post('/article/{}/edit'.format(str(article.id)),
                                   data=data)
         article = Article.objects.first()
@@ -131,7 +131,7 @@ class ArticleTest(TestCase):
         self.assertEqual(result.status_code, 302)
 
     def test_title_clean_html(self):
-        article = Article(title='title',
+        article = Article(title='<p>title<br></p>',
                           content='<p>content</p>').save()
         self.assertEqual(article.title, 'title')
 
@@ -149,7 +149,8 @@ class ArticleTest(TestCase):
         self.assertEqual(article.content, '<p><em>emphased content</em><em>also emphased</em></p>')
 
     def test_delete_article_and_folders_pictures(self):
-        article = Article(title='<h1>title<br></h1>', content='<p>content</p>').save()
+        article = Article(title='<h1>title</h1>',
+                          content='<p>content</p>').save()
         self.assertTrue(os.path.isdir(article.get_images_path()))
         Article.objects.get(id=article.id).delete()
         self.assertFalse(os.path.isdir(article.get_images_path()))

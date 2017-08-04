@@ -40,7 +40,7 @@ class UserTest(TestCase):
         result = self.client.get('/privacy')
         self.assertEqual(result.status_code, 401)
 
-    def test_privacy_page(self):
+    def test_privacy_page_access(self):
         login_user(self)
         result = self.client.get('/privacy')
         self.assertEqual(result.status_code, 200)
