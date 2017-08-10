@@ -1,3 +1,5 @@
+import json
+
 from flask import request, Response
 from flask_login import current_user
 
@@ -14,13 +16,11 @@ def spots():
 @app.route('/api/spot', methods=['post'])
 def spot_create():
     response = request.json
+    fields = ('name', 'wifi', 'location', 'power', 'category')
+    data = [response.get(f) for f in fields]
     spot = Spot(
-        name=response.get('name'),
-        wifi=response.get('wifi'),
+        **data,
         user=current_user.id,
-        location=response.get('coordinates'),
-        power=response.get('power'),
-        category=response.get('type'),
         comments=[response.get('comment')]
     ).save()
     return spot.to_json(), 201
