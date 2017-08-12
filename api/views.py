@@ -1,6 +1,6 @@
 import json
 
-from flask import request, Response, url_for
+from flask import request, Response
 from flask_login import current_user
 
 from user.models import User
@@ -10,15 +10,7 @@ from around.models import Spot
 
 @app.route('/api/spots/')
 def api_spots():
-    spots = []
-    for spot in Spot.objects.all():
-        data = spot.to_mongo()
-        data['creation_date'] = str(spot.creation_date.timestamp())
-        data['id'] = str(spot.id)
-        del data['_id']
-        data['user_url'] = url_for('api_user', id=spot.user.id)
-        del data['user']
-        spots.append(data)
+    spots = [spot.to_dict() for spot in Spot.objects.all()]
     return Response(json.dumps(spots), mimetype='application/json')
 
 
@@ -26,7 +18,7 @@ def api_spots():
 def api_spot_create():
     response = request.json
     fields = ('name', 'wifi', 'location', 'power', 'category')
-    data = [response.get(f) for f in fields]
+    data = {f: response.get(f) for f in fields}
     spot = Spot(
         **data,
         user=current_user.id,

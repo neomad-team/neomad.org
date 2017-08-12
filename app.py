@@ -1,5 +1,3 @@
-import os
-
 from core import app
 from core import helpers  # noqa: F401, F801
 from core import views  # noqa: F401, F801

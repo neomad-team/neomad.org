@@ -1,4 +1,4 @@
-from flask import request, render_template, redirect, url_for
+from flask import request, render_template, redirect
 from flask_login import login_user, logout_user, current_user
 
 from core import app
