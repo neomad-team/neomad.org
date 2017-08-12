@@ -37,12 +37,12 @@ figure {
 }
 
 a {
-  color: #279e6aee;
+  color: rgba(39, 158, 106, .9);
   text-decoration: none;
   transition: color .3s;
 }
 a:hover {
-  color: #00bf6bee;
+  color: rgba(0, 191, 107, .9);
 }
 
 ul {
