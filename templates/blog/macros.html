@@ -2,7 +2,7 @@
   <ul>
   {% for article in articles %}
   {% set url = url_for_article(article) %}
-  <li class=articles>
+  <li class=article>
   <article class=preview>
     <header class=meta>
       {% if with_author %}
@@ -21,7 +21,7 @@
     <a href={{ url }} lang={{ article.language }}>
       <h1>{{ article.title|title }}</h1>
       <figure>
-        <img src="{{ article.image | default('/static/images/articles/default.png', true) }}" width=100%>
+        <img src="{{ article.image | default('/static/images/article/default.png', true) }}" width=100%>
       </figure>
       {{ article.content|striptags|truncate(200) }}
     <a href={{ url }} lang={{ article.language }} class='read action-button'>Read more</a>
