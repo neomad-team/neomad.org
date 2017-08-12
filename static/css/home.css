@@ -124,7 +124,7 @@ footer {
 .articles .preview {
   margin: 2rem;
 }
-.articles .row ul {
+.articles .row {
   display: flex;
   justify-content: space-between;
 }
@@ -163,12 +163,12 @@ footer {
   #join-us.sticky {
     left: 18rem;
   }
-  .column ul {
+  .column {
     flex-direction: column;
     align-items: center;
     padding: 0 22rem;
   }
-  .articles .column ul .preview a h1 {
+  .articles .column .preview a h1 {
     min-height: auto;
   }
   .articles .preview {
@@ -192,7 +192,7 @@ footer {
     top: 29rem;
     left: 7.15rem;
   }
-  .column ul {
+  .column {
     padding: 0 10rem;
   }
 }
@@ -222,7 +222,7 @@ footer {
   #features .action-button {
     margin: 4rem 3rem 0rem;
   }
-  .column ul {
+  .column {
     padding: 0 5rem;
   }
   .articles article figure {
@@ -249,7 +249,7 @@ footer {
   .articles {
     padding: 5rem 0;
   }
-  .column ul {
+  .column {
     padding: 0 5rem;
   }
 }
@@ -269,7 +269,7 @@ footer {
     top: 25rem;
     left: 2.45rem;
   }
-  .column ul {
+  .column {
     padding: 0 3.5rem;
   }
 }
