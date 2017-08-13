@@ -6,7 +6,7 @@ PORT = 5000
 
 # MongoDB connection settings
 DATABASE = {
-  'db': 'neomad',
+  'db': 'neomad_test',
   'username': 'root',
   'host': 'localhost',  # set this value to 'db' if using docker-compose server.
   'password': '',
