@@ -9,13 +9,13 @@ from user.models import User
 from .models import Article, clean_html
 
 
-@app.route('/articles')
+@app.route('/articles/')
 def article_list():
     articles = Article.objects.all()
     return render_template('blog/article_list.html', articles=articles)
 
 
-@app.route('/@<string:author>/<string:slug>-<string:id>', methods=['get'])
+@app.route('/@<string:author>/<string:slug>-<string:id>/', methods=['get'])
 def article(author, slug, id):
     try:
         article = Article.objects.get(id=id)
@@ -31,7 +31,7 @@ def article(author, slug, id):
                                  author == current_user.slug))
 
 
-@app.route('/article/write', methods=['get', 'post'])
+@app.route('/article/write/', methods=['get', 'post'])
 @login_required
 def article_create():
     article = Article(content='')
@@ -52,7 +52,7 @@ def article_create():
                            errors=errors, edit=True), status
 
 
-@app.route('/article/<string:id>/edit', methods=['post'])
+@app.route('/article/<string:id>/edit/', methods=['post'])
 @login_required
 def article_edit(id):
     user = User.objects.get(id=current_user.id)
@@ -72,7 +72,7 @@ def article_edit(id):
                                errors=errors, edit=True), 400
 
 
-@app.route('/article/<string:id>/delete', methods=['get'])
+@app.route('/article/<string:id>/delete/', methods=['get'])
 @login_required
 def article_delete(id):
     user = User.objects.get(id=current_user.id)
