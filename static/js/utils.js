@@ -15,7 +15,16 @@ function alert(type, message, delay) {
   }
 }
 
-window.onload = _ => {  
+function coordinatesToAddress (coordinates) {
+  const [lat, lng] = coordinates.split(',')
+  return fetch(`http://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`, {
+    mode: 'cors'
+  })
+  .then(r => r.json())
+  .then(d => d.address)
+}
+
+window.onload = _ => {
   const menu = document.querySelector('#menu')
   const avatar = document.querySelector('#avatar-menu')
   avatar.addEventListener('click', _ => {
