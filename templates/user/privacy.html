@@ -28,7 +28,7 @@ td {
 {% for location in locations %}
   <tr>
     <td>{{ location.date | datetime }}</td>
-    <td><a href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} target=_blank>{{ location.position|join(',') }}</a></td>
+    <td><a data-latlng={{ location.position|join(',') }}  href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} target=_blank>{{ location.position|join(',') }}</a></td>
     <td>
       <form method=post action={{ url_for('privacy_delete_trip',
                                             date=location.date.timestamp()) }}>
@@ -38,4 +38,16 @@ td {
   </tr>
 {% endfor %}
 </table>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  Array.from(document.querySelectorAll('[data-latlng]')).forEach(a => {
+    coordinatesToAddress(a.dataset.latlng)
+    .then(data => {
+       a.textContent = `${data.town || data.village || data.city}, ${data.country}`
+    })
+  })
+</script>
 {% endblock %}
