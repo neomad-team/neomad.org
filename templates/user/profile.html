@@ -43,6 +43,10 @@
         </div>
       </form>
       {% endif %}
+      <p>
+        {{ user }} is currently <a href={{ url_for_trips(user) }}>around <em data-latlng={{ user.current_location|join(',') }}>the world</em></a>
+        {% if edit %}<a class=button href={{url_for('privacy')}}>Edit my locations</a>{% endif %}
+      </p>
       <a class=trips href={{ url_for_trips(user) }}>{% if edit %}View my trips{% else %}View {{ user }}'s trips{% endif %}</a>
     </div>
   </nav>
@@ -58,6 +62,44 @@
 {% endif %}
 {{ article_list(articles=articles, with_author=false) }}
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function apiFeedback(caller, confirmation) {
+    return caller.then(response => {
+      const status = response.status
+      if(200 <= status < 300) {
+        alert('success', confirmation)
+      }
+      else {
+        alert('error', `An error occured. Technical detail: response status ${status}`)
+        console.error(response)
+      }
+      return response
+    }, error => {
+      alert('error', error)
+      return error
+    })
+  }
+
+  const api = {
+    send(method, url, data) {
+      return fetch(url, {
+        method: method.toUpperCase(),
+        body: JSON.stringify(data),
+        credentials: 'same-origin',
+        headers: {'Content-Type': 'application/json'}
+      })
+    }
+  }
+
+  const localizable = document.querySelector('[data-latlng]')
+  coordinatesToAddress(localizable.dataset.latlng)
+  .then(data => {
+    localizable.textContent = `${data.area}, ${data.country}`
+  })
+</script>
 
 {% if edit %}
 <script>
@@ -161,36 +203,6 @@
       }
     })
   })
-
-
-
-  function apiFeedback(caller, confirmation) {
-    return caller.then(response => {
-      const status = response.status
-      if(200 <= status < 300) {
-        alert('success', confirmation)
-      }
-      else {
-        alert('error', `An error occured. Technical detail: response status ${status}`)
-        console.error(response)
-      }
-      return response
-    }, error => {
-      alert('error', error)
-      return error
-    })
-  }
-
-  const api = {
-    send(method, url, data) {
-      return fetch(url, {
-        method: method.toUpperCase(),
-        body: JSON.stringify(data),
-        credentials: 'same-origin',
-        headers: {'Content-Type': 'application/json'}
-      })
-    }
-  }
 </script>
 {% endif %}
 {% endblock %}
