@@ -34,7 +34,7 @@ def privacy():
 @login_required
 def privacy_delete_trip(date):
     user = User.objects.get(id=current_user.id)
-    removed = user.locations.remove(user.locations.get(date=datetime.fromtimestamp(
+    user.locations.remove(user.locations.get(date=datetime.fromtimestamp(
                                              float(date))))
     user.save()
     return redirect('privacy')
