@@ -1,6 +1,6 @@
 // init Map
 mapboxgl.accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog'
-var map = new mapboxgl.Map({
+const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v9',
   center: [-10, 45],
@@ -20,6 +20,7 @@ map.addControl(new GeolocateControlWrapper())
 
 // pois
 const worker = new Worker('/static/js/webworker-around.js')
+let pois = []
 
 function addPoi (poi) {
   const el = document.createElement('div')
@@ -28,7 +29,7 @@ function addPoi (poi) {
 
   const marker = new mapboxgl.Marker(el, {offset:[4, -6]})
     // OSM standard [Lng, Lat]
-    .setLngLat([poi.location[0], poi.location[1]])
+    .setLngLat([poi.location[1], poi.location[0]])
     .addTo(map)
 
   /* no pois-cards in mobile, using popup */
@@ -46,12 +47,14 @@ function addPoi (poi) {
   if(hash && hash === el.id) {
     superCard(hash)
     firstCard(hash)
-    moveTo([poi.position.latitude, poi.position.longitude], 11)
+    moveTo(poi.location, 11)
   }
 }
 
-
-worker.addEventListener('message', r => r.data.forEach(addPoi))
+worker.addEventListener('message', r => {
+  pois = r.data
+  r.data.forEach(addPoi)
+})
 worker.postMessage('')
 
 // events
@@ -63,9 +66,9 @@ window.onhashchange = _ => {
 map.on('click', event => {
   const poi = findPoi(event.originalEvent.target.id)
   if(poi) {
-    moveTo([poi.position.latitude, poi.position.longitude], 11)
-    urlFor(poi._id)
-    scrollCard(poi._id)
+    moveTo(poi.location, 11)
+    urlFor(poi.id)
+    scrollCard(poi.id)
   }
 })
 
@@ -111,7 +114,7 @@ function urlFor (id) {
 }
 
 function findPoi (id) {
-  return pois.find(poi => poi._id === id)
+  return pois.find(poi => poi.id === id)
 }
 
 function highlight (poi_id) {
@@ -195,6 +198,6 @@ document.querySelector('#poi-form form').addEventListener('submit', event => {
       alert('error', 'Something went wrong. Please try again later.')
     }
     document.querySelector('#poi-form').classList.remove('visible')
-
+    addPoi(response)
   })
 })
