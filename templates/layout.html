@@ -11,10 +11,15 @@
 <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
 <link href="https://fonts.googleapis.com/css?family=Raleway:600|Crimson+Text|Libre+Baskerville|Libre+Franklin|Poppins|Lora|Roboto|Oxygen|Open+Sans:600" rel=stylesheet>
 <link rel=stylesheet href={{ url_for('static', filename='css/edit.css') }}>
+<link rel=stylesheet href={{ url_for('static', filename='css/search-bar.css') }}>
 {% block extra_css %}{% endblock %}
 
 <header>
   <h1><a href="/">Neomad</a></h1>
+  <form id=search action="{{ url_for('search') }}" method=get>
+    <input type=search name=q placeholder="Neomads and articles">
+    <input type=submit value=search>
+  </form>
   <nav>
     <a href={{ url_for('article_list') }} title="Read nomad's adventures">Read</a>
     {% if current_user and current_user.is_authenticated %}

@@ -1,21 +1,15 @@
 {% from 'blog/macros.html' import article_list with context %}
+
 {% extends 'layout.html' %}
 
 {% block title %}Search results{% endblock %}
 
 {% block extra_css %}
-<link rel=stylesheet href=//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css>
 <link rel=stylesheet href={{ url_for('static', filename='css/search.css') }}>
 <link rel=stylesheet href={{ url_for('static', filename='css/_article_list.css') }}>
 {% endblock %}
 
 {% block main %}
-<header>
-  <form action="{{ url_for('search') }}" method=get>
-    <input id=search type=search name=q placeholder="search for neomads and articles">
-    <input type=submit value=search>
-  </form>
-</header>
 
 <section>
   {% if users %}
@@ -44,4 +38,9 @@
   {% endif %}
   
 </section>
+
+{% block extra_js %}
+<script src={{ url_for('static', filename='js/search.js') }}></script>
+{% endblock %}
+
 {% endblock %}

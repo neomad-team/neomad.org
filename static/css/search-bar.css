@@ -1,0 +1,25 @@
+#search::before {
+  font-family: FontAwesome;
+  content: '\f002';
+  font-size: 1.5rem;
+  position: relative;
+  left: 2.5rem;
+  color: #646464;
+  cursor: pointer;
+}
+#search > input:first-of-type {
+  padding: .75rem .75rem .75rem 3rem;
+  background: rgba(50, 50, 50, 0.2);
+  border: none;
+  border-radius: 1rem 0 0 1rem;
+}
+#search > input:last-of-type {
+  position: relative;
+  padding: .75rem;
+  left: -0.8rem;
+  border: none;
+  background-color: #3ba777;
+  color: #fafafa;
+  cursor: pointer;
+  border-radius: 0 1rem 1rem 0;
+}
