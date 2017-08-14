@@ -1,12 +1,9 @@
-url = window.location.href
+search = window.location.search.split('?q=')
 
-searchField = url.split('?q=')
-
-if (searchField[1] === '') {
+if (search[1] === '') {
   alert('no search detect', 'Fill the search field please', 2000)
 } else {
-  search = searchField[1].replace('+', ' ')
-
+  search = search[1].split('+').toString().replace(/,/ig, ' ')
   form = document.querySelectorAll('#search input')
   form.forEach( input => {
     if (input.placeholder) {
