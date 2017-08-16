@@ -4,15 +4,9 @@ git_update=git fetch origin $(env) && git checkout $(env) && git reset --hard FE
 help:
 	@echo "Make tasks for deployment. Checkout the makefile content."
 
-migrate:
-	@make title text="Running migration"
-	cp -R around/migrations data/
-	docker-compose exec db bash -c 'mongo neomad /data/migrations/001_spots_schema.js'
-
 server_update:
 	@make title text="Fetching prod branch and updating sources."
 	ssh neomad "${goto_src} && ${git_update}"
-	migrate
 
 server_reload:
 	@make title text="Recreating the server."

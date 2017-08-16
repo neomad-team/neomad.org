@@ -6,7 +6,7 @@ from user.models import User
 from core.helpers import url_for_user
 
 
-@app.route('/login', methods=['get', 'post'])
+@app.route('/login/', methods=['get', 'post'])
 def login():
     try:
         user = User.objects.get(id=current_user.id)
@@ -29,7 +29,7 @@ def login():
             200 if not len(errors) else 401)
 
 
-@app.route('/signup', methods=['get', 'post'])
+@app.route('/signup/', methods=['get', 'post'])
 def signup():
     if request.method == 'POST':
         email = request.form['email']
@@ -41,7 +41,7 @@ def signup():
         return render_template('auth/signup.html')
 
 
-@app.route('/logout', methods=['get'])
+@app.route('/logout/', methods=['get'])
 def logout():
     logout_user()
     return render_template('auth/login.html')
