@@ -48,12 +48,24 @@ section:first-child > div > h2 {
 #join-us:hover,
 #join-us.sticky:hover {
   background-color: #11c374;
+  color: #fff;
 }
 #join-us.sticky {
   position: fixed;
-  top: 1rem;
+  top: 0;
+  left: 0;
   z-index: 9;
-  padding: 0.5rem auto;
+  padding: 0.5rem;
+  background: #fff;
+  padding: 1rem;
+  text-decoration: inherit;
+  color: #333;
+  font-family: 'Poppins';
+  font-weight: 300;
+  font-size: 1.5rem;
+  border-radius: 0;
+  width: 16rem;
+  text-align: center;
 }
 #arrow-down {
   display: flex;
