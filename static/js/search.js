@@ -6,6 +6,8 @@ if (search[1] === '') {
   search = search[1].split('+').toString().replace(/,/ig, ' ')
   form = document.querySelectorAll('#search input')
   form.forEach( input => {
+    input.setAttribute('class', 'active')
+    console.log(input);
     if (input.placeholder) {
       input.value = search
     }

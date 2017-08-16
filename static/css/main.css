@@ -64,6 +64,10 @@ body > header {
   align-items: center;
   z-index: 9;
 }
+body > header div {
+  display: flex;
+  align-items: center;
+}
 body > header h1 {
   margin: 0;
   font-weight: 300;
