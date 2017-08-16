@@ -7,6 +7,10 @@
 #search > svg {
   margin: 0 2rem;
   cursor: pointer;
+  fill: #279e77;
+}
+#search > svg:hover {
+  fill: #00bf6b;
 }
 #search > input {
   display: none;
@@ -22,10 +26,13 @@
   padding: .75rem;
   left: -0.8rem;
   border: none;
-  background-color: #3ba777;
+  background-color: #279e77;
   color: #fafafa;
   cursor: pointer;
   border-radius: 0 1rem 1rem 0;
+}
+#search > input:last-of-type:hover {
+  background-color: #00bf6b;
 }
 
 #search > input.active  {
