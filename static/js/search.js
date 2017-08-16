@@ -7,7 +7,6 @@ if (search[1] === '') {
   form = document.querySelectorAll('#search input')
   form.forEach( input => {
     input.setAttribute('class', 'active')
-    console.log(input);
     if (input.placeholder) {
       input.value = search
     }
