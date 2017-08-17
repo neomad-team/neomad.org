@@ -44,12 +44,14 @@
       </form>
       {% endif %}
       <p>
+      {% if user.current_location %}
         {{ user }} is currently <a href={{ url_for_trips(user) }}>around <em data-latlng={{ user.current_location|join(',') }}>the world</em></a>
+      {% endif %}
         {% if edit %}<a class=button href={{url_for('privacy')}}>Edit my locations</a>{% endif %}
       </p>
       <a class=trips href={{ url_for_trips(user) }}>{% if edit %}View my trips{% else %}View {{ user }}'s trips{% endif %}</a>
-    </div>
-  </nav>
+    </nav>
+  </div>
 </header>
 
 <section class="articles wrapper">
