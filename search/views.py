@@ -8,7 +8,7 @@ from user.models import User
 from blog.models import Article
 
 
-@app.route('/search')
+@app.route('/search/')
 def search():
     regex = re.compile('.*{}.*'.format(request.args.get('q')))
     users = User.objects(slug=regex)[:10]

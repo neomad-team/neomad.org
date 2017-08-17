@@ -10,7 +10,7 @@ from blog.models import Article
 from .models import User
 
 
-@app.route('/@<string:username>')
+@app.route('/@<string:username>/')
 def profile(username):
     try:
         user = User.objects.get(slug=username)
@@ -21,7 +21,7 @@ def profile(username):
                            edit=(user == current_user))
 
 
-@app.route('/privacy', methods=['get'])
+@app.route('/privacy/', methods=['get'])
 @login_required
 def privacy():
     user = User.objects.get(id=current_user.id)
@@ -30,7 +30,7 @@ def privacy():
                            locations=user.locations)
 
 
-@app.route('/privacy/<string:date>/delete', methods=['post'])
+@app.route('/privacy/<string:date>/delete/', methods=['post'])
 @login_required
 def privacy_delete_trip(date):
     user = User.objects.get(id=current_user.id)
@@ -40,7 +40,7 @@ def privacy_delete_trip(date):
     return redirect('privacy')
 
 
-@app.route('/profile', methods=['patch'])
+@app.route('/profile/', methods=['patch'])
 @login_required
 def profile_edit():
     data = request.json
@@ -54,7 +54,7 @@ def profile_edit():
     return '', 204
 
 
-@app.route('/profile/avatar', methods=['patch'])
+@app.route('/profile/avatar/', methods=['patch'])
 @login_required
 def profile_edit_avatar():
     try:
