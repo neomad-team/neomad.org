@@ -138,6 +138,7 @@ footer {
 
 #poi-form form ul {
   list-style: none;
+  margin-left: 4rem;
 }
 
 #poi-form form li {
