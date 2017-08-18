@@ -26,7 +26,7 @@
       <div id=poi-cards></div>
     </div>
     <div id=poi-form>
-      <form action="{{ url_for('spot_create') }}" method=post>
+      <form action="{{ url_for('api_spot_create') }}" method=post>
         <button id=close-form class=display-form type=button>
           <svg viewBox="0 0 128 128">
             <circle cx="64" cy="64" r="64"/>
@@ -44,24 +44,20 @@
             <input name=wifi min=0 max=5 value=3 type=range>
           </li>
           <li>
-            <label for=power-available>Power is available</label>
+            <label for=power>Power is available</label>
             <input name=power type=checkbox>
           </li>
           <li>
-            <label for=type>Type of place</label>
-            <select name=type>
+            <label for=category>Type of place</label>
+            <select name=category>
                 <option value=coworking>Coworking space</option>
-                <option value=coffeeshop>Coffeeshop / Restaurant</option>
+                <option value=cafe>Coffeeshop / Restaurant</option>
                 <option value=other>Library / Museum / other</option>
             </select>
           </li>
           <li>
             <label for=comment>Anything to say?</label>
             <textarea name=comment type=text></textarea>
-          </li>
-          <li>
-            <label for=author>Your nickname</label>
-            <input name=author type=text>
           </li>
         </ul>
         <button id=save-form type=submit>Save this place</button>
