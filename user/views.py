@@ -1,3 +1,6 @@
+import json
+from datetime import datetime
+
 from flask import render_template, request, abort
 from flask_login import current_user, login_required
 
@@ -7,7 +10,7 @@ from blog.models import Article
 from .models import User
 
 
-@app.route('/@<string:username>')
+@app.route('/@<string:username>/')
 def profile(username):
     try:
         user = User.objects.get(slug=username)
@@ -18,7 +21,30 @@ def profile(username):
                            edit=(user == current_user))
 
 
-@app.route('/profile', methods=['patch'])
+@app.route('/privacy/', methods=['get'])
+@login_required
+def privacy():
+    user = User.objects.get(id=current_user.id)
+    return render_template('user/privacy.html',
+                           user=user,
+                           locations=user.locations)
+
+
+@app.route('/privacy/<string:timestamp>/delete/', methods=['delete'])
+@login_required
+def privacy_delete_trip(timestamp):
+    user = User.objects.get(id=current_user.id)
+    trip = user.locations
+    trip_list = trip.remove(
+        user.locations.get(date=datetime.fromtimestamp(float(timestamp))))
+    user.locations = trip_list
+    user.save()
+    return render_template('user/privacy.html',
+                           user=user,
+                           locations=user.locations), 204
+
+
+@app.route('/profile/', methods=['patch'])
 @login_required
 def profile_edit():
     data = request.json
@@ -32,7 +58,7 @@ def profile_edit():
     return '', 204
 
 
-@app.route('/profile/avatar', methods=['patch'])
+@app.route('/profile/avatar/', methods=['patch'])
 @login_required
 def profile_edit_avatar():
     try:

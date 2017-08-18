@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset=utf-8>
-<title>{% block title %}Digital-Nomad Community{% endblock %} - Neomad</title>
+<title>{% block title %}Digital Nomad Community{% endblock %} - Neomad</title>
 <meta name=viewport content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name=description content="{% block description %}Open Digital Nomad community.{% endblock %}">
 <meta property=og:title content="{{ self.title() or 'Neomad. The Open Digital-Nomad Community.' }}">
@@ -24,7 +24,7 @@
     </div>
     <ul id=menu class=profile-menu>
       <li><a href={{ url_for_user(current_user) }}>Profile</a></li>
-      <li><a href="">Privacy settings</a></li>
+      <li><a href={{ url_for('privacy') }}>Privacy settings</a></li>
       <li><a href={{ url_for('logout') }}>Logout</a></li>
     </ul>
     {% else %}
@@ -43,6 +43,7 @@
 </footer>
 
 <script src={{ url_for('static', filename='js/utils.js') }}></script>
+{% block extra_js %}{% endblock %}
 
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}

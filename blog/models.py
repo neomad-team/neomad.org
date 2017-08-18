@@ -68,8 +68,10 @@ class Article(db.Document):
                 images.append(img_url)
             else:
                 images.append(data)
-            self.images = images
-        self.content = str(html)
+        for outdated_image in set(self.images) - set(images):
+            os.remove(os.path.join(self.get_images_path(),
+                                   os.path.basename(outdated_image)))
+        self.images = images
 
     def get_images_path(self):
         return '{}/{}'.format(app.config['ARTICLE_IMG_PATH'], self.id)

@@ -1,7 +1,7 @@
 __pycache__/
 *.pyc
 /data/
-settings.py
-static/uploads/*
+/settings.py
+/static/uploads/*
 /node_modules/
 /static/components/App.js
