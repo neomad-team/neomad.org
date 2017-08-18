@@ -6,11 +6,13 @@ table {
   margin: 0 auto;
   border-collapse: collapse;
 }
-th, td {
-  border: 1px solid darkgray;
+tr:not(:first-child,:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+td {
+  padding: 1rem;
 }
 .delete {
-  float: left;
   background-color: #fee7e7;
   color: #a24343;
   border-color: #dab2b2;
@@ -21,17 +23,31 @@ th, td {
   <tr>
     <th>Date</th>
     <th>Location</th>
-    <th>Delete</th>
+    <th>Action</th>
   </tr>
 {% for location in locations %}
   <tr>
     <td>{{ location.date | datetime }}</td>
-    <td>{{ location.position }}</td>
-    <td><form method=post action={{ url_for('privacy_delete_trip',
-                                            date=location.date,
-                                            location=location.position) }}>
-      <button class=delete>Delete</button></form></td>
+    <td><a data-latlng={{ location.position|join(',') }}  href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} target=_blank>{{ location.position|join(',') }}</a></td>
+    <td>
+      <form method=post action={{ url_for('privacy_delete_trip',
+                                            date=location.date.timestamp()) }}>
+      <a class=button href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} target=_blank>View on map</a>
+      <button class=delete>Delete</button>
+    </form></td>
   </tr>
 {% endfor %}
 </table>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  Array.from(document.querySelectorAll('[data-latlng]')).forEach(a => {
+    coordinatesToAddress(a.dataset.latlng)
+    .then(data => {
+       a.textContent = `${data.area}, ${data.country}`
+    })
+  })
+</script>
 {% endblock %}
