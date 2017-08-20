@@ -47,8 +47,9 @@ class UserTest(TestCase):
         self.client.post('/trips/add/', data=json.dumps(lat_lng),
                          content_type='application/json')
         user = User.objects.first()
-        url = '/privacy/{}/delete/'.format(user.locations[0].date.timestamp())
-        result = self.client.delete(url, content_type='application/json')
-        user = User.objects.first()
+        self.assertEqual(user.locations.count(), 1)
+        url = '/privacy/{}/delete'.format(user.locations[0].date.timestamp())
+        result = self.client.post(url, content_type='application/json')
+        user = User.objects.first()  # DB was updated.
         self.assertEqual(user.locations.count(), 0)
-        self.assertEqual(result.status_code, 204)
+        self.assertEqual(result.status_code, 302)
