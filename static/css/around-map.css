@@ -492,8 +492,8 @@ li > svg {
     margin: 0 0 0.5rem;
   }
 
-  #poi-form ul {
-    margin: 0;
+  #poi-form form ul {
+    margin-left: 0;
     padding: 2rem 0 2rem 2rem;
   }
   
