@@ -19,7 +19,7 @@ class SearchTest(TestCase):
              username='doejohn').set_password('search').save()
         User(email='johndoe@test.com',
              username='johndoe').set_password('search').save()
-        response = self.client.get('/search?q=john')
+        response = self.client.get('/search/?q=john')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'doejohn', response.get_data())
         self.assertIn(b'johndoe', response.get_data())
@@ -35,7 +35,7 @@ class SearchTest(TestCase):
                           content='I like fries')
         article.author = user
         article.save()
-        response = self.client.get('/search?q=fries')
+        response = self.client.get('/search/?q=fries')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'My Fries Are Cold', response.get_data())
         self.assertIn(b'I Like Fries', response.get_data())
@@ -47,13 +47,13 @@ class SearchTest(TestCase):
                           content='Why my french fries are cold ?')
         article.author = user
         article.save()
-        response = self.client.get('/search?q=fries')
+        response = self.client.get('/search/?q=fries')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'My Fries Are Cold', response.get_data())
         self.assertIn(b'friesuser', response.get_data())
 
     def test_search_empty(self):
-        response = self.client.get('/search?q=noresults')
+        response = self.client.get('/search/?q=noresults')
         self.assertEqual(response.status_code, 200)
         # "noresults" appear once in the data (url)
         self.assertEqual(response.get_data().count(b'noresults'), 1)
@@ -67,7 +67,7 @@ class SearchTest(TestCase):
                               content='My fries are cold')
             article.author = user
             article.save()
-        response = self.client.get('/search?q=fries')
+        response = self.client.get('/search/?q=fries')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_data().count(b'My fries are cold'), 10)
 
@@ -77,7 +77,7 @@ class SearchTest(TestCase):
             User(email='fries{}@test.com'.format(i),
                  username='friesuser{}'.format(i)).set_password(
                         'search').save()
-        response = self.client.get('/search?q=fries')
+        response = self.client.get('/search/?q=fries')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             response.get_data().count(b'<h2 name=username>friesuser'), 10)
@@ -94,7 +94,7 @@ class SearchTest(TestCase):
             Article(title='<h1>Title</h1>',
                     content='My fries are cold',
                     author=user).save()
-        response = self.client.get('/search?q=fries')
+        response = self.client.get('/search/?q=fries')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             response.get_data().count(b'<h2 name=username>friesuser'), 10)
