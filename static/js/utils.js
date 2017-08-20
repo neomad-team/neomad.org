@@ -37,3 +37,12 @@ window.onload = _ => {
     menu.classList.toggle('active')
   })
 }
+
+// Glass search
+const glass = document.querySelector('#search svg')
+const inputs = document.querySelectorAll('#search input')
+glass.addEventListener('click', _ => {
+  inputs.forEach( input => {
+    input.classList.toggle('active')
+  })
+})

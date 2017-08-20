@@ -1,3 +1,4 @@
+// Button position
 const button = document.querySelector('#join-us')
 let buttonPosition = adaptButtonPosition()
 

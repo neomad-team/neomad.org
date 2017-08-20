@@ -11,10 +11,20 @@
 <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
 <link href="https://fonts.googleapis.com/css?family=Raleway:600|Crimson+Text|Libre+Baskerville|Libre+Franklin|Poppins|Lora|Roboto|Oxygen|Open+Sans:600" rel=stylesheet>
 <link rel=stylesheet href={{ url_for('static', filename='css/edit.css') }}>
+<link rel=stylesheet href={{ url_for('static', filename='css/search-bar.css') }}>
 {% block extra_css %}{% endblock %}
 
 <header>
-  <h1><a href="/">Neomad</a></h1>
+  <div>
+    <h1><a href="/">Neomad</a></h1>
+    <form id=search action="{{ url_for('search') }}" method=get>
+      <svg width=35 height=35 fill=#68BEBC viewBox="0 0 25 25">
+        <path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path>
+      </svg>
+      <input type=search name=q placeholder="Neomads and articles...">
+      <input type=submit value=search>
+    </form>
+  </div>
   <nav>
     <a href={{ url_for('article_list') }} title="Read nomad's adventures">Read</a>
     {% if current_user and current_user.is_authenticated %}

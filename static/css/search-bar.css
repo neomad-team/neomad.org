@@ -1,0 +1,51 @@
+
+#search {
+  display: flex;
+  padding: 0;
+  border: none;
+}
+#search > svg {
+  margin: 0 2rem;
+  cursor: pointer;
+  fill: #279e77;
+}
+#search > svg:hover {
+  fill: #00bf6b;
+}
+#search > input {
+  display: none;
+}
+#search > input:first-of-type {  
+  padding: .75rem 3rem;
+  background: rgba(50, 50, 50, 0.2);
+  border: none;
+  border-radius: 1rem 0 0 1rem;
+}
+#search > input:last-of-type {
+  position: relative;
+  padding: .75rem;
+  left: -0.8rem;
+  border: none;
+  background-color: #279e77;
+  color: #fafafa;
+  cursor: pointer;
+  border-radius: 0 1rem 1rem 0;
+}
+#search > input:last-of-type:hover {
+  background-color: #00bf6b;
+}
+
+#search > input.active  {
+  display: block;
+  animation: .5s active ease-in-out;
+}
+
+@keyframes active {
+    from {
+      opacity: 0;
+      padding: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
