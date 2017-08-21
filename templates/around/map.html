@@ -7,10 +7,9 @@
   <link rel=stylesheet href={{ url_for('static', filename='css/trips-map.css') }}>
   <link rel=stylesheet href={{ url_for('static', filename='css/around-map.css') }}>
   <script src=https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.js></script>
- {% endblock %}
+{% endblock %}
 
 {% block main %}
-
   <div id=wrap>
     <div id=map></div>
     <div id=cards-wrap>
@@ -63,7 +62,10 @@
         <button id=save-form type=submit>Save this place</button>
       </form>
     </div>
+  </div>
+{% endblock %}
 
+{% block extra_js %}
   <script>
     var currentLatLng = {{ current_user.current_location or [] }}
     var locations = [
@@ -75,8 +77,6 @@
     {% endfor %}
     ]
   </script>
-  {% block extra_js %}
   <script src={{ url_for('static', filename='js/around-map.js') }}></script>
   <script src={{ url_for('static', filename='components/App.js') }}></script>
-  {% endblock %}
 {% endblock %}

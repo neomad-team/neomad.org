@@ -174,8 +174,23 @@ function scrollCard (poi_id) {
   window.scrollTo(0, (cardTop - cardHeight/2))
 }
 
-// saving/adding a spot - form
+// form
 
+// display form with open/close button
+const formLayer = document.querySelector('#poi-form')
+const displayForm = document.querySelectorAll('.display-form')
+displayForm.forEach(button => {
+  button.addEventListener('click', _ => {
+    formLayer.classList.toggle('visible')
+  })
+})
+
+// close form clicking outside form
+formLayer.addEventListener('click', event => {
+  event.target.classList.remove('visible')
+})
+
+// saving/adding a spot
 document.querySelector('#poi-form form').addEventListener('submit', event => {
   event.preventDefault()
   const data = new FormData(event.target)
