@@ -78,8 +78,8 @@ class PoiCard extends React.Component {
         <div className='card-distance'>{this.renderDistance(this.calculateDistance(this.state.from, this.state.to), this.state.unit)}</div>
         <h2>{this.props.details.name}</h2>
         <ul>
-          <Rank value={this.props.details.wifiQuality} />
-          <Power value={this.props.details.powerAvailable} />
+          <Rank value={this.props.details.wifi} />
+          <Power value={this.props.details.power} />
           <Comments value={this.props.details.comments} />
         </ul>
       </div>
