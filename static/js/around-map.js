@@ -43,7 +43,7 @@ function addPoi (poi) {
   if(hash && hash === marker._icon.id) {
     superCard(hash)
     firstCard(hash)
-    moveTo(poi.location, 14)
+    moveTo(poi.location, 11)
   }
 }
 
@@ -62,7 +62,7 @@ window.onhashchange = _ => {
 map.on('click', event => {
   const poi = findPoi(event.originalEvent.target.id)
   if(poi) {
-    moveTo(poi.location, 13)
+    moveTo(poi.location, 11)
     urlFor(poi.id)
     scrollCard(poi.id)
   }
@@ -74,12 +74,12 @@ function currentMarker (currentLatLng) {
   localizeUser.start()
 
   if (!window.location.hash) {
-    moveTo(currentLatLng, 13)
+    moveTo(currentLatLng, 11)
   }
 }
 
 function focusUser (latLng) {
-  moveTo(latLng, 12)
+  moveTo(latLng, 11)
   currentMarker(latLng)
 }
 
