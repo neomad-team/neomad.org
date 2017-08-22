@@ -1,50 +1,46 @@
 // init Map
-mapboxgl.accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog'
-const map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v9',
-  center: [-10, 45],
-  zoom: 2
+const accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog'
+const map = L.map('map', {
+  center: [0, 0],
+  zoom: 2,
+  zoomControl: false,
+  layers: L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?${''}access_token=${accessToken}`)
 })
 
-// specific non-native move into GeolocateControl
-class GeolocateControlWrapper extends mapboxgl.GeolocateControl {
-  _onSuccess(position) {
-    const latLng = [position.coords.latitude, position.coords.longitude]
-    moveTo(latLng, 11)
-  }
-}
+new L.Control.Zoom({position: 'topright'}).addTo(map)
+const localizeUser = L.control.locate({position: 'topright', setView: false}).addTo(map)
 
-map.addControl(new mapboxgl.NavigationControl())
-map.addControl(new GeolocateControlWrapper())
+const blueIcon = L.icon({
+  iconUrl: '/static/images/marker-blue.png',
+  iconSize: [25, 41],
+  iconAnchor: [12.5, 41],
+  popupAnchor: [0, -32]
+})
+const redIcon = {url: '/static/images/marker-red.png'}
+const greenIcon = {url: '/static/images/marker-green.png'}
 
-// pois
+ 
+// POIS creation
 const worker = new Worker('/static/js/webworker-around.js')
 let pois = []
 
 function addPoi (poi) {
-  const el = document.createElement('div')
-  el.classList.add('marker')
-  el.id = poi.id
+  const marker = L.marker(poi.location, {icon: blueIcon, alt: poi.name}).addTo(map)
+  marker._icon.setAttribute('id', poi.id)
 
-  const marker = new mapboxgl.Marker(el, {offset:[4, -6]})
-    // OSM standard [Lng, Lat]
-    .setLngLat([poi.location[1], poi.location[0]])
-    .addTo(map)
-
-  /* no pois-cards in mobile, using popup */
+  // no pois-cards in mobile, using popup
   if(window.matchMedia('(max-width: 768px)').matches) {
-    const popup = new mapboxgl.Popup({offset: [10, 0]})
-    .setHTML(`<h2>${poi.name}</h2>
+    const popup = L.popup()
+    .setContent(`<h2>${poi.name}</h2>
               <ul>
                 <li>Wifi quality: ${poi.wifi}</li>
                 <li>Power available: ${poi.power}</li>
               </ul>`)
-    marker.setPopup(popup)
+    marker.bindPopup(popup)
   }
 
   const hash = getHash()
-  if(hash && hash === el.id) {
+  if(hash && hash === marker._icon.id) {
     superCard(hash)
     firstCard(hash)
     moveTo(poi.location, 11)
@@ -74,18 +70,8 @@ map.on('click', event => {
 
 // functions
 function currentMarker (currentLatLng) {
-  const popup = new mapboxgl.Popup({offset: [10, 0]})
-    .setHTML('<p>My current location</p>')
-
-  const el = document.createElement('div')
-  el.classList.add('marker')
-  el.classList.add('current')
-
-  // OSM standard [Lng, Lat]
-  new mapboxgl.Marker(el, {offset:[0, -30]})
-    .setLngLat([currentLatLng[1], currentLatLng[0]])
-    .setPopup(popup)
-    .addTo(map)
+  
+  localizeUser.start()
 
   if (!window.location.hash) {
     moveTo(currentLatLng, 11)
@@ -98,11 +84,7 @@ function focusUser (latLng) {
 }
 
 function moveTo (latLng, zoom) {
-  // OSM standard [Lng, Lat]
-  map.flyTo({
-    center: [latLng[1], latLng[0]],
-    zoom: zoom
-  })
+  map.flyTo(latLng, zoom)
 }
 
 function getHash () {

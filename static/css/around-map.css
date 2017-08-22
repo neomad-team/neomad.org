@@ -295,63 +295,29 @@ footer {
   background-color: #00BF6BEE;
 }
 
-/* ===================================== */
-/* OSM & Preact build CSS into html tag  */
-
-.mapboxgl-canvas-container {
-  position: fixed !important;
-}
-
-.super-card {
-  border: 0.2rem solid #3ba77c !important;
+.visible {
+  display: flex!important;
 }
 
 .first-card {
-  order: 0 !important;
-}
-
-.current-marker {
-  border: 0.4rem solid #3ba77c !important;
-  z-index: 1;
-}
-
-.visible {
-  display: flex !important;
-}
-
-/* ===================================== */
-
-.super-marker {
-  background-image: url('/static/images/marker-green.png');
-  background-size: cover;
-  cursor: pointer;
-  width: 2rem;
-  height: 3rem;
-  border-radius: 0;
-  background-color: transparent;
-  border: transparent;
-  z-index: 2;
-  left: -0.4rem;
-  top: -2rem;
+  order: 0;
 }
 
 .current-card > h2 {
   color: #3ba77c;
 }
 
-.marker.current {
-  background-image: url('/static/images/marker-red.png');
-  z-index: 1;
+.super-card {
+  border: 0.2rem solid #3ba77c;
 }
 
-.mapboxgl-popup {
-  width: 50%;
-  z-index: 2;
-  top: -1.9rem;
+.current-marker {
+  background-color: yellow;
+  /* need important to overide leaflet construction */
+  z-index: 999999!important;
 }
-
-.mapboxgl-popup-content p {
-  text-align: center;
+.super-marker {
+  background-color: red;
 }
 
 /* star rank */
@@ -444,19 +410,6 @@ li > svg {
   #map {
     display: block;
     width: 100%;
-  }
-  
-  .mapboxgl-popup-content {
-    padding: 1rem;
-  }
-  
-  .mapboxgl-popup-content h2 {
-    margin: 1rem 0 0 0;
-  }
-  
-  .mapboxgl-popup-content ul {
-    list-style: none;
-    padding-left: 1rem;
   }
   
   #cards-wrap {
