@@ -296,12 +296,11 @@ footer {
 }
 
 .visible {
-  display: flex;
+  display: flex!important;
 }
 
-.current-marker {
-  border: 0.4rem solid #3ba77c;
-  z-index: -1;
+.first-card {
+  order: 0;
 }
 
 .current-card > h2 {
@@ -312,8 +311,13 @@ footer {
   border: 0.2rem solid #3ba77c;
 }
 
-.first-card {
-  order: 0;
+.current-marker {
+  background-color: yellow;
+  /* need important to overide leaflet construction */
+  z-index: 999999!important;
+}
+.super-marker {
+  background-color: red;
 }
 
 /* star rank */

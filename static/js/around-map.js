@@ -6,6 +6,9 @@ const map = L.map('map', {
   layers: L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?${''}access_token=${accessToken}`)
 })
 
+L.control({position: 'bottomleft'})
+const localizeUser = L.control.locate({setView: false}).addTo(map);
+
 const blueIcon = L.icon({
   iconUrl: '/static/images/marker-blue.png',
   iconSize: [25, 41],
@@ -45,10 +48,10 @@ function addPoi (poi) {
   }
 
   const hash = getHash()
-  if(hash && hash === marker.id) {
+  if(hash && hash === marker._icon.id) {
     superCard(hash)
     firstCard(hash)
-    moveTo(poi.location, 11)
+    moveTo(poi.location, 14)
   }
 }
 
@@ -67,7 +70,7 @@ window.onhashchange = _ => {
 map.on('click', event => {
   const poi = findPoi(event.originalEvent.target.id)
   if(poi) {
-    moveTo(poi.location, 11)
+    moveTo(poi.location, 10)
     urlFor(poi.id)
     scrollCard(poi.id)
   }
@@ -75,12 +78,8 @@ map.on('click', event => {
 
 // functions
 function currentMarker (currentLatLng) {
-  const popup = L.popup()
-  .setContent('<p>My current location</p>')
   
-  L.marker(currentLatLng, {icon: redIcon, zIndexOffset: 1, alt: 'my current position'})
-    .bindPopup(popup)
-    .addTo(map)
+  localizeUser.start()
 
   if (!window.location.hash) {
     moveTo(currentLatLng, 13)
@@ -88,7 +87,7 @@ function currentMarker (currentLatLng) {
 }
 
 function focusUser (latLng) {
-  moveTo(latLng, 11)
+  moveTo(latLng, 12)
   currentMarker(latLng)
 }
 
