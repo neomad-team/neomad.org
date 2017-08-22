@@ -3,11 +3,12 @@ const accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDds
 const map = L.map('map', {
   center: [0, 0],
   zoom: 2,
+  zoomControl: false,
   layers: L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?${''}access_token=${accessToken}`)
 })
 
-L.control({position: 'bottomleft'})
-const localizeUser = L.control.locate({setView: false}).addTo(map);
+new L.Control.Zoom({position: 'topright'}).addTo(map)
+const localizeUser = L.control.locate({position: 'topright', setView: false}).addTo(map)
 
 const blueIcon = L.icon({
   iconUrl: '/static/images/marker-blue.png',
@@ -15,20 +16,11 @@ const blueIcon = L.icon({
   iconAnchor: [12.5, 41],
   popupAnchor: [0, -32]
 })
-const redIcon = L.icon({
-  iconUrl: '/static/images/marker-red.png',
-  iconSize: [25, 41],
-  iconAnchor: [12.5, 41],
-  popupAnchor: [0, -32]
-})
-const greenIcon = L.icon({
-  iconUrl: '/static/images/marker-green.png',
-  iconSize: [25, 41],
-  iconAnchor: [12.5, 41],
-  popupAnchor: [0, -32]
-})
+const redIcon = {url: '/static/images/marker-red.png'}
+const greenIcon = {url: '/static/images/marker-green.png'}
 
-// pois
+ 
+// POIS creation
 const worker = new Worker('/static/js/webworker-around.js')
 let pois = []
 
@@ -36,7 +28,7 @@ function addPoi (poi) {
   const marker = L.marker(poi.location, {icon: blueIcon, alt: poi.name}).addTo(map)
   marker._icon.setAttribute('id', poi.id)
 
-  /* no pois-cards in mobile, using popup */
+  // no pois-cards in mobile, using popup
   if(window.matchMedia('(max-width: 768px)').matches) {
     const popup = L.popup()
     .setContent(`<h2>${poi.name}</h2>
@@ -70,7 +62,7 @@ window.onhashchange = _ => {
 map.on('click', event => {
   const poi = findPoi(event.originalEvent.target.id)
   if(poi) {
-    moveTo(poi.location, 10)
+    moveTo(poi.location, 13)
     urlFor(poi.id)
     scrollCard(poi.id)
   }
