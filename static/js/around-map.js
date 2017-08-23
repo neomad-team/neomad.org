@@ -1,7 +1,6 @@
-let userPosition = []
 // init Map
 mapboxgl.accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog'
-var map = new mapboxgl.Map({
+const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v9',
   center: [-10, 45],
@@ -21,39 +20,41 @@ map.addControl(new GeolocateControlWrapper())
 
 // pois
 const worker = new Worker('/static/js/webworker-around.js')
+let pois = []
 
-worker.addEventListener('message', response => {
-  pois = response.data
-  pois.forEach(poi => {
-    const el = document.createElement('div')
-    el.classList.add('marker')
-    el.id = poi._id
+function addPoi (poi) {
+  const el = document.createElement('div')
+  el.classList.add('marker')
+  el.id = poi.id
 
-    const marker = new mapboxgl.Marker(el, {offset:[4, -6]})
-      // OSM standard [Lng, Lat]
-      .setLngLat([poi.position.longitude, poi.position.latitude])
-      .addTo(map)
+  const marker = new mapboxgl.Marker(el, {offset:[4, -6]})
+    // OSM standard [Lng, Lat]
+    .setLngLat([poi.location[1], poi.location[0]])
+    .addTo(map)
 
-    /* no pois-cards in mobile, using popup */
-    if(window.matchMedia('(max-width: 768px)').matches) {
-      const popup = new mapboxgl.Popup({offset: [10, 0]})
-      .setHTML(`<h2>${poi.name}</h2>
-                <ul>
-                  <li>Wifi quality: ${poi.wifiQuality}</li>
-                  <li>Power available: ${poi.powerAvailable}</li>
-                </ul>`)
-      marker.setPopup(popup)
-    }
+  /* no pois-cards in mobile, using popup */
+  if(window.matchMedia('(max-width: 768px)').matches) {
+    const popup = new mapboxgl.Popup({offset: [10, 0]})
+    .setHTML(`<h2>${poi.name}</h2>
+              <ul>
+                <li>Wifi quality: ${poi.wifi}</li>
+                <li>Power available: ${poi.power}</li>
+              </ul>`)
+    marker.setPopup(popup)
+  }
 
-    const hash = getHash()
-    if(hash && hash === el.id) {
-      superCard(hash)
-      firstCard(hash)
-      moveTo([poi.position.latitude, poi.position.longitude], 11)
-    }
-  })
+  const hash = getHash()
+  if(hash && hash === el.id) {
+    superCard(hash)
+    firstCard(hash)
+    moveTo(poi.location, 11)
+  }
+}
+
+worker.addEventListener('message', r => {
+  pois = r.data
+  r.data.forEach(addPoi)
 })
-
 worker.postMessage('')
 
 // events
@@ -65,9 +66,9 @@ window.onhashchange = _ => {
 map.on('click', event => {
   const poi = findPoi(event.originalEvent.target.id)
   if(poi) {
-    moveTo([poi.position.latitude, poi.position.longitude], 11)
-    urlFor(poi._id)
-    scrollCard(poi._id)
+    moveTo(poi.location, 11)
+    urlFor(poi.id)
+    scrollCard(poi.id)
   }
 })
 
@@ -113,7 +114,7 @@ function urlFor (id) {
 }
 
 function findPoi (id) {
-  return pois.find(poi => poi._id === id)
+  return pois.find(poi => poi.id === id)
 }
 
 function highlight (poi_id) {
@@ -170,15 +171,30 @@ function scrollCard (poi_id) {
   const card = document.querySelector(`#card-${poi_id}`)
   const cardTop = card.offsetTop
   const cardHeight = card.offsetHeight
-  window.scrollTo(0, (cardTop - cardHeight/2))  
+  window.scrollTo(0, (cardTop - cardHeight/2))
 }
 
-// saving/adding a spot - form
+// form
 
+// display form with open/close button
+const formLayer = document.querySelector('#poi-form')
+const displayForm = document.querySelectorAll('.display-form')
+displayForm.forEach(button => {
+  button.addEventListener('click', _ => {
+    formLayer.classList.toggle('visible')
+  })
+})
+
+// close form clicking outside form
+formLayer.addEventListener('click', event => {
+  event.target.classList.remove('visible')
+})
+
+// saving/adding a spot
 document.querySelector('#poi-form form').addEventListener('submit', event => {
   event.preventDefault()
   const data = new FormData(event.target)
-  const formValues = {coordinates: currentLatLng}
+  const formValues = {location: currentLatLng}
   data.forEach((v, k) => formValues[k] = v)
   fetch(event.target.action, {
     method: 'post',
@@ -188,5 +204,15 @@ document.querySelector('#poi-form form').addEventListener('submit', event => {
       'Content-Type': 'application/json'
     }
   })
-  // .then(r => r.json())
+  .then(r => r.json())
+  .then(response => {
+    if (response.id) {
+      alert('success', 'You spot was saved succefully')
+    }
+    else {
+      alert('error', 'Something went wrong. Please try again later.')
+    }
+    document.querySelector('#poi-form').classList.remove('visible')
+    addPoi(response)
+  })
 })

@@ -19,13 +19,13 @@ class PoiCard extends React.Component {
 
   componentDidMount() {
     this.setState({
-      from: [this.props.details.position.latitude, this.props.details.position.longitude],
+      from: this.props.details.location,
       to: [this.props.userLat, this.props.userLng]
     })
-    if(this.props.details._id === getHash()) {
-      highlight(this.props.details._id)
-      superCard(this.props.details._id)
-      firstCard(this.props.details._id)
+    if(this.props.details.id === getHash()) {
+      highlight(this.props.details.id)
+      superCard(this.props.details.id)
+      firstCard(this.props.details.id)
     }
   }
 
@@ -54,23 +54,23 @@ class PoiCard extends React.Component {
   }
 
   hoverCard() {
-    highlight(this.props.details._id)
+    highlight(this.props.details.id)
   }
 
   clickCard() {
     let zoomLevel = 11
-    if(this.props.details._id === getHash() && map.getZoom() < 14) {
+    if(this.props.details.id === getHash() && map.getZoom() < 14) {
       zoomLevel = 14
     }
-    moveTo([this.props.details.position.latitude, this.props.details.position.longitude], zoomLevel)
-    urlFor(this.props.details._id)
+    moveTo(this.props.details.location, zoomLevel)
+    urlFor(this.props.details.id)
   }
 
   render() {
     return (
       <div
         className='card'
-        id={`card-${this.props.details._id}`}
+        id={`card-${this.props.details.id}`}
         onMouseEnter={this.hoverCard}
         onMouseLeave={this.hoverCard}
         onClick={this.clickCard}
@@ -78,8 +78,8 @@ class PoiCard extends React.Component {
         <div className='card-distance'>{this.renderDistance(this.calculateDistance(this.state.from, this.state.to), this.state.unit)}</div>
         <h2>{this.props.details.name}</h2>
         <ul>
-          <Rank value={this.props.details.wifiQuality} />
-          <Power value={this.props.details.powerAvailable} />
+          <Rank value={this.props.details.wifi} />
+          <Power value={this.props.details.power} />
           <Comments value={this.props.details.comments} />
         </ul>
       </div>

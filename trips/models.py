@@ -9,4 +9,4 @@ class UserLocation(db.EmbeddedDocument):
     duration = db.IntField(default=0)
 
     def __str__(self):
-        return str(self.position)
+        return str(self.position.join(','))

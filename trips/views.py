@@ -9,7 +9,7 @@ from .models import UserLocation
 from .utils import distance
 
 
-@app.route('/@<string:user>/trips')
+@app.route('/@<string:user>/trips/')
 def trips(user):
     try:
         user = User.objects.get(slug=user)
@@ -20,7 +20,7 @@ def trips(user):
                            locations=user.locations)
 
 
-@app.route('/trips/add', methods=['post'])
+@app.route('/trips/add/', methods=['post'])
 @login_required
 def trips_add():
     user = User.objects.get(id=current_user.id)
