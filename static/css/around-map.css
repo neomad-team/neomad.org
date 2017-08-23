@@ -11,7 +11,7 @@ main {
   position: fixed;
   right: 0;
   width: 50%;
-  min-height: 100%;
+  min-height: 80%;
   order: 2;
 }
 
@@ -311,13 +311,18 @@ footer {
   border: 0.2rem solid #3ba77c;
 }
 
+.marker {
+  fill: #297ddb;
+}
 .current-marker {
-  background-color: yellow;
-  /* need important to overide leaflet construction */
-  z-index: 999999!important;
+  fill: #9B9B9B;
+  /* need important to overide leaflet */
+  z-index: 9999!important;
 }
 .super-marker {
-  background-color: red;
+  fill: #3ba77c;
+  /* need important to overide leaflet */
+  z-index: 9998!important;
 }
 
 /* star rank */
