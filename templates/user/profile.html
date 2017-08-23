@@ -56,7 +56,7 @@
     <a href={{ url_for('article_create') }} class=read>Write this article</a>
     <form>
       <input name=published type=checkbox>
-      <label for='published' title=draft or publish>published</label>
+      <label for=published title=draft or publish>published</label>
     </form>
   </article>
 {% endif %}
@@ -73,6 +73,12 @@
     )
     apiFeedback(call, 'Your username has been updated.')
   })
+  
+  const publishField = document.querySelector('[name=published]')
+  publishField.addEventListener('change', event => {
+    apiFeedback(call, 'Your article is publish preference has been updated.')
+  })
+  publishField.addEventListener('change', event => event.target.checked)
 
   const localizeField = document.querySelector('[name=localize]')
   localizeField.addEventListener('change', event => {
