@@ -3,6 +3,7 @@ const accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDds
 const map = L.map('map', {
   center: [0, 0],
   zoom: 2,
+  minZoom: 2,
   zoomControl: false,
   layers: L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?${''}access_token=${accessToken}`)
 })
