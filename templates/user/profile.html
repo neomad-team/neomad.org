@@ -54,10 +54,6 @@
     <h1><span class="newtext title">&nbsp;</span></h1>
     <p><span class=newtext>&nbsp;</span><span class=newtext>&nbsp;</span><span class=newtext>&nbsp;</span></p>
     <a href={{ url_for('article_create') }} class=read>Write this article</a>
-    <form>
-      <input name=published type=checkbox>
-      <label for=published title=draft or publish>published</label>
-    </form>
   </article>
 {% endif %}
 {{ article_list(articles=articles, with_author=false) }}
@@ -74,12 +70,6 @@
     apiFeedback(call, 'Your username has been updated.')
   })
   
-  const publishField = document.querySelector('[name=published]')
-  publishField.addEventListener('change', event => {
-    apiFeedback(call, 'Your article is publish preference has been updated.')
-  })
-  publishField.addEventListener('change', event => event.target.checked)
-
   const localizeField = document.querySelector('[name=localize]')
   localizeField.addEventListener('change', event => {
     const call = api.send('patch', "{{ url_for('profile_edit') }}",
