@@ -33,6 +33,7 @@
         <img src="{{ article.image | default('/static/images/articles/default.png', true) }}" width=100%>
       </figure>
       {{ article.content|striptags|truncate(200) }}
+    {% set url = url_for_article(article) %}
     <a href={{ url }} lang={{ article.language }} class='read action-button'>Read more</a>
   </article>
   </li>
