@@ -82,7 +82,7 @@
 
   const publishField = document.querySelector('[name=publish]')
   publishField.addEventListener('change', event => {
-    const call = api.send('post', "{{ url_for('profile_edit') }}",
+    const call = api.send('post', event.target.form.action,
       {is_published: event.target.checked}
     )
     apiFeedback(call, 'Your publish preference has been updated.')
