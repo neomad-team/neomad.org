@@ -4,7 +4,6 @@ const map = L.map('map', {
   center: [0, 0],
   zoom: 2,
   zoomControl: false,
-  renderer: L.svg(),
   layers: L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?${''}access_token=${accessToken}`)
 })
 
