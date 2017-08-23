@@ -60,11 +60,15 @@
 <link rel=stylesheet href=https://cdn.rawgit.com/orthes/medium-editor-insert-plugin/3.0/dist/css/medium-editor-insert.min.css>
 <script src=https://cdn.rawgit.com/orthes/medium-editor-insert-plugin/3.0/dist/js/medium-editor-insert.min.js></script>
 
-{% set url = url_for('article_edit', id=article.id) if article.id else url_for('article_create')  %}
+{% set url = url_for('article_edit', id=article.id) if article.id else url_for('article_create') %}
 <form method=post action={{ url }} edit>
   <div class=toolbar>
     <input type=hidden name=title>
     <input type=hidden name=content>
+    <div>
+      <input name=publish id=publish-create type=checkbox>
+      <label for=publish title="draft or publish">publish</label>
+    </div>
     <button type=submit class=save>Save</button>
     {% if article.id %}
     <a class="button delete" href={{ url_for('article_delete', id=article.id) }}>Delete</a>
