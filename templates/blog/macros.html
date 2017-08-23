@@ -15,16 +15,6 @@
       {% else %}
       <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
       {% endif %}
-      {% if edit %}
-      {% set url = url_for('article_edit', id=article.id) %}
-      <form method=post action={{ url }} edit>
-        <div>
-          {% set id=article.id %}
-          <input name=publish type=checkbox class=publish id="publish{{ id }}">
-          <label for="publish" title="draft or publish">published</label>
-        </div>
-      </form>
-      {% endif %}
     </header>
     <a href={{ url }} lang={{ article.language }}>
       <h1>{{ article.title|title }}</h1>
