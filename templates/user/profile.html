@@ -54,6 +54,10 @@
     <h1><span class="newtext title">&nbsp;</span></h1>
     <p><span class=newtext>&nbsp;</span><span class=newtext>&nbsp;</span><span class=newtext>&nbsp;</span></p>
     <a href={{ url_for('article_create') }} class=read>Write this article</a>
+    <form>
+      <input name="published" id="published" type="checkbox">
+      <label for="published" title="draft or publish">published</label>
+    </form>
   </article>
 {% endif %}
 {{ article_list(articles=articles, with_author=false) }}
