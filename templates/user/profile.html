@@ -80,6 +80,15 @@
   })
   localizeField.addEventListener('change', event => event.target.checked && localize())
 
+  const publishField = document.querySelector('[name=publish]')
+  publishField.addEventListener('change', event => {
+    const call = api.send('post', "{{ url_for('profile_edit') }}",
+      {is_published: event.target.checked}
+    )
+    apiFeedback(call, 'Your publish preference has been updated.')
+  })
+  publishField.addEventListener('change', event => event.target.checked)
+
   const aboutField = document.querySelector('[name=about]')
   aboutField.setAttribute('contenteditable', true)
   aboutField.addEventListener('blur', event => {
