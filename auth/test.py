@@ -18,7 +18,7 @@ class AuthTest(TestCase):
             'email': 'newtest@email.com',
             'password': 'test'
         }
-        result = self.client.post('/signup', data=data)
+        result = self.client.post('/signup/', data=data)
         try:
             User.objects.get(email='newtest@email.com')
         except User.DoesNotExist:
@@ -30,13 +30,13 @@ class AuthTest(TestCase):
             'email': 'newtest@email.com',
             'password': 'test'
         }
-        self.client.post('/signup', data=data)
+        self.client.post('/signup/', data=data)
         # Sign up a new user with same slug for neomad
         data = {
             'email': 'newtest@test.com',
             'password': 'test'
         }
-        result = self.client.post('/signup', data=data)
+        result = self.client.post('/signup/', data=data)
         try:
             User.objects.get(username='newtest1')
         except User.DoesNotExist:
@@ -47,7 +47,7 @@ class AuthTest(TestCase):
             'email': 'newtest@testagain.com',
             'password': 'test'
         }
-        result = self.client.post('/signup', data=data)
+        result = self.client.post('/signup/', data=data)
         try:
             User.objects.get(username='newtest2')
         except User.DoesNotExist:
@@ -58,7 +58,7 @@ class AuthTest(TestCase):
             'email': 'newtest1@test.com',
             'password': 'test'
         }
-        result = self.client.post('/signup', data=data)
+        result = self.client.post('/signup/', data=data)
         try:
             User.objects.get(username='newtest3')
         except User.DoesNotExist:
@@ -66,7 +66,7 @@ class AuthTest(TestCase):
         self.assertEqual(result.status_code, 302)
 
     def test_login_get(self):
-        result = self.client.get('/login')
+        result = self.client.get('/login/')
         self.assertEqual(result.status_code, 200)
 
     def test_login_post(self):
@@ -74,7 +74,7 @@ class AuthTest(TestCase):
             'email': 'test@email.com',
             'password': 'test',
         }
-        result = self.client.post('/login', data=data)
+        result = self.client.post('/login/', data=data)
         self.assertEqual(result.status_code, 302)
 
     def test_wrong_login_post(self):
@@ -82,9 +82,9 @@ class AuthTest(TestCase):
             'email': 'wrong@email.com',
             'password': 'test',
         }
-        result = self.client.post('/login', data=data)
+        result = self.client.post('/login/', data=data)
         self.assertEqual(result.status_code, 401)
 
     def test_logout(self):
-        result = self.client.get('/logout')
+        result = self.client.get('/logout/')
         self.assertEqual(result.status_code, 200)

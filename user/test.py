@@ -16,7 +16,7 @@ def login_user(self):
         'email': 'emailtest@test.com',
         'password': 'testtest',
     }
-    self.client.post('/login', data=data, follow_redirects=True)
+    self.client.post('/login/', data=data, follow_redirects=True)
 
 
 class UserTest(TestCase):
@@ -33,27 +33,28 @@ class UserTest(TestCase):
         Article.objects.delete()
 
     def test_user_page_that_does_not_exist(self):
-        result = self.client.get('/@doesnotexist')
+        result = self.client.get('/@doesnotexist/')
         self.assertEqual(result.status_code, 404)
 
     def test_privacy_page_unauthorized(self):
-        result = self.client.get('/privacy')
+        result = self.client.get('/privacy/')
         self.assertEqual(result.status_code, 401)
 
     def test_privacy_page_access(self):
         login_user(self)
-        result = self.client.get('/privacy')
+        result = self.client.get('/privacy/')
         self.assertEqual(result.status_code, 200)
 
     def test_delete_trip(self):
         login_user(self)
         lat_lng = [10, 10]
-        self.client.post('/trips/add', data=json.dumps(lat_lng),
+        self.client.post('/trips/add/', data=json.dumps(lat_lng),
                          content_type='application/json')
         user = User.objects.first()
+        self.assertEqual(user.locations.count(), 1)
         url = '/privacy/{}/delete'.format(user.locations[0].date.timestamp())
-        result = self.client.delete(url, content_type='application/json')
-        user = User.objects.first()
+        result = self.client.post(url, content_type='application/json')
+        user = User.objects.first()  # DB was updated.
         self.assertEqual(user.locations.count(), 0)
         self.assertEqual(result.status_code, 204)
 
@@ -74,3 +75,4 @@ class UserTest(TestCase):
         result = self.client.get('/@emailtest')
         self.assertIn(b'Article That Must Appear', result.data)
         self.assertEqual(result.status_code, 200)
+

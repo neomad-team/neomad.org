@@ -21,14 +21,6 @@ window.onload = _ => {
     const canvas = document.querySelector('canvas')
     const poisCards = document.querySelector('#poi-cards')
     poisCards.style.minHeight = `${canvas.height}px`
-
-    const displayForm = document.querySelectorAll('.display-form')
-    displayForm.forEach( button => {
-      button.addEventListener('click', _ => {
-        const poiForm = document.querySelector('#poi-form')
-        poiForm.classList.toggle('visible')  
-      })
-    })
   }
   
   const menu = document.querySelector('#menu')

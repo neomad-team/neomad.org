@@ -22,7 +22,7 @@ body {
   font-size: 1.7rem;
   line-height: 1.5;
   margin: 0;
-  color: rgba(0, 0, 0, .73);
+  color: #000000;
   font-weight: 400;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
@@ -37,12 +37,12 @@ figure {
 }
 
 a {
-  color: #279e6aee;
+  color: #279e6a;
   text-decoration: none;
   transition: color .3s;
 }
 a:hover {
-  color: #00bf6bee;
+  color: #00bf6b;
 }
 
 ul {
