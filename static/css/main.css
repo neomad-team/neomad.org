@@ -91,7 +91,7 @@ body > header nav a {
 .avatar {
   cursor: pointer;
 }
-.avatar img {
+.avatar-img {
   display: inline-block;
   vertical-align: middle;
   border: 1px solid #666;

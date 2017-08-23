@@ -4,6 +4,7 @@ const map = L.map('map', {
   center: [0, 0],
   zoom: 2,
   zoomControl: false,
+  renderer: L.svg(),
   layers: L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?${''}access_token=${accessToken}`)
 })
 
@@ -16,10 +17,7 @@ const blueIcon = L.icon({
   iconAnchor: [12.5, 41],
   popupAnchor: [0, -32]
 })
-const redIcon = {url: '/static/images/marker-red.png'}
-const greenIcon = {url: '/static/images/marker-green.png'}
 
- 
 // POIS creation
 const worker = new Worker('/static/js/webworker-around.js')
 let pois = []
