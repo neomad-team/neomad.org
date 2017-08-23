@@ -37,10 +37,14 @@
     </section>
     <nav>
       {% if edit %}
-      <form>
+      <!-- TODO: change the set url ?? -->
+      <!-- {% set url = url_for('article_edit', id=article.id) if article.id else url_for('article_create') %} -->
+      <form method=post action={{ url }} edit>
         <div>
-          <input type=checkbox name=localize {% if user.allow_localization %}checked{% endif %} id=localize><label for=localize title="enable tracking my trips">Enable trip tracking</label>
+          <input name=publish id=publish type=checkbox>
+          <label for=publish title="draft or publish">publish</label>
         </div>
+        <button type=submit class=save>Save</button>
       </form>
       {% endif %}
       <a class=trips href={{ url_for_trips(user) }}>{% if edit %}View my trips{% else %}View {{ user }}'s trips{% endif %}</a>
