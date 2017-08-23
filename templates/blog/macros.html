@@ -17,10 +17,12 @@
       {% else %}
       <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
       {% endif %}
+      {% if edit %}
       <form>
         <input name="published" id="published" type="checkbox">
         <label for="published" title="draft or publish">published</label>
       </form>
+      {% endif %}
     </header>
     <a href={{ url }} lang={{ article.language }}>
       <h1>{{ article.title|title }}</h1>
