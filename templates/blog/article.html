@@ -66,7 +66,8 @@
     <input type=hidden name=title>
     <input type=hidden name=content>
     <div>
-      <input name=publish type=checkbox>
+      {% set id=article.id %}
+      <input name=publish type=checkbox class=publish id=publish{{ id }}>
       <label for=publish title="draft or publish">publish</label>
     </div>
     <button type=submit class=save>Save</button>

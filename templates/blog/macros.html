@@ -21,7 +21,8 @@
       {% set url = url_for('article_edit', id=article.id) %}
       <form method=post action={{ url }} edit>
         <div>
-          <input name="publish" id="publish" type="checkbox">
+          {% set id=article.id %}
+          <input name=publish type=checkbox class=publish id="publish{{ id }}">
           <label for="publish" title="draft or publish">published</label>
         </div>
       </form>
