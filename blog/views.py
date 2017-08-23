@@ -46,6 +46,7 @@ def article_create():
         else:
             article.title = request.form.get('title')
             article.content = clean_html(request.form.get('content'))
+            article.is_published = request.form.get('published')
             article.save()
             status = 201
     return render_template('blog/article.html', article=article,
@@ -62,6 +63,7 @@ def article_edit(id):
         abort(404)
     article.title = request.form.get('title')
     article.content = request.form.get('content')
+    article.is_published = request.form.get('published')
     errors = []
     if article.title != '' and clean_html(article.content) != '':
         article.save()
