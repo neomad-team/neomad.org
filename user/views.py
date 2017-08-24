@@ -34,14 +34,14 @@ def privacy():
                            locations=user.locations)
 
 
-@app.route('/privacy/<string:date>/delete', methods=['post'])
+@app.route('/privacy/<float:date>/delete/', methods=['post'])
 @login_required
 def privacy_delete_trip(date):
     user = User.objects.get(id=current_user.id)
     user.locations.remove(user.locations.get(date=datetime.fromtimestamp(
-                                             float(date))))
+                                             date)))
     user.save()
-    return redirect('privacy')
+    return redirect('privacy'), 204
 
 
 @app.route('/profile/', methods=['patch'])

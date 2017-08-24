@@ -52,18 +52,18 @@ class UserTest(TestCase):
                          content_type='application/json')
         user = User.objects.first()
         self.assertEqual(user.locations.count(), 1)
-        url = '/privacy/{}/delete'.format(user.locations[0].date.timestamp())
+        url = '/privacy/{}/delete/'.format(user.locations[0].date.timestamp())
         result = self.client.post(url, content_type='application/json')
+        self.assertEqual(result.status_code, 204)
         user = User.objects.first()  # DB was updated.
         self.assertEqual(user.locations.count(), 0)
-        self.assertEqual(result.status_code, 204)
 
     def test_unpublished_articles_does_not_appears_if_the_author_not_logged(
             self):
         Article(title='<h1>Article that must not appear<br></h1>',
                 content='<p>content</p>', author=self.user,
                 is_published=False).save()
-        result = self.client.get('/@emailtest')
+        result = self.client.get('/@emailtest/')
         self.assertNotIn(b'Article That Must Not Appear', result.data)
         self.assertEqual(result.status_code, 200)
 
@@ -72,6 +72,6 @@ class UserTest(TestCase):
         Article(title='<h1>Article that must appear<br></h1>',
                 content='<p>content</p>', author=self.user,
                 is_published=False).save()
-        result = self.client.get('/@emailtest')
+        result = self.client.get('/@emailtest/')
         self.assertIn(b'Article That Must Appear', result.data)
         self.assertEqual(result.status_code, 200)
