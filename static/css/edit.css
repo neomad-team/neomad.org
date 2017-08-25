@@ -176,3 +176,7 @@ main > header figure .loading.ready {
   background-image: linear-gradient(180deg, #BFDC7A, #8EBF45);
   box-shadow: 0 0 0.3rem rgba(0,0,0,0.3);
 }
+
+footer {
+  display: none;
+}
