@@ -39,6 +39,12 @@
     </ul>
   {% endif %}
 
+  {% if article.is_published==false %}
+  <div class=ribbon-wrapper>
+    <div class=ribbon>draft</div>
+  </div>
+  {% endif %}
+  
   <h1 name=title>{{ article.title or 'Insert your title here' }}</h1>
   <div class=content name=content>
     {{ (article.content or '<p>Insert your text here</p>')|safe }}
