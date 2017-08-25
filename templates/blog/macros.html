@@ -1,7 +1,7 @@
 {% macro article_list(articles, with_author=true) %}
   {% for article in articles %}
   {% set url = url_for_article(article) %}
-  <article class=preview>
+  <article class="preview draft">
     <header class=meta>
       {% if with_author %}
       <a href={{ url_for_user(article.author) }}>
@@ -15,6 +15,11 @@
       {% else %}
       <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
       {% endif %}
+      {% if article.is_published==false %}
+      <div class=ribbon-wrapper>
+        <a href={{ url }} class=ribbon>draft</a>
+      </div>
+      {% endif %}
     </header>
     <a href={{ url }} lang={{ article.language }}>
       <h1>{{ article.title|title }}</h1>
@@ -22,7 +27,7 @@
         <img src={{ article.image | default('/static/uploads/articles/default.png', true) }} width=100%>
       </figure>
       {{ article.content|striptags|truncate(200) }}
-    <a href={{ url_for_article(article) }} lang={{ article.language }} class="read action-button">Read more</a>
+    <a href={{ url }} lang={{ article.language }} class="read action-button">Read more</a>
   </article>
   {% endfor %}
 {% endmacro %}
