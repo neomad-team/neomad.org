@@ -19,10 +19,10 @@
     <a href={{ url }} lang={{ article.language }}>
       <h1>{{ article.title|title }}</h1>
       <figure>
-        <img src="{{ article.image | default('/static/uploads/articles/default.png', true) }}" width=100%>
+        <img src={{ article.image | default('/static/uploads/articles/default.png', true) }} width=100%>
       </figure>
       {{ article.content|striptags|truncate(200) }}
-    <a href={{ url_for_article(article) }} lang={{ article.language }} class='read action-button'>Read more</a>
+    <a href={{ url_for_article(article) }} lang={{ article.language }} class="read action-button">Read more</a>
   </article>
   {% endfor %}
 {% endmacro %}
