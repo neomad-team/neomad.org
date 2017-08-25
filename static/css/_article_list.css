@@ -69,27 +69,31 @@
   right: -0.3rem;
 }
 .ribbon {
-  font-weight: bold;
+  font-weight: 200;
+  font-family: sans-serif;
   text-transform: capitalize;
-  color: #333;
+  color: #fff;
   text-align: center;
-  text-shadow: rgba(255,255,255,0.5) 0 .1rem 0rem;
   transform: rotate(45deg);
   position: relative;
   padding: .7rem 0;
   left: -0.5rem;
   top: 1.5rem;
   width: 12rem;
-  background-image: linear-gradient(180deg, #BFDC7A, #8EBF45);
+  background: #279E6A;
   box-shadow: 0 0 0.3rem rgba(0,0,0,0.3);
 }
 .ribbon:before, .ribbon:after {
   content: "";
-  border-top: .3rem solid #6e8900;   
+  border-top: .3rem solid #279E6A;   
   border-left: .3rem solid transparent;
   border-right: .3rem solid transparent;
   position: absolute;
   bottom: -0.3rem;
+}
+.ribbon:hover {
+  color: #fff;
+  background: #00bf6b;
 }
 .ribbon:before {
   left: 0;
