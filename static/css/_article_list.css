@@ -80,12 +80,12 @@
   left: -0.5rem;
   top: 1.5rem;
   width: 12rem;
-  background: #279E6A;
+  background: #279e6a;
   box-shadow: 0 0 0.3rem rgba(0,0,0,0.3);
 }
 .ribbon:before, .ribbon:after {
   content: "";
-  border-top: .3rem solid #279E6A;   
+  border-top: .3rem solid #279e6a;
   border-left: .3rem solid transparent;
   border-right: .3rem solid transparent;
   position: absolute;

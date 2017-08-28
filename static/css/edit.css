@@ -105,7 +105,7 @@ form[edit] .toolbar .delete:hover {
 
 /* on checked */
 [type="checkbox"]:checked + label:before {
-  background: #A0BD46;
+  background: #a0bd46;
   border: 1px solid #d0e9c6;
 }
 [type="checkbox"]:checked + label:after {
@@ -174,7 +174,7 @@ main > header figure .loading.ready {
   left: 1.5rem;
   top: 1.5rem;
   width: 16rem;
-  background: #279E6A;
+  background: #279e6a;
   box-shadow: 0 0 0.3rem rgba(0,0,0,0.3);
 }
 .ribbon:hover {
