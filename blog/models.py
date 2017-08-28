@@ -39,7 +39,7 @@ class Article(db.Document):
     author = db.ReferenceField(User)
     language = db.StringField(min_length=2, max_length=2, default='en')
     images = db.ListField()
-    is_published = db.BooleanField()
+    publication_date = db.DateTimeField()
 
     def __str__(self):
         return str(self.title)

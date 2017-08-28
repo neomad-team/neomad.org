@@ -17,7 +17,7 @@ def profile(username):
         if user == current_user:
             articles = Article.objects(author=user)
         else:
-            articles = Article.objects(author=user, is_published__ne=False)
+            articles = Article.objects(author=user, publication_date__ne=None)
     except User.DoesNotExist:
         abort(404)
     return render_template('user/profile.html', user=user,

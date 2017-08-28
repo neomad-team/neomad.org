@@ -1,4 +1,6 @@
 import os
+import datetime
+
 from unittest import TestCase
 
 from user.models import User
@@ -26,7 +28,8 @@ class ArticleTest(TestCase):
         self.assertEqual(result.status_code, 200)
 
     def test_articles_with_an_article(self):
-        article = Article(title='<h1>title</h1>', content='<p>content</p>')
+        article = Article(title='<h1>title</h1>', content='<p>content</p>',
+                          publication_date=datetime.datetime.utcnow())
         article.author = self.user
         article.save()
         result = self.client.get('/articles/')
@@ -167,15 +170,17 @@ class ArticleTest(TestCase):
         self.assertTrue(article.language, 'en')
 
     def test_article_appear_by_default_in_articles(self):
-        article = Article(title='title', content='<p>content</p>')
+        article = Article(title='title', content='<p>content</p>',
+                          publication_date=datetime.datetime.utcnow())
         article.author = self.user
         article.save()
         result = self.client.get('/articles/')
         self.assertIn(b'<article class=preview>', result.data)
 
     def test_unpublished_article_does_not_appear_in_articles(self):
-        article = Article(title='title', content='<p>content</p>')
-        article.is_published = False
+        article = Article(title='title', content='<p>content</p>',
+                          publication_date=None)
+        article.publication_date = None
         article.author = self.user
         article.save()
         result = self.client.get('/articles/')

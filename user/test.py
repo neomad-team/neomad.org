@@ -1,4 +1,6 @@
 import json
+import datetime
+
 from unittest import TestCase
 
 from core import app
@@ -62,7 +64,7 @@ class UserTest(TestCase):
             self):
         Article(title='<h1>Article that must not appear<br></h1>',
                 content='<p>content</p>', author=self.user,
-                is_published=False).save()
+                publication_date=None).save()
         result = self.client.get('/@emailtest/')
         self.assertNotIn(b'Article That Must Not Appear', result.data)
         self.assertEqual(result.status_code, 200)
@@ -70,8 +72,7 @@ class UserTest(TestCase):
     def test_unpublished_articles_does_appears_if_the_author_is_logged(self):
         login_user(self)
         Article(title='<h1>Article that must appear<br></h1>',
-                content='<p>content</p>', author=self.user,
-                is_published=False).save()
+                content='<p>content</p>', author=self.user).save()
         result = self.client.get('/@emailtest/')
         self.assertIn(b'Article That Must Appear', result.data)
         self.assertEqual(result.status_code, 200)
