@@ -152,3 +152,32 @@ main > header figure .loading.ready::before {
 main > header figure .loading.ready {
   display: none;
 }
+
+.ribbon-wrapper {
+  width: 13.5rem;
+  height: 10.8rem;
+  overflow: hidden;
+  position: fixed;
+  top: 6.6rem;
+  right: 0;
+}
+.ribbon {
+  font-weight: bold;
+  font-weight: 200;
+  font-family: sans-serif;
+  text-transform: capitalize;
+  color: #fff;
+  text-align: center;
+  transform: rotate(45deg);
+  position: relative;
+  padding: .7rem 0;
+  left: 1.5rem;
+  top: 1.5rem;
+  width: 16rem;
+  background: #279E6A;
+  box-shadow: 0 0 0.3rem rgba(0,0,0,0.3);
+}
+.ribbon:hover {
+  color: #fff;
+  background: #00bf6b;
+}

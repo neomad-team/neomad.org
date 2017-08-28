@@ -66,29 +66,20 @@ def article_edit(id):
         article = Article.objects.get(author=user, id=id)
     except Article.DoesNotExist:
         abort(404)
-    if request.method == 'POST':
-        if request.json:
-            if request.json.get('is_published'):
-                article.publication_date = datetime.datetime.utcnow()
-            else:
-                article.publication_date = None
-            article.save()
-            return redirect(url_for_article(article))
-        else:
-            article.title = request.form.get('title')
-            article.content = clean_html(request.form.get('content'))
-            if request.form.get('publish'):
-                article.publication_date = datetime.datetime.utcnow()
-            else:
-                article.publication_date = None
-            errors = []
-            if article.title != '' and clean_html(article.content) != '':
-                article.save()
-                return redirect(url_for_article(article))
-            else:
-                errors.append('Please insert a title and a content')
-                return render_template('blog/article.html', article=article,
-                                       errors=errors, edit=True), 400
+    article.title = request.form.get('title')
+    article.content = clean_html(request.form.get('content'))
+    if request.form.get('is_published') != '':
+        article.publication_date = datetime.datetime.utcnow()
+    else:
+        article.publication_date = None
+    errors = []
+    if article.title != '' and clean_html(article.content) != '':
+        article.save()
+        return redirect(url_for_article(article))
+    else:
+        errors.append('Please insert a title and a content')
+        return render_template('blog/article.html', article=article,
+                               errors=errors, edit=True), 400
 
 
 @app.route('/article/<string:id>/delete/', methods=['get'])

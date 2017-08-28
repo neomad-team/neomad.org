@@ -1,7 +1,7 @@
 {% macro article_list(articles, with_author=true) %}
   {% for article in articles %}
   {% set url = url_for_article(article) %}
-  <article class=preview>
+  <article class="preview draft">
     <header class=meta>
       {% if with_author %}
       <a href={{ url_for_user(article.author) }}>
@@ -15,24 +15,18 @@
       {% else %}
       <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
       {% endif %}
-      {% if edit %}
-      {% set url_edit = url_for('article_edit', id=article.id) %}
-      {% set checked = 'checked' if article.publication_date != None else '' %}
-      <form method=post action={{ url_edit }} edit>
-        <div>
-          <input name="publish" id="publish" type="checkbox" {{ checked }}>
-          <label for="publish" title="draft or publish">published</label>
-        </div>
-      </form>
+      {% if not article.publication_date %}
+      <div class=ribbon-wrapper>
+        <a href={{ url }} class=ribbon>draft</a>
+      </div>
       {% endif %}
     </header>
     <a href={{ url }} lang={{ article.language }}>
       <h1>{{ article.title|title }}</h1>
       <figure>
-        <img src="{{ article.image | default('/static/uploads/articles/default.png', true) }}" width=100%>
+        <img src={{ article.image | default('/static/uploads/articles/default.png', true) }} width=100%>
       </figure>
       {{ article.content|striptags|truncate(200) }}
-    {% set url = url_for_article(article) %}
     <a href={{ url }} lang={{ article.language }} class='read action-button'>Read more</a>
   </article>
   {% endfor %}

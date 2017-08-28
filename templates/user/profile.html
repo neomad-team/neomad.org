@@ -30,9 +30,9 @@
       <a class=email href=mailto:{{ user.socials.email }} title="Send an email">Send an email</a>
       {% endif %}
       {% for name, url in user.socials.items() %}
-      {% if name != 'email' and url %}
-      <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
-      {% endif %}
+        {% if name != 'email' and url %}
+        <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
+        {% endif %}
       {% endfor %}
     </section>
     <nav>

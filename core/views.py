@@ -10,5 +10,5 @@ from .helpers import url_for_user
 
 @app.route('/')
 def home():
-    articles = Article.objects.all()[:3]
+    articles = Article.objects.all()[:3].filter(is_published__ne=False)
     return render_template('home.html', articles=articles)
