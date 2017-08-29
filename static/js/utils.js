@@ -1,8 +1,5 @@
 function alert(type, message, delay) {
   console.info(type, message)
-  if(!message) {
-    message = type
-  }
   let notification = document.querySelector('#notification')
   if(!notification) {
     notification = document.createElement('div')
