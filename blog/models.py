@@ -5,6 +5,7 @@ import shutil
 
 from flask import Markup
 from bs4 import BeautifulSoup
+from mongoengine.queryset.manager import queryset_manager
 from langdetect import detect
 
 from core import db, app
@@ -43,6 +44,10 @@ class Article(db.Document):
 
     def __str__(self):
         return str(self.title)
+
+    @queryset_manager
+    def published(doc_cls, queryset):
+        return queryset.filter(publication_date__ne=None)
 
     def extract_images(self):
         """

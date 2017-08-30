@@ -13,7 +13,7 @@ from .models import Article, clean_html
 
 @app.route('/articles/')
 def article_list():
-    articles = Article.objects.filter(publication_date__ne=None)
+    articles = Article.published()
     return render_template('blog/article_list.html', articles=articles)
 
 
