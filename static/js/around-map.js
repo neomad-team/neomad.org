@@ -49,7 +49,7 @@ const worker = new Worker('/static/js/webworker-around.js')
 let pois = []
 
 function addPoi (poi) {
-  const marker = L.marker(poi.location, {icon: icon, alt: poi.name}).addTo(map)
+  const marker = L.marker(poi.location, { icon: icon, alt: poi.name}).addTo(map)
   marker._icon.setAttribute('id', poi.id)
 
   // no pois-cards in mobile, using popup
@@ -84,9 +84,10 @@ window.onhashchange = _ => {
 }
 
 map.on('click', event => {
-  const poi = findPoi(event.originalEvent.target.id)
+  const poi = findPoi(event.originalEvent.target.ownerDocument.activeElement.id)
+  console.log(poi);
   if(poi) {
-    moveTo(poi.location, 11)
+    moveTo(poi.location)
     urlFor(poi.id)
     scrollCard(poi.id)
   }
@@ -128,8 +129,8 @@ function getTwins (poi_id) {
   const marker = document.getElementById(poi_id)
   const card = document.querySelector(`#card-${poi_id}`)
   return twins = [
-    { class: 'marker', div: marker },
-    { class: 'card', div: card }
+    {class: 'marker', div: marker},
+    {class: 'card', div: card}
   ]
 }
 

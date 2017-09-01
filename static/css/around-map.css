@@ -299,7 +299,6 @@ footer {
   display: flex !important;
 }
 
-
 /* marker */
 
 .marker {
@@ -311,12 +310,21 @@ footer {
   color: #9b9b9b;
 }
 .current-marker {
-  /* need 201 to overide leaflet native at 200  */
+  /* need 201 with important to overide leaflet native at 200  */
   z-index: 201 !important;
 }
 .current-marker svg {
   fill: #9b9b9b;
 }
+
+.first-card {
+  /* need important to overide react build with leaflet order */
+  order: -1 !important;
+}
+
+
+
+
 
 .super-card {
   border: 0.2rem solid #3ba77c;
@@ -326,6 +334,8 @@ footer {
   /* need important to overide leaflet */
   z-index: 9998!important;
 }
+
+/* cards datas */
 
 /* star rank */
 li > svg {
@@ -368,30 +378,7 @@ li > svg {
   fill: #3ba77c;
 }
 
-/* comments */
-
-.comments {
-  flex-direction: column;
-}
-
-.comments p,
-.no-comments p {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-.no-comments p {
-  font-style: italic;
-}
-
-.comments ul {
-  padding: 0 0 0 1rem;
-}
-
-.comments li {
-  font-size: 1.5rem;
-  padding: 0;
-}
+/* responsive */
 
 @media screen and (max-width: 1280px) {
   .card {
