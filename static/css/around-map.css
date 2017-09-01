@@ -296,28 +296,30 @@ footer {
 }
 
 .visible {
-  display: flex!important;
+  display: flex !important;
 }
 
-.first-card {
-  order: 0;
-}
 
-.current-card > h2 {
-  color: #3ba77c;
-}
-
-.super-card {
-  border: 0.2rem solid #3ba77c;
-}
+/* marker */
 
 .marker {
   fill: #297ddb;
 }
+
+/* current marker/card hovering */
+.current-card h2{
+  color: #9b9b9b;
+}
 .current-marker {
-  fill: #9B9B9B;
-  /* need important to overide leaflet */
-  z-index: 9999!important;
+  /* need 201 to overide leaflet native at 200  */
+  z-index: 201 !important;
+}
+.current-marker svg {
+  fill: #9b9b9b;
+}
+
+.super-card {
+  border: 0.2rem solid #3ba77c;
 }
 .super-marker {
   fill: #3ba77c;

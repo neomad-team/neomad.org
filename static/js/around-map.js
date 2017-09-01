@@ -123,24 +123,20 @@ function findPoi (id) {
   return pois.find(poi => poi.id === id)
 }
 
-function highlight (poi_id) {
-  const currentCard = document.querySelector('.current-card')
-  const currentMarker = document.querySelector('.current-marker')
-  const superMarker = document.querySelector('.super-marker')
+function getTwins (poi_id) {
   // querySelector don't works if poi_id begin with a number
   const marker = document.getElementById(poi_id)
   const card = document.querySelector(`#card-${poi_id}`)
-  if(currentCard) {
-    currentCard.classList.remove('current-card')
-  }
-  if(currentMarker) {
-    currentMarker.classList.remove('current-marker')
-  }
-  if(card) {
-    marker.classList.toggle('current-marker')
-    card.classList.toggle('current-card')
-  }
-  superMarker.classList.remove('current-marker')
+  return twins = [
+    { class: 'marker', div: marker },
+    { class: 'card', div: card }
+  ]
+}
+
+function highlight (poi_id) {
+  getTwins(poi_id).forEach(el => {
+    el.div.classList.toggle(`current-${el.class}`)
+  })
 }
 
 function superCard (poi_id) {

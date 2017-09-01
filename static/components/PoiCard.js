@@ -14,7 +14,7 @@ class PoiCard extends React.Component {
     }
     // cf: https://facebook.github.io/react/docs/handling-events.html
     this.hoverCard = this.hoverCard.bind(this)
-    this.clickCard = this.clickCard.bind(this)
+    // this.clickCard = this.clickCard.bind(this)
   }
 
   componentDidMount() {
@@ -57,14 +57,14 @@ class PoiCard extends React.Component {
     highlight(this.props.details.id)
   }
 
-  clickCard() {
-    let zoomLevel = 11
-    if(this.props.details.id === getHash() && map.getZoom() < 14) {
-      zoomLevel = 14
-    }
-    moveTo(this.props.details.location, zoomLevel)
-    urlFor(this.props.details.id)
-  }
+  // clickCard() {
+  //   let zoomLevel = 11
+  //   if(this.props.details.id === getHash() && map.getZoom() < 14) {
+  //     zoomLevel = 14
+  //   }
+  //   moveTo(this.props.details.location, zoomLevel)
+  //   urlFor(this.props.details.id)
+  // }
 
   render() {
     return (
