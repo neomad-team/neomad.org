@@ -24,7 +24,7 @@ class PoiCard extends React.Component {
     })
     if(this.props.details.id === getHash()) {
       highlight(this.props.details.id)
-      superCard(this.props.details.id)
+      hashCard(this.props.details.id)
       firstCard(this.props.details.id)
     }
   }
@@ -58,7 +58,7 @@ class PoiCard extends React.Component {
   }
 
   clickCard() {
-    moveTo(this.props.details.location, 11)
+    moveTo(this.props.details.location)
     urlFor(this.props.details.id)
   }
 

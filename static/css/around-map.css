@@ -15,6 +15,8 @@ main {
   order: 2;
 }
 
+/* cards */
+
 #cards-wrap {
   display: flex;
   flex-direction: column;
@@ -70,13 +72,21 @@ main {
   align-self: flex-end;
 }
 
+.first-card {
+  /* need important to overide react build with leaflet order */
+  order: -1 !important;
+}
+.hash-card {
+  border: 0.2rem solid #3ba77c;
+}
+
 /* poi form */
 
 #open-form {
   display: flex;
   justify-content: center;
   height: 4rem;
-  background-color: #FEFEFE;
+  background-color: #fefefe;
   border: none;
   box-shadow: 0 0.25rem 0.25rem 0 rgba(0,0,0,0.2);
 }
@@ -91,11 +101,11 @@ main {
 }
 
 #open-form:hover svg {
-  fill: #3BA77C;
+  fill: #3va77c;
 }
 
 #open-form:hover p {
-  color: #3BA77C;
+  color: #3ba77c;
 }
 
 footer {
@@ -122,7 +132,7 @@ footer {
 #poi-form form {
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
+  background-color: #fff;
   padding: 1rem 0;
   width: 70rem;
   cursor: initial;
@@ -132,7 +142,7 @@ footer {
   text-align: center;
   font-size: 4rem;
   margin-top: 0.5rem;
-  color: #279E6A;
+  color: #279e6a;
 }
 
 #poi-form form ul {
@@ -169,7 +179,7 @@ footer {
 #poi-form input:focus,
 #poi-form textarea:focus,
 #poi-form select:focus {
-  border-color: #00BF6BEE;
+  border-color: #00bf6b;
 }
 
 #poi-form input[type=range] {
@@ -193,12 +203,12 @@ footer {
   height: 1.6rem;
   width: 1.6rem;
   border-radius: 50%;
-  background: #00BF6BEE;
+  background: #00bf6bee;
   margin-top: -0.4rem;
 }
 
 #poi-form input[type=range]:focus {
-  outline: #00BF6BEE;
+  outline: #00bf6bee;
 }
 
 #poi-form input[type=range]::-webkit-slider-runnable-track {
@@ -217,7 +227,7 @@ footer {
   height: 1.6rem;
   width: 1.6rem;
   border-radius: 50%;
-  background: #00BF6BEE;
+  background: #00bf6bee;
 }
 
 #poi-form input[type=range]:-moz-focusring{
@@ -248,7 +258,7 @@ footer {
     height: 1.6rem;
     width: 1.6rem;
     border-radius: 50%;
-    background: #00BF6BEE;
+    background: #00bfbeee;
 }
 
 #poi-form input[type=range]:focus::-ms-fill-lower {
@@ -280,19 +290,19 @@ footer {
 }
 
 #close-form svg path {
-  fill: #FFFFFF;
+  fill: #fff;
 }
 
 #save-form {
   width: 16rem;
   align-self: flex-end;
   margin: 0 13rem 1.5rem 0;
-  color: #FFFFFF;
-  background-color: #279E6A;
+  color: #fff;
+  background-color: #279e6a;
 }
 
 #save-form:hover {
-  background-color: #00BF6BEE;
+  background-color: #00bf6bee;
 }
 
 .visible {
@@ -300,39 +310,23 @@ footer {
 }
 
 /* marker */
-
 .marker {
   fill: #297ddb;
+}
+.hash-marker {
+  fill: #3ba77c;
+  /* leaflet native max at 1010 */
+  z-index: 1010!important;
 }
 
 /* current marker/card hovering */
 .current-card h2{
-  color: #9b9b9b;
+  color: #fc8428;
 }
 .current-marker {
-  /* need 201 with important to overide leaflet native at 200  */
-  z-index: 201 !important;
-}
-.current-marker svg {
-  fill: #9b9b9b;
-}
-
-.first-card {
-  /* need important to overide react build with leaflet order */
-  order: -1 !important;
-}
-
-
-
-
-
-.super-card {
-  border: 0.2rem solid #3ba77c;
-}
-.super-marker {
-  fill: #3ba77c;
-  /* need important to overide leaflet */
-  z-index: 9998!important;
+  fill: #fc8428;
+  /* leaflet native max at 1010 */
+  z-index: 1011 !important;
 }
 
 /* cards datas */

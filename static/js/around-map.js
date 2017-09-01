@@ -65,7 +65,7 @@ function addPoi (poi) {
 
   const hash = getHash()
   if(hash && hash === marker._icon.id) {
-    superCard(hash)
+    hashCard(hash)
     firstCard(hash)
     moveTo(poi.location, 11)
   }
@@ -80,12 +80,11 @@ worker.postMessage('')
 // events
 window.onhashchange = _ => {
   const hash = getHash()
-  superCard(hash)
+  hashCard(hash)
 }
 
 map.on('click', event => {
   const poi = findPoi(event.originalEvent.target.ownerDocument.activeElement.id)
-  console.log(poi);
   if(poi) {
     moveTo(poi.location)
     urlFor(poi.id)
@@ -140,24 +139,24 @@ function highlight (poi_id) {
   })
 }
 
-function superCard (poi_id) {
-  const superCard = document.querySelector('.super-card')
-  const superMarker = document.querySelector('.super-marker')
+function hashCard (poi_id) {
+  const hashCard = document.querySelector('.hash-card')
+  const superMarker = document.querySelector('.hash-marker')
   // querySelector don't works if poi_id begin with a number
   const selectedMarker = document.getElementById(poi_id)
   const selectedCard = document.querySelector(`#card-${poi_id}`)
-  if(superCard) {
-    superCard.classList.toggle('super-card')
+  if(hashCard) {
+    hashCard.classList.toggle('hash-card')
   }
   if(selectedCard) {
-    selectedCard.classList.toggle('super-card')
+    selectedCard.classList.toggle('hash-card')
   }
   if(superMarker) {
-    superMarker.classList.toggle('super-marker')
+    superMarker.classList.toggle('hash-marker')
     superMarker.classList.toggle('marker')
   }
   if(selectedMarker) {
-    selectedMarker.classList.add('super-marker')
+    selectedMarker.classList.add('hash-marker')
     selectedMarker.classList.remove('current-marker')
     selectedMarker.classList.remove('marker')
   }
