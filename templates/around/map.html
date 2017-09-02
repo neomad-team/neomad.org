@@ -77,6 +77,7 @@
       var currentLatLng = alert('localization', 'You do not allow localization, see you profile setting or use map controller')
     {% endif %}
   </script>
+  <script src={{ url_for('static', filename='js/map.js') }}></script>
   <script src={{ url_for('static', filename='js/around-map.js') }}></script>
   <script src={{ url_for('static', filename='components/App.js') }}></script>
 {% endblock %}
