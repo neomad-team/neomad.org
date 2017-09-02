@@ -19,7 +19,7 @@ class Comments extends React.Component {
     .map(key =>
       <li><p>{this.state.comments[key]}</p></li>
     )
-    if(comments[0] == [""]) {
+    if(comments[0] == ['']) {
       return (
         <li className='no-comments'>
           <p>No comments available</p>
