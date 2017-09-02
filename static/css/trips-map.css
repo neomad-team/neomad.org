@@ -2,7 +2,6 @@
   width: 100%;
   min-height: 62rem;
   top: -3.5rem;
-  z-index: 0;
 }
 
 svg {
@@ -17,4 +16,5 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 1;
 }

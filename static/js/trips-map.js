@@ -50,11 +50,11 @@ const lineCoords = []
 const latitudes = locations.map(loc => loc.position[0])
 const longitudes = locations.map(loc => loc.position[1])
 map.fitBounds([[
-    Math.min.apply(null, latitudes) - 1.5,
-    Math.min.apply(null, longitudes) - 1.5
+    Math.min.apply(null, latitudes) - 2,
+    Math.min.apply(null, longitudes) - 2
 ], [
-    Math.max.apply(null, latitudes) + 1.5,
-    Math.max.apply(null, longitudes) + 1.5
+    Math.max.apply(null, latitudes) + 2,
+    Math.max.apply(null, longitudes) + 2
 ]])
 
 // Last trips

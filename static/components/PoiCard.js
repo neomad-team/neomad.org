@@ -12,8 +12,9 @@ class PoiCard extends React.Component {
       from: {},
       to: {},
     }
-    // cf: https://facebook.github.io/react/docs/handling-events.html
-    this.hoverCard = this.hoverCard.bind(this)
+    // cf: https://facebook.github.io/react/docs/handlg-events.html
+    this.enterCard = this.enterCard.bind(this)
+    this.leaveCard = this.leaveCard.bind(this)
     this.clickCard = this.clickCard.bind(this)
   }
 
@@ -46,6 +47,7 @@ class PoiCard extends React.Component {
 
   renderDistance(distance) {
     if(distance < 15) return 'close to you'
+    if(!distance) return ''
     if(distance > 1000) {
       return `${Math.round(distance/1000)} km`
     } else {
@@ -53,8 +55,12 @@ class PoiCard extends React.Component {
     }
   }
 
-  hoverCard() {
+  enterCard() {
     highlight(this.props.details.id)
+  }
+
+  leaveCard() {
+    delight(this.props.details.id)
   }
 
   clickCard() {
@@ -67,8 +73,8 @@ class PoiCard extends React.Component {
       <div
         className='card'
         id={`card-${this.props.details.id}`}
-        onMouseEnter={this.hoverCard}
-        onMouseLeave={this.hoverCard}
+        onMouseEnter={this.enterCard}
+        onMouseLeave={this.leaveCard}
         onClick={this.clickCard}
         style={{order: this.calculateDistance(this.state.from, this.state.to)}}>
         <div className='card-distance'>{this.renderDistance(this.calculateDistance(this.state.from, this.state.to), this.state.unit)}</div>

@@ -49,7 +49,7 @@ const worker = new Worker('/static/js/webworker-around.js')
 let pois = []
 
 function addPoi (poi) {
-  const marker = L.marker(poi.location, { icon: icon, alt: poi.name}).addTo(map)
+  const marker = L.marker(poi.location, {icon: icon, alt: poi.name}).addTo(map)
   marker._icon.setAttribute('id', poi.id)
 
   // no pois-cards in mobile, using popup
@@ -117,6 +117,7 @@ function getHash () {
 
 function urlFor (id) {
   window.location.hash = id
+  highlight(id)
 }
 
 function findPoi (id) {
@@ -136,6 +137,11 @@ function getTwins (poi_id) {
 function highlight (poi_id) {
   getTwins(poi_id).forEach(el => {
     el.div.classList.toggle(`current-${el.class}`)
+  })
+}
+function delight (poi_id) {
+  getTwins(poi_id).forEach(el => {
+    el.div.classList.remove(`current-${el.class}`)
   })
 }
 
