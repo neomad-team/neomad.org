@@ -22,7 +22,7 @@ currentMarker.bindPopup(popup).openPopup()
 lineCoords.push(lastPosition.position)
 
 // Previous trips
-icon.options.className = "previous-marker"
+icon.options.className = 'previous-marker'
 locations.reverse().forEach(point => {
   
   const marker = L.marker(point.position, {icon: icon, alt: point.date}).addTo(map)
