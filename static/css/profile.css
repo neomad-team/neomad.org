@@ -34,6 +34,9 @@ main > header {
   flex: 1 1;
   padding-right: 3rem;
 }
+.profile-intro nav form div:first-of-type {
+  margin-bottom: 1rem;
+}
 .profile-intro h1 {
   font-weight: bold;
   margin: 0 auto;

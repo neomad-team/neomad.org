@@ -41,10 +41,6 @@
         <div>
           <input type=checkbox name=localize {% if user.allow_localization %}checked{% endif %} id=localize><label for=localize title="enable tracking my trips">Enable trip tracking</label>
         </div>
-      </form>
-      {% endif %}
-      {% if edit %}
-      <form>
         <div>
           <input type=checkbox name=public {% if user.allow_public %}checked{% endif %} id=public><label for=public title="enable my public profile">Enable public profile</label>
         </div>
