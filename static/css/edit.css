@@ -71,7 +71,7 @@ form[edit] .toolbar .delete:hover {
   position: relative;
   padding-left: 6rem;
   cursor: pointer;
-  padding-top: .25rem;
+  padding-top: .5rem;
   z-index: 5;
 
 }
