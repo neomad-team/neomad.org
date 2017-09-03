@@ -93,3 +93,9 @@ and "_mypass_" as password.
 
 > For development, you may want to create a whole set of dummy data.
 > To do so, just run: `make fixtures`
+
+### Work on around page
+
+Displaying pois cards from neomad's api on http://localhost/5000/around required preact (like react but lighter) 
+Run `npm run watch` to build the app with a watcher or `npm run build` if you want the compat form as in production.
+  
