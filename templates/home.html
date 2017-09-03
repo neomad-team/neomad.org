@@ -71,7 +71,6 @@
     <h2>Welcome to our last Neomads</h2>
     <ul>
       {% for user in users %}
-      {% if user.allow_public %}
       <li>
         <a href='{{ url_for_user(user) }}'>
           <figure>
@@ -79,7 +78,6 @@
           </figure>
         </a>
       </li>
-      {% endif %}
       {% endfor %}
     </ul>
     <a href={{ url_for('signup') }} class=action-button>Signup to join them</a>

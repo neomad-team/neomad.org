@@ -43,13 +43,6 @@
         </div>
       </form>
       {% endif %}
-      {% if edit %}
-      <form>
-        <div>
-          <input type=checkbox name=public {% if user.allow_public %}checked{% endif %} id=public><label for=public title="enable my public profile">Enable public profile</label>
-        </div>
-      </form>
-      {% endif %}
       <a class=trips href={{ url_for_trips(user) }}>{% if edit %}View my trips{% else %}View {{ user }}'s trips{% endif %}</a>
     </div>
   </nav>
@@ -85,14 +78,6 @@
     apiFeedback(call, 'Your localization preference has been updated.')
   })
   localizeField.addEventListener('change', event => event.target.checked && localize())
-  
-  const publicField = document.querySelector('[name=public]')
-  publicField.addEventListener('change', event => {
-    const call = api.send('patch', "{{ url_for('profile_edit') }}",
-      {allow_public: event.target.checked}
-    )
-    apiFeedback(call, 'Your public profile preference has been updated.')
-  })
 
   const aboutField = document.querySelector('[name=about]')
   aboutField.setAttribute('contenteditable', true)

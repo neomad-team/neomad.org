@@ -37,7 +37,6 @@ class User(UserMixin, db.Document):
     slug = db.StringField(unique=True)
     locations = db.EmbeddedDocumentListField(UserLocation, default=[])
     allow_localization = db.BooleanField()
-    allow_public = db.BooleanField()
     current_location = db.GeoPointField()
     socials = db.DictField()
 
