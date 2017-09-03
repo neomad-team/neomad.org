@@ -61,11 +61,21 @@ main {
 
 .card ul {
   padding: 0 0 0 2.5rem;
+  margin-bottom: 0;
 }
 
 .card ul li {
   display: flex;
   padding: 0 0 1rem 0;
+}
+
+.comments {
+  flex-direction: column;
+  padding: 0;
+}
+
+.comments p {
+  margin: 1rem 0 0 0;
 }
 
 .card-distance {
@@ -319,13 +329,12 @@ footer {
   z-index: 1010!important;
 }
 
-/* current marker/card hovering */
-.current-card h2{
+.current-card h2 {
   color: #fc8428;
 }
 .current-marker {
   fill: #fc8428;
-  /* leaflet native max at 1010 */
+  /* current marker/card hovering with 1011 */
   z-index: 1011 !important;
 }
 
