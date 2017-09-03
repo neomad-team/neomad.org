@@ -44,7 +44,7 @@ def privacy_delete_trip(date):
 @login_required
 def profile_edit():
     data = request.json
-    permitted_fields = ['username', 'about', 'allow_localization', 'socials']
+    permitted_fields = ['username', 'about', 'allow_localization', 'allow_public', 'socials']
     user = User.objects.get(id=current_user.id)
     for field, value in data.items():
         if not field in permitted_fields:
