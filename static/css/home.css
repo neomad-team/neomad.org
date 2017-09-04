@@ -43,7 +43,8 @@ section:first-child > div > h2 {
   padding: 1rem 6rem;
   font-weight: bold;
   border-radius: 2.5rem;
-  transition: all .3s ease;
+  transition: padding .3s ease;
+  z-index: 9;
 }
 #join-us:hover,
 #join-us.sticky:hover {
@@ -51,9 +52,8 @@ section:first-child > div > h2 {
 }
 #join-us.sticky {
   position: fixed;
-  top: 1rem;
-  z-index: 9;
-  padding: 0.5rem auto;
+  top: 1.5rem;
+  padding: .5rem 2rem;
 }
 #arrow-down {
   display: flex;
@@ -184,9 +184,11 @@ footer {
   #join-us {
     top: 31rem;
     left: 11.65rem;
+    z-index: inherit;
   }
   #join-us.sticky {
-    left: 18rem;
+    left: 16rem;
+    z-index: 9;
   }
   .column {
     flex-direction: column;
