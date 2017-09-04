@@ -72,3 +72,5 @@ class User(UserMixin, db.Document):
                 pass
         self.slug = slugify(self.username)
         return super().save(*args, **kwargs)
+
+    meta = {'ordering': ['-creation_date']}
