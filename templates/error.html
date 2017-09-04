@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ code }} - Digital Nomad Community{% endblock %} 
+{% block description %}Sorry for the inconveniance, let we bring back you to home.{% endblock %}
+
+{% block extra_css %}
+<link rel=stylesheet href={{ url_for('static', filename='css/error.css') }}>
+{% endblock %}
+
+{% block main %}
+
+<section>
+  <h2>Dont' worry, it's just a {{ code }}</h2>
+  <a href=/ class=action-button>Go back to home</a>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  console.debug('{{ error }}')
+</script>
+{% endblock %}
+
+{% include '_analytics.html' %}

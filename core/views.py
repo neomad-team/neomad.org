@@ -13,3 +13,12 @@ def home():
     articles = Article.objects.all()[:3]
     users = User.objects.all()[:3]
     return render_template('home.html', articles=articles, users=users)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error.html', error=e, code=404), 404
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template('error.html', error=e, code=500), 500
+    
