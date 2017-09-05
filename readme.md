@@ -96,6 +96,6 @@ and "_mypass_" as password.
 
 ### Work on around page
 
-Displaying pois cards from neomad's api on http://localhost/5000/around required preact (like react but lighter) 
-Run `npm run watch` to build the app with a watcher or `npm run build` if you want the compat form as in production.
+Displaying _/around/_ page depends on [Preact](https://preactjs.com/).
+You may build the assets running `npm run watch` when developing or `npm run build` for running the project.
   
