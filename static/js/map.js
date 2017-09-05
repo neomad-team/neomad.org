@@ -9,7 +9,12 @@ const map = L.map('map', {
 })
 
 new L.Control.Zoom({position: 'topright'}).addTo(map)
-const localizeUser = L.control.locate({position: 'topright', setView: 'untilPan', locateOptions: {maxZoom: 14}}).addTo(map)
+
+const localizeUser = new L.control.locate({
+  position: 'topright',
+  setView: 'untilPan',
+  locateOptions: {maxZoom: 14}
+  }).addTo(map)
 
 // create icon model
 const iconOptions = {
