@@ -3,7 +3,7 @@ const worker = new Worker('/static/js/webworker-around.js')
 let pois = []
 
 function addPoi (poi) {
-  const marker = L.marker(poi.location, {icon: icon, alt: poi.name}).addTo(map)
+  const marker = L.marker(poi.location, {icon:icon, setView:false, alt:poi.name}).addTo(map)
   marker._icon.setAttribute('id', poi.id)
 
   // no pois-cards in mobile, using popup
@@ -21,7 +21,7 @@ function addPoi (poi) {
   if(hash && hash === marker._icon.id) {
     hashCard(hash)
     firstCard(hash)
-    moveTo(poi.location, 11)
+    moveTo(poi.location, 13)
   }
 }
 
@@ -89,11 +89,17 @@ function getTwins (poi_id) {
 }
 
 function highlight (poi_id) {
+  document.querySelectorAll('.marker').forEach(marker => {
+    marker.classList.add('not-current-marker')
+  })
   getTwins(poi_id).forEach(el => {
-    el.div.classList.toggle(`current-${el.class}`)
+    el.div.classList.add(`current-${el.class}`)
   })
 }
 function delight (poi_id) {
+  document.querySelectorAll('.marker').forEach(marker => {
+    marker.classList.remove('not-current-marker')
+  })
   getTwins(poi_id).forEach(el => {
     el.div.classList.remove(`current-${el.class}`)
   })
@@ -118,6 +124,7 @@ function hashCard (poi_id) {
   if(selectedMarker) {
     selectedMarker.classList.add('hash-marker')
     selectedMarker.classList.remove('current-marker')
+    selectedMarker.classList.remove('not-current-marker')
     selectedMarker.classList.remove('marker')
   }
 }

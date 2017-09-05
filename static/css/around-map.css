@@ -44,6 +44,7 @@ main {
   background-color: #fefefe;
   cursor: pointer;
   margin-top: 2rem;
+  border: 0.2rem solid #fefefe;
 }
 .card:hover {
   box-shadow: 0 1rem 2rem 0 rgba(0,0,0,0.2);
@@ -323,19 +324,25 @@ footer {
 .marker {
   fill: #297ddb;
 }
+
 .hash-marker {
   fill: #3ba77c;
-  /* leaflet native max at 1010 */
-  z-index: 1010!important;
+  /* not current marker/card hovering with 1010 */
+  z-index: 1011 !important;
 }
 
 .current-card h2 {
-  color: #fc8428;
+  color: #297ddb;
+}
+.not-current-marker {
+  fill: #8f8f8f;
+  /* leaflet native max at 1010 */
+  z-index: 1010 !important;
 }
 .current-marker {
-  fill: #fc8428;
-  /* current marker/card hovering with 1011 */
-  z-index: 1011 !important;
+  fill: #297ddb;
+  /* hash marker hovering with 1012 */
+  z-index: 1012 !important;
 }
 
 /* cards datas */
