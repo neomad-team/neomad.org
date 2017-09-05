@@ -3,7 +3,7 @@ const worker = new Worker('/static/js/webworker-around.js')
 let pois = []
 
 function addPoi (poi) {
-  const marker = L.marker(poi.location, {icon:icon, setView:false, alt:poi.name}).addTo(map)
+  const marker = L.marker(poi.location, {icon:icon, alt:poi.name}).addTo(map)
   marker._icon.setAttribute('id', poi.id)
 
   // no pois-cards in mobile, using popup
@@ -52,13 +52,8 @@ function currentMarker (currentLatLng) {
   localizeUser.start()
 
   if (!window.location.hash) {
-    moveTo(currentLatLng, 11)
+    moveTo(currentLatLng, 13)
   }
-}
-
-function focusUser (latLng) {
-  moveTo(latLng, 11)
-  currentMarker(latLng)
 }
 
 function moveTo (latLng, zoom) {
@@ -71,7 +66,6 @@ function getHash () {
 
 function urlFor (id) {
   window.location.hash = id
-  highlight(id)
 }
 
 function findPoi (id) {

@@ -28,23 +28,7 @@ class App extends React.Component {
     })
     this.setState({mapBounds: map.getBounds()})
 
-    if(currentLatLng.length === 0) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const userPosition = [position.coords.latitude, position.coords.longitude]
-        this.setState({userPosition: userPosition})
-        if(getHash()) {
-          currentMarker(userPosition)
-        } else {
-          focusUser(userPosition)
-        }
-      }, function errorCallback (error) {
-        alert(`error navigator code is ${error.code} meaning`, error.message)
-      }, {
-        maximumAge: Infinity,
-        timeout: 5000
-      })
-    } else {
-      currentMarker(currentLatLng)
+    if(currentLatLng) {
       this.setState({userPosition: currentLatLng})
     }
   }

@@ -39,15 +39,16 @@ main {
   flex-direction: column;
   width: 49%;
   padding: 2rem;
-  box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.2);
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
   transition: 0.15s;
   background-color: #fefefe;
   cursor: pointer;
   margin-top: 2rem;
   border: 0.2rem solid #fefefe;
 }
+
 .card:hover {
-  box-shadow: 0 1rem 2rem 0 rgba(0,0,0,0.2);
+  box-shadow: 0 1rem 2rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .card h2 {
@@ -325,24 +326,26 @@ footer {
   fill: #297ddb;
 }
 
+.not-current-marker {
+  fill: #8f8f8f;
+  /* overide leaflet native max at 1010 */
+  z-index: 1010 !important;
+}
+
 .hash-marker {
   fill: #3ba77c;
-  /* not current marker/card hovering with 1010 */
+  /* overide regular markers */
   z-index: 1011 !important;
+}
+
+.current-marker {
+  fill: #297ddb;
+  /* overide other markers when you hover a card */
+  z-index: 1012 !important;
 }
 
 .current-card h2 {
   color: #297ddb;
-}
-.not-current-marker {
-  fill: #8f8f8f;
-  /* leaflet native max at 1010 */
-  z-index: 1010 !important;
-}
-.current-marker {
-  fill: #297ddb;
-  /* hash marker hovering with 1012 */
-  z-index: 1012 !important;
 }
 
 /* cards datas */
