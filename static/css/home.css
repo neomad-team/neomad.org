@@ -43,7 +43,8 @@ section:first-child > div > h2 {
   padding: 1rem 6rem;
   font-weight: bold;
   border-radius: 2.5rem;
-  transition: all .3s ease;
+  transition: padding .3s ease;
+  z-index: 9;
 }
 #join-us:hover,
 #join-us.sticky:hover {
@@ -51,9 +52,8 @@ section:first-child > div > h2 {
 }
 #join-us.sticky {
   position: fixed;
-  top: 1rem;
-  z-index: 9;
-  padding: 0.5rem auto;
+  top: 1.5rem;
+  padding: .5rem 2rem;
 }
 #arrow-down {
   display: flex;
@@ -76,19 +76,18 @@ section:first-child > div > h2 {
 
 #features,
 .articles,
+.profiles,
 footer {
   position: relative;
   top: -8.5rem;
 }
 
 #features h2,
-.articles > h2 {
+.articles > h2,
+.profiles > h2 {
+  font-size: 3.5rem;
   text-align: center;
   position: relative;
-}
-#features h2,
-.articles > h2 {
-  font-size: 3.5rem;
 }
 
 #features {
@@ -126,7 +125,7 @@ footer {
 }
 .articles .row {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .articles .row .preview a h1 {
   min-height: 8rem;
@@ -140,6 +139,32 @@ footer {
 .read.action-button {
   width: 50%;
   margin: 0 auto 0.5rem;
+}
+
+.profiles {
+  padding: 6rem 0;
+  display: flex;
+  flex-direction: column;
+}
+.profiles ul {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 20rem;
+  flex-wrap: wrap;
+}
+.profiles li {
+  margin: 1.5rem 3rem;
+}
+.profiles figure {
+  display: flex;
+  justify-content: center;
+}
+.profiles figure img {
+  margin: 0;
+}
+.profiles .action-button {
+  margin: 0 auto;
+  width: 20rem;
 }
 
 footer {
@@ -159,9 +184,11 @@ footer {
   #join-us {
     top: 31rem;
     left: 11.65rem;
+    z-index: inherit;
   }
   #join-us.sticky {
-    left: 18rem;
+    left: 16rem;
+    z-index: 9;
   }
   .column {
     flex-direction: column;
@@ -195,6 +222,9 @@ footer {
   .column {
     padding: 0 10rem;
   }
+  .profiles ul {
+    padding: 2rem 10rem;
+  }
 }
 
 @media screen and (max-width:620px) {
@@ -206,7 +236,7 @@ footer {
     left: 0;
     right: 0;
     text-align: center;
-    background-color: #279e6aee;
+    background-color: rgba(17, 195, 116, 0.8);
     border: none;
     font-weight: 300;
     border-radius: 0;
@@ -271,6 +301,9 @@ footer {
   }
   .column {
     padding: 0 3.5rem;
+  }
+  .profiles ul {
+    padding: 0 0 2.5rem;
   }
 }
 
