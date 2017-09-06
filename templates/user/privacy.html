@@ -29,10 +29,11 @@
       <li>
         <p>{{ location.date | datetime }}</p>
         <a 
-          href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }}
-          target=_blank>{{ location.position|join(',') }}
+           data-latlng={{ location.position|join(',') }}  
+           href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} 
+           target=_blank>{{ location.position|join(',') }}
         </a>
-        <form method=post action={{ url_for('privacy_delete_trip', date=location.date.timestamp()) }}>
+        <form method=post action={{ url_for('privacy_delete_trip', date=location.date.timestamp()) }}>  
           <a class=button href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} target=_blank>View on map</a>
           <button class=delete>Delete</button>
         </form>
@@ -69,7 +70,13 @@ communityField.addEventListener('change', event => {
   } else {
     apiFeedback(call, 'Your disable community mode, your hidden your profile and datas.')
   }
-  // TODO: find out a way to make all the changement on the page without realoading
+})
+
+Array.from(document.querySelectorAll('[data-latlng]')).forEach(a => {
+  coordinatesToAddress(a.dataset.latlng)
+  .then(data => {
+     a.textContent = `${data.area}, ${data.country}`
+  })
 })
 
 function apiFeedback(caller, confirmation) {
@@ -89,7 +96,7 @@ function apiFeedback(caller, confirmation) {
   })
 }
 
-const api = {
+ const api = {
   send(method, url, data) {
     return fetch(url, {
       method: method.toUpperCase(),

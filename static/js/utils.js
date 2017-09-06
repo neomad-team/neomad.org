@@ -15,6 +15,19 @@ function alert(type, message, delay) {
   }
 }
 
+function coordinatesToAddress (coordinates) {
+  const [lat, lng] = coordinates.split(',')
+  return fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`, {
+    mode: 'cors'
+  })
+  .then(r => r.json())
+  .then(d => {
+    const data = d.address
+    data['area'] = data.town || data.village || data.city
+    return data
+  })
+}
+
 window.onload = _ => {
   // section poisCards hidden marker overflow
   if(window.location.href.includes('around')) {
@@ -22,7 +35,7 @@ window.onload = _ => {
     const poisCards = document.querySelector('#poi-cards')
     poisCards.style.minHeight = `${canvas.height}px`
   }
-  
+
   const menu = document.querySelector('#menu')
   const avatar = document.querySelector('#avatar-menu')
   avatar.addEventListener('click', _ => {
