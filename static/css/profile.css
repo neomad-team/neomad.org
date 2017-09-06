@@ -96,20 +96,27 @@ main > header {
 }
 
 .profile-intro nav {
+  display: flex;
+  flex-wrap: wrap;
   flex-basis: 100%;
   order: 2;
   margin-top: 2rem;
 }
-.profile-intro nav .trips {
-  display: inline-block;
-  margin-top: 2rem;
+.profile-intro nav > form {
+  margin-top: 1rem;
+}
+.profile-intro nav > form > div:first-child {
+  margin-bottom: 2rem;
+}
+.profile-intro .trips {
+  padding: 0.5rem 3rem;
 }
 .profile-intro nav .trips::before {
   content: " ";
   display: block;
   width: 100%;
   height: 50px;
-  background: transparent url('/static/images/trips.png') no-repeat 50% 0;
+  background: transparent url('../images/trips.png') no-repeat 50% 0;
   background-size: 50px;
   vertical-align: middle;
 }

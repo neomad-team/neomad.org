@@ -15,7 +15,7 @@ class App extends React.Component {
     }
 
   componentDidMount() {
-    fetch('/around/spots.json')
+    fetch('/api/spots/')
       .then(response => response.json())
       .then(response => {
         this.setState({
@@ -53,10 +53,11 @@ class App extends React.Component {
     const cards = Object
       .keys(this.state.pois)
       .filter(key => {
-        return (this.state.pois[key].position.latitude <= this.state.mapBounds._ne.lat
-          && this.state.pois[key].position.latitude >= this.state.mapBounds._sw.lat
-          && this.state.pois[key].position.longitude <= this.state.mapBounds._ne.lng
-          && this.state.pois[key].position.longitude >= this.state.mapBounds._sw.lng)
+        const location = this.state.pois[key].location
+        return (location[0] <= this.state.mapBounds._ne.lat
+          && location[0] >= this.state.mapBounds._sw.lat
+          && location[1] <= this.state.mapBounds._ne.lng
+          && location[1] >= this.state.mapBounds._sw.lng)
       })
       .map(key =>
         <PoiCard

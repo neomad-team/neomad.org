@@ -11,4 +11,5 @@ from .helpers import url_for_user
 @app.route('/')
 def home():
     articles = Article.objects.all()[:3]
-    return render_template('home.html', articles=articles)
+    users = User.objects.all()[:3]
+    return render_template('home.html', articles=articles, users=users)
