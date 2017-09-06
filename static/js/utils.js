@@ -15,14 +15,7 @@ function alert(type, message, delay) {
   }
 }
 
-window.onload = _ => {
-  // section poisCards hidden marker overflow
-  if(window.location.href.includes('around')) {
-    const canvas = document.querySelector('canvas')
-    const poisCards = document.querySelector('#poi-cards')
-    poisCards.style.minHeight = `${canvas.height}px`
-  }
-  
+window.onload = _ => {  
   const menu = document.querySelector('#menu')
   const avatar = document.querySelector('#avatar-menu')
   avatar.addEventListener('click', _ => {
