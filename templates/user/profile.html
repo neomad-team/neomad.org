@@ -29,16 +29,19 @@
       <div>
         <h1 name=username>{{ user.username or 'Insert a username' }}</h1>
         <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
+        {% if user.allow_community %}
+        <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location|join(',') }}>test</a>
+        {% endif %}
       </div>
       <section class=social>
-        {% if user.socials.email %}
+      {% if user.socials.email %}
         <a class=email href=mailto:{{ user.socials.email }} title="Send an email">Send an email</a>
-        {% endif %}
-        {% for name, url in user.socials.items() %}
-        {% if name != 'email' and url %}
+      {% endif %}
+      {% for name, url in user.socials.items() %}
+      {% if name != 'email' and url %}
         <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
-        {% endif %}
-        {% endfor %}
+      {% endif %}
+      {% endfor %}
       </section>
       <nav>
         {% if edit %}
@@ -57,11 +60,8 @@
           </div>
         </form>
         {% endif %}
-      <p>
-        {{ user }} is currently <a href={{ url_for_trips(user) }}>around <em data-latlng={{ user.current_location|join(',') }}>the world</em></a>
-        {% if edit %}<a class=button href={{url_for('privacy')}}>Edit my locations</a>{% endif %}
-      </p>
-      <a class=trips href={{ url_for_trips(user) }}>{% if edit %}View my trips{% else %}View {{ user }}'s trips{% endif %}</a>
+        {% if edit %}<a class=action-button href={{url_for('privacy')}}>Edit my locations</a>{% endif %}
+        <a class=trips href={{ url_for_trips(user) }}>{% if edit %}View my trips{% else %}View {{ user }}'s trips{% endif %}</a>
       </div>
     </nav>
   </div>
@@ -230,4 +230,10 @@ const api = {
 }
 </script>
 {% endif %}
+<script>
+const a = document.querySelector('[data-latlng]')
+coordinatesToAddress(a.dataset.latlng).then(data => {
+  a.textContent = `${data.area}, ${data.country}`
+})
+</script>
 {% endblock %}

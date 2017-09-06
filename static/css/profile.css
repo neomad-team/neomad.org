@@ -101,6 +101,7 @@ main > header {
   flex-basis: 100%;
   order: 2;
   margin-top: 2rem;
+  align-items: end;
 }
 .profile-intro nav > form {
   margin-top: 1rem;
