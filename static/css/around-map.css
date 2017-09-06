@@ -11,9 +11,11 @@ main {
   position: fixed;
   right: 0;
   width: 50%;
-  min-height: 100%;
+  min-height: 80%;
   order: 2;
 }
+
+/* cards */
 
 #cards-wrap {
   display: flex;
@@ -37,14 +39,16 @@ main {
   flex-direction: column;
   width: 49%;
   padding: 2rem;
-  box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.2);
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
   transition: 0.15s;
   background-color: #fefefe;
   cursor: pointer;
   margin-top: 2rem;
+  border: 0.2rem solid #fefefe;
 }
+
 .card:hover {
-  box-shadow: 0 1rem 2rem 0 rgba(0,0,0,0.2);
+  box-shadow: 0 1rem 2rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .card h2 {
@@ -59,6 +63,7 @@ main {
 
 .card ul {
   padding: 0 0 0 2.5rem;
+  margin-bottom: 0;
 }
 
 .card ul li {
@@ -66,8 +71,25 @@ main {
   padding: 0 0 1rem 0;
 }
 
+.comments {
+  flex-direction: column;
+  padding: 0;
+}
+
+.comments p {
+  margin: 1rem 0 0 0;
+}
+
 .card-distance {
   align-self: flex-end;
+}
+
+.first-card {
+  /* need important to overide react build with leaflet order */
+  order: -1 !important;
+}
+.hash-card {
+  border: 0.2rem solid #3ba77c;
 }
 
 /* poi form */
@@ -76,7 +98,7 @@ main {
   display: flex;
   justify-content: center;
   height: 4rem;
-  background-color: #FEFEFE;
+  background-color: #fefefe;
   border: none;
   box-shadow: 0 0.25rem 0.25rem 0 rgba(0,0,0,0.2);
 }
@@ -91,11 +113,11 @@ main {
 }
 
 #open-form:hover svg {
-  fill: #3BA77C;
+  fill: #3va77c;
 }
 
 #open-form:hover p {
-  color: #3BA77C;
+  color: #3ba77c;
 }
 
 footer {
@@ -114,27 +136,30 @@ footer {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 2;
   overflow: scroll;
+  z-index: 10;
+  cursor: pointer;
 }
 
 #poi-form form {
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
+  background-color: #fff;
   padding: 1rem 0;
   width: 70rem;
+  cursor: initial;
 }
 
 #poi-form h2 {
   text-align: center;
   font-size: 4rem;
   margin-top: 0.5rem;
-  color: #279E6A;
+  color: #279e6a;
 }
 
 #poi-form form ul {
   list-style: none;
+  margin-left: 4rem;
 }
 
 #poi-form form li {
@@ -166,7 +191,7 @@ footer {
 #poi-form input:focus,
 #poi-form textarea:focus,
 #poi-form select:focus {
-  border-color: #00BF6BEE;
+  border-color: #00bf6b;
 }
 
 #poi-form input[type=range] {
@@ -190,12 +215,12 @@ footer {
   height: 1.6rem;
   width: 1.6rem;
   border-radius: 50%;
-  background: #00BF6BEE;
+  background: #00bf6bee;
   margin-top: -0.4rem;
 }
 
 #poi-form input[type=range]:focus {
-  outline: #00BF6BEE;
+  outline: #00bf6bee;
 }
 
 #poi-form input[type=range]::-webkit-slider-runnable-track {
@@ -214,7 +239,7 @@ footer {
   height: 1.6rem;
   width: 1.6rem;
   border-radius: 50%;
-  background: #00BF6BEE;
+  background: #00bf6bee;
 }
 
 #poi-form input[type=range]:-moz-focusring{
@@ -245,7 +270,7 @@ footer {
     height: 1.6rem;
     width: 1.6rem;
     border-radius: 50%;
-    background: #00BF6BEE;
+    background: #00bfbeee;
 }
 
 #poi-form input[type=range]:focus::-ms-fill-lower {
@@ -277,79 +302,53 @@ footer {
 }
 
 #close-form svg path {
-  fill: #FFFFFF;
+  fill: #fff;
 }
 
 #save-form {
-  width: 10rem;
-  align-self: center;
-  margin: 2rem 0 2rem 35rem;
-  color: #FFFFFF;
-  background-color: #279E6A;
+  width: 16rem;
+  align-self: flex-end;
+  margin: 0 13rem 1.5rem 0;
+  color: #fff;
+  background-color: #279e6a;
 }
 
 #save-form:hover {
-  background-color: #00BF6BEE;
-}
-
-/* ===================================== */
-/* OSM & Preact build CSS into html tag  */
-
-.mapboxgl-canvas-container {
-  position: fixed !important;
-}
-
-.super-card {
-  border: 0.2rem solid #3ba77c !important;
-}
-
-.first-card {
-  order: 0 !important;
-}
-
-.current-marker {
-  border: 0.4rem solid #3ba77c !important;
-  z-index: 1;
+  background-color: #00bf6bee;
 }
 
 .visible {
   display: flex !important;
 }
 
-/* ===================================== */
-
-.super-marker {
-  background-image: url('/static/images/marker-green.png');
-  background-size: cover;
-  cursor: pointer;
-  width: 2rem;
-  height: 3rem;
-  border-radius: 0;
-  background-color: transparent;
-  border: transparent;
-  z-index: 2;
-  left: -0.4rem;
-  top: -2rem;
+/* marker */
+.marker {
+  fill: #297ddb;
 }
 
-.current-card > h2 {
-  color: #3ba77c;
+.not-current-marker {
+  fill: #8f8f8f;
+  /* overide leaflet native max at 1010 */
+  z-index: 1010 !important;
 }
 
-.marker.current {
-  background-image: url('/static/images/marker-red.png');
-  z-index: 1;
+.hash-marker {
+  fill: #3ba77c;
+  /* overide regular markers */
+  z-index: 1011 !important;
 }
 
-.mapboxgl-popup {
-  width: 50%;
-  z-index: 2;
-  top: -1.9rem;
+.current-marker {
+  fill: #297ddb;
+  /* overide other markers when you hover a card */
+  z-index: 1012 !important;
 }
 
-.mapboxgl-popup-content p {
-  text-align: center;
+.current-card h2 {
+  color: #297ddb;
 }
+
+/* cards datas */
 
 /* star rank */
 li > svg {
@@ -392,30 +391,7 @@ li > svg {
   fill: #3ba77c;
 }
 
-/* comments */
-
-.comments {
-  flex-direction: column;
-}
-
-.comments p,
-.no-comments p {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-.no-comments p {
-  font-style: italic;
-}
-
-.comments ul {
-  padding: 0 0 0 1rem;
-}
-
-.comments li {
-  font-size: 1.5rem;
-  padding: 0;
-}
+/* responsive */
 
 @media screen and (max-width: 1280px) {
   .card {
@@ -443,19 +419,6 @@ li > svg {
     width: 100%;
   }
   
-  .mapboxgl-popup-content {
-    padding: 1rem;
-  }
-  
-  .mapboxgl-popup-content h2 {
-    margin: 1rem 0 0 0;
-  }
-  
-  .mapboxgl-popup-content ul {
-    list-style: none;
-    padding-left: 1rem;
-  }
-  
   #cards-wrap {
     width: auto;
     padding: 0;
@@ -473,5 +436,39 @@ li > svg {
   #open-form p {
     font-size: 1.25rem;
     margin: 0.25rem 0 0 0;
+  }
+  
+  #poi-form {
+    padding: 1rem;
+  }
+  
+  #poi-form form {
+    width: 50rem;
+  }
+  
+  #poi-form h2 {
+    font-size: 3rem;
+    margin: 0 0 0.5rem;
+  }
+
+  #poi-form form ul {
+    margin-left: 0;
+    padding: 2rem 0 2rem 2rem;
+  }
+  
+  #poi-form label {
+    width: 15rem;
+    font-size: 1.5rem;
+  }
+  
+  #poi-form input[type="text"],
+  #poi-form input[type="range"],
+  #poi-form textarea,
+  #poi-form select {
+    width: 60%;
+  }
+  
+  #save-form {
+    margin-right: 4.5rem;
   }
 }

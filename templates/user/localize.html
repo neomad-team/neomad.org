@@ -1,17 +1,21 @@
 {% if current_user and current_user.is_authenticated %}
-<script>
-function localize() {
-  navigator.geolocation.getCurrentPosition(position => {
-    fetch("{{ url_for('trips_add') }}", {
-      method: 'post',
-      body: JSON.stringify([position.coords.latitude, position.coords.longitude]),
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+  <script>
+  function localize() {
+    navigator.geolocation.getCurrentPosition(position => {
+      fetch("{{ url_for('trips_add') }}", {
+        method: 'post',
+        body: JSON.stringify([position.coords.latitude, position.coords.longitude]),
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
     })
-  })
-}
-{% if current_user and current_user.allow_localization %}localize(){% endif %}
-</script>
+  }
+  </script>
+{% endif %}
+{% if current_user and current_user.allow_localization %}
+  <script>
+    localize()
+  </script>
 {% endif %}
