@@ -4,9 +4,8 @@ from werkzeug.exceptions import NotFound, InternalServerError
 
 from blog.models import Article
 from user.models import User
-from . import app
 from .helpers import url_for_user
-
+from . import app
 
 
 @app.route('/')
@@ -14,6 +13,7 @@ def home():
     articles = Article.objects.all()[:3]
     users = User.objects.all()[:3]
     return render_template('home.html', articles=articles, users=users)
+
 
 @app.errorhandler(NotFound)
 def error_404(e):
