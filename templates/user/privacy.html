@@ -1,41 +1,103 @@
 {% extends "layout.html" %}
 
-{% block main %}
-<style>
-table {
-  margin: 0 auto;
-  border-collapse: collapse;
-}
-tr:not(:first-child,:last-child) {
-  border-bottom: 1px solid #ccc;
-}
-td {
-  padding: 1rem;
-}
-.delete {
-  background-color: #fee7e7;
-  color: #a24343;
-  border-color: #dab2b2;
-}
-</style>
+{% block extra_css %}
+<link rel=stylesheet href={{ url_for('static', filename='css/privacy.css') }}>
+{% endblock %}
 
-<table>
-  <tr>
-    <th>Date</th>
-    <th>Location</th>
-    <th>Action</th>
-  </tr>
-{% for location in locations %}
-  <tr>
-    <td>{{ location.date | datetime }}</td>
-    <td><a href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} target=_blank>{{ location.position|join(',') }}</a></td>
-    <td>
-      <form method=post action={{ url_for('privacy_delete_trip',
-                                            date=location.date.timestamp()) }}>
-      <a class=button href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} target=_blank>View on map</a>
-      <button class=delete>Delete</button>
-    </form></td>
-  </tr>
-{% endfor %}
-</table>
+{% block main %}
+<section>
+  <article>
+    <form>
+      <div>
+        <input type=checkbox name=localize {% if user.allow_localization %}checked{% endif %} id=localize>
+        <label for=localize title="enable tracking my trips">
+          {% if user.allow_localization %}Disable{% else %}Enable{% endif %} trip tracking
+        </label>
+      </div>
+      <div>
+        <input type=checkbox name=community {% if user.allow_community %}checked{% endif %} id=community>
+        <label for=community title="enable my community profile">
+          {% if user.allow_community %}Disable{% else %}Enable{% endif %} community profile
+        </label>
+      </div>
+    </form>
+  </article>
+  <article>
+    <h2>List of your trip positions</h2>
+    <ul>
+      {% for location in locations %}
+      <li>
+        <p>{{ location.date | datetime }}</p>
+        <a 
+          href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }}
+          target=_blank>{{ location.position|join(',') }}
+        </a>
+        <form method=post action={{ url_for('privacy_delete_trip', date=location.date.timestamp()) }}>
+          <a class=button href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} target=_blank>View on map</a>
+          <button class=delete>Delete</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>   
+  </article>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const localizeField = document.querySelector('[name=localize]')
+localizeField.addEventListener('change', event => {
+  const call = api.send('patch', "{{ url_for('profile_edit') }}",
+    {allow_localization: event.target.checked}
+  )
+  if (event.target.checked) {
+    apiFeedback(call, 'Your enable your localization.')
+  } else {
+    apiFeedback(call, 'Your disable your localization.')
+  }
+})
+localizeField.addEventListener('change', event => event.target.checked && localize())
+
+const communityField = document.querySelector('[name=community]')
+communityField.addEventListener('change', event => {
+  console.log(event.target.checked);
+  const call = api.send('patch', "{{ url_for('profile_edit') }}",
+    {allow_community: event.target.checked}
+  )
+  if (event.target.checked) {
+    apiFeedback(call, 'You enable community mode, you share your informations and authorized contents.')
+  } else {
+    apiFeedback(call, 'Your disable community mode, your hidden your profile and datas.')
+  }
+  // TODO: find out a way to make all the changement on the page without realoading
+})
+
+function apiFeedback(caller, confirmation) {
+  return caller.then(response => {
+    const status = response.status
+    if(200 <= status < 300) {
+      alert('success', confirmation)
+    }
+    else {
+      alert('error', `An error occured. Technical detail: response status ${status}`)
+      console.error(response)
+    }
+    return response
+  }, error => {
+    alert('error', error)
+    return error
+  })
+}
+
+const api = {
+  send(method, url, data) {
+    return fetch(url, {
+      method: method.toUpperCase(),
+      body: JSON.stringify(data),
+      credentials: 'same-origin',
+      headers: {'Content-Type': 'application/json'}
+    })
+  }
+}
+</script>
 {% endblock %}
