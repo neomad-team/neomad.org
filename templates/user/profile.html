@@ -19,7 +19,7 @@
 <header>
   <div class="profile-intro wrapper">
     <figure>
-      <img class=avatar-img name=avatar src={{ user.avatar }} width=100 height=100 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
+      <img name=avatar src={{ user.avatar }} width=100 height=100 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
     </figure>
     <div>
       <h1 name=username>{{ user.username or 'Insert a username' }}</h1>

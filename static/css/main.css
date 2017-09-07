@@ -92,7 +92,8 @@ body > header nav a {
   cursor: pointer;
 }
 .avatar img,
-.profile-intro img {
+.profile-intro img,
+.profiles img {
   display: inline-block;
   vertical-align: middle;
   border: 1px solid #666;
