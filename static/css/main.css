@@ -93,7 +93,8 @@ body > header nav a {
 }
 .avatar img,
 .profile-intro img,
-.profiles img {
+.profiles img,
+.meta img {
   display: inline-block;
   vertical-align: middle;
   border: 1px solid #666;
@@ -240,6 +241,9 @@ figure {
 .meta .reading-time::before {
   content: "-";
   margin-right: 0.5em;
+}
+.meta img {
+  margin-right: 1.25rem;
 }
 
 button,
