@@ -5,4 +5,3 @@ __pycache__/
 /static/uploads/*
 /node_modules/
 /static/components/App.js
-/static/dist
