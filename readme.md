@@ -93,3 +93,9 @@ and "_mypass_" as password.
 
 > For development, you may want to create a whole set of dummy data.
 > To do so, just run: `make fixtures`
+
+### Work on around page
+
+Displaying _/around/_ page depends on [Preact](https://preactjs.com/).
+You may build the assets running `npm run watch` when developing or `npm run build` for running the project.
+  

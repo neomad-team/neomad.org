@@ -9,23 +9,17 @@
 {% endblock %}
 
 {% block extra_css %}
-<link href=https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css rel=stylesheet>
 <link rel=stylesheet href={{ url_for('static', filename='css/trips-map.css') }}>
-<script src=https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.js></script>
- {% endblock %}
+<!-- leaflet -->
+<link rel=stylesheet href=https://unpkg.com/leaflet@1.2.0/dist/leaflet.css integrity=sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ== crossorigin=/>
+<script src=https://unpkg.com/leaflet@1.2.0/dist/leaflet.js integrity=sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log== crossorigin=></script>
+<!-- leaflet.leaflet-locatecontrol -->
+<link rel=stylesheet href=//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css>
+<script src=https://domoritz.github.io/leaflet-locatecontrol/dist/L.Control.Locate.min.js charset=utf-8></script>
+{% endblock %}
 
 {% block main %}
-
-<div class=wrapper>
-  <h1>Where <em>{{ user }}</em> has traveled</h1>
-</div>
 <div id=map></div>
-{% for point in points %}
-<p>{{ point }}</p>
-{% endfor %}
-{% if not user.allow_localization %}
-<p>{{user}} did not permit localization. Unfortunatly we cannot build the maps with his trips.</p>
-{% endif %}
 <script>
   var current_location = {{ user.current_location or [] }}
   var locations = [
@@ -37,5 +31,6 @@
   {% endfor %}
   ]
 </script>
+<script src={{ url_for('static', filename='js/map.js') }}></script>
 <script src={{ url_for('static', filename='js/trips-map.js') }}></script>
 {% endblock %}
