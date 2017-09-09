@@ -9,11 +9,11 @@ from . import app
 
 
 @app.route('/')
-def home():
-    articles = Article.objects.all()[:3]
+def home(): 
+    articles = Article.published()[:3]
     users = User.objects.all()[:3]
-    return render_template('home.html', articles=articles, users=users)
-
+    return render_template('home.html', articles=articles)
+ 
 
 @app.errorhandler(NotFound)
 def error_404(e):

@@ -1,10 +1,12 @@
 import os
+import datetime
+
 from unittest import TestCase
 
+from user.models import User
 from .models import Article
 from core import app
 from blog import views
-from user.models import User
 from user import views
 from auth import views
 from around import views
@@ -26,11 +28,12 @@ class ArticleTest(TestCase):
         self.assertEqual(result.status_code, 200)
 
     def test_articles_with_an_article(self):
-        article = Article(title='<h1>title</h1>', content='<p>content</p>')
-        article.author = self.user
-        article.save()
+        Article(title='A title for article',
+                content='<p>content</p>',
+                publication_date=datetime.datetime.utcnow(),
+                author=self.user).save()
         result = self.client.get('/articles/')
-        self.assertIn(b'<article class=preview>', result.data)
+        self.assertIn(b'A title for article', result.data)
 
     def test_read_article_unauthenticated(self):
         article = Article(title='<h1>title</h1>', content='<p>content</p>')
@@ -165,3 +168,17 @@ class ArticleTest(TestCase):
                           content='<p>The content of the article is in '
                                   'English</p>').save()
         self.assertTrue(article.language, 'en')
+
+    def test_article_appear_by_default_in_articles(self):
+        Article(title='A title for an article', content='<p>content</p>',
+                publication_date=datetime.datetime.utcnow(),
+                author=self.user).save()
+        result = self.client.get('/articles/')
+        self.assertIn(b'A title for an article', result.data)
+
+    def test_unpublished_article_does_not_appear_in_articles(self):
+        Article(title='title', content='<p>content</p>',
+                publication_date=None,
+                author=self.user).save()
+        result = self.client.get('/articles/')
+        self.assertNotIn(b'<article class=preview>', result.data)
