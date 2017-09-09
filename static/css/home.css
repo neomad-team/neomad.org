@@ -122,6 +122,7 @@ footer {
 }
 .articles .preview {
   margin: 2rem;
+  width: 100%;
 }
 .articles .row {
   display: flex;

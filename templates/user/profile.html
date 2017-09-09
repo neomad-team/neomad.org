@@ -30,16 +30,17 @@
       <a class=email href=mailto:{{ user.socials.email }} title="Send an email">Send an email</a>
       {% endif %}
       {% for name, url in user.socials.items() %}
-      {% if name != 'email' and url %}
-      <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
-      {% endif %}
+        {% if name != 'email' and url %}
+        <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
+        {% endif %}
       {% endfor %}
     </section>
     <nav>
       {% if edit %}
       <form>
         <div>
-          <input type=checkbox name=localize {% if user.allow_localization %}checked{% endif %} id=localize><label for=localize title="enable tracking my trips">Enable trip tracking</label>
+          <input type=checkbox name=localize {% if user.allow_localization %}checked{% endif %} id=localize>
+          <label for=localize title="enable tracking my trips">Enable trip tracking</label>
         </div>
       </form>
       {% endif %}
@@ -69,7 +70,7 @@
     )
     apiFeedback(call, 'Your username has been updated.')
   })
-
+  
   const localizeField = document.querySelector('[name=localize]')
   localizeField.addEventListener('change', event => {
     const call = api.send('patch', "{{ url_for('profile_edit') }}",
@@ -78,6 +79,15 @@
     apiFeedback(call, 'Your localization preference has been updated.')
   })
   localizeField.addEventListener('change', event => event.target.checked && localize())
+
+  const publishField = document.querySelector('[name=publish]')
+  publishField.addEventListener('change', event => {
+    const call = api.send('post', event.target.form.action,
+      {is_published: event.target.checked}
+    )
+    apiFeedback(call, 'Your publish preference has been updated.')
+  })
+  publishField.addEventListener('change', event => event.target.checked)
 
   const aboutField = document.querySelector('[name=about]')
   aboutField.setAttribute('contenteditable', true)
