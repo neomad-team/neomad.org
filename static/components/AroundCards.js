@@ -30,6 +30,7 @@ class App extends React.Component {
 
     if(currentLatLng) {
       this.setState({userPosition: currentLatLng})
+      currentMarker (currentLatLng)
     }
   }
 
