@@ -29,5 +29,9 @@
     "webpack": "^1.13.1",
     "preact": "^8.1.0",
     "preact-compat": "^3.16.0"
+  },
+  "dependencies": {
+    "leaflet": "^1.2.0",
+    "leaflet.locatecontrol": "^0.62.0"
   }
 }
