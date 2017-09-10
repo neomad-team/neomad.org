@@ -15,7 +15,7 @@
       {% else %}
       <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
       {% endif %}
-      {% if not article.is_published %}
+      {% if not article.publication_date %}
       <div class=ribbon-wrapper>
         <a href={{ url }} class=ribbon>draft</a>
       </div>

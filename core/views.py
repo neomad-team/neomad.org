@@ -12,7 +12,7 @@ from . import app
 def home(): 
     articles = Article.published()[:3]
     users = User.objects.all()[:3]
-    return render_template('home.html', articles=articles)
+    return render_template('home.html', articles=articles, users=users)
  
 
 @app.errorhandler(NotFound)
