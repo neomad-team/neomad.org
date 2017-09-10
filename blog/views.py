@@ -68,7 +68,7 @@ def article_edit(id):
         abort(404)
     article.title = request.form.get('title')
     article.content = clean_html(request.form.get('content'))
-    if request.form.get('is_published') != '':
+    if request.form.get('published') != '':
         article.publication_date = datetime.datetime.utcnow()
     else:
         article.publication_date = None
