@@ -39,7 +39,7 @@
     </ul>
   {% endif %}
 
-  {% if not article.is_published %}
+  {% if not article.publication_date %}
   <div class=ribbon-wrapper>
     <div class=ribbon>draft</div>
   </div>
@@ -71,7 +71,7 @@
   <div class=toolbar>
     <input type=hidden name=title>
     <input type=hidden name=content>
-    <input type=hidden name=is_published>
+    <input type=hidden name=published>
     <button type=submit class=save value="">Save as draft</button>
     <button type=submit class=save value=true>Save and publish</button>
     {% if article.id %}
@@ -104,7 +104,7 @@
     const form = event.target
     form.title.value = document.querySelector('[contenteditable][name=title]').textContent
     form.content.value = document.querySelector('[contenteditable][name=content]').innerHTML
-    form.is_published.value = event.explicitOriginalTarget.value
+    form.published.value = event.explicitOriginalTarget.value
   })
 </script>
 {% endif %}
