@@ -6,13 +6,13 @@ import PoiCard from './PoiCard'
 class App extends React.Component {
 
   constructor(props) {
-      super(props)
-      this.state = {
-        pois: {},
-        userPosition: [],
-        mapBounds: {}
-      }
+    super(props)
+    this.state = {
+      pois: {},
+      userPosition: [],
+      mapBounds: {}
     }
+  }
 
   componentDidMount() {
     fetch('/api/spots/')
