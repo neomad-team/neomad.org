@@ -91,7 +91,10 @@ body > header nav a {
 .avatar {
   cursor: pointer;
 }
-.avatar img {
+.avatar img,
+.profile-intro img,
+.profiles img,
+.meta img {
   display: inline-block;
   vertical-align: middle;
   border: 1px solid #666;
@@ -239,10 +242,8 @@ figure {
   content: "-";
   margin-right: 0.5em;
 }
-
-.avatar-img {
-  border-radius: 100%;
-  margin-right: 1rem;
+.meta img {
+  margin-right: 1.25rem;
 }
 
 button,

@@ -3,10 +3,12 @@
 {% block title %}Around you{% endblock %}
 
 {% block extra_css %}
-  <link rel=stylesheet href=https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css >
-  <link rel=stylesheet href={{ url_for('static', filename='css/trips-map.css') }}>
-  <link rel=stylesheet href={{ url_for('static', filename='css/around-map.css') }}>
-  <script src=https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.js></script>
+<link rel=stylesheet href={{ url_for('static', filename='css/around-map.css') }}>
+<link rel=stylesheet href={{ url_for('static', filename='dist/leaflet/leaflet.css') }}>
+<link rel=stylesheet href={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.css') }}>
+
+<script src={{ url_for('static', filename='dist/leaflet/leaflet.js') }}></script>
+<script src={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.min.js') }}></script>
 {% endblock %}
 
 {% block main %}
@@ -67,16 +69,13 @@
 
 {% block extra_js %}
   <script>
-    var currentLatLng = {{ current_user.current_location or [] }}
-    var locations = [
-    {% for user in users %}
-      {
-        location: {{ user.current_location }},
-        user: "{{ user }}"
-      },
-    {% endfor %}
-    ]
+    {% if current_user and current_user.allow_localization %}
+      var currentLatLng = {{ current_user.current_location or [] }}
+    {% else %}
+      var currentLatLng = alert('localization', 'You do not allow localization, see you profile setting or use map controller')
+    {% endif %}
   </script>
+  <script src={{ url_for('static', filename='js/map.js') }}></script>
   <script src={{ url_for('static', filename='js/around-map.js') }}></script>
   <script src={{ url_for('static', filename='components/App.js') }}></script>
 {% endblock %}

@@ -7,6 +7,7 @@ help:
 server_update:
 	@make title text="Fetching prod branch and updating sources."
 	ssh neomad "${goto_src} && ${git_update}"
+	ssh neomad "${goto_src} && npm install"
 
 server_reload:
 	@make title text="Recreating the server."

@@ -29,16 +29,11 @@ function coordinatesToAddress (coordinates) {
 }
 
 window.onload = _ => {
-  // section poisCards hidden marker overflow
-  if(window.location.href.includes('around')) {
-    const canvas = document.querySelector('canvas')
-    const poisCards = document.querySelector('#poi-cards')
-    poisCards.style.minHeight = `${canvas.height}px`
-  }
-
   const menu = document.querySelector('#menu')
-  const avatar = document.querySelector('#avatar-menu')
-  avatar.addEventListener('click', _ => {
-    menu.classList.toggle('active')
-  })
+  if (menu) {
+    const avatar = document.querySelector('#avatar-menu')
+    avatar.addEventListener('click', _ => {
+      menu.classList.toggle('active')
+    })
+  }
 }
