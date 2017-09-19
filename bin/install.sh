@@ -12,6 +12,4 @@ pip3 install -r requirements.txt
 make title text="Running your dabase"
 docker-compose up -d db
 
-make create_user email="my@email.com" password="mypass"
-
 make start

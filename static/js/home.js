@@ -6,7 +6,7 @@ function adaptButtonPosition() {
 }
 
 function stickyJoinButton(event) {
-  let diff = (event.pageY - buttonPosition)
+  let diff = (event.currentTarget.pageYOffset - buttonPosition)
   button.classList.toggle('sticky', diff > 0)
 }
 

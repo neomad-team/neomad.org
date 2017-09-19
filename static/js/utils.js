@@ -15,10 +15,12 @@ function alert(type, message, delay) {
   }
 }
 
-window.onload = _ => {  
+window.onload = _ => {
   const menu = document.querySelector('#menu')
-  const avatar = document.querySelector('#avatar-menu')
-  avatar.addEventListener('click', _ => {
-    menu.classList.toggle('active')
-  })
+  if (menu) {
+    const avatar = document.querySelector('#avatar-menu')
+    avatar.addEventListener('click', _ => {
+      menu.classList.toggle('active')
+    })
+  }
 }
