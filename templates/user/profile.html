@@ -2,7 +2,7 @@
 {% extends 'layout.html' %}
 
 {% block title %}{{ user|capitalize }}'s profile{% endblock %}
-{% block description %}{{ user|capitalize }} is on Neomad with {{ articles.count() }} articles published and travels tracking {% if user.allow_localization %}enabled{% else %}disabled{% endif %}.{% endblock %}
+{% block description %}{{ user|capitalize }} is on Neomad with {{ articles.count() }} articles published and travels tracking {% if user.allow_community %}enabled{% else %}disabled{% endif %}.{% endblock %}
 
 {% block extra_og %}
 <meta property=og:image content="{{ request.url_root[:-1] }}{{ user.avatar }}">
@@ -30,7 +30,7 @@
         <h1 name=username>{{ user.username or 'Insert a username' }}</h1>
         <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
         {% if user.allow_community %}
-        <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location|join(',') }}>test</a>
+        <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location|join(',') }}></a>
         {% endif %}
       </div>
       <section class=social>
@@ -45,23 +45,9 @@
       </section>
       <nav>
         {% if edit %}
-        <form>
-          <div>
-            <input type=checkbox name=localize {% if user.allow_localization %}checked{% endif %} id=localize>
-            <label for=localize title="enable tracking my trips">
-              {% if user.allow_localization %}Disable{% else %}Enable{% endif %} trip tracking
-            </label>
-          </div>
-          <div>
-            <input type=checkbox name=community {% if user.allow_community %}checked{% endif %} id=community>
-            <label for=community title="enable my community profile">
-              {% if user.allow_community %}Disable{% else %}Enable{% endif %} community profile
-            </label>
-          </div>
-        </form>
+        <a class="action-button settings" href={{ url_for('privacy') }}>Set my privacy settings</a>
         {% endif %}
-        {% if edit %}<a class=action-button href={{url_for('privacy')}}>Edit my locations</a>{% endif %}
-        <a class=trips href={{ url_for_trips(user) }}>{% if edit %}View my trips{% else %}View {{ user }}'s trips{% endif %}</a>
+        <a class="action-button trips" href={{ url_for_trips(user) }}>{% if edit %}View my trips{% else %}View {{ user }}'s trips{% endif %}</a>
       </div>
     </nav>
   </div>
@@ -89,33 +75,6 @@ usernameField.addEventListener('blur', event => {
     {username: event.target.textContent}
   )
   apiFeedback(call, 'Your username has been updated.')
-})
-
-const localizeField = document.querySelector('[name=localize]')
-localizeField.addEventListener('change', event => {
-  const call = api.send('patch', "{{ url_for('profile_edit') }}",
-    {allow_localization: event.target.checked}
-  )
-  if (event.target.checked) {
-    apiFeedback(call, 'Your enable your localization.')
-  } else {
-    apiFeedback(call, 'Your disable your localization.')
-  }
-})
-localizeField.addEventListener('change', event => event.target.checked && localize())
-
-const communityField = document.querySelector('[name=community]')
-communityField.addEventListener('change', event => {
-  console.log(event.target.checked);
-  const call = api.send('patch', "{{ url_for('profile_edit') }}",
-    {allow_community: event.target.checked}
-  )
-  if (event.target.checked) {
-    apiFeedback(call, 'You enable community mode, you share your informations and authorized contents.')
-  } else {
-    apiFeedback(call, 'Your disable community mode, your hidden your profile and datas.')
-  }
-  // TODO: find out a way to make all the changement on the page without realoading
 })
 
 const aboutField = document.querySelector('[name=about]')

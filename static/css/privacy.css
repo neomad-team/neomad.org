@@ -8,27 +8,54 @@ section {
   width: 50%;
 }
 
-/* toggle buttons localize and community mode */
-
 article {
+  padding: 3rem 1rem 1rem;
   margin-bottom: 3rem;
   box-shadow: 0 2px 2px rgba(50, 50, 50, .2);
 }
-article:first-child > form {
+article h2{
+  text-align: center;
+  width: 100%;
+}
+
+/* community mode */
+
+article:first-child {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+article:first-child > form,
+article:first-child > aside {
   display: flex;
   background-color: #fff;
-  justify-content: space-between;
+  justify-content: center;
   padding: 3rem;
+  width: 45%;
 }
+article:first-child > aside::before {
+  font-size: 1.5rem;
+  font-family: fontawesome;
+  content: "\f05a";
+  position: relative;
+  left: -0.75rem;
+  top: -.75rem;
+}
+article:first-child > label {
+  display: flex;
+  flex-direction: column;
+}
+article:first-child > footer {
+  padding: 2rem 0 1rem;
+  width: 100%;
+  text-align: center;
+  font-size: 1.55rem;
+}
+
 
 /* location save on user trips */
 
-article:last-child {
-  padding: 3rem 1rem 1rem;
-}
-article:last-child h2{
-  text-align: center;
-}
 article:last-child > ul {
   padding: 2.5rem;
   margin: 0;

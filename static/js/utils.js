@@ -16,7 +16,6 @@ function alert(type, message, delay) {
 }
 
 function coordinatesToAddress (coordinates) {
-  console.log(coordinates);
   const [lat, lng] = coordinates.split(',')
   return fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`, {
     mode: 'cors'

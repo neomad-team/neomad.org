@@ -7,20 +7,32 @@
 {% block main %}
 <section>
   <article>
+    <h2>Community mode</h2>
     <form>
-      <div>
-        <input type=checkbox name=localize {% if user.allow_localization %}checked{% endif %} id=localize>
-        <label for=localize title="enable tracking my trips">
-          {% if user.allow_localization %}Disable{% else %}Enable{% endif %} trip tracking
-        </label>
-      </div>
-      <div>
-        <input type=checkbox name=community {% if user.allow_community %}checked{% endif %} id=community>
-        <label for=community title="enable my community profile">
-          {% if user.allow_community %}Disable{% else %}Enable{% endif %} community profile
-        </label>
-      </div>
+      <input type=checkbox name=community {% if user.allow_community %}checked{% endif %} id=community>
+      <label for=community title="{% if user.allow_community %}Disable{% else %}Enable{% endif %} community profile">
+        Click to {% if user.allow_community %}disable{% else %}enable{% endif %}
+      </label>
     </form>
+    <aside>
+      {% if user.allow_community %}
+      <p>
+        Disable community mode hidden your public data as publication, localisation and account.
+      </p>
+      {% else %}
+      <p>
+        Enable community mode allow you to share your articles, localisation and account.
+      </p>
+      {% endif %}
+    </aside>
+    {% if user.allow_community %}
+    <footer>
+      <p>
+        Even if you disable the community mode you can still read, write and use your maps.
+      </p>
+    </footer>
+    {% else %}
+    {% endif %}
   </article>
   <article>
     <h2>List of your trip positions</h2>
@@ -46,27 +58,14 @@
 
 {% block extra_js %}
 <script>
-const localizeField = document.querySelector('[name=localize]')
-localizeField.addEventListener('change', event => {
-  const call = api.send('patch', "{{ url_for('profile_edit') }}",
-    {allow_localization: event.target.checked}
-  )
-  if (event.target.checked) {
-    apiFeedback(call, 'Your enable your localization.')
-  } else {
-    apiFeedback(call, 'Your disable your localization.')
-  }
-})
-localizeField.addEventListener('change', event => event.target.checked && localize())
-
 const communityField = document.querySelector('[name=community]')
 communityField.addEventListener('change', event => {
-  console.log(event.target.checked);
   const call = api.send('patch', "{{ url_for('profile_edit') }}",
     {allow_community: event.target.checked}
   )
   if (event.target.checked) {
-    apiFeedback(call, 'You enable community mode, you share your informations and authorized contents.')
+    apiFeedback(call, 'You enable community mode, you share your informations, authorized contents and position.')
+    localize()
   } else {
     apiFeedback(call, 'Your disable community mode, your hidden your profile and datas.')
   }

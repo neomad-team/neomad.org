@@ -21,7 +21,8 @@ class UserTest(TestCase):
     def setUp(self):
         self.client = app.test_client()
         self.user = (User(email='emailtest@test.com',
-                          allow_localization=True)
+                          allow_localization=True,
+                          allow_community=True)
                      .set_password('testtest').save())
         self.lat_lng = [3.5, 42.0]
 
