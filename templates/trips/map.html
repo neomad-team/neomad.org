@@ -22,9 +22,6 @@
 {% for point in points %}
 <p>{{ point }}</p>
 {% endfor %}
-{% if not user.allow_community %}
-<p>{{user}} did not permit localization. Unfortunatly we cannot build the maps with his trips.</p>
-{% endif %}
 <script>
   var current_location = {{ user.current_location or [] }}
   var locations = [

@@ -104,8 +104,8 @@ main > header {
   flex-wrap: wrap;
   order: 2;
 }
-.profile-intro nav a:last-child {
-  margin-left: 3rem;
+.profile-intro nav a:first-child {
+  margin-right: 3rem;
 }
 .profile-intro nav .settings::before,
 .profile-intro nav .trips::before {

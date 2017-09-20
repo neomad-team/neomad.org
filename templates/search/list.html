@@ -23,6 +23,7 @@
     <h2>{{users|length}} neomads found</h2>
     <ul>
       {% for user in users %}
+      {% if user.allow_community %}
       <li class=profiles>
         <a href='{{ url_for_user(user) }}'>
           <figure>
@@ -31,6 +32,7 @@
           <h2 name=username>{{ user.username }}</h2>
         </a>
       </li>
+      {% endif %}
       {% endfor %}
     </ul>
   </article>

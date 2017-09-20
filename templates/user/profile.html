@@ -16,39 +16,53 @@
 {% endblock %}
 
 {% block main %}
-  <header>
-    <div class="profile-intro wrapper">
-      <figure>
-        <img class=avatar-img 
-          name=avatar 
-          src={{ user.avatar }}
-          width=100 
-          height=100 
-          onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
-      </figure>
-      <div>
-        <h1 name=username>{{ user.username or 'Insert a username' }}</h1>
-        <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
+<header>
+  <div class="profile-intro wrapper">
+    <figure>
+      <img class=avatar-img
+        name=avatar
         {% if user.allow_community %}
-        <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location|join(',') }}></a>
+        src={{ user.avatar }}
+        {% else %}
+        src={{ url_for('static', filename='images/secret.png') }}
         {% endif %}
-      </div>
-      <section class=social>
-      {% if user.socials.email %}
-        <a class=email href=mailto:{{ user.socials.email }} title="Send an email">Send an email</a>
+        width=100
+        height=100
+        onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
+    </figure>
+    <div>
+      <h1 name=username>{{ user.username or 'Insert a username' }}</h1>
+      {% if user.allow_community %}
+      <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
+      <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location|join(',') }}></a>
+      {% else %}
+      <p>
+        Sorry, this Neomad disable her/his community mode.<br>
+        We invit you to back to <a href=/>home</a>.
+      </p>
       {% endif %}
-      {% for name, url in user.socials.items() %}
-      {% if name != 'email' and url %}
-        <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
-      {% endif %}
-      {% endfor %}
-      </section>
-      <nav>
-        {% if edit %}
-        <a class="action-button settings" href={{ url_for('privacy') }}>Set my privacy settings</a>
+    </div>
+    {% if user.allow_community %}
+    <section class=social>
+    {% if user.socials.email %}
+      <a class=email href=mailto:{{ user.socials.email }} title="Send an email">Send an email</a>
+    {% endif %}
+    {% for name, url in user.socials.items() %}
+    {% if name != 'email' and url %}
+      <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
+    {% endif %}
+    {% endfor %}
+    </section>
+    {% endif %}
+    <nav>
+      {% if edit %}
+      <a class="action-button settings" href={{ url_for('privacy') }}>Set my privacy settings</a>
+      <a class="action-button trips" href={{ url_for_trips(user) }}>View my trips</a>
+      {% else %}
+        {% if user.allow_community %}
+        <a class="action-button trips" href={{ url_for_trips(user) }}>View {{ user }}'s trips</a>
         {% endif %}
-        <a class="action-button trips" href={{ url_for_trips(user) }}>{% if edit %}View my trips{% else %}View {{ user }}'s trips{% endif %}</a>
-      </div>
+      {% endif %}
     </nav>
   </div>
 </header>
@@ -64,6 +78,7 @@
 {{ article_list(articles=articles, with_author=false) }}
 </section>
 {% endblock %}
+
 
 {% block extra_js %}
 {% if edit %}
