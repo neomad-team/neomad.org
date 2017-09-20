@@ -35,12 +35,11 @@ article:first-child > aside {
   width: 45%;
 }
 article:first-child > aside::before {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-family: fontawesome;
   content: "\f05a";
   position: relative;
   left: -0.75rem;
-  top: -.75rem;
 }
 article:first-child > label {
   display: flex;
