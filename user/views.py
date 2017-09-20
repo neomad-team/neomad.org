@@ -15,10 +15,13 @@ def profile(username):
     try:
         user = User.objects.get(slug=username)
         articles = Article.objects(author=user)
-        if user != current_user:
-            articles = Article.published()
+        community = user.allow_community
     except User.DoesNotExist:
         abort(404)
+    if not community and user != current_user:
+        return render_template('private.html', user=user)
+    if community and user != current_user:
+        articles = Article.published()
     return render_template('user/profile.html', user=user,
                            articles=articles,
                            edit=(user == current_user))

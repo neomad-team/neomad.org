@@ -21,28 +21,20 @@
     <figure>
       <img class=avatar-img
         name=avatar
-        {% if user.allow_community %}
         src={{ user.avatar }}
-        {% else %}
-        src={{ url_for('static', filename='images/secret.png') }}
-        {% endif %}
         width=100
         height=100
         onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
     </figure>
     <div>
       <h1 name=username>{{ user.username or 'Insert a username' }}</h1>
-      {% if user.allow_community %}
       <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
+      {% if user.allow_community %}
       <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location|join(',') }}></a>
       {% else %}
-      <p>
-        Sorry, this Neomad disable her/his community mode.<br>
-        We invit you to back to <a href=/>home</a>.
-      </p>
+      <p class=private>You do not share your contents, you are in a private mode</p>
       {% endif %}
     </div>
-    {% if user.allow_community %}
     <section class=social>
     {% if user.socials.email %}
       <a class=email href=mailto:{{ user.socials.email }} title="Send an email">Send an email</a>
@@ -53,15 +45,12 @@
     {% endif %}
     {% endfor %}
     </section>
-    {% endif %}
     <nav>
       {% if edit %}
       <a class="action-button settings" href={{ url_for('privacy') }}>Set my privacy settings</a>
       <a class="action-button trips" href={{ url_for_trips(user) }}>View my trips</a>
       {% else %}
-        {% if user.allow_community %}
-        <a class="action-button trips" href={{ url_for_trips(user) }}>View {{ user }}'s trips</a>
-        {% endif %}
+      <a class="action-button trips" href={{ url_for_trips(user) }}>View {{ user }}'s trips</a>
       {% endif %}
     </nav>
   </div>

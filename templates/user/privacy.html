@@ -60,8 +60,11 @@
 <script>
 const communityField = document.querySelector('[name=community]')
 communityField.addEventListener('change', event => {
-  const call = api.send('patch', "{{ url_for('profile_edit') }}",
-    {allow_community: event.target.checked}
+  call = api.send('patch', "{{ url_for('profile_edit') }}",
+    {allow_community: event.target.checked},
+  )
+  call = api.send('patch', "{{ url_for('profile_edit') }}",
+    {allow_localization: event.target.checked},
   )
   if (event.target.checked) {
     apiFeedback(call, 'You enable community mode, you share your informations, authorized contents and position.')
