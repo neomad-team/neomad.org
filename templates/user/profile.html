@@ -32,7 +32,10 @@
       {% if user.allow_community %}
       <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location|join(',') }}></a>
       {% else %}
-      <p class=private>You do not share your contents, you are in a private mode</p>
+      <p class=private>
+        Community mode is disable.<br>
+        Your contents are not shared.<br>
+      </p>
       {% endif %}
     </div>
     <section class=social>

@@ -41,6 +41,19 @@ main > header {
 .profile-intro > div > p {
   margin: 0.75rem 0 1rem;
 }
+
+.private {
+  display: flex;
+  align-items: center;
+}
+.private::before {
+  font-family: fontawesome;
+  content: '\f21b';
+  font-size: 5rem;
+  color: #666;
+  margin-right: 2rem;
+}
+
 .profile-intro .social {
   display: flex;
   flex-wrap: wrap;
