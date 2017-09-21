@@ -82,6 +82,13 @@ main > header {
 .profile-intro .social a::before {
   margin-top: -0.5rem;
 }
+
+.profile-intro .social .email::before,
+.profile-intro .social .twitter::before,
+.profile-intro .social .facebook::before,
+.profile-intro .social .instagram::before {
+  width: 2.5rem;
+}
 .profile-intro .social .email::before {
   content: "\f003";
 }
