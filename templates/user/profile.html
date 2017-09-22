@@ -146,13 +146,18 @@
     wrapper.classList.add(name)
     const input = document.createElement('input')
     input.name = name
-    input.value = userSocial[name].split(`https://www.${name}.com/`)[1] || ''
+    if(userSocial[name].length) {
+      input.value = userSocial[name].split(`https://www.${name}.com/`)[1]
+    } else {
+      input.value = ''
+    }
     input.type = 'text'
     input.placeholder = `My ${social} username`
     wrapper.append(input)
     socialField.append(wrapper)
   })
   ;[].forEach.call(socialField.querySelectorAll('input'), input => {
+    visualValidation(input)
     input.addEventListener('blur', event => {
       const field = event.currentTarget
       if(field.checkValidity()) {
@@ -162,6 +167,7 @@
         else {
           userSocial[field.name] = transformToUrl(field)
         }
+        visualValidation(field)
         const call = api.send('patch', "{{ url_for('profile_edit') }}", {socials: userSocial})
         apiFeedback(call, 'Your social accounts were updated.')
       }
@@ -169,8 +175,19 @@
   })
 
   function transformToUrl(field) {
+    if(field.value !== '') {
     field = `https://www.${field.name}.com/${field.value}`
+    }
     return field
+  }
+  
+  function visualValidation(field) {
+    const span = document.getElementsByClassName(`edit ${field.name}`)[0]
+    if(field.value) {
+      span.classList.add('validation')  
+    } else {
+      span.classList.remove('validation') 
+    }
   }
 
   function apiFeedback(caller, confirmation) {
