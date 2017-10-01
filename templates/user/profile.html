@@ -183,11 +183,7 @@
   
   function visualValidation(field) {
     const span = document.getElementsByClassName(`edit ${field.name}`)[0]
-    if(field.value) {
-      span.classList.add('validation')  
-    } else {
-      span.classList.remove('validation') 
-    }
+    span.classList.toggle('validation', field.value)
   }
 
   function apiFeedback(caller, confirmation) {
