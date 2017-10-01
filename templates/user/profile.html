@@ -32,10 +32,10 @@
       {% if user.allow_community %}
       <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location|join(',') }}></a>
       {% else %}
-      <p class=private>
-        Community mode is disable.<br>
-        Your contents are not shared.<br>
-      </p>
+      <a class=private href={{ url_for('privacy') }}>
+        Community mode is disabled.<br>
+        your contents are restricted and private.<br>
+      </a>
       {% endif %}
     </div>
     <section class=social>
@@ -198,8 +198,10 @@ const api = {
 {% endif %}
 <script>
 const a = document.querySelector('[data-latlng]')
-coordinatesToAddress(a.dataset.latlng).then(data => {
-  a.textContent = `${data.area}, ${data.country}`
-})
+  if(a) {
+  coordinatesToAddress(a.dataset.latlng).then(data => {
+    a.textContent = `${data.area}, ${data.country}`
+  })
+}
 </script>
 {% endblock %}

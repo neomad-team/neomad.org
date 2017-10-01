@@ -17,18 +17,18 @@
     <aside>
       {% if user.allow_community %}
       <p>
-        Disable community mode hidden your public data as publication, localisation and account.
+        Disabling the community mode hides your profile, your articles and your location.
       </p>
       {% else %}
       <p>
-        Enable community mode allow you to share your articles, localisation and account.
+        Enabling community mode allows you to publish your articles, to share your location, and visitors to read your profile.
       </p>
       {% endif %}
     </aside>
     {% if user.allow_community %}
     <footer>
       <p>
-        Even if you disable the community mode you can still read, write and use your maps.
+        Disabling the community mode allows only you to view your map.
       </p>
     </footer>
     {% else %}
@@ -67,10 +67,10 @@ communityField.addEventListener('change', event => {
     {allow_localization: event.target.checked},
   )
   if (event.target.checked) {
-    apiFeedback(call, 'You enable community mode, you share your informations, authorized contents and position.')
+    apiFeedback(call, 'Community mode was enabled. Your profile, location and articles are now public.')
     localize()
   } else {
-    apiFeedback(call, 'Your disable community mode, your hidden your profile and datas.')
+    apiFeedback(call, 'Community mode was disabled. Your profile, location and articles are now hidden.')
   }
 })
 
