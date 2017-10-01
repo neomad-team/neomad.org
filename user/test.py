@@ -1,15 +1,14 @@
 import json
-import datetime
 
 from unittest import TestCase
 
 from core import app
-from blog import views
 from user.models import User
+from blog import views
+from blog.models import Article
 from trips import views
 from user import views
 from auth import views
-from blog.models import Article
 from around import views
 
 
@@ -24,9 +23,7 @@ def login_user(self):
 class UserTest(TestCase):
     def setUp(self):
         self.client = app.test_client()
-        self.user = (User(email='emailtest@test.com',
-                          allow_localization=True,
-                          allow_community=True)
+        self.user = (User(email='emailtest@test.com', allow_community=True)
                      .set_password('testtest').save())
         self.lat_lng = [3.5, 42.0]
 

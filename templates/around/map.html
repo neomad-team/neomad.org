@@ -69,7 +69,7 @@
 
 {% block extra_js %}
   <script>
-    {% if current_user and current_user.allow_localization %}
+    {% if current_user and current_user.allow_community %}
       var currentLatLng = {{ current_user.current_location or [] }}
     {% else %}
       var currentLatLng = alert('localization', 'You do not allow localization, see you profile setting or use map controller')

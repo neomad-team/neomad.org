@@ -13,7 +13,6 @@ class TripTest(TestCase):
     def setUp(self):
         self.client = app.test_client()
         self.user = User(email='emailtest@test.com').set_password('testtest')
-        self.user.allow_localization = True
         self.user.allow_community = True
         self.user.save()
         data = {

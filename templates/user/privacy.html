@@ -63,9 +63,6 @@ communityField.addEventListener('change', event => {
   call = api.send('patch', "{{ url_for('profile_edit') }}",
     {allow_community: event.target.checked},
   )
-  call = api.send('patch', "{{ url_for('profile_edit') }}",
-    {allow_localization: event.target.checked},
-  )
   if (event.target.checked) {
     apiFeedback(call, 'Community mode was enabled. Your profile, location and articles are now public.')
     localize()

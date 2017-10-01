@@ -28,6 +28,19 @@ function coordinatesToAddress (coordinates) {
   })
 }
 
+function localize(url) {
+  navigator.geolocation.getCurrentPosition(position => {
+    fetch(url, {
+      method: 'post',
+      body: JSON.stringify([position.coords.latitude, position.coords.longitude]),
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  })
+}
+
 window.onload = _ => {
   const menu = document.querySelector('#menu')
   if (menu) {

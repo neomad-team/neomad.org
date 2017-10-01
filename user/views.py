@@ -1,4 +1,3 @@
-import json
 from datetime import datetime
 
 from flask import render_template, request, abort, redirect
@@ -50,10 +49,10 @@ def privacy_delete_trip(date):
 @login_required
 def profile_edit():
     data = request.json
-    permitted_fields = ['username', 'about', 'allow_localization', 'allow_community', 'socials']
+    permitted_fields = ['username', 'about', 'allow_community', 'socials']
     user = User.objects.get(id=current_user.id)
     for field, value in data.items():
-        if not field in permitted_fields:
+        if field not in permitted_fields:
             return '', 403
         setattr(user, field, value)
     user.save()

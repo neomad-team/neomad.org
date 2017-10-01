@@ -21,7 +21,7 @@ def trips(user):
                            user=user,
                            locations=user.locations)
     else:
-        return render_template('private.html', user=user)
+        return render_template('private.html', user=user), 403
 
 
 @app.route('/trips/add/', methods=['post'])

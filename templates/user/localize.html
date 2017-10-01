@@ -1,21 +1,5 @@
-{% if current_user and current_user.is_authenticated %}
+{% if current_user and current_user.allow_community %}
   <script>
-  function localize() {
-    navigator.geolocation.getCurrentPosition(position => {
-      fetch("{{ url_for('trips_add') }}", {
-        method: 'post',
-        body: JSON.stringify([position.coords.latitude, position.coords.longitude]),
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-    })
-  }
-  </script>
-{% endif %}
-{% if current_user and current_user.allow_localization %}
-  <script>
-    localize()
+    localize("{{ url_for('trips_add') }}")
   </script>
 {% endif %}
