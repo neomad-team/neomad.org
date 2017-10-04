@@ -45,11 +45,6 @@ a:hover {
   color: #00bf6b;
 }
 
-ul {
-  padding: 0;
-  list-style: none;
-}
-
 /* Header */
 body > header {
   position: fixed;

@@ -7,7 +7,6 @@ from blog import views  # noqa: F401, F801
 from trips import views  # noqa: F401, F801
 from around import views  # noqa: F401, F801
 from api import views  # noqa: F401, F801
-from search import views # noqa: F401, F801
 if app.config['DEBUG']:
     from core.debug import *
 
