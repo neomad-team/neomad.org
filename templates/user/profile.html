@@ -146,7 +146,7 @@
     wrapper.classList.add(name)
     const input = document.createElement('input')
     input.name = name
-    if(userSocial[name].length) {
+    if(userSocial[name] && userSocial[name].length) {
       input.value = userSocial[name].split(`https://www.${name}.com/`)[1]
     } else {
       input.value = ''
