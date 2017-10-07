@@ -15,13 +15,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/spots/')
-      .then(response => response.json())
-      .then(response => {
-        this.setState({
-          pois: response
-        })
+    worker.addEventListener('message', r => {
+      pois = r.data
+      this.setState({
+        pois: pois
       })
+    })
 
     map.on('moveend', move => {
       this.setState({mapBounds: map.getBounds()})
