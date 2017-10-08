@@ -145,9 +145,9 @@ const displayForm = document.querySelectorAll('.display-form')
 displayForm.forEach(button => {
   button.addEventListener('click', _ => {
     if (userID) {
-      formLayer.classList.toggle('visible')
+      formLayer.classList.add('visible')
     } else {
-      alert('error', 'Sorry, you need to be logged to share a place <a href#>login you</a>')
+      alert('warning', 'Sorry, you need to <a href=/login/>log in</a> to share a place.')
     }
   })
 })
