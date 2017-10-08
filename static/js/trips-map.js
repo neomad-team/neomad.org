@@ -1,44 +1,33 @@
-// Init array to create lines between marker 
-const lineCoords = []
-
-// Zoom to view all positions
-const latitudes = locations.map(loc => loc.position[0])
-const longitudes = locations.map(loc => loc.position[1])
-map.fitBounds([[
-    Math.min.apply(null, latitudes) - 2,
-    Math.min.apply(null, longitudes) - 2
-], [
-    Math.max.apply(null, latitudes) + 2,
-    Math.max.apply(null, longitudes) + 2
-]])
-
-// Last trips
-const lastPosition = locations.pop()
-currentMarker = L.marker(lastPosition.position, {icon: icon, alt: lastPosition.date}).addTo(map)
-
-const popup = L.popup().setContent(`<p>Last position knew - ${lastPosition.date}</p>`)
-currentMarker.bindPopup(popup).openPopup()
-
-lineCoords.push(lastPosition.position)
+// Current position
+const currentLocation = locations.slice(-1)[0]
+const currentMarker = L.marker(currentLocation.position, {icon: markerIcon, alt: currentLocation.date})
+  .bindPopup(L.popup().setContent(`<p>Latest known position - ${currentLocation.date}</p>`))
 
 // Previous trips
-icon.options.className = 'previous-marker'
-locations.reverse().forEach(point => {
+const markers = L.featureGroup(locations.reverse().slice(1).map(marker => {
+
+  const popup = L.popup().setContent(`<p>${marker.date}</p>`)
+  return L.circleMarker(marker.position, {
+      color: '#297ddb',
+      opacity: .75,
+      weight: 3,
+      fillColor: 'white',
+      fillOpacity: 1,
+      radius: 5,
+    }).bindPopup(popup)
+}))
+
+L.polyline(locations.map(l => l.position), {
+    stroke: true,
+    color: '#297ddb',
+    weight: 3,
+    opacity: 0.5,
+    smoothFactor: 1,
+    popupAnchor: [-7, -10],
+  }).addTo(map)
   
-  const marker = L.marker(point.position, {icon: icon, alt: point.date}).addTo(map)
+markers.addTo(map)
+currentMarker.addTo(map)
 
-  const popup = L.popup().setContent(`<p>${point.date}</p>`)
-  marker.bindPopup(popup)
-
-  lineCoords.push(point.position)
-})
-
-const lineOptions = {
-  stroke: true,
-  color: '#297DDB',
-  weight: 3,
-  opacity: 0.5,
-  smoothFactor: 1
-}
-
-const line = L.polyline(lineCoords, lineOptions).addTo(map);
+// Zoom to view all positions
+map.fitBounds(markers.getBounds())
