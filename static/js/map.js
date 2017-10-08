@@ -17,7 +17,7 @@ const localizeUser = new L.control.locate({
   }).addTo(map)
 
 // create icon model
-class Icon extends L.Icon {
+class MarkerIcon extends L.Icon {
   constructor(options) {
     super(options)
     L.Util.setOptions(this, {
@@ -42,4 +42,4 @@ class Icon extends L.Icon {
   }
 }
 // marker model cache
-const markerIcon = new Icon
+const markerIcon = new MarkerIcon

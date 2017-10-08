@@ -5,7 +5,6 @@ const currentMarker = L.marker(currentLocation.position, {icon: markerIcon, alt:
 
 // Previous trips
 const markers = L.featureGroup(locations.reverse().slice(1).map(marker => {
-
   const popup = L.popup().setContent(`<p>${marker.date}</p>`)
   return L.circleMarker(marker.position, {
       color: '#297ddb',
