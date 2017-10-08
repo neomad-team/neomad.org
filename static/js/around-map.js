@@ -144,7 +144,11 @@ const formLayer = document.querySelector('#poi-form')
 const displayForm = document.querySelectorAll('.display-form')
 displayForm.forEach(button => {
   button.addEventListener('click', _ => {
-    formLayer.classList.toggle('visible')
+    if (userID) {
+      formLayer.classList.toggle('visible')
+    } else {
+      alert('error', 'Sorry, you need to be logged to share a place <a href#>login you</a>')
+    }
   })
 })
 
