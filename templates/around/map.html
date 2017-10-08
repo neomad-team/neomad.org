@@ -69,10 +69,11 @@
 
 {% block extra_js %}
   <script>
+  const userID = {{ current_user.id or 'null' }}
     {% if current_user and current_user.allow_localization %}
-      var currentLatLng = {{ current_user.current_location or [] }}
+      const currentLatLng = {{ current_user.current_location or [] }}
     {% else %}
-      var currentLatLng = alert('localization', 'You do not allow localization, see you profile setting or use map controller')
+      alert('localization', 'You do not allow localization, see you profile setting or use map controller')
     {% endif %}
   </script>
   <script src={{ url_for('static', filename='js/map.js') }}></script>
