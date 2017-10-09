@@ -4,12 +4,7 @@ from unittest import TestCase
 
 from core import app
 from user.models import User
-from blog import views
 from blog.models import Article
-from trips import views
-from user import views
-from auth import views
-from around import views
 
 
 def login_user(self):

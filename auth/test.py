@@ -1,8 +1,7 @@
 from unittest import TestCase
 
-from blog.views import *
-from .views import *
-from user.views import *
+from core import app
+from user.views import User
 
 
 class AuthTest(TestCase):

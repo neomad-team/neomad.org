@@ -6,11 +6,6 @@ from unittest import TestCase
 from user.models import User
 from .models import Article
 from core import app
-from blog import views
-from user import views
-from auth import views
-from around import views
-from trips import views
 
 
 class ArticleTest(TestCase):
@@ -39,8 +34,8 @@ class ArticleTest(TestCase):
         article = Article(title='<h1>title</h1>', content='<p>content</p>')
         article.author = self.user
         article.save()
-        result = self.client.get('/@emailtest/{}-{}/'.format(article.slug,
-                                                            str(article.id)))
+        result = self.client.get(
+            '/@emailtest/{}-{}/'.format(article.slug, str(article.id)))
         self.assertEqual(result.status_code, 301)
 
     def test_read_article_authenticated(self):
@@ -52,9 +47,9 @@ class ArticleTest(TestCase):
         article = Article(title='title', content='<p>content</p>')
         article.author = self.user
         article.save()
-        result = self.client.get('/@emailtest/{}-{}/'.format(article.slug,
-                                                            str(article.id)),
-                                 follow_redirects=True)
+        result = self.client.get(
+            '/@emailtest/{}-{}/'.format(article.slug, str(article.id)),
+            follow_redirects=True)
         self.assertEqual(result.status_code, 200)
 
     def test_article_write_get(self):
@@ -148,8 +143,8 @@ class ArticleTest(TestCase):
                           content='<p><img src="/static/img"></p>').save()
         self.assertEqual(article.content, '<p><img src="/static/img"/></p>')
         article = Article(title='',
-                          content='<p><em>emphased content</em><i>also emphased</i></p>').save()
-        self.assertEqual(article.content, '<p><em>emphased content</em><em>also emphased</em></p>')
+                          content='<p><i>also emphased</i></p>').save()
+        self.assertEqual(article.content, '<p><em>emphased content</em></p>')
 
     def test_delete_article_and_folders_pictures(self):
         article = Article(title='<h1>title</h1>',
