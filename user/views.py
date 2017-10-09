@@ -35,7 +35,8 @@ def privacy():
                            locations=user.locations)
 
 
-@app.route('/privacy/<float:date>/delete/', methods=['post'])
+
+@app.route('/privacy/<string:date>/delete/', methods=['post'])
 @login_required
 def privacy_delete_trip(date):
     user = User.objects.get(id=current_user.id)

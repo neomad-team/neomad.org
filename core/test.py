@@ -1,6 +1,31 @@
 from unittest import TestCase
 
+from core import app
+from user.models import User
+from blog.models import Article
 from .utils import clean_html
+
+
+class BaseTest(TestCase):
+    def setUp(self):
+        self.client = app.test_client()
+        self.user = self.create_user()
+
+    def tearDown(self):
+        User.objects.delete()
+        Article.objects.delete()
+
+    def login_user(self):
+        data = {
+            'email': self.user.email,
+            'password': 'testtest',
+        }
+        self.client.post('/login/', data=data)
+
+    def create_user(self):
+        return User(email='emailtest@test.com',
+                    username='emailtest',
+                    allow_localization=True).set_password('testtest').save()
 
 
 class UtilsTest(TestCase):

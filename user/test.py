@@ -1,31 +1,14 @@
 import json
 
-from unittest import TestCase
-
 from core import app
+from core.test import BaseTest
+from blog import views
 from user.models import User
 from blog.models import Article
 
 
-def login_user(self):
-    data = {
-        'email': 'emailtest@test.com',
-        'password': 'testtest',
-    }
-    self.client.post('/login/', data=data, follow_redirects=True)
 
-
-class UserTest(TestCase):
-    def setUp(self):
-        self.client = app.test_client()
-        self.user = (User(email='emailtest@test.com', allow_community=True)
-                     .set_password('testtest').save())
-        self.lat_lng = [3.5, 42.0]
-
-    def tearDown(self):
-        User.objects.delete()
-        Article.objects.delete()
-
+class UserTest(BaseTest):
     def test_user_page_that_does_not_exist(self):
         result = self.client.get('/@doesnotexist/')
         self.assertEqual(result.status_code, 404)
@@ -35,12 +18,12 @@ class UserTest(TestCase):
         self.assertEqual(result.status_code, 401)
 
     def test_privacy_page_access(self):
-        login_user(self)
+        self.login_user()
         result = self.client.get('/privacy/')
         self.assertEqual(result.status_code, 200)
 
     def test_delete_trip(self):
-        login_user(self)
+        self.login_user()
         lat_lng = [10, 10]
         self.client.post('/trips/add/', data=json.dumps(lat_lng),
                          content_type='application/json')
