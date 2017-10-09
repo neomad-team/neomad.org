@@ -1,4 +1,3 @@
-import json
 from datetime import datetime
 
 from flask import render_template, request, abort, redirect
@@ -16,7 +15,7 @@ def profile(username):
         user = User.objects.get(slug=username)
         articles = Article.objects(author=user)
         if user != current_user:
-            articles = Article.published()
+            articles = Article.published(author=user)
     except User.DoesNotExist:
         abort(404)
     return render_template('user/profile.html', user=user,
@@ -50,7 +49,7 @@ def profile_edit():
     permitted_fields = ['username', 'about', 'allow_localization', 'socials']
     user = User.objects.get(id=current_user.id)
     for field, value in data.items():
-        if not field in permitted_fields:
+        if field not in permitted_fields:
             return '', 403
         setattr(user, field, value)
     user.save()
