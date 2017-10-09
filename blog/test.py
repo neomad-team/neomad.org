@@ -24,14 +24,17 @@ class ArticleTest(TestCase):
 
     def test_articles_with_an_article(self):
         Article(title='A title for article',
-                content='<p>content</p>',
+                content='content',
                 publication_date=datetime.datetime.utcnow(),
                 author=self.user).save()
         result = self.client.get('/articles/')
         self.assertIn(b'A title for article', result.data)
 
     def test_read_article_unauthenticated(self):
-        article = Article(title='<h1>title</h1>', content='<p>content</p>')
+        article = Article(
+            title='title',
+            content='content',
+            id='59db8b19e03799002216d2b9')
         article.author = self.user
         article.save()
         result = self.client.get(
@@ -44,7 +47,7 @@ class ArticleTest(TestCase):
             'password': 'testtest',
         }
         self.client.post('/login/', data=data, follow_redirects=True)
-        article = Article(title='title', content='<p>content</p>')
+        article = Article(title='title', content='content')
         article.author = self.user
         article.save()
         result = self.client.get(
@@ -79,10 +82,10 @@ class ArticleTest(TestCase):
         }
         self.client.post('/login/', data=data, follow_redirects=True)
         article = Article(title='', content='')
-        data = {'title': 'title', 'content': '<p>content</p>'}
+        data = {'title': 'title', 'content': 'content'}
         result = self.client.post('/article/write/', data=data)
         self.assertEqual(article.title, 'title')
-        self.assertEqual(article.content, '<p>content</p>')
+        self.assertEqual(article.content, 'content')
         self.assertEqual(result.status_code, 201)
 
     def test_edit_article(self):
@@ -90,10 +93,13 @@ class ArticleTest(TestCase):
             'email': 'emailtest@test.com',
             'password': 'testtest',
         }
+        article = Article(
+            title='title',
+            content='content',
+            id='59db8b19e03799002216d2b9')
         self.client.post('/login/', data=data, follow_redirects=True)
         data = {'title': 'title', 'content': 'content'}
         self.client.post('/article/write/', data=data)
-        article = Article.objects.first()
         data = {'title': '<p>title<br></p>', 'content': 'another content'}
         result = self.client.post('/article/{}/edit/'.format(str(article.id)),
                                   data=data)
@@ -106,10 +112,13 @@ class ArticleTest(TestCase):
             'email': 'emailtest@test.com',
             'password': 'testtest',
         }
+        article = Article(
+            title='',
+            content='',
+            id='59db8b19e03799002216d2b9')
         self.client.post('/login/', data=data, follow_redirects=True)
         data = {'title': 'title', 'content': 'content'}
         self.client.post('/article/write/', data=data)
-        article = Article.objects.first()
         data = {'title': '', 'content': ''}
         result = self.client.post('/article/{}/edit/'.format(str(article.id)),
                                   data=data)
@@ -120,25 +129,28 @@ class ArticleTest(TestCase):
             'email': 'emailtest@test.com',
             'password': 'testtest',
         }
+        article = Article(
+            title='title',
+            content='content',
+            id='59db8b19e03799002216d2b9')
         self.client.post('/login/', data=data, follow_redirects=True)
         data = {'title': 'title', 'content': 'content'}
         self.client.post('/article/write/', data=data)
-        article = Article.objects.first()
         result = self.client.get('/article/{}/delete/'.format(str(article.id)))
         self.assertEqual(Article.objects.count(), 0)
         self.assertEqual(result.status_code, 302)
 
     def test_title_clean_html(self):
         article = Article(title='<p>title<br></p>',
-                          content='<p>content</p>').save()
+                          content='content').save()
         self.assertEqual(article.title, 'title')
 
     def test_content_cleaned_html(self):
-        article = Article(title='', content='<p>content</p>').save()
-        self.assertEqual(article.content, '<p>content</p>')
+        article = Article(title='', content='content').save()
+        self.assertEqual(article.content, 'content')
         article = Article(title='',
                           content='<p style="font: Arial">content</p>').save()
-        self.assertEqual(article.content, '<p>content</p>')
+        self.assertEqual(article.content, 'content')
         article = Article(title='',
                           content='<p><img src="/static/img"></p>').save()
         self.assertEqual(article.content, '<p><img src="/static/img"/></p>')
@@ -148,7 +160,7 @@ class ArticleTest(TestCase):
 
     def test_delete_article_and_folders_pictures(self):
         article = Article(title='<h1>title</h1>',
-                          content='<p>content</p>').save()
+                          content='content').save()
         self.assertTrue(os.path.isdir(article.get_images_path()))
         Article.objects.get(id=article.id).delete()
         self.assertFalse(os.path.isdir(article.get_images_path()))
@@ -165,14 +177,14 @@ class ArticleTest(TestCase):
         self.assertTrue(article.language, 'en')
 
     def test_article_appear_by_default_in_articles(self):
-        Article(title='A title for an article', content='<p>content</p>',
+        Article(title='A title for an article', content='content',
                 publication_date=datetime.datetime.utcnow(),
                 author=self.user).save()
         result = self.client.get('/articles/')
         self.assertIn(b'A title for an article', result.data)
 
     def test_unpublished_article_does_not_appear_in_articles(self):
-        Article(title='title', content='<p>content</p>',
+        Article(title='title', content='content',
                 publication_date=None,
                 author=self.user).save()
         result = self.client.get('/articles/')
