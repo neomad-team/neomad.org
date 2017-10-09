@@ -30,8 +30,7 @@ class Spot(db.Document):
         data['creation_date'] = str(self.creation_date.timestamp())
         data['id'] = str(self.id)
         del data['_id']
-        data['user_url'] = url_for('api_user', id=self.user.id)
-        del data['user']
+        data['user'] = str(data['user'])
         return data
 
     def to_json(self):

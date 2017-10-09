@@ -79,7 +79,7 @@ main > header {
   margin-right: 3rem;
 }
 .profile-intro .social a:not(.email) {
-  width: 2rem;
+  width: 3rem;
   overflow: hidden;
 }
 .profile-intro .social .edit {
@@ -98,6 +98,17 @@ main > header {
 }
 .profile-intro .social a::before {
   margin-top: -0.5rem;
+}
+.profile-intro .social .validation {
+  color: #279e6a;
+}
+.profile-intro .social .email::before,
+.profile-intro .social .twitter::before,
+.profile-intro .social .facebook::before,
+.profile-intro .social .instagram::before {
+  width: 2.5rem;
+  text-align: center;
+  margin-right: 0.75rem;
 }
 .profile-intro .social .email::before {
   content: "\f003";

@@ -6,7 +6,7 @@ function alert(type, message, delay) {
     notification.id = 'notification'
     document.body.append(notification)
   }
-  notification.textContent = message
+  notification.innerHTML = message
   notification.classList = [type]
   if(delay !== 0) {
     this.timer = setTimeout(_ => {

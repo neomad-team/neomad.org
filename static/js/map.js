@@ -17,34 +17,29 @@ const localizeUser = new L.control.locate({
   }).addTo(map)
 
 // create icon model
-const iconOptions = {
-  iconSize: [30, 50],
-  iconAnchor: [15, 42],
-  popupAnchor: [0, -40],
-  className: 'marker',
-  viewBox: '300 100 1200 1200',
-  path: 'm 768,896 q 0,106 -75,181 -75,75 -181,75 -106,0 -181,-75 -75,-75 -75,-181 0,-106 75,-181 75,-75 181,-75 106,0 181,75 75,75 75,181 z m 256,0 q 0,-109 -33, -179 L 627,-57 q -16,-33 -47.5,-52 -31.5,-19 -67.5,-19 -36,0 -67.5,19 Q 413,-90 398, -57 L 33,717 Q 0,787 0,896 q 0,212 150,362 150,150 362,150 212,0 362,-150 150,-150 150,-362 z',
-  transform: 'matrix(1,0,0,-1,364.47458,1270.2373)'
-}
-
-class Icon extends L.Icon {
+class MarkerIcon extends L.Icon {
   constructor(options) {
     super(options)
-    L.Util.setOptions(this, iconOptions)
-    L.Util.setOptions(this, options)
+    L.Util.setOptions(this, {
+      iconAnchor: [15, 42],
+      popupAnchor: [0, -25],
+      className: 'marker'
+    })
   }
   createIcon() {
     const marker = document.createElement('div')
-    const options = this.options
     marker.innerHTML = `<svg xmlns:cc="http://creativecommons.org/ns" xmlns:svg="http://www.w3.org/2000/svg" version="1.1"
-      viewBox="${options.viewBox}"
-      width="${options.iconSize[0]}px"
-      height="${options.iconSize[1]}px">
-      <g transform="${options.transform}"><path d="${options.path}"/></g>
+      viewBox="300 100 1200 1200"
+      width="30px"
+      height="50px">
+      <g transform="matrix(1,0,0,-1,364.47458,1270.2373)">
+        <circle cx="500" cy="900" r="300" style="fill:white"/>
+        <path d="m 768,896 q 0,106 -75,181 -75,75 -181,75 -106,0 -181,-75 -75,-75 -75,-181 0,-106 75,-181 75,-75 181,-75 106,0 181,75 75,75 75,181 z m 256,0 q 0,-109 -33, -179 L 627,-57 q -16,-33 -47.5,-52 -31.5,-19 -67.5,-19 -36,0 -67.5,19 Q 413,-90 398, -57 L 33,717 Q 0,787 0,896 q 0,212 150,362 150,150 362,150 212,0 362,-150 150,-150 150,-362 z"/>
+      </g>
     </svg>`
     this._setIconStyles(marker, 'icon')
     return marker
   }
 }
 // marker model cache
-const icon = new Icon
+const markerIcon = new MarkerIcon

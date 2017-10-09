@@ -156,6 +156,7 @@ footer {
 }
 .profiles li {
   margin: 1.5rem 3rem;
+  list-style: none;
 }
 .profiles figure {
   display: flex;

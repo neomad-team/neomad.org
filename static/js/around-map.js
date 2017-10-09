@@ -3,7 +3,7 @@ const worker = new Worker('/static/js/webworker-around.js')
 let pois = []
 
 function addPoi (poi) {
-  const marker = L.marker(poi.location, {icon:icon, alt:poi.name}).addTo(map)
+  const marker = L.marker(poi.location, {icon: markerIcon, alt: poi.name}).addTo(map)
   marker._icon.setAttribute('id', poi.id)
 
   // no pois-cards in mobile, using popup
@@ -144,7 +144,11 @@ const formLayer = document.querySelector('#poi-form')
 const displayForm = document.querySelectorAll('.display-form')
 displayForm.forEach(button => {
   button.addEventListener('click', _ => {
-    formLayer.classList.toggle('visible')
+    if (userID) {
+      formLayer.classList.add('visible')
+    } else {
+      alert('warning', 'Sorry, you need to <a href=/login/>log in</a> to share a place.')
+    }
   })
 })
 

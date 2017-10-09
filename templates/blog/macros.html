@@ -5,7 +5,7 @@
     <header class=meta>
       {% if with_author %}
       <a href={{ url_for_user(article.author) }}>
-        <img src={{ article.author.avatar }} width=40 height=40 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt="">
+        <img src={{ article.author.avatar }} width=40 height=40 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt>
       </a>
       <div>
         <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
@@ -24,7 +24,7 @@
     <a href={{ url }} lang={{ article.language }}>
       <h1>{{ article.title|title }}</h1>
       <figure>
-        <img src="{{ article.image }}" onerror="this.src='{{ url_for('static', filename='images/article.png') }}'" width=100% alt="">
+        <img src="{{ article.image }}" onerror="this.src='{{ url_for('static', filename='images/article.png') }}'" width=100% alt>
       </figure>
       {{ article.content|striptags|truncate(200) }}
     <a href={{ url }} lang={{ article.language }} class="read action-button">Read more</a>
