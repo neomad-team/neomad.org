@@ -1,8 +1,8 @@
 import os
-from unittest import TestCase
 
 from .models import Article
 from core import app
+from core.test import BaseTest
 from blog import views
 from user.models import User
 from user import views
@@ -11,104 +11,75 @@ from around import views
 from trips import views
 
 
-class ArticleTest(TestCase):
-    def setUp(self):
-        self.client = app.test_client()
-        self.user = User(email='emailtest@test.com').set_password(
-            'testtest').save()
-
-    def tearDown(self):
-        User.objects.delete()
-        Article.objects.delete()
-
+class ArticleTest(BaseTest):
     def test_articles_empty(self):
         result = self.client.get('/articles/')
         self.assertEqual(result.status_code, 200)
 
     def test_articles_with_an_article(self):
-        article = Article(title='<h1>title</h1>', content='<p>content</p>')
-        article.author = self.user
-        article.save()
+        Article(title='Title for an article',
+                content='<p>content</p>',
+                author=self.user).save()
         result = self.client.get('/articles/')
-        self.assertIn(b'<article class=preview>', result.data)
+        self.assertEqual(result.status_code, 200)
+        self.assertIn(b'Title for an article', result.data)
 
     def test_read_article_unauthenticated(self):
-        article = Article(title='<h1>title</h1>', content='<p>content</p>')
-        article.author = self.user
-        article.save()
+        article = Article(title='title for an article',
+                          content='<p>content</p>',
+                          author=self.user).save()
         result = self.client.get('/@emailtest/{}-{}/'.format(article.slug,
-                                                            str(article.id)))
-        self.assertEqual(result.status_code, 301)
+                                                             str(article.id)))
+        self.assertEqual(result.status_code, 200)
+        self.assertIn(b'title for an article', result.data)
 
     def test_read_article_authenticated(self):
-        data = {
-            'email': 'emailtest@test.com',
-            'password': 'testtest',
-        }
-        self.client.post('/login/', data=data, follow_redirects=True)
-        article = Article(title='title', content='<p>content</p>')
-        article.author = self.user
-        article.save()
+        self.login_user()
+        article = Article(title='title for article',
+                          content='<p>content</p>',
+                          author=self.user).save()
         result = self.client.get('/@emailtest/{}-{}/'.format(article.slug,
-                                                            str(article.id)),
-                                 follow_redirects=True)
+                                                             str(article.id)))
         self.assertEqual(result.status_code, 200)
+        self.assertIn(b'title for article', result.data)
 
     def test_article_write_get(self):
-        data = {
-            'email': 'emailtest@test.com',
-            'password': 'testtest',
-        }
-        self.client.post('/login/', data=data, follow_redirects=True)
+        self.login_user()
         result = self.client.get('/article/write/')
         self.assertEqual(result.status_code, 200)
 
     def test_article_write_post_empty_field(self):
-        data = {
-            'email': 'emailtest@test.com',
-            'password': 'testtest',
-        }
-        self.client.post('/login/', data=data, follow_redirects=True)
+        self.login_user()
         data = {'title': '', 'content': ''}
-        self.client.post('/login/', data=data, follow_redirects=True)
         result = self.client.post('/article/write/', data=data)
         self.assertEqual(result.status_code, 400)
 
     def test_article_write_post(self):
-        data = {
-            'email': 'emailtest@test.com',
-            'password': 'testtest',
-        }
-        self.client.post('/login/', data=data, follow_redirects=True)
+        self.login_user()
         data = {'title': 'title', 'content': '<p>content</p>'}
         result = self.client.post('/article/write/', data=data)
+        self.assertEqual(result.status_code, 201)
         article = Article.objects.first()
         self.assertEqual(article.title, 'title')
         self.assertEqual(article.content, '<p>content</p>')
-        self.assertEqual(result.status_code, 201)
 
     def test_edit_article(self):
-        data = {
-            'email': 'emailtest@test.com',
-            'password': 'testtest',
-        }
-        self.client.post('/login/', data=data, follow_redirects=True)
+        self.login_user()
         data = {'title': 'title', 'content': 'content'}
         self.client.post('/article/write/', data=data)
         article = Article.objects.first()
-        data = {'title': '<p>title<br></p>', 'content': 'another content'}
+        data = {'title': 'title', 'content': 'another content'}
         result = self.client.post('/article/{}/edit/'.format(str(article.id)),
                                   data=data)
         article = Article.objects.first()
         self.assertEqual(article.content, '<p>another content</p>')
         self.assertEqual(result.status_code, 302)
+        self.assertEqual('http://localhost/@{}/{}-{}/'
+                         .format(self.user.slug, article.title, article.id),
+                         result.headers.get('Location'))
 
     def test_edit_article_with_empty_data(self):
-        data = {
-            'email': 'emailtest@test.com',
-            'password': 'testtest',
-        }
-        self.client.post('/login/', data=data, follow_redirects=True)
+        self.login_user()
         data = {'title': 'title', 'content': 'content'}
         self.client.post('/article/write/', data=data)
         article = Article.objects.first()
@@ -118,17 +89,13 @@ class ArticleTest(TestCase):
         self.assertEqual(result.status_code, 400)
 
     def test_delete_an_article(self):
-        data = {
-            'email': 'emailtest@test.com',
-            'password': 'testtest',
-        }
-        self.client.post('/login/', data=data, follow_redirects=True)
+        self.login_user()
         data = {'title': 'title', 'content': 'content'}
         self.client.post('/article/write/', data=data)
         article = Article.objects.first()
         result = self.client.get('/article/{}/delete/'.format(str(article.id)))
-        self.assertEqual(Article.objects.count(), 0)
         self.assertEqual(result.status_code, 302)
+        self.assertEqual(Article.objects.count(), 0)
 
     def test_title_clean_html(self):
         article = Article(title='<p>title<br></p>',

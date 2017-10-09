@@ -1,44 +1,81 @@
+mapboxgl.accessToken = 'pk.eyJ1IjoibmVvbWFkIiwiYSI6ImNqMHRrZ3ZwdzAwNDgzMm1kcHRhMDdsZGIifQ.bOSlLkmc1LBv0xAbcZXpog'
+var map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/streets-v9',
+  center: [-10, 45],
+  zoom: 2
+})
+
 // Init array to create lines between marker 
 const lineCoords = []
 
-// Zoom to view all positions
+// Previous trips
+locations.forEach(point => {
+  const popup = new mapboxgl.Popup({offset: [10, 0]})
+      .setText(point.date)
+
+  const el = document.createElement('div')
+  el.classList.add('marker')
+
+  lineCoords.push(point.position)
+
+  new mapboxgl.Marker(el, {offset:[4, -6]})
+      .setLngLat(point.position.reverse())
+      .setPopup(popup)
+      .addTo(map)
+})
+
+// Zoom to view all markers
 const latitudes = locations.map(loc => loc.position[0])
 const longitudes = locations.map(loc => loc.position[1])
 map.fitBounds([[
-    Math.min.apply(null, latitudes) - 2,
-    Math.min.apply(null, longitudes) - 2
+    Math.min.apply(null, latitudes) - 1,
+    Math.min.apply(null, longitudes) - 1
 ], [
-    Math.max.apply(null, latitudes) + 2,
-    Math.max.apply(null, longitudes) + 2
+    Math.max.apply(null, latitudes) + 1,
+    Math.max.apply(null, longitudes) + 1
 ]])
 
-// Last trips
-const lastPosition = locations.pop()
-currentMarker = L.marker(lastPosition.position, {icon: icon, alt: lastPosition.date}).addTo(map)
+// Current location
+if(current_location.length) {
+  const popup = new mapboxgl.Popup({offset: [10, -20]})
+      .setText('Latest location')
 
-const popup = L.popup().setContent(`<p>Last position knew - ${lastPosition.date}</p>`)
-currentMarker.bindPopup(popup).openPopup()
+  const el = document.createElement('div')
+  el.classList.add('marker')
+  el.classList.add('current')
 
-lineCoords.push(lastPosition.position)
-
-// Previous trips
-icon.options.className = 'previous-marker'
-locations.reverse().forEach(point => {
-  
-  const marker = L.marker(point.position, {icon: icon, alt: point.date}).addTo(map)
-
-  const popup = L.popup().setContent(`<p>${point.date}</p>`)
-  marker.bindPopup(popup)
-
-  lineCoords.push(point.position)
-})
-
-const lineOptions = {
-  stroke: true,
-  color: '#297DDB',
-  weight: 3,
-  opacity: 0.5,
-  smoothFactor: 1
+  new mapboxgl.Marker(el, {offset:[0, -30]})
+      .setLngLat(current_location.reverse())
+      .setPopup(popup)
+      .addTo(map)
 }
 
-const line = L.polyline(lineCoords, lineOptions).addTo(map);
+// Create lines
+map.on('load', _ => {
+    map.addLayer({
+        'id': 'route',
+        'type': 'line',
+        'source': {
+            'type': 'geojson',
+            'data': {
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': lineCoords
+                }
+            }
+        },
+        'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        'paint': {
+            'line-color': 'rgba(212, 85, 85, 0.3)',
+            'line-width': 4,
+            'line-translate': [10, 0],
+            'line-translate-anchor': 'map'
+        }
+    })
+})
