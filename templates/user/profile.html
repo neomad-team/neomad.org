@@ -24,6 +24,11 @@
     <div>
       <h1 name=username>{{ user.username or 'Insert a username' }}</h1>
       <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
+      {% if user.allow_localization %}
+      <p>
+        {{ user }} is currently around <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location|join(',') }}>the world</a>.
+      </p>
+      {% endif %}
     </div>
     <section class=social>
       {% if user.socials.email %}
@@ -70,7 +75,7 @@
     )
     apiFeedback(call, 'Your username has been updated.')
   })
-  
+
   const localizeField = document.querySelector('[name=localize]')
   localizeField.addEventListener('change', event => {
     const call = api.send('patch', "{{ url_for('profile_edit') }}",
@@ -163,7 +168,7 @@
       if(field.checkValidity()) {
         if(field.name === 'email') {
           userSocial[field.name] = field.value
-        } 
+        }
         else {
           userSocial[field.name] = transformToUrl(field)
         }
@@ -180,7 +185,7 @@
     }
     return field
   }
-  
+
   function visualValidation(field) {
     const span = document.getElementsByClassName(`edit ${field.name}`)[0]
     span.classList.toggle('validation', field.value)
