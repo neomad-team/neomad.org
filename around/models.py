@@ -1,6 +1,5 @@
 import datetime
 import json
-from flask import url_for
 
 from core import db
 
