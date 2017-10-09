@@ -23,16 +23,14 @@
     <h2>{{users|length}} neomads found</h2>
     <ul>
       {% for user in users %}
-      {% if user.allow_community %}
       <li class=profiles>
         <a href='{{ url_for_user(user) }}'>
           <figure>
-            <img src={{ user.avatar }} width=100 height=100 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt="">
+            <img class=avatar-img src={{ user.avatar }} width=100 height=100 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
           </figure>
           <h2 name=username>{{ user.username }}</h2>
         </a>
       </li>
-      {% endif %}
       {% endfor %}
     </ul>
   </article>

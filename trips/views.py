@@ -13,15 +13,11 @@ from .utils import distance
 def trips(user):
     try:
         user = User.objects.get(slug=user)
-        community = user.allow_community
     except User.DoesNotExist:
         abort(404)
-    if community:
-        return render_template('trips/map.html',
+    return render_template('trips/map.html',
                            user=user,
                            locations=user.locations)
-    else:
-        return render_template('private.html', user=user), 403
 
 
 @app.route('/trips/add/', methods=['post'])

@@ -7,16 +7,12 @@ help:
 server_update:
 	@make title text="Fetching prod branch and updating sources."
 	ssh neomad "${goto_src} && ${git_update}"
-	ssh neomad "${goto_src} && npm install"
 
 server_reload:
 	@make title text="Recreating the server."
 	ssh neomad "${goto_src} && docker-compose restart web"
 
-assets_build:
-	ssh neomad "${goto_src} && npm run build"
-
-deploy: server_update assets_build server_reload
+deploy: server_update server_reload
 
 install:
 	bash -c "bin/install.sh"

@@ -6,30 +6,46 @@ import PoiCard from './PoiCard'
 class App extends React.Component {
 
   constructor(props) {
-    super(props)
-    this.state = {
-      pois: {},
-      userPosition: [],
-      mapBounds: {}
+      super(props)
+      this.state = {
+        pois: {},
+        userPosition: [],
+        mapBounds: {}
+      }
     }
-  }
 
   componentDidMount() {
-    worker.addEventListener('message', r => {
-      pois = r.data
-      this.setState({
-        pois: pois
+    fetch('/api/spots/')
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          pois: response
+        })
       })
-    })
 
     map.on('moveend', move => {
       this.setState({mapBounds: map.getBounds()})
     })
     this.setState({mapBounds: map.getBounds()})
 
-    if(currentLatLng) {
+    if(currentLatLng.length === 0) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const userPosition = [position.coords.latitude, position.coords.longitude]
+        this.setState({userPosition: userPosition})
+        if(getHash()) {
+          currentMarker(userPosition)
+        } else {
+          focusUser(userPosition)
+        }
+      }, function errorCallback (error) {
+        alert(`error navigator code is ${error.code} meaning`, error.message)
+      }, {
+        maximumAge: Infinity,
+        timeout: 5000
+      })
+    } else {
+      currentMarker(currentLatLng)
       this.setState({userPosition: currentLatLng})
-      currentMarker (currentLatLng)
     }
   }
 
@@ -38,10 +54,10 @@ class App extends React.Component {
       .keys(this.state.pois)
       .filter(key => {
         const location = this.state.pois[key].location
-        return (location[0] <= this.state.mapBounds._northEast.lat
-          && location[0] >= this.state.mapBounds._southWest.lat
-          && location[1] <= this.state.mapBounds._northEast.lng
-          && location[1] >= this.state.mapBounds._southWest.lng)
+        return (location[0] <= this.state.mapBounds._ne.lat
+          && location[0] >= this.state.mapBounds._sw.lat
+          && location[1] <= this.state.mapBounds._ne.lng
+          && location[1] >= this.state.mapBounds._sw.lng)
       })
       .map(key =>
         <PoiCard

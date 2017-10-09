@@ -13,34 +13,31 @@ h2 {
   justify-content: space-between;
 }
 
-section:first-child {
-background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/home.jpg');
-background-position: bottom center;
-background-repeat: no-repeat;
-background-size: cover;
-height: 70rem;
-margin: 10rem 0 8rem;
+section:first-child > div > img {
+  width: 100%;
+  filter: brightness(50%);
+  min-height: 50rem;
 }
-section:first-child > h1,
-section:first-child > h2 {
+section:first-child > div > h1,
+section:first-child > div > h2 {
   position: absolute;
   color: #fff;
   margin: 0 0 0 3rem;
 }
-section:first-child > h1 {
+section:first-child > div > h1 {
   font-size: 8rem;
-  top: 22rem;
+  top: 23rem;
   left: 12.5rem;
 }
-section:first-child > h2 {
+section:first-child > div > h2 {
   margin-left: 3.5rem;
-  top: 31rem;
+  top: 32rem;
   left: 12.5rem;
 }
 #join-us {
   position: absolute;
   left: 16rem;
-  top: 37rem;
+  top: 38rem;
   background-color: rgba(17, 195, 116, 0.8);
   color: #fff;
   padding: 1rem 6rem;
@@ -59,20 +56,22 @@ section:first-child > h2 {
   padding: .5rem 2rem;
 }
 #arrow-down {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: transparent;
-  position: absolute;
-  text-align: center;
-  bottom: -3rem;
-  width: 100%;
+  position: relative;
+  bottom: 2.5rem;
 }
 #arrow-down::after {
   font-family: FontAwesome;
   content: "\f078";
   position: relative;
   font-size: 3.5rem;
+  position: relative;
+  bottom: 7rem;
   animation: 10s updown infinite ease-in-out;
   color: #fff;
-  right: 10.5rem;
 }
 
 #features,
@@ -123,7 +122,6 @@ footer {
 }
 .articles .preview {
   margin: 2rem;
-  width: 100%;
 }
 .articles .row {
   display: flex;
@@ -156,7 +154,6 @@ footer {
 }
 .profiles li {
   margin: 1.5rem 3rem;
-  list-style: none;
 }
 .profiles figure {
   display: flex;
@@ -176,14 +173,11 @@ footer {
 }
 
 @media screen and (max-width:1200px) {
-  section:first-child {
-    height: 55rem;
-  }
-  section:first-child > h1 {
+  section:first-child  > div > h1 {
     top: 16rem;
     left: 8rem;
   }
-  section:first-child > h2 {
+  section:first-child  > div > h2 {
     top: 25rem;
     left: 8rem;
   }
@@ -195,9 +189,6 @@ footer {
   #join-us.sticky {
     left: 16rem;
     z-index: 9;
-  }
-  #arrow-down {
-    bottom: 12rem;
   }
   .column {
     flex-direction: column;
@@ -213,14 +204,11 @@ footer {
 }
 
 @media screen and (max-width:960px) {
-  section:first-child {
-    height: 45rem;
-  }
-  section:first-child > h1 {
+  section:first-child  > div > h1 {
     top: 10rem;
     left: 3.5rem;
   }
-  section:first-child > h2 {
+  section:first-child  > div > h2 {
     top: 20rem;
     left: 3.5rem;
     max-width: 36rem;
@@ -230,9 +218,6 @@ footer {
   #join-us {
     top: 29rem;
     left: 7.15rem;
-  }
-  #arrow-down {
-    bottom: 22rem;
   }
   .column {
     padding: 0 10rem;
@@ -264,12 +249,6 @@ footer {
     position: relative;
     left: 2rem;
   }
-  #arrow-down {
-    bottom: 23rem;
-  }
-  #arrow-down::after {
-    font-size: 3rem;
-  }
   #features .action-button {
     margin: 4rem 3rem 0rem;
   }
@@ -282,12 +261,12 @@ footer {
 }
 
 @media screen and (max-width:480px) {
-  section:first-child > h1 {
+  section:first-child > div > h1 {
     font-size: 7.5rem;
     top: 9rem;
     left: 2rem;
   }
-  section:first-child > h2 {
+  section:first-child > div > h2 {
     font-size: 2rem;
     top: 18rem;
     left: 2rem;
@@ -306,11 +285,11 @@ footer {
 }
 
 @media screen and (max-width:360px) {
-  section:first-child > h1 {
+  section:first-child > div > h1 {
     font-size: 5.5rem;
     margin: 0;
   }
-  section:first-child > h2 {
+  section:first-child  > div > h2 {
     margin: 0;
     top: 16rem;
     left: 2.5rem;

@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 
 from flask import render_template, request, abort, redirect
@@ -13,16 +14,10 @@ from .models import User
 def profile(username):
     try:
         user = User.objects.get(slug=username)
-        articles = Article.objects(author=user)
-        community = user.allow_community
     except User.DoesNotExist:
         abort(404)
-    if not community and user != current_user:
-        return render_template('private.html', user=user), 403
-    if community and user != current_user:
-        articles = Article.published()
     return render_template('user/profile.html', user=user,
-                           articles=articles,
+                           articles=Article.objects(author=user),
                            edit=(user == current_user))
 
 
@@ -35,25 +30,24 @@ def privacy():
                            locations=user.locations)
 
 
-
 @app.route('/privacy/<string:date>/delete/', methods=['post'])
 @login_required
 def privacy_delete_trip(date):
     user = User.objects.get(id=current_user.id)
     user.locations.remove(user.locations.get(date=datetime.fromtimestamp(
-                                             date)))
+                                             float(date))))
     user.save()
-    return redirect('privacy'), 204
+    return redirect('privacy')
 
 
 @app.route('/profile/', methods=['patch'])
 @login_required
 def profile_edit():
     data = request.json
-    permitted_fields = ['username', 'about', 'allow_community', 'socials']
+    permitted_fields = ['username', 'about', 'allow_localization', 'socials']
     user = User.objects.get(id=current_user.id)
     for field, value in data.items():
-        if field not in permitted_fields:
+        if not field in permitted_fields:
             return '', 403
         setattr(user, field, value)
     user.save()

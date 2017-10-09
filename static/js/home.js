@@ -1,8 +1,15 @@
 const button = document.querySelector('#join-us')
+let buttonPosition = adaptButtonPosition()
 
-if (button) {
-  window.addEventListener('scroll', event => {
-    const diff = (event.currentTarget.pageYOffset - button.offsetTop + 13)
-    button.classList.toggle('sticky', diff > 0)
-  })
+function adaptButtonPosition() {
+  return button.offsetTop - 15
 }
+
+function stickyJoinButton(event) {
+  let diff = (event.pageY - buttonPosition)
+  button.classList.toggle('sticky', diff > 0)
+}
+
+window.addEventListener('resize', adaptButtonPosition)
+
+window.addEventListener('scroll', stickyJoinButton)

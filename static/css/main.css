@@ -45,6 +45,11 @@ a:hover {
   color: #00bf6b;
 }
 
+ul {
+  padding: 0;
+  list-style: none;
+}
+
 /* Header */
 body > header {
   position: fixed;
@@ -86,10 +91,7 @@ body > header nav a {
 .avatar {
   cursor: pointer;
 }
-.avatar img,
-.profile-intro img,
-.profiles img,
-.meta img {
+.avatar img {
   display: inline-block;
   vertical-align: middle;
   border: 1px solid #666;
@@ -108,7 +110,7 @@ body > header nav .button:hover {
 .profile-menu {
   position: absolute;
   top: 6rem;
-  right: -1rem;
+  right: 0;
   margin: 0;
   padding: 1rem 2rem;
   height: 0;
@@ -143,6 +145,7 @@ body > header nav .button:hover {
 .profile-menu.active {
   height: auto;
   opacity: 1;
+  z-index: 1;
 }
 .profile-menu.active li {
   display: block;
@@ -236,8 +239,10 @@ figure {
   content: "-";
   margin-right: 0.5em;
 }
-.meta img {
-  margin-right: 1.25rem;
+
+.avatar-img {
+  border-radius: 100%;
+  margin-right: 1rem;
 }
 
 button,
@@ -296,7 +301,6 @@ button:hover,
   transition: .3s;
   border: 1px solid #333;
   border-radius: .2em;
-  text-align: center;
 }
 #notification.success {
   background-color: #e7fee7;

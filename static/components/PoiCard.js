@@ -12,9 +12,8 @@ class PoiCard extends React.Component {
       from: {},
       to: {},
     }
-    // cf: https://facebook.github.io/react/docs/handlg-events.html
-    this.enterCard = this.enterCard.bind(this)
-    this.leaveCard = this.leaveCard.bind(this)
+    // cf: https://facebook.github.io/react/docs/handling-events.html
+    this.hoverCard = this.hoverCard.bind(this)
     this.clickCard = this.clickCard.bind(this)
   }
 
@@ -25,7 +24,7 @@ class PoiCard extends React.Component {
     })
     if(this.props.details.id === getHash()) {
       highlight(this.props.details.id)
-      hashCard(this.props.details.id)
+      superCard(this.props.details.id)
       firstCard(this.props.details.id)
     }
   }
@@ -46,7 +45,6 @@ class PoiCard extends React.Component {
   }
 
   renderDistance(distance) {
-    if(distance < 15) return 'close to you'
     if(!distance) return ''
     if(distance > 1000) {
       return `${Math.round(distance/1000)} km`
@@ -55,16 +53,16 @@ class PoiCard extends React.Component {
     }
   }
 
-  enterCard() {
+  hoverCard() {
     highlight(this.props.details.id)
   }
 
-  leaveCard() {
-    delight(this.props.details.id)
-  }
-
   clickCard() {
-    moveTo(this.props.details.location)
+    let zoomLevel = 11
+    if(this.props.details.id === getHash() && map.getZoom() < 14) {
+      zoomLevel = 14
+    }
+    moveTo(this.props.details.location, zoomLevel)
     urlFor(this.props.details.id)
   }
 
@@ -73,8 +71,8 @@ class PoiCard extends React.Component {
       <div
         className='card'
         id={`card-${this.props.details.id}`}
-        onMouseEnter={this.enterCard}
-        onMouseLeave={this.leaveCard}
+        onMouseEnter={this.hoverCard}
+        onMouseLeave={this.hoverCard}
         onClick={this.clickCard}
         style={{order: this.calculateDistance(this.state.from, this.state.to)}}>
         <div className='card-distance'>{this.renderDistance(this.calculateDistance(this.state.from, this.state.to), this.state.unit)}</div>

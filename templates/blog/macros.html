@@ -1,11 +1,11 @@
 {% macro article_list(articles, with_author=true) %}
   {% for article in articles %}
   {% set url = url_for_article(article) %}
-  <article class="preview draft">
+  <article class=preview>
     <header class=meta>
       {% if with_author %}
       <a href={{ url_for_user(article.author) }}>
-        <img src={{ article.author.avatar }} width=40 height=40 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt>
+        <img class=avatar-img src={{ article.author.avatar }} width=40 height=40>
       </a>
       <div>
         <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
@@ -15,19 +15,14 @@
       {% else %}
       <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
       {% endif %}
-      {% if not article.publication_date %}
-      <div class=ribbon-wrapper>
-        <a href={{ url }} class=ribbon>draft</a>
-      </div>
-      {% endif %}
     </header>
     <a href={{ url }} lang={{ article.language }}>
       <h1>{{ article.title|title }}</h1>
       <figure>
-        <img src="{{ article.image }}" onerror="this.src='{{ url_for('static', filename='images/article.png') }}'" width=100% alt>
+        <img src="{{ article.image | default('/static/uploads/articles/default.png', true) }}" width=100%>
       </figure>
       {{ article.content|striptags|truncate(200) }}
-    <a href={{ url }} lang={{ article.language }} class="read action-button">Read more</a>
+    <a href={{ url }} lang={{ article.language }} class='read action-button'>Read more</a>
   </article>
   {% endfor %}
 {% endmacro %}
