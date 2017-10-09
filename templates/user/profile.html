@@ -191,7 +191,7 @@ const api = {
 
 function transformToUrl(field) {
   if(field.value !== '') {
-  field = `https://www.${field.name}.com/${field.value}`
+    field = `https://www.${field.name}.com/${field.value}`
   }
   return field
 }
@@ -221,7 +221,7 @@ function apiFeedback(caller, confirmation) {
 {% endif %}
 <script>
 const a = document.querySelector('[data-latlng]')
-  if(a) {
+if(a) {
   coordinatesToAddress(a.dataset.latlng).then(data => {
     a.textContent = `${data.area}, ${data.country}`
   })
