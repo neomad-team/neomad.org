@@ -1,6 +1,5 @@
 import datetime
 import json
-from flask import url_for
 
 from core import db
 
@@ -16,6 +15,7 @@ class Spot(db.Document):
     category = db.StringField()
     comments = db.ListField(db.StringField())
     creation_date = db.DateTimeField(default=datetime.datetime.utcnow)
+    user_url = db.StringField()
 
     meta = {
         'ordering': ['-creation_date']
@@ -29,8 +29,7 @@ class Spot(db.Document):
         data['creation_date'] = str(self.creation_date.timestamp())
         data['id'] = str(self.id)
         del data['_id']
-        data['user_url'] = url_for('api_user', id=self.user.id)
-        del data['user']
+        data['user'] = str(data['user'])
         return data
 
     def to_json(self):

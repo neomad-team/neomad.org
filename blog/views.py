@@ -1,5 +1,7 @@
+import datetime
+
 from flask import (
-    request, render_template, redirect, url_for, abort, flash
+    request, render_template, redirect, abort, flash
 )
 from flask_login import current_user, login_required
 
@@ -11,7 +13,7 @@ from .models import Article, clean_html
 
 @app.route('/articles/')
 def article_list():
-    articles = Article.objects.all()
+    articles = Article.published()
     return render_template('blog/article_list.html', articles=articles)
 
 
@@ -46,6 +48,10 @@ def article_create():
         else:
             article.title = request.form.get('title')
             article.content = clean_html(request.form.get('content'))
+            if request.form.get('published') != '':
+                article.publication_date = datetime.datetime.utcnow()
+            else:
+                article.publication_date = None
             article.save()
             status = 201
     return render_template('blog/article.html', article=article,
@@ -61,7 +67,11 @@ def article_edit(id):
     except Article.DoesNotExist:
         abort(404)
     article.title = request.form.get('title')
-    article.content = request.form.get('content')
+    article.content = clean_html(request.form.get('content'))
+    if request.form.get('published') != '':
+        article.publication_date = datetime.datetime.utcnow()
+    else:
+        article.publication_date = None
     errors = []
     if article.title != '' and clean_html(article.content) != '':
         article.save()
@@ -77,7 +87,7 @@ def article_edit(id):
 def article_delete(id):
     user = User.objects.get(id=current_user.id)
     try:
-        article = Article.objects.get(author=user, id=id).delete()
+        Article.objects.get(author=user, id=id).delete()
     except Article.DoesNotExist:
         abort(404)
     flash('You article was deleted.', 'success')

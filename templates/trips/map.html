@@ -9,33 +9,30 @@
 {% endblock %}
 
 {% block extra_css %}
-<link href=https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css rel=stylesheet>
 <link rel=stylesheet href={{ url_for('static', filename='css/trips-map.css') }}>
-<script src=https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.js></script>
- {% endblock %}
+<link rel=stylesheet href={{ url_for('static', filename='dist/leaflet/leaflet.css') }}>
+<link rel=stylesheet href={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.css') }}>
+
+<script src={{ url_for('static', filename='dist/leaflet/leaflet.js') }}></script>
+<script src={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.min.js') }}></script>
+{% endblock %}
 
 {% block main %}
-
-<div class=wrapper>
-  <h1>Where <em>{{ user }}</em> has traveled</h1>
-</div>
 <div id=map></div>
-{% for point in points %}
-<p>{{ point }}</p>
-{% endfor %}
-{% if not user.allow_localization %}
-<p>{{user}} did not permit localization. Unfortunatly we cannot build the maps with his trips.</p>
-{% endif %}
+{% endblock %}
+
+{% block extra_js %}
 <script>
-  var current_location = {{ user.current_location or [] }}
-  var locations = [
-  {% for location in locations %}
-    {
-      date: '{{ location.date|datetime }}',
-      position: {{ location.position }}
-    },
-  {% endfor %}
-  ]
+var current_location = {{ user.current_location or [] }}
+var locations = [
+{% for location in locations %}
+  {
+    date: '{{ location.date|datetime }}',
+    position: {{ location.position }}
+  },
+{% endfor %}
+]
 </script>
+<script src={{ url_for('static', filename='js/map.js') }}></script>
 <script src={{ url_for('static', filename='js/trips-map.js') }}></script>
 {% endblock %}

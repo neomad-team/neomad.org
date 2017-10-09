@@ -2,18 +2,14 @@ import json
 from unittest import TestCase
 
 from core import app
-from blog import views
 from user.models import User
-from trips import views
-from user import views
-from auth import views
 
 
 class TripTest(TestCase):
     def setUp(self):
         self.client = app.test_client()
         self.user = User(email='emailtest@test.com').set_password('testtest')
-        self.user.allow_localization = True
+        self.user.allow_community = True
         self.user.save()
         data = {
             'email': 'emailtest@test.com',
@@ -27,12 +23,12 @@ class TripTest(TestCase):
 
     def test_add_trip(self):
         user = User.objects.first()
-        self.assertEqual(user.locations, [])
+        self.assertEqual(user.locations, [3.5, 42.0])
         result = self.client.post('/trips/add/', data=json.dumps(self.lat_lng),
                                   content_type='application/json')
         # User has changed in the database
         user = User.objects.first()
-        self.assertEqual(user.locations[0].position, self.lat_lng)
+        self.assertEqual(user.locations, self.lat_lng)
         self.assertEqual(result.status_code, 201)
 
     def test_trip_exactly_same_area(self):

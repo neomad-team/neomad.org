@@ -15,12 +15,11 @@ class Comments extends React.Component {
 
   render() {
     const comments = Object
-      .keys(this.state.comments)
-      .map(key =>
-        <li><p>{this.state.comments[key]}</p></li>
-      )
-    // webnomade API have two cases for empty comments - issue #96
-    if(comments.length === 0 || comments[0] == [""]) {
+    .keys(this.state.comments)
+    .map(key =>
+      <li><p>{this.state.comments[key]}</p></li>
+    )
+    if(comments[0] == ['']) {
       return (
         <li className='no-comments'>
           <p>No comments available</p>

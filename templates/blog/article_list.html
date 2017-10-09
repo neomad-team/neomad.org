@@ -1,9 +1,9 @@
 {% from 'blog/macros.html' import article_list with context %}
 {% extends 'layout.html' %}
 
-{% block title %}Nomad articles {% if articles[0] %} - {{ articles[0].title|truncate(40) }}{% endif %}
+{% block title %}Neomad articles {% if articles[0] %} - {{ articles[0].title|truncate(40) }}{% endif %}
 {% endblock %}
-{% block description %}Read the latest Nomad's articles on Neomad.
+{% block description %}Read the latest Neomad's articles on Neomad.
   {% if articles[0] %} Hotest article is « {{ articles[0].title }} ».{% endif %}
 {% endblock %}
 {% block extra_og %}
