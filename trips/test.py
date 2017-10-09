@@ -2,11 +2,7 @@ import json
 from unittest import TestCase
 
 from core import app
-from blog import views
 from user.models import User
-from trips import views
-from user import views
-from auth import views
 
 
 class TripTest(TestCase):
