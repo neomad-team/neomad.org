@@ -78,10 +78,11 @@ class ArticleTest(TestCase):
             'password': 'testtest',
         }
         self.client.post('/login/', data=data, follow_redirects=True)
+        article = Article(title='', content='')
         data = {'title': 'title', 'content': '<p>content</p>'}
         result = self.client.post('/article/write/', data=data)
-        self.assertEqual(result.title, 'title')
-        self.assertEqual(result.content, '<p>content</p>')
+        self.assertEqual(article.title, 'title')
+        self.assertEqual(article.content, '<p>content</p>')
         self.assertEqual(result.status_code, 201)
 
     def test_edit_article(self):
