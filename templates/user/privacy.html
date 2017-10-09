@@ -46,7 +46,7 @@ td {
   Array.from(document.querySelectorAll('[data-latlng]')).forEach(a => {
     coordinatesToAddress(a.dataset.latlng)
     .then(data => {
-       a.textContent = `${data.area}, ${data.country}`
+       a.textContent = `${data.town || data.village || data.city}, ${data.country}`
     })
   })
 </script>
