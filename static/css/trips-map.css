@@ -1,7 +1,12 @@
+main {
+  margin-top: 6.5rem;
+}
+
 #map {
+  position: fixed;
+  right: 0;
   width: 100%;
-  min-height: 62rem;
-  top: -3.5rem;
+  min-height: 80%;
 }
 
 svg {
@@ -16,5 +21,4 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  z-index: 1;
 }
