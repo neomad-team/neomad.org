@@ -108,7 +108,7 @@ body > header nav .button:hover {
 .profile-menu {
   position: absolute;
   top: 6rem;
-  right: 0;
+  right: -1rem;
   margin: 0;
   padding: 1rem 2rem;
   height: 0;
@@ -143,7 +143,6 @@ body > header nav .button:hover {
 .profile-menu.active {
   height: auto;
   opacity: 1;
-  z-index: 1;
 }
 .profile-menu.active li {
   display: block;
