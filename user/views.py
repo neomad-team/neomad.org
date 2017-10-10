@@ -13,8 +13,9 @@ from .models import User
 def profile(username):
     try:
         user = User.objects.get(slug=username)
-        articles = Article.objects(author=user)
-        if user != current_user:
+        if user == current_user:
+            articles = Article.objects(author=user)
+        else:
             articles = Article.published(author=user)
     except User.DoesNotExist:
         abort(404)
