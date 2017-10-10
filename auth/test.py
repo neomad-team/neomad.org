@@ -1,14 +1,18 @@
 from unittest import TestCase
 
-from blog.views import *
-from .views import *
-from user.views import *
+from core import app
+from user.models import User
+
+from blog import views  # noqa: F401
+from . import views  # noqa: F401, F811
+from user import views  # noqa: F401, F811
 
 
 class AuthTest(TestCase):
     def setUp(self):
         self.client = app.test_client()
-        self.user = User(email='test@email.com').set_password('test').save()
+        self.user = (User(email='test@email.com', username='tester')
+                     .set_password('test').save())
 
     def tearDown(self):
         User.objects.delete()
