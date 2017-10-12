@@ -1,18 +1,20 @@
 import json
 from unittest import TestCase
 
-from core import app
-from blog import views
 from user.models import User
-from trips import views
-from user import views
-from auth import views
+from core import app
+
+from blog import views  # noqa: F401
+from trips import views  # noqa: F401, F801
+from user import views  # noqa: F401, F801
+from auth import views  # noqa: F401, F801
 
 
 class TripTest(TestCase):
     def setUp(self):
         self.client = app.test_client()
-        self.user = User(email='emailtest@test.com').set_password('testtest')
+        self.user = (User(email='emailtest@test.com', username='tester')
+                     .set_password('testtest'))
         self.user.allow_localization = True
         self.user.save()
         data = {
