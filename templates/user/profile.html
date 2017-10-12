@@ -26,7 +26,7 @@
       <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
       {% if user.allow_localization %}
       <p>
-        {{ user }} is currently around <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location|join(',') }}>the world</a>.
+        {{ user }} is currently around <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location and user.current_location|join(',') }}>the world</a>.
       </p>
       {% endif %}
     </div>

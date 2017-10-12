@@ -8,6 +8,7 @@ from blog import views  # noqa: F401
 from trips import views  # noqa: F401, F801
 from user import views  # noqa: F401, F801
 from auth import views  # noqa: F401, F801
+from around import views  # noqa: F401, F801
 
 
 class TripTest(TestCase):
@@ -25,7 +26,7 @@ class TripTest(TestCase):
         self.lat_lng = [3.5, 42.0]
 
     def tearDown(self):
-        User.objects.delete()
+        User.drop_collection()
 
     def test_add_trip(self):
         user = User.objects.first()
