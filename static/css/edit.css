@@ -1,3 +1,7 @@
+body {
+  min-height: 100%;
+}
+
 form[edit] .toolbar {
   position: fixed;
   bottom: 0;
@@ -180,4 +184,8 @@ main > header figure .loading.ready {
 .ribbon:hover {
   color: #fff;
   background: #00bf6b;
+}
+
+body > footer {
+  border-top: none;
 }
