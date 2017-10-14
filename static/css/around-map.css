@@ -56,7 +56,6 @@ main {
   margin: .75rem 0;
   max-height: 5rem;
   width: 27rem;
-  overflow: hidden;
 }
 
 .card ul {
@@ -393,7 +392,7 @@ li > div > svg {
   }
   
   .card > h2 {
-    margin: -3rem 0 0 0;
+    margin: -2rem 0 0 0;
     max-width: 70%;
   }
 
