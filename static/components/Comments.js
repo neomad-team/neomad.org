@@ -17,20 +17,14 @@ class Comments extends React.Component {
     const comments = Object
     .keys(this.state.comments)
     .map(key =>
-      <li><p>{this.state.comments[key]}</p></li>
+      <p>{this.state.comments[key]}</p>
     )
-    if(comments[0] == ['']) {
+    if(comments.length) {
       return (
-        <li className='no-comments'>
-          <p>No comments available</p>
-        </li>
-      )
-    } else {
-      return (
-        <li className='comments'>
-          <h3>Comments:</h3>
-          <ul>{comments}</ul>
-        </li>
+        <details>
+          <summary>Comments</summary>
+          <p>{comments}</p>
+        </details>
       )
     }
   }

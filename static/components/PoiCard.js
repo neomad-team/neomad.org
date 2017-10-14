@@ -46,12 +46,11 @@ class PoiCard extends React.Component {
   }
 
   renderDistance(distance) {
-    if(distance < 15) return 'close to you'
     if(!distance) return ''
     if(distance > 1000) {
       return `${Math.round(distance/1000)} km`
     } else {
-      return `${distance} meters`
+      return `${distance} m`
     }
   }
 
@@ -78,11 +77,11 @@ class PoiCard extends React.Component {
         onClick={this.clickCard}
         style={{order: this.calculateDistance(this.state.from, this.state.to)}}>
         <div className='card-distance'>{this.renderDistance(this.calculateDistance(this.state.from, this.state.to), this.state.unit)}</div>
-        <h2>{this.props.details.name}</h2>
+        <h2 title={this.props.details.name}>{this.props.details.name}</h2>
         <ul>
-          <Rank value={this.props.details.wifi} />
-          <Power value={this.props.details.power} />
-          <Comments value={this.props.details.comments} />
+          <li><Rank value={this.props.details.wifi} /></li>
+          <li><Power value={this.props.details.power} /></li>
+          <li><Comments value={this.props.details.comments} /></li>
         </ul>
       </div>
     )
