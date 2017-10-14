@@ -1,4 +1,5 @@
 body {
+  height: auto;
   min-height: 100%;
 }
 
@@ -184,8 +185,4 @@ main > header figure .loading.ready {
 .ribbon:hover {
   color: #fff;
   background: #00bf6b;
-}
-
-body > footer {
-  border-top: none;
 }
