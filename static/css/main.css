@@ -15,7 +15,7 @@ html {
 }
 
 body {
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -230,7 +230,7 @@ figure {
   font-size: 1.1em;
 }
 .meta .reading-time {
-  display: inline; 
+  display: inline;
 }
 .meta .reading-time::before {
   content: "-";
