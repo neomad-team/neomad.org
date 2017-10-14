@@ -28,7 +28,7 @@ main {
   padding: 1rem 2rem 10rem;
 }
 
-#poi-cards > div{
+#poi-cards > div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -38,7 +38,7 @@ main {
   display: flex;
   flex-direction: column;
   width: 49%;
-  padding: 2rem;
+  padding: 1rem 1.5rem 2.5rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
   transition: 0.15s;
   background-color: #fefefe;
@@ -52,32 +52,31 @@ main {
 }
 
 .card h2 {
-  font-size: 2rem;
-}
-
-.card h3 {
-  font-size: 1.85rem;
-  font-weight: normal;
-  margin: 0 1.25rem 0 0;
+  font-size: 1.7rem;
+  margin: .75rem 0;
+  max-height: 5rem;
+  width: 27rem;
+  overflow: hidden;
 }
 
 .card ul {
   padding: 0 0 0 2.5rem;
-  margin-bottom: 0;
+  margin: 1rem;
 }
 
 .card ul li {
+  list-style-type: none;
+}
+
+.card ul li div {
   display: flex;
   padding: 0 0 1rem 0;
 }
 
-.comments {
-  flex-direction: column;
-  padding: 0;
-}
-
-.comments p {
-  margin: 1rem 0 0 0;
+.card ul li div h3 {
+  font-size: 1.85rem;
+  font-weight: normal;
+  margin: 0 1.25rem 0 0;
 }
 
 .card-distance {
@@ -118,12 +117,6 @@ main {
 
 #open-form:hover p {
   color: #3ba77c;
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
 }
 
 #poi-form {
@@ -351,7 +344,7 @@ footer {
 /* cards datas */
 
 /* star rank */
-li > svg {
+li > div > svg {
   display: inline-block;
   height: 1em;
   width: 1em;
@@ -471,4 +464,10 @@ li > svg {
   #save-form {
     margin-right: 4.5rem;
   }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
