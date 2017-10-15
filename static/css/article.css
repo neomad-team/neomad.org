@@ -2,6 +2,11 @@ html {
   background-color: #fff;
 }
 
+body {
+  height: auto;
+  min-height: 100%;
+}
+
 main {
   display: flex;
   flex-direction: column;
