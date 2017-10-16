@@ -174,7 +174,7 @@ document.querySelector('#poi-form form').addEventListener('submit', event => {
   .then(r => r.json())
   .then(response => {
     if (response.id) {
-      alert('success', 'You spot was saved succefully')
+      alert('success', 'You spot was saved successfully')
     }
     else {
       alert('error', 'Something went wrong. Please try again later.')
