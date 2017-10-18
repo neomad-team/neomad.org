@@ -18,6 +18,9 @@ assets_build:
 
 deploy: server_update assets_build server_reload
 
+backup_db:
+	rsync -avz neomad:~/prod/data/db ./backups/prod-`(date +%s)`
+
 install:
 	bash -c "bin/install.sh"
 
