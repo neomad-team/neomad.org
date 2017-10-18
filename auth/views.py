@@ -1,5 +1,6 @@
 from flask import request, render_template, redirect
 from flask_login import login_user, logout_user, current_user
+from mongoengine.errors import NotUniqueError
 
 from core import app
 from user.models import User
@@ -33,8 +34,12 @@ def login():
 def signup():
     if request.method == 'POST':
         email = request.form['email']
-        user = (User(email=email, username=email.split('@')[0])
-                .set_password(request.form['password']).save())
+        try:
+            user = (User(email=email, username=email.split('@')[0])
+                    .set_password(request.form['password']).save())
+        except NotUniqueError:
+            errors = ['This email already exists.']
+            return render_template('auth/signup.html', errors=errors), 400
         login_user(user)
         return redirect(url_for_user(user))
     else:
