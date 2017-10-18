@@ -141,15 +141,14 @@ function scrollCard (poi_id) {
 
 // display form with open/close button
 const formLayer = document.querySelector('#poi-form')
-const displayForm = document.querySelectorAll('.display-form')
-displayForm.forEach(button => {
-  button.addEventListener('click', _ => {
-    if (userID) {
-      formLayer.classList.toggle('visible')
-    } else {
-      alert('warning', 'Sorry, you need to <a href=/login/>log in</a> to share a place.')
-    }
-  })
+
+document.querySelector('#open-form').addEventListener('click', _ => {
+  userID ? formLayer.classList.add('visible')
+         : alert('warning', 'Sorry, you need to <a href=/login/>log in</a> to share a place.')
+})
+
+document.querySelector('#close-form').addEventListener('click', _ => {
+  formLayer.classList.remove('visible')
 })
 
 // close form clicking outside form
