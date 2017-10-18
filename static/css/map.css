@@ -1,0 +1,15 @@
+main {
+  margin-top: 6.5rem;
+}
+
+a.leaflet-control-zoom-in,
+a.leaflet-control-zoom-out {
+  padding-right: 2px;
+  line-height: 22px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

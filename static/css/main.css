@@ -110,7 +110,9 @@ body > header nav .button:hover {
   top: 6rem;
   right: -1rem;
   margin: 0;
-  padding: 1rem 2rem;
+  /* actual padding is set on .active to avoid 
+  to go above map controller when menu is hidden */
+  padding: 0;
   height: 0;
   opacity: 0;
   background-color: #fff;
@@ -141,6 +143,7 @@ body > header nav .button:hover {
 }
 
 .profile-menu.active {
+  padding: 1rem 2rem;
   height: auto;
   opacity: 1;
 }

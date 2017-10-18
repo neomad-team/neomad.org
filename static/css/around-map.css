@@ -1,7 +1,3 @@
-main {
-  margin-top: 6.5rem;
-}
-
 #wrap {
   display: flex;
   justify-content: space-between;
@@ -465,10 +461,4 @@ li > div > svg {
   #save-form {
     margin-right: 4.5rem;
   }
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
 }
