@@ -52,7 +52,7 @@ function currentMarker (currentLatLng) {
   localizeUser.start()
 
   if (!window.location.hash) {
-    moveTo(currentLatLng, 13)
+    moveTo(currentLatLng, 11)
   }
 }
 
