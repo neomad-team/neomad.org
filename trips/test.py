@@ -16,7 +16,7 @@ class TripTest(TestCase):
         self.client = app.test_client()
         self.user = (User(email='emailtest@test.com', username='tester')
                      .set_password('testtest'))
-        self.user.allow_localization = True
+        self.user.allow_community = True
         self.user.save()
         data = {
             'email': 'emailtest@test.com',
