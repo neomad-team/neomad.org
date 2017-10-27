@@ -1,3 +1,8 @@
+body {
+  height: auto;
+  min-height: 100%;
+}
+
 form[edit] .toolbar {
   position: fixed;
   bottom: 0;
@@ -129,7 +134,7 @@ figure label {
   text-align: center;
   vertical-align: middle;
   background-color: rgba(255,255,255,.7);
-  padding-top: 45%;
+  padding-top: 40%;
   cursor: pointer;
   display: none;
   z-index: 4;

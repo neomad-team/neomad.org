@@ -6,3 +6,4 @@ __pycache__/
 /node_modules/
 /static/components/App.js
 /package-lock.json
+/backups/

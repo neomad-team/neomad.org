@@ -21,6 +21,7 @@ function coordinatesToAddress (coordinates) {
     mode: 'cors'
   })
   .then(r => r.json())
+<<<<<<< HEAD
   .then(d => {
     const data = d.address
     data['area'] = data.town || data.village || data.city
@@ -39,6 +40,10 @@ function localize(url) {
       }
     })
   })
+=======
+  .then(d => d.address)
+  .catch(console.error.bind(console))
+>>>>>>> 9c4c40c29c6629a046c09e3785ba07ea18b97085
 }
 
 window.onload = _ => {

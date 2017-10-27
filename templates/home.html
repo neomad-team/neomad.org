@@ -15,8 +15,7 @@
   <section>
     <h1>Neomad</h1>
     <h2>Make the world your home. And workplace.</h2>
-    {% if current_user and current_user.is_authenticated %}
-    {% else %}
+    {% if not current_user or not current_user.is_authenticated %}
     <a href={{ url_for('signup') }} id=join-us>Become a Neomad</a>
     {% endif %}
     <a href=#features id=arrow-down>find out below our features</a>
@@ -79,7 +78,9 @@
       {% endif %}
     {% endfor %}
     </ul>
+    {% if not current_user or not current_user.is_authenticated %}
     <a href={{ url_for('signup') }} class=action-button>Signup to join them</a>
+    {% endif %}
   </section>
     
 {% endblock %}

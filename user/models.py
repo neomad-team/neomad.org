@@ -32,7 +32,7 @@ class User(UserMixin, db.Document):
     email = db.EmailField(unique=True)
     password = db.StringField(required=True, min_length=32, max_length=120)
     creation_date = db.DateTimeField(default=datetime.datetime.utcnow)
-    username = db.StringField(unique=True)
+    username = db.StringField(unique=True, required=True)
     about = db.StringField()
     slug = db.StringField(unique=True)
     locations = db.EmbeddedDocumentListField(UserLocation, default=[])

@@ -1,15 +1,22 @@
 import json
 from unittest import TestCase
 
-from core import app
 from user.models import User
+from core import app
+
+from blog import views  # noqa: F401
+from trips import views  # noqa: F401, F801
+from user import views  # noqa: F401, F801
+from auth import views  # noqa: F401, F801
+from around import views  # noqa: F401, F801
 
 
 class TripTest(TestCase):
     def setUp(self):
         self.client = app.test_client()
-        self.user = User(email='emailtest@test.com').set_password('testtest')
-        self.user.allow_community = True
+        self.user = (User(email='emailtest@test.com', username='tester')
+                     .set_password('testtest'))
+        self.user.allow_localization = True
         self.user.save()
         data = {
             'email': 'emailtest@test.com',
@@ -19,7 +26,7 @@ class TripTest(TestCase):
         self.lat_lng = [3.5, 42.0]
 
     def tearDown(self):
-        User.objects.delete()
+        User.drop_collection()
 
     def test_add_trip(self):
         user = User.objects.first()

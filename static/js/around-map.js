@@ -52,7 +52,7 @@ function currentMarker (currentLatLng) {
   localizeUser.start()
 
   if (!window.location.hash) {
-    moveTo(currentLatLng, 13)
+    moveTo(currentLatLng, 11)
   }
 }
 
@@ -141,15 +141,14 @@ function scrollCard (poi_id) {
 
 // display form with open/close button
 const formLayer = document.querySelector('#poi-form')
-const displayForm = document.querySelectorAll('.display-form')
-displayForm.forEach(button => {
-  button.addEventListener('click', _ => {
-    if (userID) {
-      formLayer.classList.add('visible')
-    } else {
-      alert('warning', 'Sorry, you need to <a href=/login/>log in</a> to share a place.')
-    }
-  })
+
+document.querySelector('#open-form').addEventListener('click', _ => {
+  userID ? formLayer.classList.add('visible')
+         : alert('warning', 'Sorry, you need to <a href=/login/>log in</a> to share a place.')
+})
+
+document.querySelector('#close-form').addEventListener('click', _ => {
+  formLayer.classList.remove('visible')
 })
 
 // close form clicking outside form
@@ -174,7 +173,7 @@ document.querySelector('#poi-form form').addEventListener('submit', event => {
   .then(r => r.json())
   .then(response => {
     if (response.id) {
-      alert('success', 'You spot was saved succefully')
+      alert('success', 'You spot was saved successfully')
     }
     else {
       alert('error', 'Something went wrong. Please try again later.')

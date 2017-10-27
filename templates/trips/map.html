@@ -9,9 +9,11 @@
 {% endblock %}
 
 {% block extra_css %}
-<link rel=stylesheet href={{ url_for('static', filename='css/trips-map.css') }}>
 <link rel=stylesheet href={{ url_for('static', filename='dist/leaflet/leaflet.css') }}>
 <link rel=stylesheet href={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.css') }}>
+
+<link rel=stylesheet href={{ url_for('static', filename='css/map.css') }}>
+<link rel=stylesheet href={{ url_for('static', filename='css/trips-map.css') }}>
 
 <script src={{ url_for('static', filename='dist/leaflet/leaflet.js') }}></script>
 <script src={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.min.js') }}></script>

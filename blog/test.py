@@ -11,8 +11,8 @@ from core import app
 class ArticleTest(TestCase):
     def setUp(self):
         self.client = app.test_client()
-        self.user = User(email='emailtest@test.com').set_password(
-            'testtest').save()
+        self.user = (User(email='emailtest@test.com', username='tester')
+                     .set_password('testtest').save())
 
     def tearDown(self):
         User.objects.delete()

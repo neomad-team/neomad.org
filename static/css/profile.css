@@ -65,6 +65,9 @@ main > header {
 .profile-intro .social input {
   border: none;
   width: auto;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .profile-intro .social a,
 .profile-intro .social input {

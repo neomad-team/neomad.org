@@ -6,6 +6,12 @@ from core import app
 from user.models import User
 from blog.models import Article
 
+from blog import views  # noqa: F401
+from trips import views  # noqa: F401, F811
+from user import views  # noqa: F401, F811
+from auth import views  # noqa: F401, F811
+from around import views  # noqa: F401, F811
+
 
 def login_user(self):
     data = {
@@ -23,8 +29,8 @@ class UserTest(TestCase):
         self.lat_lng = [3.5, 42.0]
 
     def tearDown(self):
-        User.objects.delete()
-        Article.objects.delete()
+        User.drop_collection()
+        Article.drop_collection()
 
     def test_user_page_that_does_not_exist(self):
         result = self.client.get('/@doesnotexist/')
