@@ -37,7 +37,7 @@ section:first-child > h2 {
   top: 31rem;
   left: 12.5rem;
 }
-#join-us {
+section:first-child #join-us {
   position: absolute;
   left: 16rem;
   top: 37rem;
@@ -49,23 +49,23 @@ section:first-child > h2 {
   transition: padding .3s ease;
   z-index: 9;
 }
-#join-us:hover,
-#join-us.sticky:hover {
+section:first-child #join-us:hover,
+section:first-child #join-us.sticky:hover {
   background-color: #11c374;
 }
-#join-us.sticky {
+section:first-child #join-us.sticky {
   position: fixed;
   top: 1.5rem;
   padding: .5rem 2rem;
 }
-#arrow-down {
+section:first-child #arrow-down {
   color: transparent;
   position: absolute;
   text-align: center;
   bottom: -3rem;
   width: 100%;
 }
-#arrow-down::after {
+section:first-child #arrow-down::after {
   font-family: FontAwesome;
   content: "\f078";
   position: relative;
@@ -75,7 +75,7 @@ section:first-child > h2 {
   right: 10.5rem;
 }
 
-#features,
+section#features,
 .articles,
 .profiles,
 footer {
@@ -83,7 +83,7 @@ footer {
   top: -8.5rem;
 }
 
-#features h2,
+section#features h2,
 .articles > h2,
 .profiles > h2 {
   font-size: 3.5rem;
@@ -91,29 +91,29 @@ footer {
   position: relative;
 }
 
-#features {
+section#features {
   padding: 0;
 }
-#features ul {
+section#features ul {
   list-style-type: none;
   display: flex;
   flex-direction: column;
   padding: 0;
   margin: 0;
 }
-#features > ul > li {
+section#features > ul > li {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 6rem 2rem;
 }
-#features > ul > li > ul > li{
+section#features > ul > li > ul > li{
   margin: 0 0 1rem;
 }
-#features > ul > li:nth-child(2) {
+section#features > ul > li:nth-child(2) {
   background-color: #fafafa;
 }
-#features .action-button {
+section#features .action-button {
   margin: 4rem 9rem 1rem;
 }
 
@@ -187,16 +187,16 @@ footer {
     top: 25rem;
     left: 8rem;
   }
-  #join-us {
+  section:first-child #join-us {
     top: 31rem;
     left: 11.65rem;
     z-index: inherit;
   }
-  #join-us.sticky {
+  section:first-child #join-us.sticky {
     left: 16rem;
     z-index: 9;
   }
-  #arrow-down {
+  section:first-child #arrow-down {
     bottom: 12rem;
   }
   .column {
@@ -227,11 +227,11 @@ footer {
     font-size: 2.4rem;
     line-height: 3rem;
   }
-  #join-us {
+  section:first-child section:first-child #join-us {
     top: 29rem;
     left: 7.15rem;
   }
-  #arrow-down {
+  section:first-child section:first-child #arrow-down {
     bottom: 22rem;
   }
   .column {
@@ -246,7 +246,7 @@ footer {
   body > header {
     padding: 0;
   }
-  #join-us.sticky {
+  section:first-child #join-us.sticky {
     top: 4.5rem;
     left: 0;
     right: 0;
@@ -256,7 +256,7 @@ footer {
     font-weight: 300;
     border-radius: 0;
   }
-  #join-us.sticky::after {
+  section:first-child #join-us.sticky::after {
     font-family: FontAwesome;
     content: "\f0a5";
     font-size: 2rem;
@@ -264,13 +264,13 @@ footer {
     position: relative;
     left: 2rem;
   }
-  #arrow-down {
+  section:first-child #arrow-down {
     bottom: 23rem;
   }
-  #arrow-down::after {
+  section:first-child #arrow-down::after {
     font-size: 3rem;
   }
-  #features .action-button {
+  section:first-child #features .action-button {
     margin: 4rem 3rem 0rem;
   }
   .column {
@@ -293,7 +293,7 @@ footer {
     left: 2rem;
     width: 30rem;
   }
-  #join-us {
+  section:first-child section:first-child #join-us {
     top: 27rem;
     left: 5.65rem;
   }
@@ -306,6 +306,9 @@ footer {
 }
 
 @media screen and (max-width:360px) {
+  section:first-child {
+    margin-top: 14rem;
+  }
   section:first-child > h1 {
     font-size: 5.5rem;
     margin: 0;
@@ -316,15 +319,24 @@ footer {
     left: 2.5rem;
     width: 90%;
   }
-  #join-us {
+  section:first-child #arrow-down {
+    bottom: 0;
+  }
+  section:first-child #join-us {
     top: 25rem;
     left: 2.45rem;
   }
   .column {
     padding: 0 3.5rem;
   }
+  .row {
+    flex-direction: column;
+  }
   .profiles ul {
     padding: 0 0 2.5rem;
+  }
+  section#features h2 {
+    font-size: 3rem;
   }
 }
 
