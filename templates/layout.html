@@ -22,7 +22,7 @@
     <a href={{ url_for('around') }}>Around me</a>
     {% if current_user and current_user.is_authenticated %}
     <div id=avatar-menu class=avatar>
-      <img src={{ current_user.avatar }} width=35 height=35 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt="">
+      <img src={{ current_user.avatar }} width=35 height=35 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt>
     </div>
     <ul id=menu class=profile-menu>
       <li><a href={{ url_for_user(current_user) }}>Profile</a></li>
