@@ -187,16 +187,16 @@ footer {
     top: 25rem;
     left: 8rem;
   }
-  section:first-child #join-us {
+  #join-us {
     top: 31rem;
     left: 11.65rem;
     z-index: inherit;
   }
-  section:first-child #join-us.sticky {
+  #join-us.sticky {
     left: 16rem;
     z-index: 9;
   }
-  section:first-child #arrow-down {
+  #arrow-down {
     bottom: 12rem;
   }
   .column {
