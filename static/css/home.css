@@ -37,7 +37,7 @@ section:first-child > h2 {
   top: 31rem;
   left: 12.5rem;
 }
-section:first-child #join-us {
+#join-us {
   position: absolute;
   left: 16rem;
   top: 37rem;
@@ -49,23 +49,23 @@ section:first-child #join-us {
   transition: padding .3s ease;
   z-index: 9;
 }
-section:first-child #join-us:hover,
-section:first-child #join-us.sticky:hover {
+#join-us:hover,
+#join-us.sticky:hover {
   background-color: #11c374;
 }
-section:first-child #join-us.sticky {
+#join-us.sticky {
   position: fixed;
   top: 1.5rem;
   padding: .5rem 2rem;
 }
-section:first-child #arrow-down {
+#arrow-down {
   color: transparent;
   position: absolute;
   text-align: center;
   bottom: -3rem;
   width: 100%;
 }
-section:first-child #arrow-down::after {
+#arrow-down::after {
   font-family: FontAwesome;
   content: "\f078";
   position: relative;
@@ -75,7 +75,7 @@ section:first-child #arrow-down::after {
   right: 10.5rem;
 }
 
-section#features,
+#features,
 .articles,
 .profiles,
 footer {
@@ -83,7 +83,7 @@ footer {
   top: -8.5rem;
 }
 
-section#features h2,
+#features h2,
 .articles > h2,
 .profiles > h2 {
   font-size: 3.5rem;
@@ -91,29 +91,29 @@ section#features h2,
   position: relative;
 }
 
-section#features {
+#features {
   padding: 0;
 }
-section#features ul {
+#features ul {
   list-style-type: none;
   display: flex;
   flex-direction: column;
   padding: 0;
   margin: 0;
 }
-section#features > ul > li {
+#features > ul > li {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 6rem 2rem;
 }
-section#features > ul > li > ul > li{
+#features > ul > li > ul > li{
   margin: 0 0 1rem;
 }
-section#features > ul > li:nth-child(2) {
+#features > ul > li:nth-child(2) {
   background-color: #fafafa;
 }
-section#features .action-button {
+#features .action-button {
   margin: 4rem 9rem 1rem;
 }
 
@@ -227,11 +227,11 @@ footer {
     font-size: 2.4rem;
     line-height: 3rem;
   }
-  section:first-child section:first-child #join-us {
+  #join-us {
     top: 29rem;
     left: 7.15rem;
   }
-  section:first-child section:first-child #arrow-down {
+  #arrow-down {
     bottom: 22rem;
   }
   .column {
@@ -246,7 +246,7 @@ footer {
   body > header {
     padding: 0;
   }
-  section:first-child #join-us.sticky {
+  #join-us.sticky {
     top: 4.5rem;
     left: 0;
     right: 0;
@@ -256,7 +256,7 @@ footer {
     font-weight: 300;
     border-radius: 0;
   }
-  section:first-child #join-us.sticky::after {
+  #join-us.sticky::after {
     font-family: FontAwesome;
     content: "\f0a5";
     font-size: 2rem;
@@ -264,13 +264,13 @@ footer {
     position: relative;
     left: 2rem;
   }
-  section:first-child #arrow-down {
+  #arrow-down {
     bottom: 23rem;
   }
-  section:first-child #arrow-down::after {
+  #arrow-down::after {
     font-size: 3rem;
   }
-  section:first-child #features .action-button {
+  #features .action-button {
     margin: 4rem 3rem 0rem;
   }
   .column {
@@ -293,7 +293,7 @@ footer {
     left: 2rem;
     width: 30rem;
   }
-  section:first-child section:first-child #join-us {
+  #join-us {
     top: 27rem;
     left: 5.65rem;
   }
@@ -319,10 +319,10 @@ footer {
     left: 2.5rem;
     width: 90%;
   }
-  section:first-child #arrow-down {
+  #arrow-down {
     bottom: 0;
   }
-  section:first-child #join-us {
+  #join-us {
     top: 25rem;
     left: 2.45rem;
   }
@@ -335,7 +335,7 @@ footer {
   .profiles ul {
     padding: 0 0 2.5rem;
   }
-  section#features h2 {
+  #features h2 {
     font-size: 3rem;
   }
 }
