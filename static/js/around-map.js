@@ -181,4 +181,5 @@ document.querySelector('#poi-form form').addEventListener('submit', event => {
     document.querySelector('#poi-form').classList.remove('visible')
     addPoi(response)
   })
+  .catch(e => console.error(e))
 })
