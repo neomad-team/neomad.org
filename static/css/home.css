@@ -306,6 +306,9 @@ footer {
 }
 
 @media screen and (max-width:360px) {
+  section:first-child {
+    margin-top: 14rem;
+  }
   section:first-child > h1 {
     font-size: 5.5rem;
     margin: 0;
@@ -316,6 +319,9 @@ footer {
     left: 2.5rem;
     width: 90%;
   }
+  #arrow-down {
+    bottom: 0;
+  }
   #join-us {
     top: 25rem;
     left: 2.45rem;
@@ -323,8 +329,14 @@ footer {
   .column {
     padding: 0 3.5rem;
   }
+  .row {
+    flex-direction: column;
+  }
   .profiles ul {
     padding: 0 0 2.5rem;
+  }
+  #features h2 {
+    font-size: 3rem;
   }
 }
 

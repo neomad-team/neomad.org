@@ -110,7 +110,7 @@ body > header nav .button:hover {
   top: 6rem;
   right: -1rem;
   margin: 0;
-  /* actual padding is set on .active to avoid 
+  /* actual padding is set on .active to avoid
   to go above map controller when menu is hidden */
   padding: 0;
   height: 0;
@@ -384,5 +384,14 @@ button:hover,
     width: 100%;
     min-width: 0;
     margin-left: 0;
+  }
+}
+
+@media screen and (max-width:360px) {
+  header {
+    flex-direction: column;
+  }
+  header nav {
+    height: 3.5rem;
   }
 }
