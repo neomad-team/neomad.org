@@ -19,4 +19,4 @@ services:
     volumes:
       - .:/app
     ports:
-      - 5000:8080
+      - 5000:80
