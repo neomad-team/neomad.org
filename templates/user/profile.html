@@ -30,7 +30,7 @@
       <h1 name=username>{{ user.username or 'Insert a username' }}</h1>
       <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
       {% if user.allow_community %}
-      <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location|join(',') }}></a>
+      <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location }}></a>
       {% else %}
       <a class=private href={{ url_for('privacy') }}>
         Community mode is disabled.<br>
@@ -167,7 +167,7 @@ socials.forEach(social => {
     if(field.checkValidity()) {
       if(field.name === 'email') {
         userSocial[field.name] = field.value
-      } 
+      }
       else {
         userSocial[field.name] = transformToUrl(field)
       }
@@ -195,7 +195,7 @@ function transformToUrl(field) {
   }
   return field
 }
-  
+
 function visualValidation(field) {
   const span = document.getElementsByClassName(`edit ${field.name}`)[0]
   span.classList.toggle('validation', field.value)

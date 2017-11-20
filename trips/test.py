@@ -30,12 +30,13 @@ class TripTest(TestCase):
 
     def test_add_trip(self):
         user = User.objects.first()
-        self.assertEqual(user.locations, [3.5, 42.0])
+        self.assertEqual(user.locations, [])
         result = self.client.post('/trips/add/', data=json.dumps(self.lat_lng),
                                   content_type='application/json')
         # User has changed in the database
         user = User.objects.first()
-        self.assertEqual(user.locations, self.lat_lng)
+        self.assertEqual(user.current_location, self.lat_lng)
+        self.assertEqual(user.locations[0].position, self.lat_lng)
         self.assertEqual(result.status_code, 201)
 
     def test_trip_exactly_same_area(self):

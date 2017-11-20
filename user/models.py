@@ -7,6 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from core import db, app
 from core.helpers import slugify
+from core.fields import GeoPointField
 
 from trips.models import UserLocation
 
@@ -37,7 +38,7 @@ class User(UserMixin, db.Document):
     slug = db.StringField(unique=True)
     locations = db.EmbeddedDocumentListField(UserLocation, default=[])
     allow_community = db.BooleanField()
-    current_location = db.GeoPointField()
+    current_location = GeoPointField()
     socials = db.DictField()
 
     def set_password(self, password):
