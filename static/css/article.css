@@ -37,16 +37,16 @@ article .date {
   font-size: .7em;
 }
 
-#editor h1 {
+#editorTitle h1 {
   font-size: 1.9em;
   margin: 1em 0;
 }
 
-#editor p {
+#editorContent p {
   line-height: 1.7;
   margin: 1.7em 0;
 }
-#editor img {
+#editorContent img {
   display: inline-block;
   margin: 0 auto;
   max-width: 100%;

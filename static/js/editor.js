@@ -1,16 +1,18 @@
-new Quill('#editor', {
+var editorTitle = new Quill('#editorTitle')
+
+var editorContent = new Quill('#editorContent', {
+  theme: 'bubble',
   modules: {
-    toolbar: [   
-      ['image', 'code-block'],
-      ['clean'] 
+    toolbar: [
+      ['bold', 'italic'],
+      ['link', 'image']
     ]
-  },
-  theme: 'bubble'
-});
+  }
+})
 
 document.querySelector('form[edit]').addEventListener('submit', event => {
   const form = event.target
-  form.title.value = document.querySelector('#editor h1').innerHTML
-  form.content.value = document.querySelector('#editor div').innerHTML
+  form.title.value = editorTitle.getContents()
+  form.content.value = editorContent.getContents()
   form.published.value = event.explicitOriginalTarget.value
 })

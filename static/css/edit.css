@@ -53,8 +53,8 @@ form[edit] .toolbar .delete:hover {
 [contenteditable=true]::before {
   visibility: hidden;
   position: absolute;
-  top: 0;
-  left: -20px;
+  top: -15px;
+  left: -25px;
   content: "✏️";
   font-size: 20px;
 }
@@ -187,7 +187,12 @@ main > header figure .loading.ready {
   background: #00bf6b;
 }
 
-/* override native editor content overflow for pen sign */
+/* override native content editor */
+.ql-container {
+  height: auto !important;
+}
 .ql-editor {
   overflow-y: visible !important;
+  height: auto !important;
+  padding: 0 !important;
 }

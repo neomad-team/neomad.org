@@ -46,11 +46,12 @@
   </div>
   {% endif %}
   
-  <div id=editor>
+  <div id=editorTitle>
     <h1>{{ article.title or 'Insert your title here' }}</h1>
-    <div>
-      {{ (article.content or '<p>Insert your text here</p>')|safe }}
-    </div>
+  </div>
+  
+  <div id=editorContent>
+    {{ (article.content or '<p>Insert your text here</p>')|safe }}
   </div>
 
 </article>
