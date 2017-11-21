@@ -1,6 +1,5 @@
-var editorTitle = new Quill('#editorTitle')
-
-var editorContent = new Quill('#editorContent', {
+const title = document.querySelector('[name=title]')
+const content = new Quill('.content', {
   theme: 'bubble',
   modules: {
     toolbar: [
@@ -10,9 +9,11 @@ var editorContent = new Quill('#editorContent', {
   }
 })
 
+title.setAttribute('contenteditable', true)
+
 document.querySelector('form[edit]').addEventListener('submit', event => {
   const form = event.target
-  form.title.value = editorTitle.getContents()
-  form.content.value = editorContent.getContents()
+  form.title.value = title.innerHTML
+  form.content.value = content.getContents()
   form.published.value = event.explicitOriginalTarget.value
 })
