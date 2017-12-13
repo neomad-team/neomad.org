@@ -1,3 +1,6 @@
+.articles h2 {
+  text-align: center;
+}
 .articles article {
   box-shadow: 0 0 3px #eee;
   padding: 1em;

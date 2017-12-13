@@ -1,6 +1,5 @@
 import datetime
 import json
-from flask import url_for
 
 from core import db
 
@@ -16,6 +15,7 @@ class Spot(db.Document):
     category = db.StringField()
     comments = db.ListField(db.StringField())
     creation_date = db.DateTimeField(default=datetime.datetime.utcnow)
+    user_url = db.StringField()
 
     meta = {
         'ordering': ['-creation_date']

@@ -10,12 +10,15 @@
 {% block main %}
 
 <section>
-  <h2>Don't worry, it's just a <span>{{ code }}</span></h2>
+  <h2>Don't worry,<br>
+    this is just <span>{{ user.username }}</span>'s page that is private.</h2>
   <p>
-    You should first discover earth before getting too far from your community.<br>
-    You got lost!
+    {{ user.username }} has disabled the community mode.<br>
+    Don't be ungry, we are all free to share or not.
    </p>
   <a href=/ class=action-button>Go back to home</a>
 </section>
 
 {% endblock %}
+
+{% include '_analytics.html' %}
