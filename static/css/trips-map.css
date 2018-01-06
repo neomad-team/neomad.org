@@ -5,6 +5,11 @@
   min-height: 80%;
 }
 
+/* overide leaflet z-index controler */
+body > header {
+  z-index: 1001
+}
+
 svg {
   fill: #279E6A;
 }

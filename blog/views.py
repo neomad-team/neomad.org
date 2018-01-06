@@ -1,7 +1,7 @@
 import datetime
 
 from flask import (
-    request, render_template, redirect, url_for, abort, flash
+    request, render_template, redirect, abort, flash
 )
 from flask_login import current_user, login_required
 

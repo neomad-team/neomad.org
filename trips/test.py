@@ -16,7 +16,7 @@ class TripTest(TestCase):
         self.client = app.test_client()
         self.user = (User(email='emailtest@test.com', username='tester')
                      .set_password('testtest'))
-        self.user.allow_localization = True
+        self.user.allow_community = True
         self.user.save()
         data = {
             'email': 'emailtest@test.com',
@@ -35,6 +35,7 @@ class TripTest(TestCase):
                                   content_type='application/json')
         # User has changed in the database
         user = User.objects.first()
+        self.assertEqual(user.current_location, self.lat_lng)
         self.assertEqual(user.locations[0].position, self.lat_lng)
         self.assertEqual(result.status_code, 201)
 

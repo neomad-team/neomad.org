@@ -21,16 +21,19 @@
 
 {% block main %}
 <div id=map></div>
+{% endblock %}
+
+{% block extra_js %}
 <script>
-  var current_location = {{ user.current_location or [] }}
-  var locations = [
-  {% for location in locations %}
-    {
-      date: '{{ location.date|datetime }}',
-      position: {{ location.position }}
-    },
-  {% endfor %}
-  ]
+var current_location = {{ user.current_location or [] }}
+var locations = [
+{% for location in locations %}
+  {
+    date: '{{ location.date|datetime }}',
+    position: {{ location.position }}
+  },
+{% endfor %}
+]
 </script>
 <script src={{ url_for('static', filename='js/map.js') }}></script>
 <script src={{ url_for('static', filename='js/trips-map.js') }}></script>

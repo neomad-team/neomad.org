@@ -2,7 +2,7 @@
 {% extends 'layout.html' %}
 
 {% block title %}{{ user|capitalize }}'s profile{% endblock %}
-{% block description %}{{ user|capitalize }} is on Neomad with {{ articles.count() }} articles published and travels tracking {% if user.allow_localization %}enabled{% else %}disabled{% endif %}.{% endblock %}
+{% block description %}{{ user|capitalize }} is on Neomad with {{ articles.count() }} articles published and travels tracking {% if user.allow_community %}enabled{% else %}disabled{% endif %}.{% endblock %}
 
 {% block extra_og %}
 <meta property=og:image content="{{ request.url_root[:-1] }}{{ user.avatar }}">
@@ -19,39 +19,44 @@
 <header>
   <div class="profile-intro wrapper">
     <figure>
-      <img name=avatar src={{ user.avatar }} width=100 height=100 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt="">
+      <img class=avatar-img
+        name=avatar
+        src={{ user.avatar }}
+        width=100
+        height=100
+        onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
     </figure>
     <div>
       <h1 name=username>{{ user.username or 'Insert a username' }}</h1>
       <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
-      {% if user.allow_localization %}
-      <p>
-        {{ user }} is currently around <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location and user.current_location|join(',') }}>the world</a>.
-      </p>
+      {% if user.allow_community %}
+      <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location }}></a>
+      {% else %}
+      <a class=private href={{ url_for('privacy') }}>
+        Community mode is disabled.<br>
+        your contents are restricted and private.<br>
+      </a>
       {% endif %}
     </div>
     <section class=social>
-      {% if user.socials.email %}
+    {% if user.socials.email %}
       <a class=email href=mailto:{{ user.socials.email }} title="Send an email">Send an email</a>
-      {% endif %}
-      {% for name, url in user.socials.items() %}
-        {% if name != 'email' and url %}
-        <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
-        {% endif %}
-      {% endfor %}
+    {% endif %}
+    {% for name, url in user.socials.items() %}
+    {% if name != 'email' and url %}
+      <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
+    {% endif %}
+    {% endfor %}
     </section>
     <nav>
       {% if edit %}
-      <form>
-        <div>
-          <input type=checkbox name=localize {% if user.allow_localization %}checked{% endif %} id=localize>
-          <label for=localize title="enable tracking my trips">Enable trip tracking</label>
-        </div>
-      </form>
+      <a class="action-button settings" href={{ url_for('privacy') }}>Set my privacy settings</a>
+      <a class="action-button trips" href={{ url_for_trips(user) }}>View my trips</a>
+      {% else %}
+      <a class="action-button trips" href={{ url_for_trips(user) }}>View {{ user }}'s trips</a>
       {% endif %}
-      <a class=trips href={{ url_for_trips(user) }}>{% if edit %}View my trips{% else %}View {{ user }}'s trips{% endif %}</a>
-    </div>
-  </nav>
+    </nav>
+  </div>
 </header>
 
 <section class="articles wrapper">
@@ -64,160 +69,162 @@
 {% endif %}
 {{ article_list(articles=articles, with_author=false) }}
 </section>
+{% endblock %}
 
+
+{% block extra_js %}
 {% if edit %}
 <script>
-  const usernameField = document.querySelector('[name=username]')
-  usernameField.setAttribute('contenteditable', true)
-  usernameField.addEventListener('blur', event => {
-    const call = api.send('patch', "{{ url_for('profile_edit') }}",
-      {username: event.target.textContent}
-    )
-    apiFeedback(call, 'Your username has been updated.')
-  })
+const usernameField = document.querySelector('[name=username]')
+usernameField.setAttribute('contenteditable', true)
+usernameField.addEventListener('blur', event => {
+  const call = api.send('patch', "{{ url_for('profile_edit') }}",
+    {username: event.target.textContent}
+  )
+  apiFeedback(call, 'Your username has been updated.')
+})
 
-  const localizeField = document.querySelector('[name=localize]')
-  localizeField.addEventListener('change', event => {
-    const call = api.send('patch', "{{ url_for('profile_edit') }}",
-      {allow_localization: event.target.checked}
-    )
-    apiFeedback(call, 'Your localization preference has been updated.')
-  })
-  localizeField.addEventListener('change', event => event.target.checked && localize())
+const aboutField = document.querySelector('[name=about]')
+aboutField.setAttribute('contenteditable', true)
+aboutField.addEventListener('blur', event => {
+  const call = api.send('patch', "{{ url_for('profile_edit') }}",
+    {about: event.target.innerHTML}
+  )
+  apiFeedback(call, 'You description has been updated.')
+})
 
-  const aboutField = document.querySelector('[name=about]')
-  aboutField.setAttribute('contenteditable', true)
-  aboutField.addEventListener('blur', event => {
-    const call = api.send('patch', "{{ url_for('profile_edit') }}",
-      {about: event.target.innerHTML}
+const avatarField = document.querySelector('[name=avatar]')
+const uploadField = document.createElement('input')
+const uploadLabel = document.createElement('label')
+const loadingField = document.createElement('img')
+uploadField.type = 'file'
+uploadField.name = 'avatar'
+uploadField.id = 'avatar-field'
+uploadLabel.textContent = 'Change'
+uploadLabel.setAttribute('for', uploadField.id)
+loadingField.src = '{{ url_for('static', filename='images/loading.svg') }}'
+loadingField.setAttribute('class', 'loading')
+loadingField.classList.add('ready')
+// avatarField.after(uploadField)  # is not cross compatible
+avatarField.parentNode.insertBefore(uploadField, avatarField.nextSibling)
+avatarField.parentNode.insertBefore(uploadLabel, avatarField.nextSibling)
+avatarField.parentNode.insertBefore(loadingField, avatarField.nextSibling)
+uploadField.addEventListener('change', event => {
+  loadingField.classList.remove('ready')
+  const reader = new FileReader()
+  reader.addEventListener('load', event => {
+    const call = api.send('patch', "{{ url_for('profile_edit_avatar') }}",
+      {data: event.target.result}
     )
-    apiFeedback(call, 'You description has been updated.')
-  })
-
-  const avatarField = document.querySelector('[name=avatar]')
-  const uploadField = document.createElement('input')
-  const uploadLabel = document.createElement('label')
-  const loadingField = document.createElement('img')
-  uploadField.type = 'file'
-  uploadField.name = 'avatar'
-  uploadField.id = 'avatar-field'
-  uploadLabel.textContent = 'Change'
-  uploadLabel.setAttribute('for', uploadField.id)
-  loadingField.src = '{{ url_for('static', filename='images/loading.svg') }}'
-  loadingField.setAttribute('class', 'loading')
-  loadingField.classList.add('ready')
-  // avatarField.after(uploadField)  # is not cross compatible
-  avatarField.parentNode.insertBefore(uploadField, avatarField.nextSibling)
-  avatarField.parentNode.insertBefore(uploadLabel, avatarField.nextSibling)
-  avatarField.parentNode.insertBefore(loadingField, avatarField.nextSibling)
-  uploadField.addEventListener('change', event => {
-    loadingField.classList.remove('ready')
-    const reader = new FileReader()
-    reader.addEventListener('load', event => {
-      const call = api.send('patch', "{{ url_for('profile_edit_avatar') }}",
-        {data: event.target.result}
-      )
-      apiFeedback(call, "Your profile picture has been updated.")
-      .then(response => response.text())
-      .then(url => {
-        // url is cached
-        loadingField.classList.add('ready')
-        avatarField.src = url + '?' + Math.random()
-      })
+    apiFeedback(call, "Your profile picture has been updated.")
+    .then(response => response.text())
+    .then(url => {
+      // url is cached
+      loadingField.classList.add('ready')
+      avatarField.src = url + '?' + Math.random()
     })
-    reader.readAsDataURL(event.target.files[0])
   })
+  reader.readAsDataURL(event.target.files[0])
+})
 
-  const socialField = document.querySelector('.social')
-  ;[].map.call(socialField.querySelectorAll('a'), a => a.style.display = 'none')
+const socialField = document.querySelector('.social')
+;[].map.call(socialField.querySelectorAll('a'), a => a.style.display = 'none')
 
-  const emailWrapper = document.createElement('span')
-  emailWrapper.classList.add('edit')
-  emailWrapper.classList.add('email')
-  const email = document.createElement('input')
-  email.name ='email'
-  email.type = 'email'
-  email.value = '{{ user.socials.email }}'
-  email.placeholder = 'mycontact@email.com'
-  emailWrapper.append(email)
-  socialField.append(emailWrapper)
+const emailWrapper = document.createElement('span')
+emailWrapper.classList.add('edit')
+emailWrapper.classList.add('email')
+const email = document.createElement('input')
+email.name ='email'
+email.type = 'email'
+email.value = '{{ user.socials.email }}'
+email.placeholder = 'mycontact@email.com'
+emailWrapper.append(email)
+socialField.append(emailWrapper)
 
-  const socials = ['Twitter', 'Facebook', 'Instagram']
-  const userSocial = {{ user.socials|safe }}
-  socials.forEach(social => {
-    const name = social.toLowerCase()
-    const wrapper = document.createElement('span')
-    wrapper.classList.add('edit')
-    wrapper.classList.add(name)
-    const input = document.createElement('input')
-    input.name = name
-    if(userSocial[name] && userSocial[name].length) {
-      input.value = userSocial[name].split(`https://www.${name}.com/`)[1]
-    } else {
-      input.value = ''
-    }
-    input.type = 'text'
-    input.placeholder = `My ${social} username`
-    wrapper.append(input)
-    socialField.append(wrapper)
-  })
+const socials = ['Twitter', 'Facebook', 'Instagram']
+const userSocial = {{ user.socials|safe }}
+socials.forEach(social => {
+  const name = social.toLowerCase()
+  const wrapper = document.createElement('span')
+  wrapper.classList.add('edit')
+  wrapper.classList.add(name)
+  const input = document.createElement('input')
+  input.name = name
+  if(userSocial[name] && userSocial[name].length) {
+    input.value = userSocial[name].split(`https://www.${name}.com/`)[1]
+  } else {
+    input.value = ''
+  }
+  input.type = 'text'
+  input.placeholder = `My ${social} username`
+  wrapper.append(input)
+  socialField.append(wrapper)
+})
   ;[].forEach.call(socialField.querySelectorAll('input'), input => {
-    visualValidation(input)
-    input.addEventListener('blur', event => {
-      const field = event.currentTarget
-      if(field.checkValidity()) {
-        if(field.name === 'email') {
-          userSocial[field.name] = field.value
-        }
-        else {
-          userSocial[field.name] = transformToUrl(field)
-        }
-        visualValidation(field)
-        const call = api.send('patch', "{{ url_for('profile_edit') }}", {socials: userSocial})
-        apiFeedback(call, 'Your social accounts were updated.')
-      }
-    })
-  })
-
-  function transformToUrl(field) {
-    if(field.value !== '') {
-    field = `https://www.${field.name}.com/${field.value}`
-    }
-    return field
-  }
-
-  function visualValidation(field) {
-    const span = document.getElementsByClassName(`edit ${field.name}`)[0]
-    span.classList.toggle('validation', field.value)
-  }
-
-  function apiFeedback(caller, confirmation) {
-    return caller.then(response => {
-      const status = response.status
-      if(200 <= status < 300) {
-        alert('success', confirmation)
+  visualValidation(input)
+  input.addEventListener('blur', event => {
+    const field = event.currentTarget
+    if(field.checkValidity()) {
+      if(field.name === 'email') {
+        userSocial[field.name] = field.value
       }
       else {
-        alert('error', `An error occured. Technical detail: response status ${status}`)
-        console.error(response)
+        userSocial[field.name] = transformToUrl(field)
       }
-      return response
-    }, error => {
-      alert('error', error)
-      return error
+      visualValidation(field)
+      const call = api.send('patch', "{{ url_for('profile_edit') }}", {socials: userSocial})
+      apiFeedback(call, 'Your social accounts were updated.')
+    }
+  })
+})
+
+const api = {
+  send(method, url, data) {
+    return fetch(url, {
+      method: method.toUpperCase(),
+      body: JSON.stringify(data),
+      credentials: 'same-origin',
+      headers: {'Content-Type': 'application/json'}
     })
   }
+}
 
-  const api = {
-    send(method, url, data) {
-      return fetch(url, {
-        method: method.toUpperCase(),
-        body: JSON.stringify(data),
-        credentials: 'same-origin',
-        headers: {'Content-Type': 'application/json'}
-      })
-    }
+function transformToUrl(field) {
+  if(field.value !== '') {
+    field = `https://www.${field.name}.com/${field.value}`
   }
+  return field
+}
+
+function visualValidation(field) {
+  const span = document.getElementsByClassName(`edit ${field.name}`)[0]
+  span.classList.toggle('validation', field.value)
+}
+
+function apiFeedback(caller, confirmation) {
+  return caller.then(response => {
+    const status = response.status
+    if(200 <= status < 300) {
+      alert('success', confirmation)
+    }
+    else {
+      alert('error', `An error occured. Technical detail: response status ${status}`)
+      console.error(response)
+    }
+    return response
+  }, error => {
+    alert('error', error)
+    return error
+  })
+}
 </script>
 {% endif %}
+<script>
+const a = document.querySelector('[data-latlng]')
+if(a) {
+  coordinatesToAddress(a.dataset.latlng).then(data => {
+    a.textContent = `${data.area}, ${data.country}`
+  })
+}
+</script>
 {% endblock %}
