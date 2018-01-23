@@ -159,8 +159,7 @@ footer {
   list-style: none;
 }
 .profiles figure {
-  display: flex;
-  justify-content: center;
+  text-align: center;
 }
 .profiles figure img {
   margin: 0;

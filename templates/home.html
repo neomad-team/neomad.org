@@ -2,7 +2,7 @@
 
 {% extends 'layout.html' %}
 
-{% block title %}Digital Nomad Community{% endblock %} 
+{% block title %}Digital Nomad Community{% endblock %}
 {% block description %}Find a local place to work, get connected to other remote workers.{% endblock %}
 
 {% block extra_css %}
@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block main %}
-  
+
   <section>
     <h1>Neomad</h1>
     <h2>Make the world your home. And workplace.</h2>
@@ -20,7 +20,7 @@
     {% endif %}
     <a href=#features id=arrow-down>find out below our features</a>
   </section>
-  
+
   <section id=features>
     <ul>
       <li>
@@ -55,14 +55,14 @@
       </li>
     </ul>
   </section>
-    
+
   <section class=articles>
     <h2>Latest articles from Neomads</h2>
     <div class="row column">
       {{ article_list(articles=articles) }}
     </div>
   </section>
-  
+
   <section class=profiles>
     <h2>Welcome to our last Neomads</h2>
     <ul>
@@ -71,13 +71,14 @@
       <li>
         <a href='{{ url_for_user(user) }}'>
           <figure>
-            <img 
+            <img
               src={{ user.avatar }}
               title={{ user.username }}
               width=100
               height=100
               onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'"
               alt="photo of {{ user.username }}">
+            <figcaption>{{ user }}</figcaption>
           </figure>
         </a>
       </li>
@@ -88,7 +89,7 @@
     <a href={{ url_for('signup') }} class=action-button>Signup to join them</a>
     {% endif %}
   </section>
-    
+
 {% endblock %}
 
 {% block extra_js %}
