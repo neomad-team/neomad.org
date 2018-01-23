@@ -1,5 +1,5 @@
 function alert (type, message, delay) {
-  console.info(type, message)
+  console.info(`${type}: ${message}`)
   let notification = document.querySelector('#notification')
   if (!notification) {
     notification = document.createElement('div')
@@ -12,6 +12,34 @@ function alert (type, message, delay) {
     this.timer = setTimeout(_ => {
       notification.classList = []
     }, delay || 5000)
+  }
+}
+
+function apiFeedback (caller, confirmation) {
+  return caller.then(response => {
+    const status = response.status
+    if(200 <= status < 300) {
+      alert('success', confirmation)
+    }
+    else {
+      alert('error', `An error occured. Technical detail: response status ${status}`)
+      console.error(response)
+    }
+    return response
+  }, error => {
+    alert('error', error)
+    return error
+  })
+}
+
+var api = {
+  send(method, url, data) {
+    return fetch(url, {
+      method: method.toUpperCase(),
+      body: JSON.stringify(data),
+      credentials: 'same-origin',
+      headers: {'Content-Type': 'application/json'}
+    })
   }
 }
 

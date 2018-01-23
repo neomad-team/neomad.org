@@ -178,17 +178,6 @@ socials.forEach(social => {
   })
 })
 
-const api = {
-  send(method, url, data) {
-    return fetch(url, {
-      method: method.toUpperCase(),
-      body: JSON.stringify(data),
-      credentials: 'same-origin',
-      headers: {'Content-Type': 'application/json'}
-    })
-  }
-}
-
 function transformToUrl(field) {
   if(field.value !== '') {
     field = `https://www.${field.name}.com/${field.value}`
@@ -199,23 +188,6 @@ function transformToUrl(field) {
 function visualValidation(field) {
   const span = document.getElementsByClassName(`edit ${field.name}`)[0]
   span.classList.toggle('validation', field.value)
-}
-
-function apiFeedback(caller, confirmation) {
-  return caller.then(response => {
-    const status = response.status
-    if(200 <= status < 300) {
-      alert('success', confirmation)
-    }
-    else {
-      alert('error', `An error occured. Technical detail: response status ${status}`)
-      console.error(response)
-    }
-    return response
-  }, error => {
-    alert('error', error)
-    return error
-  })
 }
 </script>
 {% endif %}

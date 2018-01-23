@@ -40,18 +40,18 @@
       {% for location in locations %}
       <li>
         <p>{{ location.date | datetime }}</p>
-        <a 
-           data-latlng={{ location.position|join(',') }}  
-           href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} 
+        <a
+           data-latlng={{ location.position|join(',') }}
+           href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }}
            target=_blank>{{ location.position|join(',') }}
         </a>
-        <form method=post action={{ url_for('privacy_delete_trip', date=location.date.timestamp()) }}>  
+        <form method=post action={{ url_for('privacy_delete_trip', date=location.date.timestamp()) }}>
           <a class=button href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} target=_blank>View on map</a>
           <button class=delete>Delete</button>
         </form>
       </li>
       {% endfor %}
-    </ul>   
+    </ul>
   </article>
 </section>
 {% endblock %}
@@ -77,33 +77,5 @@ Array.from(document.querySelectorAll('[data-latlng]')).forEach(a => {
      a.textContent = `${data.area}, ${data.country}`
   })
 })
-
-function apiFeedback(caller, confirmation) {
-  return caller.then(response => {
-    const status = response.status
-    if(200 <= status < 300) {
-      alert('success', confirmation)
-    }
-    else {
-      alert('error', `An error occured. Technical detail: response status ${status}`)
-      console.error(response)
-    }
-    return response
-  }, error => {
-    alert('error', error)
-    return error
-  })
-}
-
-const api = {
-  send(method, url, data) {
-    return fetch(url, {
-      method: method.toUpperCase(),
-      body: JSON.stringify(data),
-      credentials: 'same-origin',
-      headers: {'Content-Type': 'application/json'}
-    })
-  }
-}
 </script>
 {% endblock %}
