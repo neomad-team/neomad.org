@@ -206,7 +206,9 @@ body > header nav .button:hover {
     display: flex;
     justify-content: center;
   }
-  
+  .profile-menu > li > a{
+    padding: 3px 15px;
+  }
 }
 
 /* Footer */
