@@ -17,7 +17,8 @@
 
 <header>
   <h1><a href=/>Neomad</a></h1>
-  <nav>
+  <a href=# class=mobile-nav>Menu</a>
+  <nav class=mobile-close>
     <a href={{ url_for('article_list') }} title="Read Neomad's adventures">Read</a>
     <a href={{ url_for('around') }}>Around me</a>
     {% if current_user and current_user.is_authenticated %}

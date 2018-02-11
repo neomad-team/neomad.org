@@ -36,4 +36,13 @@ window.onload = _ => {
       menu.classList.toggle('active')
     })
   }
+  const mobileNav = document.querySelector('.mobile-nav')
+  if (mobileNav) {
+    const nav = document.querySelector('.mobile-close')
+    mobileNav.addEventListener('click', e => {
+      e.preventDefault()
+      mobileNav.classList.toggle('is-open')
+      nav.classList.toggle('mobile-close')
+    })
+  }
 }
