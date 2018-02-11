@@ -186,6 +186,27 @@ body > header nav .button:hover {
     font-size: 2.25rem;
     line-height: 5rem;
   }
+  #avatar-menu {
+    display: none;
+  }
+  .profile-menu {
+    opacity: 1;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    top: 0;
+    right: 0;
+  }
+  .profile-menu::before {
+    display: none;
+  }
+  .profile-menu > li {
+    display: flex;
+    justify-content: center;
+  }
+  
 }
 
 /* Footer */
