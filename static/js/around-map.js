@@ -46,9 +46,29 @@ map.on('click', event => {
   }
 })
 
+// add user on map
+usersLocation.forEach(user => {
+  addUser(user)
+})
+
 // functions
-function currentMarker (currentLatLng) {
+function addUser (user) {
+  const popup = L.popup()
+    .setContent(`<a href=${user.link}>Latest known position for ${user.name}</a>`)
   
+  const userMarker = L.circleMarker(user.position, {
+      color: '#297ddb',
+      opacity: .75,
+      weight: 3,
+      fillColor: 'white',
+      fillOpacity: 1,
+      radius: 5,
+    })
+    .bindPopup(popup)
+    .addTo(map)
+}
+
+function currentMarker (currentLatLng) {
   localizeUser.start()
 
   if (!window.location.hash) {
