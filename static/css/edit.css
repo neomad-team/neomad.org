@@ -50,17 +50,17 @@ form[edit] .toolbar .delete:hover {
   border-bottom-color: #333;
 }
 
-[contenteditable=true]::after {
-  position: absolute;
-  top: 0;
-  right: -9px;
+[contenteditable=true]::before {
   visibility: hidden;
-  content: " ✏️";
-  font-size: 18px;
+  position: absolute;
+  top: -15px;
+  left: -25px;
+  content: "✏️";
+  font-size: 20px;
 }
 
-[contenteditable=true]:hover::after,
-[contenteditable=true]:focus::after {
+[contenteditable=true]:hover::before,
+[contenteditable=true]:focus::before {
   visibility: inherit;
 }
 
@@ -127,4 +127,14 @@ main > header figure .loading.ready {
 .ribbon:hover {
   color: #fff;
   background: #00bf6b;
+}
+
+/* override native content editor */
+.ql-container {
+  height: auto !important;
+}
+.ql-editor {
+  overflow-y: visible !important;
+  height: auto !important;
+  padding: 0 !important;
 }
