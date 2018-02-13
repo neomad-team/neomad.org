@@ -82,10 +82,10 @@ body > header nav a {
   font-size: 1.5rem;
   text-decoration: none;
 }
-.avatar {
+.avatar-nav {
   cursor: pointer;
 }
-.avatar img,
+.avatar-nav img,
 .profile-intro img,
 .profiles img,
 .meta img {
@@ -153,62 +153,8 @@ body > header nav .button:hover {
 /* Mobile nav */
 .mobile-nav {
   display: none;
-}
-@media screen and (max-width: 620px) {
-  .mobile-nav {
-    display: flex;
-    padding: 1rem 2rem;
-  }
-  .mobile-nav::after {
-    content: "\f0c9";
-    font-family: fontAwesome;
-    margin-left: 1rem;
-  }
-  .mobile-nav.is-open::after {
-    content: "\f00d";
-  }
-  body > header nav.mobile-close {
-    display: none;
-  }
-  body > header nav {
-    position: absolute;
-    top: 6rem;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: white;
-    padding: 3rem;
-    box-shadow: 1px 1px 2px #eee;
-  }
-  
-  body > header nav a {
-    font-size: 2.25rem;
-    line-height: 5rem;
-  }
-  #avatar-menu {
-    display: none;
-  }
-  .profile-menu {
-    opacity: 1;
-    position: relative;
-    height: 100%;
-    width: 100%;
-    box-shadow: none;
-    border: none;
-    top: 0;
-    right: 0;
-  }
-  .profile-menu::before {
-    display: none;
-  }
-  .profile-menu > li {
-    display: flex;
-    justify-content: center;
-  }
-  .profile-menu > li > a{
-    padding: 3px 15px;
-  }
+  border: none;
+  background: none;
 }
 
 /* Footer */
@@ -432,14 +378,71 @@ button:hover,
   backface-visibility: hidden;
 }
 
-@media screen and (max-width: 700px) {
+/* Responsive */
+
+@media screen and (max-width: 620px) {
+  .mobile-nav {
+    display: flex;
+    padding: 1rem 2rem;
+  }
+  .mobile-nav::after {
+    content: "\f0c9";
+    font-family: fontAwesome;
+    margin-left: 1rem;
+  }
+  .mobile-nav.is-open::after {
+    content: "\f00d";
+  }
+  body > header nav.mobile-close {
+    display: none;
+  }
+  body > header nav {
+    position: absolute;
+    top: 6rem;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    padding: 3rem;
+    box-shadow: 1px 1px 2px #eee;
+  }
+  body > header nav a {
+    font-size: 2.25rem;
+    line-height: 5rem;
+  }
+  
+  .avatar-nav {
+    display: none;
+    background: none;
+    border: none;
+  }
+  .profile-menu {
+    opacity: 1;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    top: 0;
+    right: 0;
+  }
+  .profile-menu::before {
+    display: none;
+  }
+  .profile-menu > li {
+    display: flex;
+    justify-content: center;
+  }
+  .profile-menu > li > a{
+    padding: 3px 15px;
+  }
+  
   article {
     width: 100%;
     padding: 0 2rem;
   }
-}
-
-@media screen and (max-width: 800px) {
+  
   #notification {
     width: 100%;
     min-width: 0;
