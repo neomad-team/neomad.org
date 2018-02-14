@@ -4,43 +4,33 @@ main {
   background-color: #fff;
 }
 
-h2 {
-  margin: 0 0 3rem;
-}
-
 .row {
   display: flex;
   justify-content: space-between;
 }
 
-section:first-child {
+.hero {
 background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/home.jpg');
 background-position: bottom center;
 background-repeat: no-repeat;
 background-size: cover;
 height: 70rem;
 margin: 10rem 0 8rem;
+padding: 10rem 10rem;
+position: relative;
 }
-section:first-child > h1,
-section:first-child > h2 {
-  position: absolute;
+.hero > h1,
+.hero > h2 {
   color: #fff;
-  margin: 0 0 0 3rem;
+  margin: 0;
 }
-section:first-child > h1 {
+.hero > h1 {
   font-size: 8rem;
-  top: 22rem;
-  left: 12.5rem;
-}
-section:first-child > h2 {
-  margin-left: 3.5rem;
-  top: 31rem;
-  left: 12.5rem;
+  line-height: 10rem;
 }
 #join-us {
-  position: absolute;
-  left: 16rem;
-  top: 37rem;
+  position: relative;;
+  top: 5rem;
   background-color: rgba(17, 195, 116, 0.8);
   color: #fff;
   padding: 1rem 6rem;
@@ -55,14 +45,18 @@ section:first-child > h2 {
 }
 #join-us.sticky {
   position: fixed;
+  left: 17rem;
   top: 1.5rem;
   padding: .5rem 2rem;
 }
 #arrow-down {
   color: transparent;
   position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   text-align: center;
-  bottom: -3rem;
+  bottom: -5rem;
   width: 100%;
 }
 #arrow-down::after {
@@ -175,28 +169,8 @@ footer {
 }
 
 @media screen and (max-width:1200px) {
-  section:first-child {
+  .hero {
     height: 55rem;
-  }
-  section:first-child > h1 {
-    top: 16rem;
-    left: 8rem;
-  }
-  section:first-child > h2 {
-    top: 25rem;
-    left: 8rem;
-  }
-  #join-us {
-    top: 31rem;
-    left: 11.65rem;
-    z-index: inherit;
-  }
-  #join-us.sticky {
-    left: 16rem;
-    z-index: 9;
-  }
-  #arrow-down {
-    bottom: 12rem;
   }
   .column {
     flex-direction: column;
@@ -212,26 +186,13 @@ footer {
 }
 
 @media screen and (max-width:960px) {
-  section:first-child {
+  .hero {
     height: 45rem;
   }
-  section:first-child > h1 {
-    top: 10rem;
-    left: 3.5rem;
-  }
-  section:first-child > h2 {
-    top: 20rem;
-    left: 3.5rem;
-    max-width: 36rem;
+  .hero > h2 {
     font-size: 2.4rem;
     line-height: 3rem;
-  }
-  #join-us {
-    top: 29rem;
-    left: 7.15rem;
-  }
-  #arrow-down {
-    bottom: 22rem;
+    font-weight: normal;
   }
   .column {
     padding: 0 10rem;
@@ -242,6 +203,12 @@ footer {
 }
 
 @media screen and (max-width:620px) {
+  body > header {
+    padding: 0;
+  }
+  .hero {
+    padding: 7rem;
+  }
   #join-us.sticky {
     top: 4.5rem;
     left: 0;
@@ -260,12 +227,6 @@ footer {
     position: relative;
     left: 2rem;
   }
-  #arrow-down {
-    bottom: 23rem;
-  }
-  #arrow-down::after {
-    font-size: 3rem;
-  }
   #features .action-button {
     margin: 4rem 3rem 0rem;
   }
@@ -278,20 +239,18 @@ footer {
 }
 
 @media screen and (max-width:480px) {
-  section:first-child > h1 {
+  .hero {
+    padding: 5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero > h1 {
     font-size: 7.5rem;
-    top: 9rem;
-    left: 2rem;
   }
-  section:first-child > h2 {
+  .hero > h2 {
     font-size: 2rem;
-    top: 18rem;
-    left: 2rem;
-    width: 30rem;
-  }
-  #join-us {
-    top: 27rem;
-    left: 5.65rem;
+    text-align: center;
   }
   .articles {
     padding: 5rem 0;
@@ -302,22 +261,14 @@ footer {
 }
 
 @media screen and (max-width:360px) {
-  section:first-child > h1 {
+  .hero {
+    margin-top: 14rem;
+  }
+  .hero > h1 {
     font-size: 5.5rem;
-    margin: 0;
   }
-  section:first-child > h2 {
-    margin: 0;
-    top: 16rem;
-    left: 2.5rem;
+  .hero > h2 {
     width: 90%;
-  }
-  #arrow-down {
-    bottom: 0;
-  }
-  #join-us {
-    top: 25rem;
-    left: 2.45rem;
   }
   .column {
     padding: 0 3.5rem;
