@@ -29,9 +29,9 @@ function coordinatesToAddress (coordinates) {
 }
 
 window.onload = _ => {
-  const menu = document.querySelector('#profile-menu')
+  const menu = document.querySelector('nav .profile')
   if (menu) {
-    const avatar = document.querySelector('#avatar-nav')
+    const avatar = document.querySelector('nav .avatar')
     avatar.addEventListener('click', _ => {
       menu.classList.toggle('active')
     })
