@@ -47,9 +47,7 @@ map.on('click', event => {
 })
 
 // add user on map
-usersLocation.forEach(user => {
-  addUser(user)
-})
+usersLocation.forEach(user => addUser(user))
 
 // functions
 function addUser (user) {
