@@ -83,7 +83,11 @@
       {% endif %}
     {% endfor %}
 
-    const userID = {{ current_user.id or 'null' }}
+    let userID = null
+    {% if current_user %}
+      userID = '{{ current_user.id }}'
+    {% endif %}
+    
     {% if current_user and current_user.allow_community %}
       const currentLatLng = {{ current_user.current_location or [] }}
     {% else %}
