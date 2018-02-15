@@ -11,7 +11,7 @@ section {
 article {
   padding: 3rem 1rem 1rem;
   margin-bottom: 3rem;
-  box-shadow: 0 2px 2px rgba(50, 50, 50, .2);
+  box-shadow: 0 .2rem .2rem rgba(50, 50, 50, .2);
 }
 article h2{
   text-align: center;
@@ -70,7 +70,7 @@ article:last-child ul > li {
   padding: 1rem;
   width: 100%;
   margin: 1rem 0;
-  box-shadow: 0 0 2px rgba(50, 50, 50, .2);
+  box-shadow: 0 0 .2rem rgba(50, 50, 50, .2);
 }
 article:last-child ul > li > p {
  margin: 0
@@ -111,21 +111,25 @@ article:last-child ul > li > form {
   position: absolute;
 }
 [type="checkbox"] + label:before {
-  left: 0em; top: 0em;
-  width: 3em; height: 1.6em;
+  left: 0;
+  top: 0;
+  width: 5.1rem;
+  height: 2.7rem;
   background: #f2dede;
-  border-radius: 1em;
+  border-radius: 1.7rem;
   transition: background-color .2s;
-  border: 1px solid #ebcccc;
+  border: .1rem solid #ebcccc;
   z-index: 2;
 }
 [type="checkbox"] + label:after {
-  width: 1.5em; height: 1.5em;
+  width: 2.55rem;
+  height: 2.55rem;
   transition: all .2s;
   border-radius: 50%;
   background: #fff;
-  top: .1em; left: .1em;
-  box-shadow: 1px 1px 3px #ccc;
+  top: .17rem;
+  left: .17rem;
+  box-shadow: .1rem .1rem .3rem #ccc;
   z-index: 4;
 }
 .text {
@@ -137,13 +141,13 @@ article:last-child ul > li > form {
 
 [type="checkbox"]:checked + label:before {
   background: #00bf6b;
-  border: 1px solid #279e6a;
+  border: .1rem solid #279e6a;
 }
 [type="checkbox"]:checked + label:after {
   background: #fff;
   left: 2.5rem;
 }
 [type="checkbox"]:focus + label:before {
-  border: 1px dashed #777;
-  margin-top: 1px;
+  border: .1rem dashed #777;
+  margin-top: .1rem;
 }

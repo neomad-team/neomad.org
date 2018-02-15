@@ -8,10 +8,10 @@ form[edit] .toolbar {
   bottom: 0;
   left: 0;
   width: 100%;
-  min-height: 50px;
+  min-height: 5rem;
   background: #fefefe;
-  border-top: 1px solid #ccc;
-  padding: 10px 20px;
+  border-top: .1rem solid #ccc;
+  padding: 1rem 2rem;
   text-align: right;
   z-index: 2;
 }
@@ -41,7 +41,7 @@ form[edit] .toolbar .delete:hover {
 [contenteditable=true] {
   position: relative;
   line-height: 1.5;
-  border-bottom: 1px dashed transparent;
+  border-bottom: .1rem dashed transparent;
   transition: .2s border-bottom-color;
 }
 
@@ -53,10 +53,10 @@ form[edit] .toolbar .delete:hover {
 [contenteditable=true]::after {
   position: absolute;
   top: 0;
-  right: -9px;
+  right: -0.9rem;
   visibility: hidden;
   content: " ✏️";
-  font-size: 18px;
+  font-size: 1.8rem;
 }
 
 [contenteditable=true]:hover::after,
@@ -122,7 +122,7 @@ main > header figure .loading.ready {
   top: 1.5rem;
   width: 16rem;
   background: #279e6a;
-  box-shadow: 0 0 0.3rem rgba(0,0,0,0.3);
+  box-shadow: 0 0 .3rem rgba(0,0,0,0.3);
 }
 .ribbon:hover {
   color: #fff;

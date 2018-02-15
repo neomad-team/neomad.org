@@ -15,14 +15,14 @@ main {
 
 article {
   font-family: Lora;
-  font-size: 1.15em;
-  letter-spacing: .02em;
-  margin-bottom: 3em;
+  font-size: 2rem;
+  letter-spacing: .035rem;
+  margin-bottom: 5.1rem;
 }
 
 article .meta {
   line-height: 1.4;
-  font-size: .7em;
+  font-size: 1.2rem;
 }
 article .meta a {
   color: #666;
@@ -32,13 +32,13 @@ article .meta .reading-time {
 }
 
 article h1 {
-  font-size: 1.9em;
-  margin: 1em 0;
+  font-size: 3.25rem;
+  margin: 1.7rem 0;
 }
 
 article .content p {
   line-height: 1.7;
-  margin: 1.7em 0;
+  margin: 2.9rem 0;
 }
 article .content img {
   display: inline-block;
@@ -48,8 +48,8 @@ article .content img {
 
 article .date {
   display: block;
-  margin-top: 3em;
-  font-size: .7em;
+  margin-top: 5.1rem;
+  font-size: 1.2rem;
 }
 
 aside a {
