@@ -4,8 +4,8 @@ main {
 
 a.leaflet-control-zoom-in,
 a.leaflet-control-zoom-out {
-  padding-right: 2px;
-  line-height: 22px;
+  padding-right: .2rem;
+  line-height: 2.2rem;
 }
 
 footer {

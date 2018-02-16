@@ -29,11 +29,20 @@ function coordinatesToAddress (coordinates) {
 }
 
 window.onload = _ => {
-  const menu = document.querySelector('#menu')
+  const menu = document.querySelector('nav .profile')
   if (menu) {
-    const avatar = document.querySelector('#avatar-menu')
+    const avatar = document.querySelector('nav .avatar')
     avatar.addEventListener('click', _ => {
       menu.classList.toggle('active')
+    })
+  }
+  const mobileNav = document.querySelector('.mobile-nav')
+  if (mobileNav) {
+    const nav = document.querySelector('.mobile-close')
+    mobileNav.addEventListener('click', e => {
+      e.preventDefault()
+      mobileNav.classList.toggle('is-open')
+      nav.classList.toggle('mobile-close')
     })
   }
 }
