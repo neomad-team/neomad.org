@@ -14,6 +14,7 @@
 {% endblock %}
 
 {% block main %}
+
   <div id=wrap>
     <div id=map></div>
     <div id=cards-wrap>
@@ -71,7 +72,22 @@
 
 {% block extra_js %}
   <script>
-    const userID = {{ current_user.id or 'null' }}
+    const usersLocation = []
+    {% for user in users %}
+      {% if not current_user %}
+        usersLocation.push({ 
+          name: '{{ user.username }}',
+          position: {{ user.current_location }},
+          link: "{{ url_for_user(user) }}"
+        })
+      {% endif %}
+    {% endfor %}
+
+    let userID = null
+    {% if current_user %}
+      userID = '{{ current_user.id }}'
+    {% endif %}
+    
     {% if current_user and current_user.allow_community %}
       const currentLatLng = {{ current_user.current_location or [] }}
     {% else %}
