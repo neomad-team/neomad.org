@@ -203,9 +203,6 @@ footer {
 }
 
 @media screen and (max-width:620px) {
-  body > header {
-    padding: 0;
-  }
   .hero {
     padding: 7rem;
   }
@@ -219,13 +216,14 @@ footer {
     font-weight: 300;
     border-radius: 0;
   }
-  #join-us.sticky::after {
+  #join-us.sticky::before {
     font-family: FontAwesome;
-    content: "\f0a5";
+    content: "\f234";
     font-size: 2rem;
     color: #fff;
     position: relative;
-    left: 2rem;
+    right: 2rem;
+    font-weight: lighter;
   }
   #features .action-button {
     margin: 4rem 3rem 0;
@@ -261,9 +259,6 @@ footer {
 }
 
 @media screen and (max-width:360px) {
-  .hero {
-    margin-top: 14rem;
-  }
   .hero > h1 {
     font-size: 5.5rem;
   }

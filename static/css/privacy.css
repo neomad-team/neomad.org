@@ -5,7 +5,7 @@ main {
 }
 
 section {
-  width: 50%;
+  padding: 0 5rem;
 }
 
 article {
@@ -150,4 +150,26 @@ article:last-child ul > li > form {
 [type="checkbox"]:focus + label:before {
   border: .1rem dashed #777;
   margin-top: .1rem;
+}
+
+@media screen and (max-width: 620px) {
+  main {
+    margin-top: 10rem;
+  }
+  
+  section {
+    padding: 0 2rem;
+  }
+  
+  article {
+    flex-direction: column;
+  }
+  article:first-child > form,
+  article:first-child > aside {
+    width: 100%;
+  }
+  
+  article:last-child ul > li {
+    flex-direction: column;
+  }
 }

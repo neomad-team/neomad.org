@@ -5,15 +5,15 @@ body {
 
 form[edit] .toolbar {
   position: fixed;
-  bottom: 0;
+  bottom: 5rem;
   left: 0;
   width: 100%;
   min-height: 5rem;
   background: #fefefe;
-  border-top: .1rem solid #ccc;
   padding: 1rem 2rem;
   text-align: right;
   z-index: 2;
+  border-top: .3rem solid #eee;
 }
 form[edit] .toolbar .save {
   background-color: #e7fee7;
@@ -127,4 +127,25 @@ main > header figure .loading.ready {
 .ribbon:hover {
   color: #fff;
   background: #00bf6b;
+}
+
+footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+@media screen and (max-width: 620px) {
+  .ribbon-wrapper {
+    top: 4.6rem;
+  }
+  
+  form[edit] .toolbar {
+    padding: 1rem; 
+  }
+  
+  .delete,
+  .save {
+    padding: 0 0.5rem;
+  }
 }

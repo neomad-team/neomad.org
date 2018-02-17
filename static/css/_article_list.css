@@ -1,3 +1,8 @@
+main > h1 {
+  text-align: center;
+  margin: 3rem 0;
+  font-size: 3.7rem;
+}
 .articles h2 {
   text-align: center;
 }
