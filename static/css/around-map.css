@@ -4,10 +4,7 @@
 }
 
 #map {
-  position: fixed;
-  right: 0;
   width: 50%;
-  min-height: 80%;
   order: 2;
 }
 
@@ -166,7 +163,6 @@
 #poi-form input[type="checkbox"] {
   position: relative;
   opacity: 1;
-  margin-left: -1.5rem;
 }
 
 #poi-form input[type="text"],
@@ -399,7 +395,7 @@ li > div > svg {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 620px) {
   #poi-cards {
     display: none;
   }
@@ -416,13 +412,12 @@ li > div > svg {
   }
   
   #open-form {
-    flex-direction: column-reverse;
+    flex-direction: row-reverse;
     align-items: center;
     margin: 1rem 0 0 1rem;
-    width: 9rem;
-    height: 8rem;
+    width: 15rem;
+    height: 5rem;
   }
-  
   #open-form p {
     font-size: 1.25rem;
     margin-top: .25rem;
@@ -447,8 +442,9 @@ li > div > svg {
   }
   
   #poi-form label {
-    width: 15rem;
+    width: 9rem;
     font-size: 1.5rem;
+    margin-right: 1rem;
   }
   
   #poi-form input[type="text"],
@@ -459,6 +455,6 @@ li > div > svg {
   }
   
   #save-form {
-    margin-right: 4.5rem;
+    margin: 0 auto 3rem;
   }
 }

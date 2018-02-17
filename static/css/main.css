@@ -27,11 +27,6 @@ body {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
-.wrapper {
-  max-width: 70rem;
-  margin: 0 auto;
-}
-
 figure {
   margin: 0;
 }
@@ -141,12 +136,12 @@ nav .profile li a {
   padding: 1rem 0;
 }
 
-nav .profile .active {
+nav .profile.active {
   padding: 1rem 2rem;
   height: auto;
   opacity: 1;
 }
-nav .profile .active li {
+nav .profile.active li {
   display: block;
 }
 
@@ -179,6 +174,10 @@ main {
 article {
   max-width: 70rem;
   background-color: #fff;
+}
+
+.articles.wrapper {
+  padding: 0 5rem;
 }
 
 .content {
@@ -243,7 +242,7 @@ figure {
 }
 .meta .reading-time::before {
   content: "-";
-  margin-right: 85rem;
+  margin-right: .85rem;
 }
 .meta img {
   margin-right: 1.25rem;
@@ -285,26 +284,23 @@ button:hover,
   border: 0.125rem solid rgba(17, 195, 116, 0.8);
 }
 
+/* Notification */
 #notification[class=""] {
-  top: -8.5rem;
+  top: -10rem;
 }
 
 #notification {
   position: fixed;
   z-index: 99;
-  top: 1.7rem;
+  top: 0;
   left: 0;
+  width: 100%;
   background: rgba(50, 50, 50, .8);
   color: white;
-  min-width: 50rem;
-  padding: 1.7rem;
-  max-width: 80rem;
-  margin-left: 25%;
-  width: 50%;
+  padding: 1.9rem;
   box-shadow: 0 0 .3rem #ccc;
   transition: .3s;
-  border: .1rem solid #333;
-  border-radius: .35rem;
+  border-bottom: .1rem solid #333;
   text-align: center;
 }
 #notification.success {
@@ -381,6 +377,9 @@ button:hover,
 /* Responsive */
 
 @media screen and (max-width: 620px) {
+  main {
+    margin-top: 5rem;
+  }
   .mobile-nav {
     display: flex;
     padding: 1rem 2rem;
@@ -398,12 +397,16 @@ button:hover,
   .mobile-nav.is-open::after {
     content: "\f00d";
   }
+  body > header {
+    z-index: 10;
+    padding: 0;
+  }
   body > header nav.mobile-close {
     display: none;
   }
   body > header nav {
     position: absolute;
-    top: 6rem;
+    top: 4rem;
     left: 0;
     display: flex;
     flex-direction: column;
@@ -448,9 +451,18 @@ button:hover,
     padding: 0 2rem;
   }
   
+  .articles.wrapper {
+    padding: 0 2.5rem;
+  }
+  
   #notification {
     width: 100%;
     min-width: 0;
     margin-left: 0;
+  }
+  
+  footer {
+    font-size: 1.5rem;
+    padding: 2rem 0;
   }
 }

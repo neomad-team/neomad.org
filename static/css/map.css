@@ -1,3 +1,10 @@
+#map {
+  position: fixed;
+  right: 0;
+  width: 100%;
+  min-height: 80.75%;
+}
+
 main {
   margin-top: 6.5rem;
 }
@@ -12,4 +19,14 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+
+@media screen and (max-width:620px) {
+  #map {
+    min-height: 85.5%;
+  }
+  
+  main {
+    margin-top: 4.75rem;
+  }
 }

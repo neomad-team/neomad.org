@@ -1,12 +1,8 @@
-main {
-  margin-top: 6rem;
-}
-
 main > header {
   background-color: #fff;
   border-bottom: 3px solid #eee;
-  margin-bottom: 3rem;
-  padding-top: 3rem;
+  margin: -3.5rem auto 3rem;
+  padding: 5rem 3rem 3rem;
 }
 
 .profile-intro {
@@ -15,6 +11,11 @@ main > header {
   flex-wrap: wrap;
   padding-bottom: 3rem;
   margin-bottom: 1rem;
+ }
+ .profile-intro.wrapper {
+   max-width: 70rem;
+   margin: 0 auto;
+   padding-bottom: 0;
  }
 .profile-intro form input[type=file] {
   width: 100%;
@@ -127,6 +128,10 @@ main > header {
   flex-wrap: wrap;
   order: 2;
 }
+.profile-intro nav .settings,
+.profile-intro nav .trips {
+  margin-bottom: 2rem; 
+}
 .profile-intro nav a:first-child {
   margin-right: 3rem;
 }
@@ -158,14 +163,20 @@ main > header {
   width: 50%;
 }
 
-@media screen and (max-width:700px) {
-  main header {
-    padding-left: 3rem;
-    padding-right: 3rem;
+@media screen and (max-width:620px) {
+  main > header > .profile-intro.wrapper{
+    margin-top: 2rem;
+    flex-direction: column;
   }
-  main > header figure {
+  main > header .profile-intro figure {
     order: 0;
-    margin-bottom: 5rem;
-    text-align: left;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  main > header .profile-intro label {
+    padding-top: 3.5rem;
+  }
+  .profile-intro nav a:first-child {
+    margin-right: 2rem;
   }
 }

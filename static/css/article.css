@@ -66,3 +66,27 @@ aside a:hover {
   color: #fff;
   opacity: .9;
 }
+
+@media screen and (max-width: 620px) {
+  article {
+    padding: 6rem 2rem;
+  }
+  article .meta p {
+    display: none;
+  }
+  article .meta time {
+    display: block;
+  }
+  article .meta .reading-time {
+    font-size: 1.25rem;
+  }
+  .reading-time::before {
+    display: none;
+  }
+  
+  aside a {
+    padding: 1rem 2rem;
+    font-size: 1.25rem;
+    margin: 1rem;
+  }
+}
