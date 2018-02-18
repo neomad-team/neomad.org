@@ -59,7 +59,7 @@ function addUser (user) {
       iconSize: [30, 30],
       iconAnchor: [15, 15],
       popupAnchor: [0, -15],
-      className: 'user-avatar'
+      className: 'avatar'
   })
 
   const userMarker = L.marker(user.position, {icon: userIcon})

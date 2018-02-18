@@ -335,7 +335,7 @@
   color: #297ddb;
 }
 
-.user-avatar {
+.avatar {
   border-radius: 100%;
   background-image: url('/static/images/avatar.png');
   background-position: center;
