@@ -53,15 +53,16 @@ usersLocation.forEach(user => addUser(user))
 function addUser (user) {
   const popup = L.popup()
     .setContent(`<a href=${user.link}>Latest known position for ${user.name}</a>`)
-  
-  const userMarker = L.circleMarker(user.position, {
-      color: '#297ddb',
-      opacity: .75,
-      weight: 3,
-      fillColor: 'white',
-      fillOpacity: 1,
-      radius: 5,
-    })
+
+  const userIcon = L.icon({
+      iconUrl: user.avatar,
+      iconSize: [30, 30],
+      iconAnchor: [15, 15],
+      popupAnchor: [0, -15],
+      className: 'avatar'
+  })
+
+  const userMarker = L.marker(user.position, {icon: userIcon})
     .bindPopup(popup)
     .addTo(map)
 }
