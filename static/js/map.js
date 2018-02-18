@@ -5,11 +5,20 @@ const map = L.map('map', {
   zoom: 2,
   minZoom: 2,
   zoomControl: false,
+  attributionControl: false,
   layers: L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?${''}access_token=${accessToken}`)
 })
 
 new L.Control.Zoom({position: 'topright'}).addTo(map)
 
+// credentials
+const credits = L.control.attribution()
+const mapbox = '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a>'
+const osm = '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+const contribute = '- <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>'
+credits.addAttribution(`${mapbox} ${osm} ${contribute}`).addTo(map)
+
+// user position
 const localizeUser = new L.control.locate({
   position: 'topright',
   setView: 'untilPan',
