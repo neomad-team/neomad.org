@@ -12,6 +12,8 @@ from auth import views
 from around import views
 from trips import views
 
+now = datetime.datetime.utcnow()
+
 
 class ArticleTest(TestCase):
     def setUp(self):
@@ -182,3 +184,14 @@ class ArticleTest(TestCase):
                 author=self.user).save()
         result = self.client.get('/articles/')
         self.assertNotIn(b'<article class=preview>', result.data)
+
+    def test_article_replace_embedded_video(self):
+        article = Article(title='title', content='View my latest videos: '
+                'embed:https://www.youtube.com/watch?v=Fa4cRMaTDUI \n'
+                'and embed:https://youtu.be/v/yOuTuBeCoDe now!',
+                publication_date=now,
+                author=self.user).save()
+        response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
+                                   f'{article.id}/')
+        self.assertIn(b'src="https://www.youtube.com/embed/Fa4cRMaTDUI"',
+                      response.get_data())

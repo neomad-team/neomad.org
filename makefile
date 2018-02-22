@@ -11,6 +11,7 @@ server_update:
 
 server_reload:
 	@make title text="Recreating the server."
+	ssh neomad "${goto_src} && npm uninstall yarn --save"
 	ssh neomad "${goto_src} && docker-compose restart web"
 
 assets_build:

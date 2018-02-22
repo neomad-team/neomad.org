@@ -1,4 +1,4 @@
-import datetime
+from urllib.parse import urlparse, parse_qs
 import re
 import unicodedata
 
@@ -46,6 +46,18 @@ def url_for_trips(user):
     return url_for('trips', user=user.slug).replace('%40', '@')
 
 
+def _replace_embed(match):
+    url = match.group().replace('embed:', '')
+    youtube_id = extract_youtube_id(url)
+    return f'''<iframe src="https://youtube.com/?v={youtube_id}"></iframe>'''
+
+
+@app.template_filter()
+def embed(text):
+    regex = re.compile('embed:(https?://[\w\./\?=]+)')
+    return regex.sub(_replace_embed, text)
+
+
 @app.context_processor
 def utility_processor():
     return dict(
@@ -54,3 +66,18 @@ def utility_processor():
         url_for_trips=url_for_trips,
         is_debug=app.debug,
     )
+
+
+def extract_youtube_id(url):
+    if url.startswith(('youtu', 'www')):
+        url = 'http://' + url
+
+    query = urlparse(url)
+
+    if 'youtube' in query.hostname:
+        if query.path == '/watch':
+            return parse_qs(query.query)['v'][0]
+        elif query.path.startswith(('/embed/', '/v/')):
+            return query.path.split('/')[2]
+    elif 'youtu.be' in query.hostname:
+        return query.path[1:]
