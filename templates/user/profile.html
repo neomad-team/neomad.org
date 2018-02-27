@@ -30,7 +30,8 @@
       <h1 name=username>{{ user.username or 'Insert a username' }}</h1>
       <p name=about>{{ user.about|htmlnewline or 'Introduce yourself here' }}</p>
       {% if user.allow_community %}
-      <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location }}></a>
+      <p>
+        {{ user }} is currently around <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location and user.current_location|join(',') }}>the world</a>.</p>
       {% else %}
       <a class=private href={{ url_for('privacy') }}>
         Community mode is disabled.<br>
