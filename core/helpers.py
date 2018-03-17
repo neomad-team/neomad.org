@@ -49,11 +49,17 @@ def url_for_trips(user):
 def _replace_embed(match):
     url = match.group().replace('embed:', '')
     youtube_id = extract_youtube_id(url)
-    return f'''<iframe src="https://youtube.com/?v={youtube_id}"></iframe>'''
+    return f'''<iframe width=100% height=auto
+        src=https://www.youtube-nocookie.com/embed/{youtube_id}
+        frameborder=0 allow="autoplay; encrypted-media" allowfullscreen>
+        </iframe>'''.replace('\n', ' ')
 
 
 @app.template_filter()
 def embed(text):
+    '''
+    Replace and "embed:http…" by the embeded corresponding media.
+    '''
     regex = re.compile('embed:(https?://[\w\./\?=]+)')
     return regex.sub(_replace_embed, text)
 

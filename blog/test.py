@@ -55,7 +55,7 @@ class ArticleTest(TestCase):
         article.author = self.user
         article.save()
         result = self.client.get('/@emailtest/{}-{}/'.format(article.slug,
-                                                            str(article.id)),
+                                                             str(article.id)),
                                  follow_redirects=True)
         self.assertEqual(result.status_code, 200)
 
@@ -193,5 +193,7 @@ class ArticleTest(TestCase):
                 author=self.user).save()
         response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
                                    f'{article.id}/')
-        self.assertIn(b'src="https://www.youtube.com/embed/Fa4cRMaTDUI"',
-                      response.get_data())
+        self.assertIn(
+            b'src=https://www.youtube-nocookie.com/embed/Fa4cRMaTDUI',
+            response.get_data()
+        )
