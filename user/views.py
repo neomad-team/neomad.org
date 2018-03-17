@@ -45,10 +45,17 @@ def privacy_delete_trip(date):
     return redirect('privacy'), 204
 
 
-@app.route('/profile/', methods=['patch'])
+@app.route('/profile/')
 @login_required
 def profile_edit():
-    data = request.json
+    user = User.objects.get(id=current_user.id)
+    articles = Article.objects(author=user)
+    return render_template('user/edit.html', user=user, articles=articles)
+
+
+@app.route('/profile/', methods=['post'])
+@login_required
+def profile_edit_save():
     permitted_fields = ['username', 'about', 'allow_community', 'socials']
     user = User.objects.get(id=current_user.id)
     for field, value in data.items():
