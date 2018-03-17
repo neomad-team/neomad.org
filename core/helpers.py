@@ -52,7 +52,7 @@ def _replace_embed(match):
     return f'''<iframe width=100% height=auto
         src=https://www.youtube-nocookie.com/embed/{youtube_id}
         frameborder=0 allow="autoplay; encrypted-media" allowfullscreen>
-        </iframe>'''.replace('\n', ' ')
+        </iframe>'''
 
 
 @app.template_filter()
