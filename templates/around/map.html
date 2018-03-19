@@ -75,7 +75,7 @@
     const usersLocation = []
     {% for user in users %}
       {% if user != current_user %}
-        usersLocation.push({ 
+        usersLocation.push({
           name: '{{ user.username }}',
           position: {{ user.current_location }},
           link: "{{ url_for_user(user) }}",
@@ -84,11 +84,8 @@
       {% endif %}
     {% endfor %}
 
-    let userID = null
-    {% if current_user %}
-      userID = '{{ current_user.id }}'
-    {% endif %}
-    
+    let userID = '{{ current_user and current_user.id or "" }}'
+
     {% if current_user and current_user.allow_community %}
       const currentLatLng = {{ current_user.current_location or [] }}
     {% else %}
