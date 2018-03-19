@@ -8,6 +8,6 @@ if [ -e requirements.txt ]; then
 fi
 
 # Build frontend assets
-npm install
+npm install && npm run build
 
-gunicorn app:app -b :80 --name app
+gunicorn --workers 4 app:app -b :80 --name app
