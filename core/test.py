@@ -22,7 +22,6 @@ class UtilsTest(TestCase):
         self.assertEqual(clean_html('<img src="/myimage.jpg">', allowed_tags), '<img src="/myimage.jpg"/>')
 
 
-
 class HelpersTest(TestCase):
     def test_extract_youtube_id(self):
         youtube_id = helpers.extract_youtube_id(
