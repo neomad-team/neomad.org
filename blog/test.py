@@ -187,8 +187,8 @@ class ArticleTest(TestCase):
 
     def test_article_replace_embedded_video(self):
         article = Article(title='title', content='View my latest videos: '
-                'embed:https://www.youtube.com/watch?v=Fa4cRMaTDUI \n'
-                'and embed:https://youtu.be/yOuTuBeCoDe now!',
+                'https://www.youtube.com/watch?v=Fa4cRMaTDUI \n'
+                'and https://youtu.be/yOuTuBeCoDe now!',
                 publication_date=now,
                 author=self.user).save()
         response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
