@@ -4,14 +4,19 @@ git_update=git fetch origin $(env) && git checkout $(env) && git reset --hard FE
 help:
 	@echo "Make tasks for deployment. Checkout the makefile content."
 
+logs:  # type=error|access
+	@${remote} "${goto_src} && tail -f ./log/${type}.log"
+
 server_update:
 	@make title text="Fetching prod branch and updating sources."
 	ssh neomad "${goto_src} && ${git_update}"
 	ssh neomad "${goto_src} && npm install"
 
 server_reload:
-	@make title text="Recreating the server."
-	ssh neomad "${goto_src} && docker-compose restart web"
+	@make title text="Rebuilding the server."
+	ssh neomad "${goto_src} && pkill gunicorn; \
+		gunicorn -w 3 --daemon -b 127.0.0.1:5000 app \
+		--error-logfile ./log/error.log --access-logfile ./log/access.log"
 
 assets_build:
 	ssh neomad "${goto_src} && npm run build"
