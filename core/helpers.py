@@ -47,8 +47,10 @@ def url_for_trips(user):
 
 
 def _replace_embed(match):
-    url = match.group().replace('embed:', '')
+    url = match.group()
     youtube_id = extract_youtube_id(url)
+    if not youtube_id:
+        return url
     return f'''<iframe width=100% height=auto
         src=https://www.youtube-nocookie.com/embed/{youtube_id}
         frameborder=0 allow="autoplay; encrypted-media" allowfullscreen>
@@ -58,9 +60,9 @@ def _replace_embed(match):
 @app.template_filter()
 def embed(text):
     '''
-    Replace and "embed:http…" by the embeded corresponding media.
+    Replace and "http…" by the embeded corresponding media.
     '''
-    regex = re.compile('embed:(https?://[\w\./\?=]+)')
+    regex = re.compile('https?://[\w\./\?=]+')
     return regex.sub(_replace_embed, text)
 
 
@@ -76,14 +78,12 @@ def utility_processor():
 
 def extract_youtube_id(url):
     if url.startswith(('youtu', 'www')):
-        url = 'http://' + url
+        url = f'http://{url}'
 
     query = urlparse(url)
 
     if 'youtube' in query.hostname:
         if query.path == '/watch':
             return parse_qs(query.query)['v'][0]
-        elif query.path.startswith(('/embed/', '/v/')):
-            return query.path.split('/')[2]
     elif 'youtu.be' in query.hostname:
         return query.path[1:]
