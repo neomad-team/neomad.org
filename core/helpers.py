@@ -47,7 +47,10 @@ def url_for_trips(user):
 
 
 def _replace_embed(match):
-    youtube_id = extract_youtube_id(match.group())
+    url = match.group()
+    youtube_id = extract_youtube_id(url)
+    if not youtube_id:
+        return url
     return f'''<iframe width=100% height=auto
         src=https://www.youtube-nocookie.com/embed/{youtube_id}
         frameborder=0 allow="autoplay; encrypted-media" allowfullscreen>
@@ -75,7 +78,7 @@ def utility_processor():
 
 def extract_youtube_id(url):
     if url.startswith(('youtu', 'www')):
-        url = 'http://' + url
+        url = f'http://{url}'
 
     query = urlparse(url)
 

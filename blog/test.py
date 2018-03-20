@@ -186,9 +186,10 @@ class ArticleTest(TestCase):
         self.assertNotIn(b'<article class=preview>', result.data)
 
     def test_article_replace_embedded_video(self):
-        article = Article(title='title', content='View my latest videos: '
+        article = Article(title='title', content='View'
                 'https://www.youtube.com/watch?v=Fa4cRMaTDUI \n'
-                'and https://youtu.be/yOuTuBeCoDe now!',
+                'and https://youtu.be/yOuTuBeCoDe now! \n'
+                'See http://neomad.org/@user for more.',
                 publication_date=now,
                 author=self.user).save()
         response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
@@ -201,3 +202,12 @@ class ArticleTest(TestCase):
             b'src=https://www.youtube-nocookie.com/embed/yOuTuBeCoDe',
             response.get_data()
         )
+
+    def test_article_preserves_non_media_urls(self):
+        article = Article(title='title',
+                          content='See http://neomad.org/@user for more.',
+                          publication_date=now,
+                          author=self.user).save()
+        response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
+                                   f'{article.id}/')
+        self.assertIn(b'See http://neomad.org/@user for', response.get_data())
