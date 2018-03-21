@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import render_template, request, abort, redirect
+from flask import render_template, request, abort, redirect, url_for
 from flask_login import current_user, login_required
 
 from core import app
@@ -58,12 +58,17 @@ def profile_edit():
 def profile_save():
     permitted_fields = ['username', 'about', 'allow_community', 'socials']
     user = User.objects.get(id=current_user.id)
+    socials = user.socials or {}
     for field, value in request.form.items():
-        if field not in permitted_fields:
+        if field not in permitted_fields and not field.startswith('socials.'):
             return f'Property {field} cannot be modified.', 403
-        setattr(user, field, value)
+        if field.startswith('socials.'):
+            socials[field[len('socials.'):]] = value
+        else:
+            setattr(user, field, value)
+    user.socials = socials
     user.save()
-    return '', 204
+    return redirect(url_for('profile', username=user.username))
 
 
 @app.route('/profile/avatar/', methods=['patch'])
