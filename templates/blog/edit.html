@@ -1,0 +1,83 @@
+{% from 'blog/macros.html' import article_list with context %}
+{% extends 'layout.html' %}
+
+{% block title %}Editing "{{ article.title }}"{% endblock %}
+{% block description %}{{ article.content|truncate(200) }} by {{ article.author|capitalize }}.{% endblock %}
+
+{% block extra_css %}
+<link rel=stylesheet href={{ url_for('static', filename='css/article.css') }}>
+<link rel=stylesheet href={{ url_for('static', filename='css/edit.css') }}>
+{% endblock %}
+
+{% block main %}
+<article lang={{ article.language }}>
+  <section class=meta>
+    <div>
+      <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
+      <p class=reading-time><span>{{ (article.content|length / 6 / 250)|int }}</span> min read</p>
+    </div>
+  </section>
+
+  {% if errors %}
+    <ul>
+    {% for error in errors %}
+      <li class=error>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if not article.publication_date %}
+  <div class=ribbon-wrapper>
+    <div class=ribbon>draft</div>
+  </div>
+  {% endif %}
+
+  {% set url = url_for('article_save', id=article.id) if article.id else url_for('article_create') %}
+  <form method=post action={{ url }}>
+    <input type=hidden name=published value="{{ article.is_published or '' }}">
+    <input name=title value="{{ article.title or 'Insert your title here' }}">
+    <textarea name=content>
+      {{ (article.content or '<p>Insert your text here</p>')|safe }}
+    </textarea>
+
+    <div class=toolbar>
+      <button type=submit class=save>Save as draft</button>
+      <button type=submit class=save value=true>Save and publish</button>
+      {% if article.id %}
+      <a class="button delete" href={{ url_for('article_delete', id=article.id) }}>Delete</a>
+      {% endif %}
+    </div>
+  </form>
+</article>
+
+<link rel=stylesheet href=//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css>
+<link rel=stylesheet href=/static/js/medium-editor/medium-editor.css type=text/css media=screen>
+<link rel=stylesheet href=/static/js/medium-editor/tim.min.css>
+<script src=/static/js/medium-editor/medium-editor.js></script>
+<link rel=stylesheet href=/static/js/medium-editor-insert-plugin/medium-editor-insert.min.css>
+<script src=/static/js/medium-editor-insert-plugin/medium-editor-insert.min.js></script>
+
+<script>
+  new MediumEditor('textarea', {
+    toolbar: {
+      buttons: ['h2', 'h3', 'bold', 'italic', 'anchor', 'quote']
+    },
+    extensions: {
+      insert: new MediumEditorInsert()
+    },
+    paste: {
+        forcePlainText: true,
+        cleanPastedHTML: true,
+        cleanReplacements: [],
+        cleanAttrs: ['class', 'style', 'dir'],
+        cleanTags: ['meta', 'span', 'script'],
+        unwrapTags: []
+    },
+    disableDoubleReturn: true,
+    disableExtraSpaces: false
+  })
+  document.querySelector('form').addEventListener('submit', event => {
+    event.target.published.value = event.explicitOriginalTarget.value
+  })
+</script>
+{% endblock %}

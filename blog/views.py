@@ -28,37 +28,17 @@ def article(author, slug, id):
     if article.slug != slug or article.author.slug != author:
         return redirect(url_for_article(article), 301)
     return render_template('blog/article.html', article=article,
-                           articles=Article.objects.filter(id__ne=id),
-                           edit=(current_user.is_authenticated and
-                                 author == current_user.slug))
+                           articles=Article.objects.filter(id__ne=id))
 
 
-@app.route('/article/write/', methods=['get', 'post'])
+@app.route('/article/write/')
 @login_required
 def article_create():
-    article = Article(content='')
-    article.author = User.objects.get(id=current_user.id)
-    status = 200
-    errors = []
-    if request.method == 'POST':
-        if (request.form.get('title') == ''
-                or request.form.get('content') == ''):
-            errors.append('Please, insert a title and a content')
-            status = 400
-        else:
-            article.title = request.form.get('title')
-            article.content = clean_html(request.form.get('content'))
-            if request.form.get('published') != '':
-                article.publication_date = datetime.datetime.utcnow()
-            else:
-                article.publication_date = None
-            article.save()
-            status = 201
-    return render_template('blog/article.html', article=article,
-                           errors=errors, edit=True), status
+    article = Article()
+    return render_template('blog/edit.html', article=article)
 
 
-@app.route('/article/<string:id>/edit/', methods=['post'])
+@app.route('/article/<string:id>/')
 @login_required
 def article_edit(id):
     user = User.objects.get(id=current_user.id)
@@ -66,20 +46,29 @@ def article_edit(id):
         article = Article.objects.get(author=user, id=id)
     except Article.DoesNotExist:
         abort(404)
+    return render_template('blog/edit.html', article=article)
+
+
+@app.route('/article/<string:id>/', methods=['post'])
+@login_required
+def article_save(id):
+    user = User.objects.get(id=current_user.id)
+    try:
+        article = Article.objects.get(author=user, id=id)
+    except Article.DoesNotExist:
+        abort(404)
     article.title = request.form.get('title')
     article.content = clean_html(request.form.get('content'))
-    if request.form.get('published') != '':
-        article.publication_date = datetime.datetime.utcnow()
-    else:
-        article.publication_date = None
+    article.publication_date = (datetime.datetime.utcnow()
+                                if request.form.get('published') != ''
+                                else None)
     errors = []
-    if article.title != '' and clean_html(article.content) != '':
-        article.save()
-        return redirect(url_for_article(article))
-    else:
+    if article.title == '' or clean_html(article.content) == '':
         errors.append('Please insert a title and a content')
-        return render_template('blog/article.html', article=article,
-                               errors=errors, edit=True), 400
+        return render_template('blog/edit.html', article=article,
+                               errors=errors), 400
+    article.save()
+    return redirect(url_for_article(article))
 
 
 @app.route('/article/<string:id>/delete/', methods=['get'])

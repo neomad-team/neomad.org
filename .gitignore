@@ -7,3 +7,4 @@ __pycache__/
 /static/components/App.js
 /package-lock.json
 /backups/
+/venv/

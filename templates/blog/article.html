@@ -15,6 +15,7 @@
 
 {% block extra_css %}
 <link rel=stylesheet href={{ url_for('static', filename='css/article.css') }}>
+<link rel=stylesheet href={{ url_for('static', filename='css/edit.css') }}>
 {% endblock %}
 
 {% block main %}
@@ -44,68 +45,18 @@
     <div class=ribbon>draft</div>
   </div>
   {% endif %}
-  
+
   <h1 name=title>{{ article.title or 'Insert your title here' }}</h1>
   <div class=content name=content>
     {{ (article.content or '<p>Insert your text here</p>')|safe }}
   </div>
 </article>
 
-{% if not edit %}
 <aside>
   <a href={{ url_for_user(article.author) }}>Read more from {{ article.author }}</a>
 </aside>
-{% endif %}
 
-{% if edit %}
-<script src="//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
-<link rel=stylesheet href=//cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css type=text/css media=screen charset=utf-8>
-
-<link rel=stylesheet href=//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.23.0/css/themes/tim.min.css>
-<link rel=stylesheet href=https://cdn.rawgit.com/orthes/medium-editor-insert-plugin/3.0/dist/css/medium-editor-insert.min.css>
-<script src=https://cdn.rawgit.com/orthes/medium-editor-insert-plugin/3.0/dist/js/medium-editor-insert.min.js></script>
-
-{% set url = url_for('article_edit', id=article.id) if article.id else url_for('article_create') %}
-<form method=post action={{ url }} edit>
-  <div class=toolbar>
-    <input type=hidden name=title>
-    <input type=hidden name=content>
-    <input type=hidden name=published>
-    <button type=submit class=save>Save as draft</button>
-    <button type=submit class=save value=true>Save and publish</button>
-    {% if article.id %}
-    <a class="button delete" href={{ url_for('article_delete', id=article.id) }}>Delete</a>
-    {% endif %}
-  </div>
-</form>
-<script>
-  document.querySelector('[name=title]').setAttribute('contenteditable', true)
-
-  new MediumEditor('article .content', {
-    toolbar: {
-      buttons: ['h2', 'h3', 'bold', 'italic', 'anchor', 'quote']
-    },
-    extensions: {
-      insert: new MediumEditorInsert()
-    },
-    paste: {
-        forcePlainText: true,
-        cleanPastedHTML: true,
-        cleanReplacements: [],
-        cleanAttrs: ['class', 'style', 'dir'],
-        cleanTags: ['meta', 'span', 'script'],
-        unwrapTags: []
-    },
-    disableDoubleReturn: true,
-    disableExtraSpaces: false
-  })
-  document.querySelector('form[edit]').addEventListener('submit', event => {
-    const form = event.target
-    form.title.value = document.querySelector('[contenteditable][name=title]').textContent
-    form.content.value = document.querySelector('[contenteditable][name=content]').innerHTML
-    form.published.value = event.explicitOriginalTarget.value
-  })
-</script>
-{% endif %}
+<div class=toolbar>
+  <a class=button href={{ url_for('article_edit', id=article.id) }}>Edit this article</a>
+</div>
 {% endblock %}
