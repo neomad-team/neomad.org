@@ -1,0 +1,64 @@
+{% from 'blog/macros.html' import article_list with context %}
+{% extends 'layout.html' %}
+
+{% block title %}My profile{% endblock %}
+
+{% block extra_css %}
+<link rel=stylesheet href={{ url_for('static', filename='css/profile.css') }}>
+<link rel=stylesheet href={{ url_for('static', filename='css/_article_list.css') }}>
+{% endblock %}
+
+{% block main -%}
+  <header>
+    <div class="profile-intro wrapper">
+      <figure>
+        <img class=avatar-img
+          name=avatar
+          src={{ user.avatar }}
+          width=100
+          height=100
+          onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
+      </figure>
+      <form method=post action={{ url_for('profile_save') }}>
+        <div>
+          <input name=username value="{{ user.username or '' }}" placeholder="Insert a username">
+          <textarea name=about placeholder="Tell a little about yourself">{{ user.about|htmlnewline }}</textarea>
+
+          {% if not user.allow_community %}
+          <p>
+            <a class=private href={{ url_for('privacy') }}>
+              Community mode is disabled.<br>
+              your contents are restricted and private.<br>
+            </a>
+          </p>
+          {% endif %}
+        </div>
+        <section class=social>
+          {% for name in ['Twitter', 'Facebook', 'Instagram'] -%}
+            {% set property = name|lower %}
+            <span class="edit {{ property }}"><input name=socials.{{ property }} value="{{ user.socials[property] }}" placeholder="My {{ name }} URL"></span>
+          {%- endfor %}
+          <span class="edit email"><input name=socials.email value="{{ user.socials.email }}" placeholder="My contact email"></span>
+        </section>
+        <div class=toolbar>
+          <input class=save type=submit value="Save my profile">
+        </div>
+      </form>
+
+      <nav>
+        <a class="action-button settings" href={{ url_for('privacy') }}>Set my privacy settings</a>
+      </nav>
+    </div>
+  </header>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function transformToUrl(field) {
+    if(field.value !== '') {
+      field = `https://www.${field.name}.com/${field.value}`
+    }
+    return field
+  }
+</script>
+{% endblock %}
