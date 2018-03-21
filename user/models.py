@@ -40,6 +40,7 @@ class User(UserMixin, db.Document):
     allow_community = db.BooleanField()
     current_location = GeoPointField()
     socials = db.DictField()
+    image_path = db.ImageField(size=(600, 400), thumbnail=(200, 200))
 
     def set_password(self, password):
         self.password = generate_password_hash(password)

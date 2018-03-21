@@ -1,10 +1,11 @@
+from pathlib import Path
 from datetime import datetime
 
 from flask import render_template, request, abort, redirect, url_for
 from flask_login import current_user, login_required
 
 from core import app
-from core.utils import save_base64_image
+from core.utils import save_image
 from blog.models import Article
 from .models import User
 
@@ -67,6 +68,13 @@ def profile_save():
         else:
             setattr(user, field, value)
     user.socials = socials
+    if request.form['delete']:
+        Path.unlink(user.image_path)
+        user.image_path = None
+    if request.files['avatar']:
+        ouput = f'{app.config.get('AVATARS_PATH')}/{user.id}'
+        save_image(request.files['avatar'], output, (200, 200))
+        user.image_path = ouput
     user.save()
     return redirect(url_for('profile', username=user.username))
 
@@ -78,7 +86,5 @@ def profile_edit_avatar():
         user = User.objects.get(id=current_user.id)
     except User.DoesNotExist:
         abort(404)
-    save_base64_image(request.json['data'],
-                      '{}/{}'.format(app.config.get('AVATARS_PATH'), user.id),
-                      (200, 200))
-    return user.avatar, 201
+    save_image(request.files['avatar'],
+               f'{app.config.get('AVATARS_PATH')}/{user.id}', (200, 200))
