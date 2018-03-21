@@ -12,6 +12,8 @@ from auth import views
 from around import views
 from trips import views
 
+now = datetime.datetime.utcnow()
+
 
 class ArticleTest(TestCase):
     def setUp(self):
@@ -53,7 +55,7 @@ class ArticleTest(TestCase):
         article.author = self.user
         article.save()
         result = self.client.get('/@emailtest/{}-{}/'.format(article.slug,
-                                                            str(article.id)),
+                                                             str(article.id)),
                                  follow_redirects=True)
         self.assertEqual(result.status_code, 200)
 
@@ -182,3 +184,30 @@ class ArticleTest(TestCase):
                 author=self.user).save()
         result = self.client.get('/articles/')
         self.assertNotIn(b'<article class=preview>', result.data)
+
+    def test_article_replace_embedded_video(self):
+        article = Article(title='title', content='View'
+                'https://www.youtube.com/watch?v=Fa4cRMaTDUI \n'
+                'and https://youtu.be/yOuTuBeCoDe now! \n'
+                'See http://neomad.org/@user for more.',
+                publication_date=now,
+                author=self.user).save()
+        response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
+                                   f'{article.id}/')
+        self.assertIn(
+            b'src=https://www.youtube-nocookie.com/embed/Fa4cRMaTDUI',
+            response.get_data()
+        )
+        self.assertIn(
+            b'src=https://www.youtube-nocookie.com/embed/yOuTuBeCoDe',
+            response.get_data()
+        )
+
+    def test_article_preserves_non_media_urls(self):
+        article = Article(title='title',
+                          content='See http://neomad.org/@user for more.',
+                          publication_date=now,
+                          author=self.user).save()
+        response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
+                                   f'{article.id}/')
+        self.assertIn(b'See http://neomad.org/@user for', response.get_data())
