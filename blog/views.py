@@ -21,8 +21,6 @@ def article_list():
 def article(author, slug, id):
     try:
         article = Article.objects.get(id=id)
-    except db.errors.ValidationError:
-        abort(404)
     except Article.DoesNotExist:
         abort(404)
     if article.slug != slug or article.author.slug != author:
