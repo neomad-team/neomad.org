@@ -55,12 +55,12 @@ def profile_edit():
 
 @app.route('/profile/', methods=['post'])
 @login_required
-def profile_edit_save():
+def profile_save():
     permitted_fields = ['username', 'about', 'allow_community', 'socials']
     user = User.objects.get(id=current_user.id)
-    for field, value in data.items():
+    for field, value in request.form.items():
         if field not in permitted_fields:
-            return '', 403
+            return f'Property {field} cannot be modified.', 403
         setattr(user, field, value)
     user.save()
     return '', 204

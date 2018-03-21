@@ -36,37 +36,32 @@
         <div class=private>
           {{ user }} disabled community mode; the contents are therefore private.<br>
           {% if user == current_user %}
-            <a href={{ url_for('privacy') }}>Change my settings</a>
+            <a href={{ url_for('privacy') }}>Change my community status</a>
           {% endif %}
         </div>
       {% endif %}
     </div>
     <section class=social>
-    {% if user.socials.email %}
-      <a class=email href=mailto:{{ user.socials.email }} title="Send an email">Send an email</a>
-    {% endif %}
-    {% for name, url in user.socials.items() %}
-    {% if name != 'email' and url %}
-      <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
-    {% endif %}
-    {% endfor %}
+      {% if user.socials.email -%}
+        <a class=email href=mailto:{{ user.socials.email }} title="Send an email">Send an email</a>
+      {%- endif %}
+      {% for name, url in user.socials.items() -%}
+        {% if name != 'email' and url -%}
+          <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
+        {%- endif %}
+      {%- endfor %}
     </section>
     <nav>
-      {% if user == current_user %}
+      {% if user == current_user -%}
         <a class=button href={{ url_for('profile_edit') }}>Edit my profile</a>
-      {% endif %}
+        <a class="action-button trips" href={{ url_for_trips(user) }}>View my trips</a>
+      {%- endif %}
+      <a class="action-button trips" href={{ url_for_trips(user) }}>View {{ user }}'s trips</a>
     </nav>
   </div>
 </header>
 
 <section class="articles wrapper">
-  {% if edit %}
-    <article class=preview>
-      <h1><span class="newtext title">&nbsp;</span></h1>
-      <p><span class=newtext>&nbsp;</span><span class=newtext>&nbsp;</span><span class=newtext>&nbsp;</span></p>
-      <a href={{ url_for('article_create') }} class=read>Write this article</a>
-    </article>
-  {% endif %}
   {{ article_list(articles=articles, with_author=false) }}
 </section>
 {% endblock %}
