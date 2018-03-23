@@ -1,4 +1,4 @@
-goto_src=cd ~/$(env)
+goto_src=cd ~/$(env) && source ./venv/bin/activate
 git_update=git fetch origin $(env) && git checkout $(env) && git reset --hard FETCH_HEAD
 
 help:
@@ -10,7 +10,7 @@ logs:  # type=error|access
 server_update:
 	@make title text="Fetching prod branch and updating sources."
 	ssh neomad "${goto_src} && ${git_update}"
-	ssh neomad "${goto_src} && npm install"
+	ssh neomad "${goto_src} && pip install -r requirements.txt && npm install"
 
 server_reload:
 	@make title text="Rebuilding the server."
