@@ -4,6 +4,5 @@ __pycache__/
 /settings.py
 /static/uploads/*
 /node_modules/
-/static/components/App.js
 /package-lock.json
 /backups/

@@ -1,100 +1,31 @@
-#wrap {
-  display: flex;
-  justify-content: space-between;
-}
-
-#map {
-  width: 50%;
-  order: 2;
-}
-
-/* cards */
-
-#cards-wrap {
-  display: flex;
-  flex-direction: column;
-  order: 1;
-  width: 50%;
-  height: 100%;
-  z-index: 1;
-  background-color: #fafafa;
-  padding: 1rem 2rem 10rem;
-}
-
-#poi-cards > div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  width: 49%;
-  padding: 1.5rem;
-  box-shadow: 0 .5rem 1rem 0 rgba(0, 0, 0, 0.2);
-  transition: 0.15s;
-  background-color: #fefefe;
-  cursor: pointer;
-  margin-top: 2rem;
-  border: .2rem solid #fefefe;
-}
-
-.card:hover {
-  box-shadow: 0 1rem 2rem 0 rgba(0, 0, 0, 0.2);
-}
-
-.card h2 {
-  font-size: 1.7rem;
-  margin: .75rem 0;
-  max-height: 5rem;
-}
-
-.card ul {
-  padding-left: 1rem;
-  display: flex;
-  flex-direction: column;
-  margin: 1rem;
-}
-
-.card ul li {
-  list-style-type: none;
-  margin-bottom: 1rem;
-}
-
-.card ul li div {
-  display: flex;
-  align-items: baseline;
-}
-
-.card ul li div h3 {
-  font-size: 1.85rem;
-  font-weight: normal;
-  margin: 0 1rem 0 0;
-}
-
-.card-distance {
-  align-self: flex-end;
-  font-size: 1.35rem;
-}
-
-.first-card {
-  /* need important to overide react build with leaflet order */
-  order: -1 !important;
-}
-.hash-card {
-  border: .2rem solid #3ba77c;
-}
-
 /* poi form */
 
 #open-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  position: absolute;
+  top: 6rem;
+  left: 0;
+  z-index: 8;
   display: flex;
-  justify-content: center;
-  height: 4rem;
-  background-color: #fefefe;
+  justify-content: space-around;
+  height: 6rem;
+  width: auto;
+  padding: 1.5rem 1rem 1rem;
+  background-color: #fff;
   border: none;
+  border-radius:  0 0 1rem 1rem;
   box-shadow: 0 .25rem .25rem 0 rgba(0,0,0,0.2);
+}
+
+
+#open-form p {
+  margin: 0 .5rem 0 0;
+}
+
+#open-form:hover p {
+  color: #3ba77c;
 }
 
 #open-form svg {
@@ -102,16 +33,8 @@
   width: 2.5rem;
 }
 
-#open-form p {
-  margin: 0 2rem;
-}
-
 #open-form:hover svg {
-  fill: #3va77c;
-}
-
-#open-form:hover p {
-  color: #3ba77c;
+  fill: #3ba77c;
 }
 
 #poi-form {
@@ -288,6 +211,10 @@
   fill: #666;
 }
 
+#close-form:hover svg circle {
+  fill: #279e6a;
+}
+
 #close-form svg path {
   fill: #fff;
 }
@@ -344,100 +271,25 @@
   border: 0.1rem solid #fafafa;
 }
 
-/* cards datas */
-
-/* star rank */
-li > div > svg {
-  display: inline-block;
-  height: 1.7rem;
-  width: 1.7rem;
-  fill: grey;
-}
-.rank-1 svg:nth-child(2) {
-  fill: #3ba77c;
-}
-.rank-2 svg:nth-child(2),
-.rank-2 svg:nth-child(3) {
-  fill: #3ba77c;
-}
-.rank-3 svg:nth-child(2),
-.rank-3 svg:nth-child(3),
-.rank-3 svg:nth-child(4) {
-  fill: #3ba77c;
-}
-.rank-4 svg:nth-child(2),
-.rank-4 svg:nth-child(3),
-.rank-4 svg:nth-child(4),
-.rank-4 svg:nth-child(5) {
-  fill: #3ba77c;
-}
-.rank-5 svg:nth-child(2),
-.rank-5 svg:nth-child(3),
-.rank-5 svg:nth-child(4),
-.rank-5 svg:nth-child(5),
-.rank-5 svg:nth-child(6) {
-  fill: #3ba77c;
-}
-
-/* power avaibility */
-
-.power-on svg,
-.power-true svg {
-  fill: #3ba77c;
-}
-
 /* responsive */
 
-@media screen and (max-width: 1280px) {
-  .card {
-    width: 100%;
-    padding-bottom: 0;
-  }
-  
-  .card > h2 {
-    margin-top: -2rem;
-    max-width: 70%;
-  }
-
-  .card > ul li {
-    padding: .25rem;
-  }
-}
-
 @media screen and (max-width: 620px) {
-  #poi-cards {
-    display: none;
-  }
-  
-  #map {
-    display: block;
-    width: 100%;
-  }
-  
-  #cards-wrap {
-    width: auto;
-    padding: 0;
-    background: transparent;
-  }
   
   #open-form {
     flex-direction: row-reverse;
     align-items: center;
-    margin: 1rem 0 0 1rem;
+    top: 4.5rem;
     width: 15rem;
     height: 5rem;
   }
+  
   #open-form p {
     font-size: 1.25rem;
     margin-top: .25rem;
   }
   
-  #poi-form {
-    padding: 1rem;
-  }
-  
   #poi-form form {
-    width: 50rem;
+    width: 100%;
   }
   
   #poi-form h2 {

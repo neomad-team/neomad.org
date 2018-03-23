@@ -21,8 +21,8 @@ credits.addAttribution(`${mapbox} ${osm} ${contribute}`).addTo(map)
 // user position
 const localizeUser = new L.control.locate({
   position: 'topright',
-  setView: 'untilPan',
-  locateOptions: {maxZoom: 14}
+  setView: 'false',
+  locateOptions: {maxZoom: 15}
   }).addTo(map)
 
 // create icon model
