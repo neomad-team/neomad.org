@@ -3,7 +3,7 @@ body {
   min-height: 100%;
 }
 
-form[edit] .toolbar {
+.toolbar {
   position: fixed;
   bottom: 5rem;
   left: 0;
@@ -15,24 +15,24 @@ form[edit] .toolbar {
   z-index: 2;
   border-top: .3rem solid #eee;
 }
-form[edit] .toolbar .save {
+.toolbar .save {
   background-color: #e7fee7;
   color: #3ba53b;
   border-color: #7fc27f;
 }
-form[edit] .toolbar .save:hover {
+.toolbar .save:hover {
   background-color: #c5f5c5;
   color: #217421;
   border-color: #4b8f4b;
 }
 
-form[edit] .toolbar .delete {
+.toolbar .delete {
   float: left;
   background-color: #fee7e7;
   color: #a24343;
   border-color: #dab2b2;
 }
-form[edit] .toolbar .delete:hover {
+.toolbar .delete:hover {
   background-color: #f2c3c3;
   color: #771515;
   border-color: #a25151;
@@ -139,11 +139,11 @@ footer {
   .ribbon-wrapper {
     top: 4.6rem;
   }
-  
+
   form[edit] .toolbar {
-    padding: 1rem; 
+    padding: 1rem;
   }
-  
+
   .delete,
   .save {
     padding: 0 0.5rem;
