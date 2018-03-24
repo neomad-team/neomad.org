@@ -17,7 +17,7 @@ def article_list():
     return render_template('blog/article_list.html', articles=articles)
 
 
-@app.route('/@<string:author>/<string:slug>-<string:id>/', methods=['get'])
+@app.route('/@<string:author>/<string:slug>-<string:id>/')
 def article(author, slug, id):
     try:
         article = Article.objects.get(id=id)
@@ -26,9 +26,7 @@ def article(author, slug, id):
     if article.slug != slug or article.author.slug != author:
         return redirect(url_for_article(article), 301)
     return render_template('blog/article.html', article=article,
-                           articles=Article.objects.filter(id__ne=id),
-                           edit=(current_user.is_authenticated and
-                                 author == current_user.slug))
+                           articles=Article.objects.filter(id__ne=id))
 
 
 @app.route('/article/write/', methods=['get', 'post'])
