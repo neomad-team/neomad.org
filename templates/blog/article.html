@@ -43,7 +43,14 @@
   </div>
 </article>
 
-<aside>
-  <a href={{ url_for_user(article.author) }}>Read more from {{ article.author }}</a>
-</aside>
+
+{% if article.author == current_user -%}
+  <div class=toolbar>
+    <a class="button edit" href={{ url_for('article_edit', id=article.id) }}>Edit</a>
+  </div>
+{% else %}
+  <aside>
+    <a href={{ url_for_user(article.author) }}>Read more from {{ article.author }}</a>
+  </aside>
+{%- endif %}
 {% endblock %}
