@@ -10,6 +10,7 @@ logs:  # type=error|access
 server_update:
 	@make title text="Fetching prod branch and updating sources."
 	ssh neomad "${goto_src} && ${git_update}"
+	ssh neomad "${goto_src} && pip install -r requirements.txt"
 
 server_reload:
 	@make title text="Rebuilding the server."
