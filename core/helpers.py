@@ -51,10 +51,11 @@ def _replace_embed(match):
     youtube_id = extract_youtube_id(url)
     if not youtube_id:
         return url
-    return f'''<iframe width=100% height=auto
+    return f'''<iframe class=video width=auto height=auto
         src=https://www.youtube-nocookie.com/embed/{youtube_id}
         frameborder=0 allow="autoplay; encrypted-media" allowfullscreen>
-        </iframe>'''
+        </iframe>
+        <small>{url}</small>'''
 
 
 @app.template_filter()
