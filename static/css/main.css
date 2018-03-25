@@ -182,7 +182,6 @@ article {
 
 .content {
   font-family: 'Merryweather';
-  letter-spacing: .425rem;
   font-size: 1.9rem;
 }
 
@@ -419,7 +418,7 @@ button:hover,
     font-size: 2.25rem;
     line-height: 5rem;
   }
-  
+
   nav .avatar {
     display: none;
     background: none;
@@ -445,22 +444,22 @@ button:hover,
   nav .profile > li > a {
     padding: .3rem 1.5rem;
   }
-  
+
   article {
     width: 100%;
     padding: 0 2rem;
   }
-  
+
   .articles.wrapper {
     padding: 0 2.5rem;
   }
-  
+
   #notification {
     width: 100%;
     min-width: 0;
     margin-left: 0;
   }
-  
+
   footer {
     font-size: 1.5rem;
     padding: 2rem 0;
