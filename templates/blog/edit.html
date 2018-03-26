@@ -9,47 +9,51 @@
 {%- endblock %}
 
 {% block main -%}
-<article lang={{ article.language }}>
-  <section class=meta>
-    <a href={{ url_for_user(article.author) }}>
-      <img src={{ article.author.avatar }} width=70 height=70 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt>
-    </a>
-    <div>
-      <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
-      <p>{{ article.author.about|htmlnewline }}</p>
-      <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
-      <p class=reading-time><span>{{ (article.content|length / 6 / 250)|int }}</span> min read</p>
-    </div>
-  </section>
-
-  {% if errors -%}
-    <ul>
-    {% for error in errors %}
-      <li class=error>{{ error }}</li>
-    {% endfor %}
-    </ul>
-  {%- endif %}
-
-  {% if not article.publication_date -%}
-    <div class=ribbon-wrapper>
-      <div class=ribbon>draft</div>
-    </div>
-  {%- endif %}
-
-  <h1 name=title>{{ article.title or 'Insert your title here' }}</h1>
-  <div class=content name=content>
-    {{ (article.content or '<p>Insert your text here</p>')|safe }}
-  </div>
-</article>
-
 {% set url = url_for('article_edit', id=article.id) if article.id else url_for('article_create') %}
 <form method=post action={{ url }}>
+
+  <article lang={{ article.language }}>
+    <section class=meta>
+      <a href={{ url_for_user(article.author) }}>
+        <img src={{ article.author.avatar }} width=70 height=70 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt>
+      </a>
+      <div>
+        <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
+        <p>{{ article.author.about|htmlnewline }}</p>
+        <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
+        <p class=reading-time><span>{{ (article.content|length / 6 / 250)|int }}</span> min read</p>
+      </div>
+    </section>
+
+    {% if errors -%}
+      <ul>
+      {% for error in errors %}
+        <li class=error>{{ error }}</li>
+      {% endfor %}
+      </ul>
+    {%- endif %}
+
+    {% if not article.publication_date -%}
+      <div class=ribbon-wrapper>
+        <div class=ribbon>draft</div>
+      </div>
+    {%- endif %}
+
+    <h1 name=title>{{ article.title or 'Insert your title here' }}</h1>
+    <div class=content name=content>
+      {{ (article.content or '<p>Insert your text here</p>')|safe }}
+    </div>
+
+    <label for=published>
+      <input type=checkbox name=published value=1 id=published {% if article.published %}checked{% endif %}>
+      Publish this article
+    </label>
+  </article>
+
   <div class=toolbar>
     <input type=hidden name=title>
     <input type=hidden name=content>
-    <input type=hidden name=published>
-    <button type=submit class=save>Save as draft</button>
-    <button type=submit class=save value=true>Save and publish</button>
+    <button type=submit class=save>Save</button>
     {% if article.id -%}
       <a class="button delete" href={{ url_for('article_delete', id=article.id) }}>Delete</a>
     {%- endif %}
@@ -89,7 +93,6 @@
     const form = event.target
     form.title.value = document.querySelector('[contenteditable][name=title]').textContent
     form.content.value = document.querySelector('[contenteditable][name=content]').innerHTML
-    form.published.value = event.explicitOriginalTarget.value
   })
 </script>
 
