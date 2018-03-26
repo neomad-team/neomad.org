@@ -27,3 +27,7 @@ class HelpersTest(TestCase):
         youtube_id = helpers.extract_youtube_id(
             'https://www.youtube.com/watch?v=c2rEbbGLPQc')
         self.assertEqual(youtube_id, 'c2rEbbGLPQc')
+
+    def test_extract_youtube_id_with_hyphen(self):
+        youtube_id = helpers.extract_youtube_id('https://youtu.be/J2M4coM-u6Y')
+        self.assertEqual(youtube_id, 'J2M4coM-u6Y')
