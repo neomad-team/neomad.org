@@ -39,10 +39,10 @@
       </div>
     {%- endif %}
 
-    <h1 name=title>{{ article.title or 'Insert your title here' }}</h1>
-    <div class=content name=content>
-      {{ (article.content or '<p>Insert your text here</p>')|safe }}
-    </div>
+    <h1><input name=title value="{{ article.title }}" placeholder="Insert your title here"></h1>
+    <textarea class=content name=content placeholder="Insert your text here">
+      {{ article.content|safe }}
+    </textarea>
 
     <label for=published>
       <input type=checkbox name=published value=1 id=published {% if article.published %}checked{% endif %}>
@@ -88,11 +88,6 @@
     },
     disableDoubleReturn: true,
     disableExtraSpaces: false
-  })
-  document.querySelector('form').addEventListener('submit', event => {
-    const form = event.target
-    form.title.value = document.querySelector('[contenteditable][name=title]').textContent
-    form.content.value = document.querySelector('[contenteditable][name=content]').innerHTML
   })
 </script>
 
