@@ -70,8 +70,8 @@
     {% for user in users %}
       {% if user != current_user %}
         usersLocation.push({
-          name: '{{ user.username }}',
-          position: {{ user.current_location }},
+          name: '{{ user.username or "anonymous" }}',
+          position: {{ user.current_location or [] }},
           link: "{{ url_for_user(user) }}",
           avatar: '{{ user.avatar }}'
         })
