@@ -53,7 +53,12 @@ window.onhashchange = _ => {
 // functions
 function addUser (user) {
   const popup = L.popup()
-    .setContent(`<a href=${user.link}>Latest known position for ${user.name}</a>`)
+    .setContent(`
+      <a class=user-popup href=${user.link} title="View profile in detail">
+        <h3>${user.name}</h3>
+        <img class=avatar src="${user.avatar}" alt="Picture of ${user.name}">
+        <p>${user.about}</p>
+      </a>`)
 
   const userIcon = L.icon({
       iconUrl: user.avatar,
