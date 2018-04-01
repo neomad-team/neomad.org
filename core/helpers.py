@@ -63,7 +63,7 @@ def embed(text):
     '''
     Replace and "http…" by the embeded corresponding media.
     '''
-    regex = re.compile('https?://[\w\./\?=]+')
+    regex = re.compile('https?://[\w\./\?=-]+')
     return regex.sub(_replace_embed, text)
 
 

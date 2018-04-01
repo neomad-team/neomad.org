@@ -188,18 +188,19 @@ class ArticleTest(TestCase):
     def test_article_replace_embedded_video(self):
         article = Article(title='title', content='View'
                 'https://www.youtube.com/watch?v=Fa4cRMaTDUI \n'
-                'and https://youtu.be/yOuTuBeCoDe now! \n'
+                'and https://youtu.be/J2M4coM-u6Y now! \n'
                 'See http://neomad.org/@user for more.',
                 publication_date=now,
                 author=self.user).save()
         response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
                                    f'{article.id}/')
+
         self.assertIn(
             b'src=https://www.youtube-nocookie.com/embed/Fa4cRMaTDUI',
             response.get_data()
         )
         self.assertIn(
-            b'src=https://www.youtube-nocookie.com/embed/yOuTuBeCoDe',
+            b'src=https://www.youtube-nocookie.com/embed/J2M4coM-u6Y',
             response.get_data()
         )
 
