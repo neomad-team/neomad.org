@@ -263,18 +263,23 @@
 }
 
 .avatar {
-  border-radius: 100%;
   background-image: url('/static/images/avatar.png');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   border: 0.1rem solid #fafafa;
+  border-radius: 100%;
+}
+
+.user-popup .avatar {
+  width: 150px;
+  height: 150px;
 }
 
 /* responsive */
 
 @media screen and (max-width: 620px) {
-  
+
   #open-form {
     flex-direction: row-reverse;
     align-items: center;
@@ -282,16 +287,16 @@
     width: 15rem;
     height: 5rem;
   }
-  
+
   #open-form p {
     font-size: 1.25rem;
     margin-top: .25rem;
   }
-  
+
   #poi-form form {
     width: 100%;
   }
-  
+
   #poi-form h2 {
     font-size: 3rem;
     margin: 0 0 .5rem;
@@ -301,20 +306,20 @@
     margin-left: 0;
     padding: 2rem 0 2rem 2rem;
   }
-  
+
   #poi-form label {
     width: 9rem;
     font-size: 1.5rem;
     margin-right: 1rem;
   }
-  
+
   #poi-form input[type="text"],
   #poi-form input[type="range"],
   #poi-form textarea,
   #poi-form select {
     width: 60%;
   }
-  
+
   #save-form {
     margin: 0 auto 3rem;
   }

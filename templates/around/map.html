@@ -68,14 +68,13 @@
   <script>
     const usersLocation = []
     {% for user in users %}
-      {% if user != current_user %}
-        usersLocation.push({
-          name: '{{ user.username or "anonymous" }}',
-          position: {{ user.current_location or [] }},
-          link: "{{ url_for_user(user) }}",
-          avatar: '{{ user.avatar }}'
-        })
-      {% endif %}
+      usersLocation.push({
+        name: '{{ user.username or "anonymous" }}',
+        position: {{ user.current_location or [] }},
+        link: "{{ url_for_user(user) }}",
+        avatar: '{{ user.avatar }}',
+        about: '{{ user.about }}'
+      })
     {% endfor %}
 
     let userID = '{{ current_user and current_user.id or "" }}'
