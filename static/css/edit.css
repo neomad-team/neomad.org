@@ -29,6 +29,12 @@ body {
   visibility: inherit;
 }
 
+article h1 > input {
+  border: 0;
+  border-bottom: 1px dashed #333;
+  font: inherit;
+}
+
 figure {
   position: relative;
 }
