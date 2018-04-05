@@ -73,7 +73,7 @@
         position: {{ user.current_location or [] }},
         link: "{{ url_for_user(user) }}",
         avatar: '{{ user.avatar }}',
-        about: '{{ user.about }}'
+        about: `{{ user.about }}`,
       })
     {% endfor %}
 
