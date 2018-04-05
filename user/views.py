@@ -13,14 +13,14 @@ from .models import User
 def profile(username):
     try:
         user = User.objects.get(slug=username)
-        articles = Article.objects(author=user)
-        community = user.allow_community
     except User.DoesNotExist:
         abort(404)
-    if not community and user != current_user:
-        return render_template('private.html', user=user), 403
-    if community and user != current_user:
-        articles = Article.published()
+    if user == current_user:
+        if not user.allow_community:
+            return render_template('private.html', user=user), 403
+        articles = Article.objects(author=user)
+    else:
+        articles = Article.published(author=user)
     return render_template('user/profile.html', user=user,
                            articles=articles,
                            edit=(user == current_user))
