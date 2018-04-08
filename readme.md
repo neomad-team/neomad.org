@@ -89,3 +89,17 @@ Then launch your test with `python -m unittest`.
 
 Displaying _/around/_ page depends on [Preact](https://preactjs.com/).
 You may build the assets running `npm run watch` when developing or `npm run build` for running the project.
+
+
+## Deploying
+
+Deployment is processed through the SSH command `ssh neomad`.
+You should ensure that your ssh_config is configured prior to continue.
+
+Run the following task to deploy in _preprod_:
+```sh
+make prepare-deploy env=preprod
+make deploy preprod
+```
+
+replace `preprod` with `prod` for running in production.
