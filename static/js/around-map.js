@@ -42,7 +42,7 @@ worker.addEventListener('message', r => {
 worker.postMessage('')
 
 // add users on map
-usersLocation.forEach(user => addUser(user))
+usersLocation.filter(user => user.position.length).forEach(user => addUser(user))
 
 // events
 window.onhashchange = _ => {
