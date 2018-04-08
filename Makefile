@@ -7,18 +7,24 @@ help:
 logs:  # type=error|access
 	@${remote} "${goto_src} && tail -f ./log/${type}.log"
 
-server_update:
+server_update:  # env=prod|preprod
 	@make title text="Fetching prod branch and updating sources."
 	ssh neomad "${goto_src} && ${git_update}"
 	ssh neomad "${goto_src} && pip install -r requirements.txt"
 
-server_reload:
+server_reload:  # env=prod|preprod
 	@make title text="Rebuilding the server."
 	ssh neomad "${goto_src} && pkill gunicorn; \
 		gunicorn -w 3 --daemon -b 127.0.0.1:5000 app \
 		--error-logfile ./log/error.log --access-logfile ./log/access.log"
 
-deploy: server_update server_reload
+prepare-deploy:  # env=prod|preprod
+	git checkout $(env)
+	git fetch origin
+	git merge origin/master
+	git push origin $(env)
+
+deploy: server_update server_reload  # env=prod|preprod
 
 backup_db:
 	rsync -avz neomad:~/prod/data/db ./backups/prod-`(date +%s)`
