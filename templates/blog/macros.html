@@ -23,9 +23,11 @@
     </header>
     <a href={{ url }} lang={{ article.language }}>
       <h1>{{ article.title|title }}</h1>
+      {% if article.image %}
       <figure>
-        <img src="{{ article.image }}" onerror="this.src='{{ url_for('static', filename='images/article.png') }}'" width=100% alt>
+        <img src="{{ article.image }}" width=100% alt>
       </figure>
+      {% endif %}
       {{ article.content|striptags|truncate(200) }}
     <a href={{ url }} lang={{ article.language }} class="read action-button">Read more</a>
   </article>
