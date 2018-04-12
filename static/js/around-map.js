@@ -69,6 +69,7 @@ function addUser (user) {
   })
 
   const userMarker = L.marker(user.position, {icon: userIcon})
+    .setZIndexOffset(1000)
     .bindPopup(popup)
     .addTo(map)
 }
