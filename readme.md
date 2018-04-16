@@ -83,14 +83,6 @@ Activate your python virtual environment (with `source venv/bin/activate`).
 Then launch your test with `python -m unittest`.
 
 
-## Extra commands
-
-### Work on around page
-
-Displaying _/around/_ page depends on [Preact](https://preactjs.com/).
-You may build the assets running `npm run watch` when developing or `npm run build` for running the project.
-
-
 ## Deploying
 
 Deployment is processed through the SSH command `ssh neomad`.
