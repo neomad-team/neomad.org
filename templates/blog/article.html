@@ -5,6 +5,7 @@
 {% block description %}{{ article.content|truncate(200) }} by {{ article.author|capitalize }}.{% endblock %}
 
 {% block extra_og -%}
+  <meta property=og:title content="{{ article.title }}">
   {% if article.image -%}
     <meta property=og:image content="{% if article.image[:4] == 'http' %}{{ article.image }}{% else %}{{ request.url_root[:-1] }}{{ article.image }}{% endif %}">
   {%- endif %}
