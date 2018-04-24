@@ -43,7 +43,7 @@ def article_create():
             status = 400
         else:
             article.title = request.form.get('title')
-            article.content = clean_html(request.form.get('content'))
+            article.content = request.form.get('content')
             if request.form.get('published') != '':
                 article.publication_date = datetime.datetime.utcnow()
             else:
@@ -65,8 +65,8 @@ def article_edit(id):
     errors = []
     if request.method == 'POST':
         article.title = request.form.get('title')
-        article.content = clean_html(request.form.get('content'))
-        if bool(request.form.get('published')) == True:
+        article.content = request.form.get('content')
+        if bool(request.form.get('published')):
             article.publication_date = datetime.datetime.utcnow()
         else:
             article.publication_date = None
