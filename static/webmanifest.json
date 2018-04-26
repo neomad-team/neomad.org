@@ -4,7 +4,7 @@
   "description": "Find a local place to work, get connected to other remote workers.",
   "background_color": "#279e6a",
   "theme_color": "#279e6a",
-  "dir": "rtl",
+  "dir": "ltr",
   "lang": "en",
   "display": "standalone",
   "orientation": "portrait-primary"
