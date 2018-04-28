@@ -16,9 +16,9 @@ from core.utils import (
 from user.models import User
 
 ALLOWED_TAGS = {
-        'a': ('href', 'name', 'target', 'title'), 'img': ('src', 'title'),
-        'h2': ('id'), 'h3': ('id'), 'strong': (), 'em': (), 'i': (), 'b': (),
-        'p': (), 'br': (), 'blockquote': (),
+    'a': ('href', 'name', 'target', 'title'), 'img': ('src', 'title'),
+    'h2': ('id'), 'h3': ('id'), 'strong': (), 'em': (), 'i': (), 'b': (),
+    'p': (), 'br': (), 'blockquote': (),
 }
 
 
@@ -33,14 +33,15 @@ def clean_html(html, *args, **kwargs):
 
 
 class Article(db.Document):
+    creation_date = db.DateTimeField(default=datetime.datetime.utcnow)
+    publication_date = db.DateTimeField()
     title = db.StringField(required=True)
     content = db.StringField(required=True)
-    creation_date = db.DateTimeField(default=datetime.datetime.utcnow)
     slug = db.StringField(required=True, default='no-title')
     author = db.ReferenceField(User)
     language = db.StringField(min_length=2, max_length=2, default='en')
     images = db.ListField()
-    publication_date = db.DateTimeField()
+    duration = db.IntegerField()
 
     def __str__(self):
         return str(self.title)
