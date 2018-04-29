@@ -63,14 +63,6 @@ main > h1 {
 .meta time {
   font-size: 1.55rem;
 }
-.meta .reading-time {
-  display: inline;
-  font-size: 1.4rem;
-}
-.meta .reading-time::before {
-  content: "-";
-  margin-right: 0.85rem;
-}
 
 .draft {
   position: relative;

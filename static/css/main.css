@@ -236,13 +236,6 @@ figure {
   vertical-align: top;
   font-size: 1.9rem;
 }
-.meta .reading-time {
-  display: inline;
-}
-.meta .reading-time::before {
-  content: "-";
-  margin-right: .85rem;
-}
 .meta img {
   margin-right: 1.25rem;
 }
