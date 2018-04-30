@@ -41,7 +41,6 @@ class Article(db.Document):
     author = db.ReferenceField(User)
     language = db.StringField(min_length=2, max_length=2, default='en')
     images = db.ListField()
-    duration = db.IntegerField()
 
     def __str__(self):
         return str(self.title)
