@@ -16,9 +16,9 @@ from core.utils import (
 from user.models import User
 
 ALLOWED_TAGS = {
-        'a': ('href', 'name', 'target', 'title'), 'img': ('src', 'title'),
-        'h2': ('id'), 'h3': ('id'), 'strong': (), 'em': (), 'i': (), 'b': (),
-        'p': (), 'br': (), 'blockquote': (),
+    'a': ('href', 'name', 'target', 'title'), 'img': ('src', 'title'),
+    'h2': ('id'), 'h3': ('id'), 'strong': (), 'em': (), 'i': (), 'b': (),
+    'p': (), 'br': (), 'blockquote': (),
 }
 
 
