@@ -1,11 +1,19 @@
 from urllib.parse import urlparse, parse_qs
+from math import ceil
 import re
 import unicodedata
 
-from flask import url_for
+from flask import url_for, Markup
 from jinja2.filters import do_mark_safe
 
 from . import app
+
+
+@app.template_filter('reading_time')
+def reading_time(text):
+    if not text:
+        return 0
+    return ceil(len(Markup(text).striptags()) / 6 / 250)
 
 
 @app.template_filter('datetime')
