@@ -101,8 +101,6 @@ class Article(db.Document):
         return parent
 
     def save(self, *args, **kwargs):
-        if not self.creation_date:
-            self.creation_date = datetime.datetime.utcnow()
         self.slug = slugify(self.title)
         is_new = not self.id
         # when new, the id must exist before extracting images
@@ -112,6 +110,9 @@ class Article(db.Document):
         self.title = Markup(self.title).striptags()
         self.content = clean_html(self.content, ALLOWED_TAGS)
         self.language = detect(self.content)
+        morph = self.morph()
+        if self != morph:
+            morph.pre_save(*args, **kwargs)
         return super(Article, self).save(*args, **kwargs)
 
     def morph(self):
@@ -135,7 +136,6 @@ class SteemitArticle:
                                  attrs={'type': 'application/json'}).text
         self.article = article
         self.data = json.loads(content)['global']['content'][uri]
-        import ipdb;ipdb.set_trace()
 
     @property
     def title(self):
@@ -151,3 +151,8 @@ class SteemitArticle:
 
     def __getattr__(self, prop):
         return getattr(self.article, prop)
+
+    def pre_save(self, *args, **kwargs):
+        self.article.title = self.title
+        self.article.publication_date = self.publication_date
+        self.article.slug = slugify(self.title)
