@@ -212,3 +212,12 @@ class ArticleTest(TestCase):
         response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
                                    f'{article.id}/')
         self.assertIn(b'See http://neomad.org/@user for', response.get_data())
+
+    def test_parse_steemit(self):
+        url = 'https://steemit.com/travel/@silkroad40/a-set-of-pictures-from-turkmenistan-and-bukhara-uzbekistan-ein-paar-bilder-von-philipe-s-reise-durch-turkmenistan-und-bukhara'
+        article = Article(title='Steemit article', content=f'<p>{url}</p>',
+                          publication_date=now, author=self.user).save()
+        response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
+                                   f'{article.id}/')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'<p>Philipe drove', response.get_data())

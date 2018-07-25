@@ -1,5 +1,6 @@
 {% macro article_list(articles, with_author=true) %}
-  {% for article in articles %}
+  {% for original_article in articles %}
+  {% set article = original_article.morph() %}
   {% set url = url_for_article(article) %}
   <article class="preview draft">
     <header class=meta>
