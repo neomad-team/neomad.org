@@ -221,3 +221,4 @@ class ArticleTest(TestCase):
                                    f'{article.id}/')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'<p>Philipe drove', response.get_data())
+        self.assertIn(b'>18 July, 2018<', response.get_data())
