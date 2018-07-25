@@ -123,7 +123,7 @@ class Article(db.Document):
         return self
 
     meta = {
-        'ordering': ['-creation_date']
+        'ordering': ['-publication_date']
     }
 
 
