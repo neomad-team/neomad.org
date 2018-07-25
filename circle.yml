@@ -1,13 +1,35 @@
-machine:
-  python:
-    version: 3.7.0
-  environment:
-    SETTINGS: settings.test.py
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.7-rc-node
+    environment:
+      SETTINGS: settings.test.py
+    steps:
+      - checkout
+      - run:
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+            python -m unittest
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "venv"
 
 dependencies:
+  cache_directories:
+    - mongodb-linux-x86_64-ubuntu1204-3.2.0
   pre:
-    - pip install -r requirements.txt
+    - if [[ ! -d mongodb-linux-x86_64-ubuntu1204-3.2.0 ]]; then wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1204-3.2.0.tgz && tar xvzf mongodb-linux-x86_64-ubuntu1204-3.2.0.tgz; fi
+    - sudo stop mongodb
+    - sudo cp mongodb-linux-x86_64-ubuntu1204-3.2.0/bin/* /usr/bin
+    - sudo start mongodb
 
-test:
-  override:
-    - python -m unittest
+machine:
+  services:
+    - mongodb
