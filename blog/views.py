@@ -25,6 +25,7 @@ def article(author, slug, id):
         abort(404)
     if article.slug != slug or article.author.slug != author:
         return redirect(url_for_article(article), 301)
+    article = article.morph()
     return render_template('blog/article.html', article=article,
                            articles=Article.objects.filter(id__ne=id))
 

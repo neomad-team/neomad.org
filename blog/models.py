@@ -1,12 +1,16 @@
 import datetime
 import hashlib
+import json
 import os
+import re
 import shutil
 
 from flask import Markup
 from bs4 import BeautifulSoup
-from mongoengine.queryset.manager import queryset_manager
 from langdetect import detect
+from mongoengine.queryset.manager import queryset_manager
+import markdown
+import requests
 
 from core import db, app
 from core.helpers import slugify
@@ -110,6 +114,40 @@ class Article(db.Document):
         self.language = detect(self.content)
         return super(Article, self).save(*args, **kwargs)
 
+    def morph(self):
+        if('https://steemit.com/' in self.content):
+            match = re.match('.*(https://steemit.com/[^<\s.]*)', self.content)
+            url = match.groups()[0]
+            return SteemitArticle(article=self, url=url)
+        return self
+
     meta = {
         'ordering': ['-creation_date']
     }
+
+
+class SteemitArticle:
+    def __init__(self, article, url):
+        res = requests.get(url)
+        html = BeautifulSoup(res.text)
+        uri = re.match('https://steemit.com/.+/@(.*)', url).groups()[0]
+        content = html.body.find('script',
+                                 attrs={'type': 'application/json'}).text
+        self.article = article
+        self.data = json.loads(content)['global']['content'][uri]
+        import ipdb;ipdb.set_trace()
+
+    @property
+    def title(self):
+        return self.data['title']
+
+    @property
+    def content(self):
+        return markdown.markdown(self.data['body'])
+
+    @property
+    def publication_date(self):
+        return datetime.datetime.fromisoformat(self.data['created'])
+
+    def __getattr__(self, prop):
+        return getattr(self.article, prop)
