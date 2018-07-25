@@ -9,7 +9,7 @@ willing to _nomadize_ themselves.
 ## Requirements
 
 - Git
-- Python3.6 or above
+- Python3.7 or above
 - [Docker-compose](https://docs.docker.com/compose/)
 
 > If you don't have/want to use docker, you can process to the

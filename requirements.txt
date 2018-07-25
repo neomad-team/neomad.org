@@ -1,12 +1,12 @@
 bs4==0.0.1
 feincms-cleanse==8
-Flask==0.12
-Flask-Login==0.4.0
+Flask==1.0.2
+Flask-Login==0.4.1
 langdetect==1.0.7
 Markdown==2.6.11
-mongoengine==0.11.0
-Pillow==4.0.0
-requests==2.11.1
+mongoengine==0.15.3
+Pillow==5.2.0
+requests==2.19.1
 
 # Deployment
 gunicorn
