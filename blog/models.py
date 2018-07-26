@@ -147,7 +147,8 @@ class SteemitArticle:
 
     @property
     def publication_date(self):
-        return datetime.datetime.fromisoformat(self.data['created'])
+        return datetime.datetime.strptime(self.data['created'],
+                                          '%Y-%m-%dT%H:%M:%S')
 
     def __getattr__(self, prop):
         return getattr(self.article, prop)
