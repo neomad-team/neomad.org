@@ -9,6 +9,7 @@ from flask import Markup
 from bs4 import BeautifulSoup
 from langdetect import detect
 from mongoengine.queryset.manager import queryset_manager
+from mongoengine.errors import DoesNotExist
 import markdown
 import requests
 
@@ -41,7 +42,7 @@ class Article(db.Document):
     content = db.StringField(required=True)
     creation_date = db.DateTimeField(default=datetime.datetime.utcnow)
     slug = db.StringField(required=True, default='no-title')
-    author = db.ReferenceField(User)
+    author = db.ReferenceField(User, reverse_delete_rule='NULLIFY')
     language = db.StringField(min_length=2, max_length=2, default='en')
     images = db.ListField()
     publication_date = db.DateTimeField()
@@ -52,6 +53,12 @@ class Article(db.Document):
     @queryset_manager
     def published(doc_cls, queryset):
         return queryset.filter(publication_date__ne=None)
+
+    def get_author(self):
+        try:
+            return self.author
+        except DoesNotExist:
+            return User.objects.get(slug='neomad')
 
     def extract_images(self):
         """
@@ -123,7 +130,8 @@ class Article(db.Document):
         return self
 
     meta = {
-        'ordering': ['-publication_date']
+        'ordering': ['-publication_date'],
+        'indexes': ['-publication_date']
     }
 
 
