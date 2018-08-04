@@ -27,7 +27,9 @@ prepare-deploy:  # env=prod|preprod
 deploy: server_update server_reload  # env=prod|preprod
 
 backup_db:
-	rsync -avz neomad:~/prod/data/db ./backups/prod-`(date +%s)`
+	# rsync -avz neomad:~/prod/data/db ./backups/prod-`(date +%s)`
+	ssh neomad "./scripts/dbbackup.sh"
+	rsync -avz neomad:scripts/dump/ ./backups/
 
 install:
 	bash -c "bin/install.sh"

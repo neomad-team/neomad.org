@@ -5,11 +5,11 @@
   <article class="preview draft">
     <header class=meta>
       {% if with_author %}
-      <a href={{ url_for_user(article.author) }}>
-        <img src={{ article.author.avatar }} width=40 height=40 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt>
+      <a href={{ url_for_user(article.get_author()) }}>
+        <img src={{ article.get_author().avatar }} width=40 height=40 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt>
       </a>
       <div>
-        <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
+        <a href={{ url_for_user(article.get_author()) }}>{{ article.get_author().username }}</a>
         <time datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
         <p class=reading-time><span>{{ article.content|reading_time }}</span> min read</p>
       </div>

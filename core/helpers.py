@@ -46,8 +46,8 @@ def url_for_user(user):
 
 
 def url_for_article(article):
-    return url_for('article', author=article.author.slug, slug=article.slug,
-                   id=article.id).replace('%40', '@')
+    return url_for('article', author=article.get_author().slug,
+                   slug=article.slug, id=article.id).replace('%40', '@')
 
 
 def url_for_trips(user):

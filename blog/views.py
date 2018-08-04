@@ -23,7 +23,7 @@ def article(author, slug, id):
         article = Article.objects.get(id=id)
     except Article.DoesNotExist:
         abort(404)
-    if article.slug != slug or article.author.slug != author:
+    if article.slug != slug or article.get_author().slug != author:
         return redirect(url_for_article(article), 301)
     article = article.morph()
     return render_template('blog/article.html', article=article,

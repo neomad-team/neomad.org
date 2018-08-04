@@ -9,6 +9,7 @@ from flask import Markup
 from bs4 import BeautifulSoup
 from langdetect import detect
 from mongoengine.queryset.manager import queryset_manager
+from mongoengine.errors import DoesNotExist
 import markdown
 import requests
 
@@ -52,6 +53,12 @@ class Article(db.Document):
     @queryset_manager
     def published(doc_cls, queryset):
         return queryset.filter(publication_date__ne=None)
+
+    def get_author(self):
+        try:
+            return self.author
+        except DoesNotExist:
+            return User.objects.get(slug='neomad')
 
     def extract_images(self):
         """
