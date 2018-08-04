@@ -41,7 +41,7 @@ class Article(db.Document):
     content = db.StringField(required=True)
     creation_date = db.DateTimeField(default=datetime.datetime.utcnow)
     slug = db.StringField(required=True, default='no-title')
-    author = db.ReferenceField(User)
+    author = db.ReferenceField(User, reverse_delete_rule='NULLIFY')
     language = db.StringField(min_length=2, max_length=2, default='en')
     images = db.ListField()
     publication_date = db.DateTimeField()
@@ -123,7 +123,8 @@ class Article(db.Document):
         return self
 
     meta = {
-        'ordering': ['-publication_date']
+        'ordering': ['-publication_date'],
+        'indexes': ['-publication_date']
     }
 
 
