@@ -16,8 +16,6 @@ def profile(username):
     except User.DoesNotExist:
         abort(404)
     if user == current_user:
-        if not user.allow_community:
-            return render_template('private.html', user=user), 403
         articles = Article.objects(author=user)
     else:
         articles = Article.published(author=user)
