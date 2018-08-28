@@ -41,8 +41,8 @@ def api_user(id):
 
 @app.route('/api/login/', methods=['get', 'post'])
 def api_login():
-    response = request.json
     user = User.objects.get(email=request.form['email'])
     if user.check_password(password=request.form['password']):
-        login_user(user)
-        return Response(json.dumps(user), mimetype='application/json')
+        return jsonify(user)
+    else:
+        return jsonify({'success': False})
