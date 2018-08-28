@@ -1,6 +1,6 @@
 import json
 
-from flask import request, Response
+from flask import request, Response, jsonify
 from flask_login import current_user, login_user
 
 from core import app
