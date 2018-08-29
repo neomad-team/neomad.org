@@ -1,10 +1,10 @@
 import json
 
-from flask import request, Response
-from flask_login import current_user
+from flask import request, Response, jsonify
+from flask_login import current_user, login_user
 
-from user.models import User
 from core import app
+from user.models import User
 from around.models import Spot
 
 
@@ -37,3 +37,15 @@ def api_user(id):
     if 'email' in data['socials']:
         data['socials']['email'] = 'hidden'
     return Response(json.dumps(data), mimetype='application/json')
+
+
+@app.route('/api/login/', methods=['post'])
+def api_login():
+    try:
+        user = User.objects.get(email=request.form['email'])
+    except User.DoesNotExist:
+        return jsonify({'success': False}), 401
+    if user.check_password(password=request.form['password']):
+        return jsonify(user.to_dict())
+    else:
+        return jsonify({'success': False}), 401
