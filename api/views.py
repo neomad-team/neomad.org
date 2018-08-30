@@ -39,7 +39,7 @@ def api_user(id):
     return Response(json.dumps(data), mimetype='application/json')
 
 
-@app.route('/api/login/', methods=['post'])
+@app.route('/api/login/')
 def api_login():
     try:
         user = User.objects.get(email=request.form['email'])
