@@ -41,11 +41,14 @@ def api_user(id):
 
 @app.route('/api/login/', methods=['post'])
 def api_login():
+    email = request.form['email']
+    password = request.form['password']
+
     try:
-        user = User.objects.get(email=request.form['email'])
+        user = User.objects.get(email=email)
+        if user.check_password(password=password):
+            return Response(json.dumps(user), mimetype='application/json')
     except User.DoesNotExist:
         return jsonify({'success': False}), 401
-    if user.check_password(password=request.form['password']):
-        return jsonify(user.to_dict())
     else:
         return jsonify({'success': False}), 401
