@@ -14,6 +14,7 @@ class UserTest(TestCase):
                           username='emailtest',
                           allow_community=True)
                      .set_password('testtest').save())
+        self.lat_lng = [3.5, 42.0]
 
     def tearDown(self):
         self.user.delete()
@@ -35,3 +36,13 @@ class UserTest(TestCase):
         self.assertEqual(response.status_code, 200)
         user = json.loads(response.get_data())
         self.assertEqual(user['email'], 'emailtest@test.com')
+
+    def test_add_trip(self):
+        user = User.objects.first()
+        self.assertEqual(user.locations, [])
+        result = self.client.post('/api/position/',
+                                    data=json.dumps(self.lat_lng),
+                                    content_type='application/json')
+        self.assertEqual(user.current_location, self.lat_lng)
+        self.assertEqual(user.locations[0].position, self.lat_lng)
+        self.assertEqual(result.status_code, 201)
