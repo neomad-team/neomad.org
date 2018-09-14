@@ -49,3 +49,22 @@ def api_login():
         return jsonify(user.to_dict())
     else:
         return jsonify({'success': False}), 401
+
+
+@app.route('/api/position/', methods=['post'])
+def api_position():
+    try:
+        user = User.objects.get(id=request.form['id']).to_mongo()
+    except User.DoesNotExist:
+        return jsonify({'success': False}), 401
+    if not user.locations:
+        user.locations = [UserLocation(position=request.form['position'])]
+        user.save()
+        return '', 201
+    else:
+        index = user.locations.count() - 1
+        latest_location = user.locations[index]
+        user.locations.append(UserLocation(position=request.form['position']))
+        user.save()
+        status = 201
+    return '', status
