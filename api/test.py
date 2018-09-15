@@ -3,6 +3,7 @@ from unittest import TestCase
 
 from core import app
 from user.models import User
+from auth import views  # noqa: F401, F801
 
 from . import views  # noqa: F401
 
@@ -35,3 +36,12 @@ class UserTest(TestCase):
         self.assertEqual(response.status_code, 200)
         user = json.loads(response.get_data())
         self.assertEqual(user['email'], 'emailtest@test.com')
+
+    def test_api_user_location_update(self):
+        response = self.client.post('/api/user/location/',
+                                    data=json.dumps([1, 2]),
+                                    content_type='application/json',
+                                    headers={'Authentication': self.user.id})
+        user = User.objects.get(id=self.user.id)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(user.current_location, [1, 2])

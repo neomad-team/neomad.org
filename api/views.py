@@ -6,6 +6,7 @@ from flask_login import current_user, login_user
 from core import app
 from user.models import User
 from around.models import Spot
+from trips.views import trips_add
 
 
 @app.route('/api/spots/')
@@ -49,3 +50,14 @@ def api_login():
         return jsonify(user.to_dict())
     else:
         return jsonify({'success': False}), 401
+
+
+@app.route('/api/user/location/', methods=['post'])
+def api_trip_create(*args, **kwargs):
+    user_id = request.headers.get('Authentication', ' ' * 24)
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return '', 401
+    login_user(user)
+    return trips_add(*args, **kwargs)
