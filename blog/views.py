@@ -69,8 +69,6 @@ def article_edit(id):
         article.content = request.form.get('content')
         if bool(request.form.get('published') and not article.publication_date):
             article.publication_date = datetime.datetime.utcnow()
-        else:
-            article.publication_date = article.publication_date
         if article.title != '' and clean_html(article.content) != '':
             article.save()
             return redirect(url_for_article(article))
