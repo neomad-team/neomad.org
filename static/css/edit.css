@@ -59,13 +59,6 @@ figure input {
   display: none;
 }
 
-input[type=date] {
-  font-size: 1.5rem;
-  color: inherit;
-  border: 0;
-  border-bottom: .1rem dashed #aaa;
-}
-
 main > header figure .loading {
   position: absolute;
   top: 30%;
