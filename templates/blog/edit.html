@@ -20,7 +20,13 @@
       <div>
         <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
         <p>{{ article.author.about|htmlnewline }}</p>
-        <input name=date type=date value="{{ article.publication_date.strftime('%Y-%m-%d') }}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+
+        {% if article.publication_date -%}
+          <input name=date type=date value="{{ article.publication_date.strftime('%Y-%m-%d') }}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+        {% else %}
+          <input name=date type=date value="{{ article.creation_date.strftime('%Y-%m-%d') }}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+        {%- endif %}
+
         <p class=reading-time><span>{{ article.content|reading_time }}</span> min read</p>
       </div>
     </section>
