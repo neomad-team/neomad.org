@@ -45,10 +45,12 @@ def article_create():
         else:
             article.title = request.form.get('title')
             article.content = request.form.get('content')
-            if request.form.get('published') != '':
+            if bool(request.form.get('published')):
+                article.published = True
                 article.publication_date = datetime.datetime.utcnow()
             else:
                 article.publication_date = None
+                article.published = False
             article.save()
             status = 201
     return render_template('blog/edit.html', article=article,
@@ -67,7 +69,7 @@ def article_edit(id):
     if request.method == 'POST':
         article.title = request.form.get('title')
         article.content = request.form.get('content')
-        if bool(request.form.get('published') and not article.publication_date):
+        if bool(request.form.get('published')) and not article.publication_date:
             article.publication_date = datetime.datetime.utcnow()
         if article.title != '' and clean_html(article.content) != '':
             article.save()
