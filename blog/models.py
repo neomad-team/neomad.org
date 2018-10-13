@@ -8,7 +8,6 @@ import shutil
 from flask import Markup
 from bs4 import BeautifulSoup
 from langdetect import detect
-from mongoengine.queryset.manager import queryset_manager
 from mongoengine.errors import DoesNotExist
 import markdown
 import requests
@@ -46,13 +45,10 @@ class Article(db.Document):
     language = db.StringField(min_length=2, max_length=2, default='en')
     images = db.ListField()
     publication_date = db.DateTimeField()
+    published = db.BooleanField(default=False)
 
     def __str__(self):
         return str(self.title)
-
-    @queryset_manager
-    def published(doc_cls, queryset):
-        return queryset.filter(publication_date__ne=None)
 
     def get_author(self):
         try:

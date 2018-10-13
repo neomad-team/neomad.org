@@ -13,7 +13,7 @@ from .models import Article, clean_html
 
 @app.route('/articles/')
 def article_list():
-    articles = Article.published()
+    articles = Article.objects.filter(published=True)
     return render_template('blog/article_list.html', articles=articles)
 
 
@@ -68,8 +68,9 @@ def article_edit(id):
     errors = []
     if request.method == 'POST':
         article.title = request.form.get('title')
-        article.content = request.form.get('content')
-        if bool(request.form.get('published')) and not article.publication_date:
+        article.content = request.form.get('content')        
+        article.published = bool(request.form.get('published'))
+        if article.published and not article.publication_date:
             article.publication_date = datetime.datetime.utcnow()
         if article.title != '' and clean_html(article.content) != '':
             article.save()
