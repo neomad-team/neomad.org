@@ -227,7 +227,8 @@ class ArticleTest(TestCase):
     def test_parse_steemit(self):
         url = 'https://steemit.com/travel/@silkroad40/a-set-of-pictures-from-turkmenistan-and-bukhara-uzbekistan-ein-paar-bilder-von-philipe-s-reise-durch-turkmenistan-und-bukhara'
         article = Article(title='Steemit article', content=f'<p>{url}</p>',
-                          publication_date=now, author=self.user).save()
+                          published=True, publication_date=now,
+                          author=self.user).save()
         response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
                                    f'{article.id}/')
         self.assertEqual(response.status_code, 200)
