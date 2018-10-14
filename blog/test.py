@@ -188,7 +188,7 @@ class ArticleTest(TestCase):
         result = self.client.get('/articles/')
         self.assertNotIn(b'<article class=preview>', result.data)
         
-    def test_published_then_unpublished_article_does_not_appear_in_articles(self):
+    def test_unpublished_article_with_date_does_not_appear_in_articles(self):
         Article(title='title', content='<p>content</p>',
                 publication_date=datetime.datetime.utcnow(),
                 published=False,
