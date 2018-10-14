@@ -22,12 +22,13 @@ article {
 
 article .meta {
   line-height: 1.4;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
 }
 article .meta a {
   color: #666;
 }
-article .meta .reading-time {
+article .meta .reading-time,
+article .meta time {
   font-size: 1.5rem;
 }
 
@@ -44,12 +45,6 @@ article .content img {
   display: inline-block;
   margin: 0 auto;
   max-width: 100%;
-}
-
-article .date {
-  display: block;
-  margin-top: 5.1rem;
-  font-size: 1.2rem;
 }
 
 article iframe.video {
@@ -81,6 +76,7 @@ aside a:hover {
   }
   article .meta time {
     display: block;
+    font-size: 1.25rem;
   }
   article .meta .reading-time {
     font-size: 1.25rem;

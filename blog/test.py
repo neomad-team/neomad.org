@@ -33,6 +33,7 @@ class ArticleTest(TestCase):
         Article(title='A title for article',
                 content='<p>content</p>',
                 publication_date=datetime.datetime.utcnow(),
+                published=True,
                 author=self.user).save()
         result = self.client.get('/articles/')
         self.assertIn(b'A title for article', result.data)
@@ -174,13 +175,23 @@ class ArticleTest(TestCase):
     def test_article_appear_by_default_in_articles(self):
         Article(title='A title for an article', content='<p>content</p>',
                 publication_date=datetime.datetime.utcnow(),
+                published=True,
                 author=self.user).save()
         result = self.client.get('/articles/')
         self.assertIn(b'A title for an article', result.data)
 
     def test_unpublished_article_does_not_appear_in_articles(self):
         Article(title='title', content='<p>content</p>',
+                published=False,
                 publication_date=None,
+                author=self.user).save()
+        result = self.client.get('/articles/')
+        self.assertNotIn(b'<article class=preview>', result.data)
+        
+    def test_unpublished_article_with_date_does_not_appear_in_articles(self):
+        Article(title='title', content='<p>content</p>',
+                publication_date=datetime.datetime.utcnow(),
+                published=False,
                 author=self.user).save()
         result = self.client.get('/articles/')
         self.assertNotIn(b'<article class=preview>', result.data)
@@ -216,7 +227,8 @@ class ArticleTest(TestCase):
     def test_parse_steemit(self):
         url = 'https://steemit.com/travel/@silkroad40/a-set-of-pictures-from-turkmenistan-and-bukhara-uzbekistan-ein-paar-bilder-von-philipe-s-reise-durch-turkmenistan-und-bukhara'
         article = Article(title='Steemit article', content=f'<p>{url}</p>',
-                          publication_date=now, author=self.user).save()
+                          published=True, publication_date=now,
+                          author=self.user).save()
         response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
                                    f'{article.id}/')
         self.assertEqual(response.status_code, 200)

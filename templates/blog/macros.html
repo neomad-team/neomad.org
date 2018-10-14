@@ -16,7 +16,7 @@
       {% elif article.publication_date %}
       <time datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
       {% endif %}
-      {% if not article.publication_date %}
+      {% if not article.published %}
       <div class=ribbon-wrapper>
         <a href={{ url }} class=ribbon>draft</a>
       </div>

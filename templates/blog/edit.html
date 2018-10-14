@@ -20,7 +20,13 @@
       <div>
         <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
         <p>{{ article.author.about|htmlnewline }}</p>
-        <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
+
+        {% if article.published -%}
+          <time datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
+        {% else %}
+          <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
+        {%- endif %}
+
         <p class=reading-time><span>{{ article.content|reading_time }}</span> min read</p>
       </div>
     </section>
@@ -33,7 +39,7 @@
       </ul>
     {%- endif %}
 
-    {% if not article.publication_date -%}
+    {% if not article.published -%}
       <div class=ribbon-wrapper>
         <div class=ribbon>draft</div>
       </div>
@@ -69,6 +75,9 @@
 <script src=/static/js/medium-editor-insert-plugin/medium-editor-insert.min.js></script>
 
 <script>
+  const dateControl = document.querySelector('input[type=date]')
+  dateControl.value = dateControl.getAttribute('value')
+
   document.querySelector('[name=title]').setAttribute('contenteditable', true)
 
   new MediumEditor('article .content', {

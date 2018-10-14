@@ -58,6 +58,7 @@ figure:hover label {
 figure input {
   display: none;
 }
+
 main > header figure .loading {
   position: absolute;
   top: 30%;

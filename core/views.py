@@ -10,7 +10,7 @@ from . import app
 
 @app.route('/')
 def home(): 
-    articles = Article.published()[:3]
+    articles = Article.objects(published=True)[:3]
     users = User.objects.all()[:6]
     return render_template('home.html', articles=articles, users=users)
  

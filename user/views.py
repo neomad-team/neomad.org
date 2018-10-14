@@ -15,10 +15,11 @@ def profile(username):
         user = User.objects.get(slug=username)
     except User.DoesNotExist:
         abort(404)
+
     if user == current_user:
         articles = Article.objects(author=user)
     else:
-        articles = Article.published(author=user)
+        articles = Article.objects(author=user, published=True)
     return render_template('user/profile.html', user=user,
                            articles=articles,
                            edit=(user == current_user))
