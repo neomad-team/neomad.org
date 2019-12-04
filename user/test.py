@@ -64,7 +64,7 @@ class UserTest(TestCase):
             self):
         Article(title='Article that must not appear',
                 content='<p>content</p>', author=self.user,
-                publication_date=None).save()
+                published=False).save()
         result = self.client.get('/@emailtest/')
         self.assertNotIn(b'Article That Must Not Appear', result.data)
         self.assertEqual(result.status_code, 200)
@@ -72,7 +72,8 @@ class UserTest(TestCase):
     def test_unpublished_articles_does_appears_if_the_author_is_logged(self):
         login_user(self)
         Article(title='Article that must appear',
-                content='<p>content</p>', author=self.user).save()
+                content='<p>content</p>', author=self.user,
+                published=False).save()
         result = self.client.get('/@emailtest/')
         self.assertIn(b'Article That Must Appear', result.data)
         self.assertEqual(result.status_code, 200)

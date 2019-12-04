@@ -167,7 +167,7 @@ footer nav {
 
 /* Main */
 main {
-  margin-top: 10rem;
+  margin: 10rem 0;
 }
 
 /* Article */
@@ -182,7 +182,6 @@ article {
 
 .content {
   font-family: 'Merryweather';
-  letter-spacing: .425rem;
   font-size: 1.9rem;
 }
 
@@ -374,6 +373,70 @@ button:hover,
   backface-visibility: hidden;
 }
 
+.ribbon-wrapper {
+  width: 13.5rem;
+  height: 10.8rem;
+  overflow: hidden;
+  position: fixed;
+  top: 6.6rem;
+  right: 0;
+}
+.ribbon {
+  font-weight: bold;
+  font-weight: 200;
+  font-family: sans-serif;
+  text-transform: capitalize;
+  color: #fff;
+  text-align: center;
+  transform: rotate(45deg);
+  position: relative;
+  padding: .7rem 0;
+  left: 1.5rem;
+  top: 1.5rem;
+  width: 16rem;
+  background: #279e6a;
+  box-shadow: 0 0 .3rem rgba(0,0,0,0.3);
+}
+.ribbon:hover {
+  color: #fff;
+  background: #00bf6b;
+}
+
+.toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  min-height: 10rem;
+  background: #fefefe;
+  padding: 1rem 2rem;
+  text-align: right;
+  z-index: 2;
+  border-top: .3rem solid #eee;
+}
+.toolbar .save {
+  background-color: #e7fee7;
+  color: #3ba53b;
+  border-color: #7fc27f;
+}
+.toolbar .save:hover {
+  background-color: #c5f5c5;
+  color: #217421;
+  border-color: #4b8f4b;
+}
+
+.toolbar .delete {
+  float: left;
+  background-color: #fee7e7;
+  color: #a24343;
+  border-color: #dab2b2;
+}
+.toolbar .delete:hover {
+  background-color: #f2c3c3;
+  color: #771515;
+  border-color: #a25151;
+}
+
 /* Responsive */
 
 @media screen and (max-width: 620px) {
@@ -419,7 +482,7 @@ button:hover,
     font-size: 2.25rem;
     line-height: 5rem;
   }
-  
+
   nav .avatar {
     display: none;
     background: none;
@@ -445,22 +508,30 @@ button:hover,
   nav .profile > li > a {
     padding: .3rem 1.5rem;
   }
-  
+
+  .toolbar {
+    padding: 1rem;
+  }
+
   article {
     width: 100%;
     padding: 0 2rem;
   }
-  
+
   .articles.wrapper {
     padding: 0 2.5rem;
   }
-  
+
+  .ribbon-wrapper {
+    top: 4.6rem;
+  }
+
   #notification {
     width: 100%;
     min-width: 0;
     margin-left: 0;
   }
-  
+
   footer {
     font-size: 1.5rem;
     padding: 2rem 0;

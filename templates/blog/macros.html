@@ -1,21 +1,22 @@
 {% macro article_list(articles, with_author=true) %}
-  {% for article in articles %}
+  {% for original_article in articles %}
+  {% set article = original_article.morph() %}
   {% set url = url_for_article(article) %}
   <article class="preview draft">
     <header class=meta>
       {% if with_author %}
-      <a href={{ url_for_user(article.author) }}>
-        <img src={{ article.author.avatar }} width=40 height=40 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt>
+      <a href={{ url_for_user(article.get_author()) }}>
+        <img src={{ article.get_author().avatar }} width=40 height=40 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt>
       </a>
       <div>
-        <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
-        <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
-        <p class=reading-time><span>{{ (article.content|length / 6 / 250)|int }}</span> min read</p>
+        <a href={{ url_for_user(article.get_author()) }}>{{ article.get_author().username }}</a>
+        <time datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
+        <p class=reading-time><span>{{ article.content|reading_time }}</span> min read</p>
       </div>
-      {% else %}
-      <time datetime={{ article.creation_date }} pubdate>{{ article.creation_date.strftime('%d %B, %Y') }}</time>
+      {% elif article.publication_date %}
+      <time datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
       {% endif %}
-      {% if not article.publication_date %}
+      {% if not article.published %}
       <div class=ribbon-wrapper>
         <a href={{ url }} class=ribbon>draft</a>
       </div>
@@ -23,9 +24,11 @@
     </header>
     <a href={{ url }} lang={{ article.language }}>
       <h1>{{ article.title|title }}</h1>
+      {% if article.image %}
       <figure>
-        <img src="{{ article.image }}" onerror="this.src='{{ url_for('static', filename='images/article.png') }}'" width=100% alt>
+        <img src="{{ article.image }}" width=100% alt>
       </figure>
+      {% endif %}
       {{ article.content|striptags|truncate(200) }}
     <a href={{ url }} lang={{ article.language }} class="read action-button">Read more</a>
   </article>

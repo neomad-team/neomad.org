@@ -1,12 +1,16 @@
 import datetime
 import hashlib
+import json
 import os
+import re
 import shutil
 
 from flask import Markup
 from bs4 import BeautifulSoup
-from mongoengine.queryset.manager import queryset_manager
 from langdetect import detect
+from mongoengine.errors import DoesNotExist
+import markdown
+import requests
 
 from core import db, app
 from core.helpers import slugify
@@ -18,7 +22,7 @@ from user.models import User
 ALLOWED_TAGS = {
         'a': ('href', 'name', 'target', 'title'), 'img': ('src', 'title'),
         'h2': ('id'), 'h3': ('id'), 'strong': (), 'em': (), 'i': (), 'b': (),
-         'p': (), 'br': (), 'blockquote': (),
+        'p': (), 'br': (), 'blockquote': (),
 }
 
 
@@ -37,17 +41,20 @@ class Article(db.Document):
     content = db.StringField(required=True)
     creation_date = db.DateTimeField(default=datetime.datetime.utcnow)
     slug = db.StringField(required=True, default='no-title')
-    author = db.ReferenceField(User)
+    author = db.ReferenceField(User, reverse_delete_rule='NULLIFY')
     language = db.StringField(min_length=2, max_length=2, default='en')
     images = db.ListField()
     publication_date = db.DateTimeField()
+    published = db.BooleanField(default=False)
 
     def __str__(self):
         return str(self.title)
 
-    @queryset_manager
-    def published(doc_cls, queryset):
-        return queryset.filter(publication_date__ne=None)
+    def get_author(self):
+        try:
+            return self.author
+        except DoesNotExist:
+            return User.objects.get(slug='neomad')
 
     def extract_images(self):
         """
@@ -97,8 +104,6 @@ class Article(db.Document):
         return parent
 
     def save(self, *args, **kwargs):
-        if not self.creation_date:
-            self.creation_date = datetime.datetime.utcnow()
         self.slug = slugify(self.title)
         is_new = not self.id
         # when new, the id must exist before extracting images
@@ -108,8 +113,51 @@ class Article(db.Document):
         self.title = Markup(self.title).striptags()
         self.content = clean_html(self.content, ALLOWED_TAGS)
         self.language = detect(self.content)
+        morph = self.morph()
+        if self != morph:
+            morph.pre_save(*args, **kwargs)
         return super(Article, self).save(*args, **kwargs)
 
+    def morph(self):
+        if('https://steemit.com/' in self.content):
+            match = re.match('.*(https://steemit.com/[^<\s.]*)', self.content)
+            url = match.groups()[0]
+            return SteemitArticle(article=self, url=url)
+        return self
+
     meta = {
-        'ordering': ['-creation_date']
+        'ordering': ['-publication_date'],
+        'indexes': ['-publication_date']
     }
+
+
+class SteemitArticle:
+    def __init__(self, article, url):
+        res = requests.get(url)
+        html = BeautifulSoup(res.text)
+        uri = re.match('https://steemit.com/.+/@(.*)', url).groups()[0]
+        content = html.body.find('script',
+                                 attrs={'type': 'application/json'}).text
+        self.article = article
+        self.data = json.loads(content)['global']['content'][uri]
+
+    @property
+    def title(self):
+        return self.data['title']
+
+    @property
+    def content(self):
+        return markdown.markdown(self.data['body'])
+
+    @property
+    def publication_date(self):
+        return datetime.datetime.strptime(self.data['created'],
+                                          '%Y-%m-%dT%H:%M:%S')
+
+    def __getattr__(self, prop):
+        return getattr(self.article, prop)
+
+    def pre_save(self, *args, **kwargs):
+        self.article.title = self.title
+        self.article.publication_date = self.publication_date
+        self.article.slug = slugify(self.title)

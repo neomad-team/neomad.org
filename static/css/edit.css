@@ -3,41 +3,6 @@ body {
   min-height: 100%;
 }
 
-form[edit] .toolbar {
-  position: fixed;
-  bottom: 5rem;
-  left: 0;
-  width: 100%;
-  min-height: 5rem;
-  background: #fefefe;
-  padding: 1rem 2rem;
-  text-align: right;
-  z-index: 2;
-  border-top: .3rem solid #eee;
-}
-form[edit] .toolbar .save {
-  background-color: #e7fee7;
-  color: #3ba53b;
-  border-color: #7fc27f;
-}
-form[edit] .toolbar .save:hover {
-  background-color: #c5f5c5;
-  color: #217421;
-  border-color: #4b8f4b;
-}
-
-form[edit] .toolbar .delete {
-  float: left;
-  background-color: #fee7e7;
-  color: #a24343;
-  border-color: #dab2b2;
-}
-form[edit] .toolbar .delete:hover {
-  background-color: #f2c3c3;
-  color: #771515;
-  border-color: #a25151;
-}
-
 [contenteditable=true] {
   position: relative;
   line-height: 1.5;
@@ -64,6 +29,12 @@ form[edit] .toolbar .delete:hover {
   visibility: inherit;
 }
 
+article h1 > input {
+  border: 0;
+  border-bottom: 1px dashed #333;
+  font: inherit;
+}
+
 figure {
   position: relative;
 }
@@ -87,6 +58,7 @@ figure:hover label {
 figure input {
   display: none;
 }
+
 main > header figure .loading {
   position: absolute;
   top: 30%;
@@ -100,35 +72,6 @@ main > header figure .loading.ready {
   display: none;
 }
 
-.ribbon-wrapper {
-  width: 13.5rem;
-  height: 10.8rem;
-  overflow: hidden;
-  position: fixed;
-  top: 6.6rem;
-  right: 0;
-}
-.ribbon {
-  font-weight: bold;
-  font-weight: 200;
-  font-family: sans-serif;
-  text-transform: capitalize;
-  color: #fff;
-  text-align: center;
-  transform: rotate(45deg);
-  position: relative;
-  padding: .7rem 0;
-  left: 1.5rem;
-  top: 1.5rem;
-  width: 16rem;
-  background: #279e6a;
-  box-shadow: 0 0 .3rem rgba(0,0,0,0.3);
-}
-.ribbon:hover {
-  color: #fff;
-  background: #00bf6b;
-}
-
 footer {
   position: fixed;
   width: 100%;
@@ -136,14 +79,6 @@ footer {
 }
 
 @media screen and (max-width: 620px) {
-  .ribbon-wrapper {
-    top: 4.6rem;
-  }
-  
-  form[edit] .toolbar {
-    padding: 1rem; 
-  }
-  
   .delete,
   .save {
     padding: 0 0.5rem;

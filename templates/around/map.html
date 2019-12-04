@@ -14,59 +14,53 @@
 {% endblock %}
 
 {% block main %}
-
-  <div id=wrap>
-    <div id=map></div>
-    <div id=cards-wrap>
-      <button id=open-form class=display-form type=button>
-        <p>Add a new place</p>
-        <svg viewBox="0 0 1000 1000">
-          <g transform="translate(0.000000,511.000000) scale(0.100000,-0.100000)">
-            <path d="M4423,4979.6c-625.3-97.6-1272.7-370.3-1773.9-749.5c-219.5-166.3-636.4-598.7-802.7-833.7c-516.6-727.3-765-1618.7-700.7-2505.6c97.6-1350.4,1028.8-2957.9,2678.5-4614.3c350.3-350.4,911.3-867,1102-1011.1l73.2-55.4l153,124.2c663,543.2,1530,1427.9,2102,2146.4C8877.6-481.7,9263.4,1247.8,8456.4,2875.3c-534.4,1079.8-1521.1,1833.7-2716.3,2075.4C5423,5015.1,4740.1,5030.6,4423,4979.6z M5456.3,3806.6C6545,3618.1,7416.4,2773.3,7638.1,1689.1c93.1-454.6,53.2-1006.7-102-1445.7c-175.2-487.8-507.8-935.7-933.5-1257.2c-208.4-157.4-638.6-365.9-893.6-434.6c-924.6-243.9-1902.5,6.6-2578.8,663c-1071,1035.5-1102,2734-71,3800.5c390.3,408,862.5,665.2,1419.1,780.5C4733.4,3846.5,5188,3853.2,5456.3,3806.6z"></path>
-            <path d="M4445.2,2265.6v-554.3h-565.4h-565.4v-554.3V602.6h565.4h565.4V37.2v-565.4h554.3h554.4V37.2v565.4h565.4h565.4l-4.5,549.9l-6.6,547.7l-558.8,6.7l-561,4.4v554.3v554.3h-554.4h-554.3V2265.6z"></path>
-          </g>
+  <div id=map></div>
+  <button id=open-form type=button>
+    <p>Add a new place</p>
+    <svg viewBox="0 0 1000 1000">
+      <g transform="translate(0.000000,511.000000) scale(0.100000,-0.100000)">
+        <path d="M4423,4979.6c-625.3-97.6-1272.7-370.3-1773.9-749.5c-219.5-166.3-636.4-598.7-802.7-833.7c-516.6-727.3-765-1618.7-700.7-2505.6c97.6-1350.4,1028.8-2957.9,2678.5-4614.3c350.3-350.4,911.3-867,1102-1011.1l73.2-55.4l153,124.2c663,543.2,1530,1427.9,2102,2146.4C8877.6-481.7,9263.4,1247.8,8456.4,2875.3c-534.4,1079.8-1521.1,1833.7-2716.3,2075.4C5423,5015.1,4740.1,5030.6,4423,4979.6z M5456.3,3806.6C6545,3618.1,7416.4,2773.3,7638.1,1689.1c93.1-454.6,53.2-1006.7-102-1445.7c-175.2-487.8-507.8-935.7-933.5-1257.2c-208.4-157.4-638.6-365.9-893.6-434.6c-924.6-243.9-1902.5,6.6-2578.8,663c-1071,1035.5-1102,2734-71,3800.5c390.3,408,862.5,665.2,1419.1,780.5C4733.4,3846.5,5188,3853.2,5456.3,3806.6z"></path>
+        <path d="M4445.2,2265.6v-554.3h-565.4h-565.4v-554.3V602.6h565.4h565.4V37.2v-565.4h554.3h554.4V37.2v565.4h565.4h565.4l-4.5,549.9l-6.6,547.7l-558.8,6.7l-561,4.4v554.3v554.3h-554.4h-554.3V2265.6z"></path>
+      </g>
+    </svg>
+  </button>
+  <div id=poi-form>
+    <form action="{{ url_for('api_spot_create') }}" method=post>
+      <button id=close-form class=display-form type=button>
+        <svg viewBox="0 0 128 128">
+          <circle cx="64" cy="64" r="64"/>
+          <path d="M100.3,90.4L73.9,64l26.3-26.4c0.4-0.4,0.4-1,0-1.4l-8.5-8.5c-0.4-0.4-1-0.4-1.4,0L64,54.1L37.7,27.8  c-0.4-0.4-1-0.4-1.4,0l-8.5,8.5c-0.4,0.4-0.4,1,0,1.4L54,64L27.7,90.3c-0.4,0.4-0.4,1,0,1.4l8.5,8.5c0.4,0.4,1.1,0.4,1.4,0L64,73.9  l26.3,26.3c0.4,0.4,1.1,0.4,1.5,0.1l8.5-8.5C100.7,91.4,100.7,90.8,100.3,90.4z"/>
         </svg>
       </button>
-      <div id=poi-cards></div>
-    </div>
-    <div id=poi-form>
-      <form action="{{ url_for('api_spot_create') }}" method=post>
-        <button id=close-form class=display-form type=button>
-          <svg viewBox="0 0 128 128">
-            <circle cx="64" cy="64" r="64"/>
-            <path d="M100.3,90.4L73.9,64l26.3-26.4c0.4-0.4,0.4-1,0-1.4l-8.5-8.5c-0.4-0.4-1-0.4-1.4,0L64,54.1L37.7,27.8  c-0.4-0.4-1-0.4-1.4,0l-8.5,8.5c-0.4,0.4-0.4,1,0,1.4L54,64L27.7,90.3c-0.4,0.4-0.4,1,0,1.4l8.5,8.5c0.4,0.4,1.1,0.4,1.4,0L64,73.9  l26.3,26.3c0.4,0.4,1.1,0.4,1.5,0.1l8.5-8.5C100.7,91.4,100.7,90.8,100.3,90.4z"/>
-          </svg>
-        </button>
-        <h2>Share your place</h2>
-        <ul>
-          <li>
-            <label for=name>Name<span>*</span></label>
-            <input name=name type=text required>
-          </li>
-          <li>
-            <label for=wifi>Wifi quality</label>
-            <input name=wifi min=0 max=5 value=3 type=range>
-          </li>
-          <li>
-            <label for=power>Power is available</label>
-            <input name=power type=checkbox>
-          </li>
-          <li>
-            <label for=category>Type of place</label>
-            <select name=category>
-                <option value=coworking>Coworking space</option>
-                <option value=cafe>Coffeeshop / Restaurant</option>
-                <option value=other>Library / Museum / other</option>
-            </select>
-          </li>
-          <li>
-            <label for=comment>Anything to say?</label>
-            <textarea name=comment type=text></textarea>
-          </li>
-        </ul>
-        <button id=save-form type=submit>Save this place</button>
-      </form>
-    </div>
+      <h2>Share your place</h2>
+      <ul>
+        <li>
+          <label for=name>Name<span>*</span></label>
+          <input name=name type=text required>
+        </li>
+        <li>
+          <label for=wifi>Wifi quality</label>
+          <input name=wifi min=0 max=5 value=3 type=range>
+        </li>
+        <li>
+          <label for=power>Power is available</label>
+          <input name=power type=checkbox>
+        </li>
+        <li>
+          <label for=category>Type of place</label>
+          <select name=category>
+              <option value=coworking>Coworking space</option>
+              <option value=cafe>Coffeeshop / Restaurant</option>
+              <option value=other>Library / Museum / other</option>
+          </select>
+        </li>
+        <li>
+          <label for=comment>Anything to say?</label>
+          <textarea name=comment type=text></textarea>
+        </li>
+      </ul>
+      <button id=save-form type=submit>Save this place</button>
+    </form>
   </div>
 {% endblock %}
 
@@ -74,25 +68,25 @@
   <script>
     const usersLocation = []
     {% for user in users %}
-      {% if user != current_user %}
-        usersLocation.push({
-          name: '{{ user.username }}',
-          position: {{ user.current_location }},
-          link: "{{ url_for_user(user) }}",
-          avatar: '{{ user.avatar }}'
-        })
-      {% endif %}
+      usersLocation.push({
+        name: '{{ user.username or "anonymous" }}',
+        position: {{ user.current_location or [] }},
+        link: "{{ url_for_user(user) }}",
+        avatar: '{{ user.avatar }}',
+        about: `{{ user.about }}`,
+      })
     {% endfor %}
 
     let userID = '{{ current_user and current_user.id or "" }}'
+    let currentLatLng = []
 
     {% if current_user and current_user.allow_community %}
-      const currentLatLng = {{ current_user.current_location or [] }}
+      currentLatLng = {{ current_user.current_location }}
     {% else %}
       alert('localization', 'You do not allow localization, see you profile setting or use map controller')
     {% endif %}
   </script>
   <script src={{ url_for('static', filename='js/map.js') }}></script>
   <script src={{ url_for('static', filename='js/around-map.js') }}></script>
-  <script src={{ url_for('static', filename='components/App.js') }}></script>
+  <script src={{ url_for('static', filename='js/poi-form.js') }}></script>
 {% endblock %}

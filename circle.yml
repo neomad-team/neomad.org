@@ -1,6 +1,8 @@
 machine:
+  pre:
+    - cd /opt/circleci/.pyenv; git pull   
   python:
-    version: 3.5.2
+    version: 3.6.6
   environment:
     SETTINGS: settings.test.py
 

@@ -9,7 +9,7 @@ willing to _nomadize_ themselves.
 ## Requirements
 
 - Git
-- Python3.5 or above
+- Python3.6 or above
 - [Docker-compose](https://docs.docker.com/compose/)
 
 > If you don't have/want to use docker, you can process to the
@@ -83,9 +83,15 @@ Activate your python virtual environment (with `source venv/bin/activate`).
 Then launch your test with `python -m unittest`.
 
 
-## Extra commands
+## Deploying
 
-### Work on around page
+Deployment is processed through the SSH command `ssh neomad`.
+You should ensure that your ssh_config is configured prior to continue.
 
-Displaying _/around/_ page depends on [Preact](https://preactjs.com/).
-You may build the assets running `npm run watch` when developing or `npm run build` for running the project.
+Run the following task to deploy in _preprod_:
+```sh
+make prepare-deploy env=preprod
+make deploy preprod
+```
+
+replace `preprod` with `prod` for running in production.

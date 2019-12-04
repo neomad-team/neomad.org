@@ -63,6 +63,13 @@ class User(UserMixin, db.Document):
     def __str__(self):
         return str(self.username or 'Unknown')
 
+    def to_dict(self):
+        data = self.to_mongo()
+        data['id'] = str(self.id)
+        del data['_id']
+        del data['password']
+        return data
+
     def save(self, *args, **kwargs):
         if self.slug is None:
             try:

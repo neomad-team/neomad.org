@@ -7,6 +7,8 @@
 <meta property=og:url content="{{ request.url }}">
 {% block extra_og %}{% endblock %}
 
+<link rel="manifest" href={{ url_for('static', filename='webmanifest.json') }}>
+
 <link rel=stylesheet href={{ url_for('static', filename='css/main.css') }}>
 <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
 <link href="https://fonts.googleapis.com/css?family=Raleway:600|Crimson+Text|Libre+Baskerville|Libre+Franklin|Poppins|Lora|Roboto|Oxygen|Open+Sans:600" rel=stylesheet>
@@ -27,6 +29,7 @@
     </div>
     <ul class=profile>
       <li><a href={{ url_for_user(current_user) }}>Profile</a></li>
+      <li><a href={{ url_for_trips(current_user) }}>Trips</a></li>
       <li><a href={{ url_for('privacy') }}>Privacy settings</a></li>
       <li><a href={{ url_for('logout') }}>Logout</a></li>
     </ul>

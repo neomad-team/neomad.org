@@ -12,6 +12,8 @@ from auth import views
 from around import views
 from trips import views
 
+now = datetime.datetime.utcnow()
+
 
 class ArticleTest(TestCase):
     def setUp(self):
@@ -31,6 +33,7 @@ class ArticleTest(TestCase):
         Article(title='A title for article',
                 content='<p>content</p>',
                 publication_date=datetime.datetime.utcnow(),
+                published=True,
                 author=self.user).save()
         result = self.client.get('/articles/')
         self.assertIn(b'A title for article', result.data)
@@ -53,7 +56,7 @@ class ArticleTest(TestCase):
         article.author = self.user
         article.save()
         result = self.client.get('/@emailtest/{}-{}/'.format(article.slug,
-                                                            str(article.id)),
+                                                             str(article.id)),
                                  follow_redirects=True)
         self.assertEqual(result.status_code, 200)
 
@@ -172,13 +175,62 @@ class ArticleTest(TestCase):
     def test_article_appear_by_default_in_articles(self):
         Article(title='A title for an article', content='<p>content</p>',
                 publication_date=datetime.datetime.utcnow(),
+                published=True,
                 author=self.user).save()
         result = self.client.get('/articles/')
         self.assertIn(b'A title for an article', result.data)
 
     def test_unpublished_article_does_not_appear_in_articles(self):
         Article(title='title', content='<p>content</p>',
+                published=False,
                 publication_date=None,
                 author=self.user).save()
         result = self.client.get('/articles/')
         self.assertNotIn(b'<article class=preview>', result.data)
+        
+    def test_unpublished_article_with_date_does_not_appear_in_articles(self):
+        Article(title='title', content='<p>content</p>',
+                publication_date=datetime.datetime.utcnow(),
+                published=False,
+                author=self.user).save()
+        result = self.client.get('/articles/')
+        self.assertNotIn(b'<article class=preview>', result.data)
+
+    def test_article_replace_embedded_video(self):
+        article = Article(title='title', content='View'
+                'https://www.youtube.com/watch?v=Fa4cRMaTDUI \n'
+                'and https://youtu.be/J2M4coM-u6Y now! \n'
+                'See http://neomad.org/@user for more.',
+                publication_date=now,
+                author=self.user).save()
+        response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
+                                   f'{article.id}/')
+
+        self.assertIn(
+            b'src=https://www.youtube-nocookie.com/embed/Fa4cRMaTDUI',
+            response.get_data()
+        )
+        self.assertIn(
+            b'src=https://www.youtube-nocookie.com/embed/J2M4coM-u6Y',
+            response.get_data()
+        )
+
+    def test_article_preserves_non_media_urls(self):
+        article = Article(title='title',
+                          content='See http://neomad.org/@user for more.',
+                          publication_date=now,
+                          author=self.user).save()
+        response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
+                                   f'{article.id}/')
+        self.assertIn(b'See http://neomad.org/@user for', response.get_data())
+
+    def test_parse_steemit(self):
+        url = 'https://steemit.com/travel/@silkroad40/a-set-of-pictures-from-turkmenistan-and-bukhara-uzbekistan-ein-paar-bilder-von-philipe-s-reise-durch-turkmenistan-und-bukhara'
+        article = Article(title='Steemit article', content=f'<p>{url}</p>',
+                          published=True, publication_date=now,
+                          author=self.user).save()
+        response = self.client.get(f'/@{self.user.slug}/{article.slug}-'
+                                   f'{article.id}/')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'<p>Philipe drove', response.get_data())
+        self.assertIn(b'>18 July, 2018<', response.get_data())
