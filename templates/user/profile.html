@@ -53,10 +53,11 @@
     </section>
     <nav>
       {% if user == current_user -%}
-        <a class=button href={{ url_for('profile_edit') }}>Edit my profile</a>
+        <a class="action-button settings" href={{ url_for('profile_edit') }}>Edit my profile</a>
         <a class="action-button trips" href={{ url_for_trips(user) }}>View my trips</a>
+      {%- else %}
+        <a class="action-button trips" href={{ url_for_trips(user) }}>View {{ user }}'s trips</a>
       {%- endif %}
-      <a class="action-button trips" href={{ url_for_trips(user) }}>View {{ user }}'s trips</a>
     </nav>
   </div>
 </header>
