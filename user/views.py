@@ -71,7 +71,8 @@ def profile_save():
         Path.unlink(user.image_path)
         user.image_path = None
     if request.files['avatar']:
-        ouput = f'{app.config.get('AVATARS_PATH')}/{user.id}'
+        avatars_path = app.config.get('AVATARS_PATH')
+        ouput = f'{avatars_path}/{user.id}'
         save_image(request.files['avatar'], output, (200, 200))
         user.image_path = ouput
     user.save()
@@ -83,7 +84,8 @@ def profile_save():
 def profile_edit_avatar():
     try:
         user = User.objects.get(id=current_user.id)
+        avatars_path = app.config.get('AVATARS_PATH')
+        save_image(request.files['avatar'],
+            f'{avatars_path}/{user.id}', (200, 200))
     except User.DoesNotExist:
         abort(404)
-    save_image(request.files['avatar'],
-               f'{app.config.get('AVATARS_PATH')}/{user.id}', (200, 200))
