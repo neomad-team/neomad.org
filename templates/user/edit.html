@@ -22,9 +22,12 @@
             onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
           <caption>
             <input type=file name=avatar>
-            {% if user.avatar %}
-            <label><input type=checkbox name=delete value=1>Remove this picture</label>
-            {% endif %}
+              {% if user.avatar %}
+                <label>Edit your picture</label>
+              {% else %}
+                <label>Add your picture</label>
+              {% endif %}
+            </input>
           </caption>
         </figure>
 
@@ -55,7 +58,8 @@
       </div>
 
       <div class=toolbar>
-        <input class=save type=submit value="Save my profile">
+        <a class="action-button" href={{ url_for_user(current_user) }}>Go back to profile</a>
+        <button type=submit>Save my profile</button>
       </div>
     </form>
   </header>
