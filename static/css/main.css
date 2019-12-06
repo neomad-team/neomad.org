@@ -22,7 +22,7 @@ body {
   font-size: 1.7rem;
   line-height: 1.5;
   margin: 0;
-  color: #000000;
+  color: #555;
   font-weight: 400;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
@@ -44,16 +44,21 @@ a:hover {
 body > header {
   position: fixed;
   top: 0;
-  width: 100%;
   padding: 1rem;
   background-color: #fff;
   font-family: Arial, Helvetica, sans-serif;
   box-shadow: 0 .2rem .2rem rgba(50, 50, 50, .2);
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   z-index: 9;
+  width: 100%;
 }
+body > header .wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
 body > header h1 {
   margin: 0;
   font-weight: 300;
@@ -158,11 +163,22 @@ footer {
   border-top: .3rem solid #eee;
   background-color: #fff;
   z-index: 1;
+  font-size: 1.5rem;
 }
-footer nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+footer .wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+footer h2 {
+  font-size: 1.8rem;
+  margin-bottom: .5rem;
+}
+footer a {
+  display: block;
+  margin-left: 1rem;
+}
+footer a:before {
+  content: '• ';
 }
 
 /* Main */
@@ -270,17 +286,20 @@ button:hover,
 .action-button {
   width: auto;
   text-align: center;
-  padding: 0.5rem 1.5rem;
-  border: 0.125rem solid #279e6a;
+  padding: 0.7rem 2rem;
+  border: 1px solid #d2ded8;
   color: #279e6a;
   background-color: #fff;
   border-radius: 0.5rem;
   transition: all .3s ease;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 3px rgba(0,0,0,.1);
 }
 .action-button:hover {
   color: #fff;
-  background-color: rgba(17, 195, 116, 0.8);
-  border: 0.125rem solid rgba(17, 195, 116, 0.8);
+  background-color: rgba(22, 158, 98, 0.8);
+  border-color: rgba(22, 158, 98, 0.8);
 }
 
 /* Notification */
@@ -533,7 +552,7 @@ button:hover,
   }
 
   footer {
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding: 2rem 0;
   }
 }
