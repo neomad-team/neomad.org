@@ -22,7 +22,10 @@
               height=100
               onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
             <caption>
-              <label><input type=file name=avatar></label>
+              <label>
+                <input type=file name=avatar>
+                {% if user.avatar %}Edit{% else %}Add{% endif %} your picture
+              </label>
             </caption>
           </figure>
           {% if user.has_avatar %}
