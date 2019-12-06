@@ -10,14 +10,14 @@ main {
 }
 
 .hero {
-background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/home.jpg');
-background-position: bottom center;
-background-repeat: no-repeat;
-background-size: cover;
-height: 70rem;
-margin: 10rem 0 8rem;
-padding: 10rem 10rem;
-position: relative;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/home.jpg');
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 70rem;
+  margin: 10rem 0 8rem;
+  padding: 10rem 10rem;
+  position: relative;
 }
 .hero > h1,
 .hero > h2 {
@@ -28,6 +28,7 @@ position: relative;
   font-size: 8rem;
   line-height: 10rem;
 }
+
 #join-us {
   position: relative;;
   top: 5rem;
@@ -69,13 +70,51 @@ position: relative;
   right: 10.5rem;
 }
 
-#features,
-.articles,
-.profiles,
-footer {
-  position: relative;
-  top: -8.5rem;
+main > section:not(.hero) {
+  padding: 2rem;
 }
+main > section:not(.hero) .wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+}
+main > section article {
+  flex: 1;
+  max-width: 600px;
+}
+main > section article h3 {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  margin-bottom: 0;
+  margin-top: 7rem;
+}
+main > section article ul {
+  list-style: none;
+}
+main > section aside {
+  width: 350px;
+  overflow: hidden;
+  height: 325px;
+}
+main > section article + aside {
+  margin-left: 10rem;
+}
+main > section aside + article {
+  margin-left: 10rem;
+}
+main > section article footer {
+  margin-top: 5rem;
+  text-align: center;
+}
+main > section article footer.row {
+  justify-content: space-around;
+}
+
+main > section img {
+  width: 100%;
+}
+
 
 #features h2,
 .articles > h2,
@@ -85,9 +124,6 @@ footer {
   position: relative;
 }
 
-#features {
-  padding: 0;
-}
 #features ul {
   list-style-type: none;
   display: flex;
@@ -163,7 +199,7 @@ footer {
   width: 20rem;
 }
 
-footer {
+body > footer {
   position: relative;
   top: -9rem;
 }

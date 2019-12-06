@@ -158,26 +158,26 @@ nav .profile.active li {
 }
 
 /* Footer */
-footer {
+body > footer {
   padding: 3rem 0;
   border-top: .3rem solid #eee;
   background-color: #fff;
   z-index: 1;
   font-size: 1.5rem;
 }
-footer .wrapper {
+body > footer .wrapper {
   max-width: 1200px;
   margin: 0 auto;
 }
-footer h2 {
+body > footer h2 {
   font-size: 1.8rem;
   margin-bottom: .5rem;
 }
-footer a {
+body > footer a {
   display: block;
   margin-left: 1rem;
 }
-footer a:before {
+body > footer a:before {
   content: '• ';
 }
 
@@ -297,9 +297,17 @@ button:hover,
   box-shadow: 0 2px 3px rgba(0,0,0,.1);
 }
 .action-button:hover {
+  background-color: rgba(0,0,0, 0.02);
+  box-shadow: 0 2px 3px rgba(0,0,0,.3);
+  color: #1c7d53;
+}
+.action-button.primary {
   color: #fff;
   background-color: rgba(22, 158, 98, 0.8);
   border-color: rgba(22, 158, 98, 0.8);
+}
+.action-button.primary:hover {
+  background-color: rgba(22, 158, 98, 1);
 }
 
 /* Notification */
@@ -554,7 +562,7 @@ button:hover,
     margin-left: 0;
   }
 
-  footer {
+  body > footer {
     font-size: 1rem;
     padding: 2rem 0;
   }
