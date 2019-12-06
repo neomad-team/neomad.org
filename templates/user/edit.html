@@ -47,11 +47,11 @@
         </section>
 
         <section class=social>
-          {% for name in ['Twitter', 'Facebook', 'Instagram'] -%}
-            {% set property = name|lower %}
-            <span class="edit {{ property }}"><input name=socials.{{ property }} value="{{ user.socials[property] }}" placeholder="My {{ name }} URL"></span>
+          {% for social in user.socials -%}
+            <span class="edit {{ social }}">
+              <input name=socials.{{ social }} value="{{ user.socials[social] }}" placeholder="My {{ social }} link">
+            </span>
           {%- endfor %}
-          <span class="edit email"><input name=socials.email value="{{ user.socials.email }}" placeholder="My contact email"></span>
         </section>
 
         <nav>
