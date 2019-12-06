@@ -5,6 +5,7 @@ from flask import render_template, request, abort, redirect, url_for
 from flask_login import current_user, login_required
 
 from core import app
+from core.helpers import url_for_user
 from core.utils import save_image
 from blog.models import Article
 from .models import User
@@ -16,7 +17,6 @@ def profile(username):
         user = User.objects.get(slug=username)
     except User.DoesNotExist:
         abort(404)
-
     if user == current_user:
         articles = Article.objects(author=user)
     else:
@@ -56,27 +56,25 @@ def profile_edit():
 @app.route('/profile/', methods=['post'])
 @login_required
 def profile_save():
-    permitted_fields = ['username', 'about', 'allow_community', 'socials']
+    data_fields = ['username', 'about', 'allow_community']
     user = User.objects.get(id=current_user.id)
-    socials = user.socials or {}
+    for field in data_fields:
+        value = request.form.get(field)
+        setattr(user, field, value)
+    if not user.socials:
+        user.socials = {}
     for field, value in request.form.items():
-        if field not in permitted_fields and not field.startswith('socials.'):
-            return f'Property {field} cannot be modified.', 403
         if field.startswith('socials.'):
-            socials[field[len('socials.'):]] = value
-        else:
-            setattr(user, field, value)
-    user.socials = socials
-    if request.form['delete']:
-        Path.unlink(user.image_path)
+            user.socials[field[len('socials.'):]] = value
+    if request.form.get('delete'):
+        Path.unlink(Path(f"{app.config.get('AVATARS_PATH')}/{user.id}"))
         user.image_path = None
-    if request.files['avatar']:
-        avatars_path = app.config.get('AVATARS_PATH')
-        ouput = f'{avatars_path}/{user.id}'
-        save_image(request.files['avatar'], output, (200, 200))
-        user.image_path = ouput
+    if request.files.get('avatar'):
+        path = f"{app.config.get('AVATARS_PATH')}/{user.id}"
+        save_image(request.files['avatar'], path, (200, 200))
+        user.image_path = path
     user.save()
-    return redirect(url_for('profile', username=user.username))
+    return redirect(url_for_user(user))
 
 
 @app.route('/profile/avatar/', methods=['patch'])
