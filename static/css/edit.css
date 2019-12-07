@@ -15,22 +15,18 @@ form.profile-intro {
   justify-content: center;
   flex-wrap: nowrap;
 }
-
-form .avatar {
+form.profile-intro .avatar {
   margin-right: 2rem;
 }
-
-form .save {
+form.profile-intro .save {
   height: 5rem;
   width: 100%;
 }
-
-form section {
+form.profile-intro section {
   max-width: 50rem;
 }
-
-input,
-textarea {
+form.profile-intro input,
+form.profile-intro textarea {
   font-family: inherit;
   font-size: 1.7rem;
   color: #333;
@@ -44,32 +40,35 @@ textarea {
   height: 5rem;
   cursor: pointer;
 }
-
-textarea {
+form.profile-intro textarea {
   height: 10rem;
 }
-
-input:focus,
-input:active,
-textarea:focus,
-textarea:active {
+form.profile-intro input:focus,
+form.profile-intro input:active,
+form.profile-intro textarea:focus,
+form.profile-intro textarea:active {
   cursor: text;
   color: inherit;
-  box-shadow: 0 0 .2rem .1rem #00d1b2;
+  box-shadow: 0 0 .2rem .1rem #00bf6b;
+  border-bottom: 0;
+  border-radius: .5rem;
 }
-
-.social .edit {
+form.profile-intro .social .edit {
+  display: flex;
+  align-content: center;
+  width: 100%;
   margin: 0 0 2rem;
 }
-
-.social .edit input {
-  margin: 0;
-}
-
-.social .edit::before {
+form.profile-intro .social .edit::before {
   color: #00bf6b;
+  margin: 0 1rem;
+  position: absolute;
 }
-
+form.profile-intro .social .edit input {
+  margin: 0;
+  padding-left: 5rem;
+  width: 100%;
+}
 
 [contenteditable=true] {
   position: relative;
