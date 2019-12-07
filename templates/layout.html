@@ -12,9 +12,7 @@
 <link rel=stylesheet href={{ url_for('static', filename='css/main.css') }}>
 <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
 <link href="https://fonts.googleapis.com/css?family=Raleway:600|Crimson+Text|Libre+Baskerville|Libre+Franklin|Poppins|Lora|Roboto|Oxygen|Open+Sans:600" rel=stylesheet>
-{% if edit %}
-<link rel=stylesheet href={{ url_for('static', filename='css/edit.css') }}>
-{% endif %}
+
 {% block extra_css %}{% endblock %}
 
 <header>

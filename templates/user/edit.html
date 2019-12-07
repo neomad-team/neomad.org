@@ -4,13 +4,13 @@
 {% block title %}My profile{% endblock %}
 
 {% block extra_css %}
-<link rel=stylesheet href={{ url_for('static', filename='css/edit.css') }}>
 <link rel=stylesheet href={{ url_for('static', filename='css/profile.css') }}>
 <link rel=stylesheet href={{ url_for('static', filename='css/_article_list.css') }}>
+<link rel=stylesheet href={{ url_for('static', filename='css/edit.css') }}>
 {% endblock %}
 
 {% block main -%}
-  <form class="profile-intro" method=post action={{ url_for('profile_save') }} enctype=multipart/form-data>
+  <form class=profile-intro method=post action={{ url_for('profile_save') }} enctype=multipart/form-data>  
     <aside class=avatar>
       <figure>
         <img class=avatar-img
@@ -34,14 +34,6 @@
     <section>
       <input name=username value="{{ user.username }}" placeholder="Insert a username">
       <textarea name=about placeholder="Tell a little about yourself">{{ user.about|htmlnewline }}</textarea>
-      {% if not user.allow_community %}
-      <p>
-        <a class=private href={{ url_for('privacy') }}>
-          Community mode is disabled.<br>
-          your contents are restricted and private.<br>
-        </a>
-      </p>
-      {% endif %}
       
       <article class=social>
         {% for social in user.socials -%}
