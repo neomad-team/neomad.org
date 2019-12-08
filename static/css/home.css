@@ -83,32 +83,29 @@ main > section article {
   max-width: 600px;
 }
 main > section article h3 {
-  text-align: center;
   text-transform: uppercase;
   font-size: 2.5rem;
-  margin-bottom: 0;
-  margin-top: 7rem;
+  margin-bottom: 1rem;
+  margin-top: 6.5rem;
 }
 main > section article ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 main > section aside {
-  width: 350px;
+  width: 375px;
   overflow: hidden;
-  height: 325px;
-}
-main > section article + aside {
-  margin-left: 10rem;
+  height: 350px;
 }
 main > section aside + article {
-  margin-left: 10rem;
+  margin-left: 8rem;
 }
 main > section article footer {
   margin-top: 5rem;
-  text-align: center;
 }
-main > section article footer.row {
-  justify-content: space-around;
+main > section article footer a:not(:last-of-type) {
+  margin-right: 3rem;
 }
 
 main > section img {
@@ -116,7 +113,6 @@ main > section img {
 }
 
 
-#features h2,
 .articles > h2,
 .profiles > h2 {
   font-size: 3.5rem;
@@ -142,9 +138,6 @@ main > section img {
 }
 #features > ul > li:nth-child(2) {
   background-color: #fafafa;
-}
-#features .action-button {
-  margin: 4rem 9rem 1rem;
 }
 
 .articles {

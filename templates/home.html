@@ -22,6 +22,7 @@
 
   <section id=features>
     <div class=wrapper>
+      <aside><img src=/static/images/home/van.svg> </aside>
       <article>
         <h3>Read and share Neomad's stories</h3>
         <ul>
@@ -29,18 +30,17 @@
           <li>Give others your good tips for a better journey,</li>
           <li>Whatever your level of nomadism, there are things to give and take.</li>
         </ul>
-        <footer class=row>
+        <footer>
           <a href={{ url_for('article_list') }} class="action-button primary">Read from Neomads</a>
           <a href={{ url_for('signup') }} class="action-button primary">Write your stories</a>
         </footer>
       </article>
-      <aside><img src=/static/images/home/van.svg></aside>
     </div>
   </section>
 
   <section>
     <div class=wrapper>
-      <aside><img src=/static/images/home/trips.svg></aside>
+      <aside><img src=/static/images/home/trips.svg> </aside>
       <article>
         <h3>Track your trips</h3>
         <ul>
@@ -50,13 +50,15 @@
         </ul>
 
         <footer>
-        <a href={{ url_for('signup') }} class="action-button primary">Start sharing your trips</a>
+          <a href={{ url_for('signup') }} class="action-button primary">Start sharing your trips</a>
         </footer>
       </article>
+      </div>
   </section>
 
   <section>
     <div class=wrapper>
+      <aside><img src=/static/images/home/coffee.svg> </aside>
       <article>
         <h3>Find out what is around you</h3>
         <ul>
@@ -68,7 +70,6 @@
           <a href={{ url_for('around') }} class="action-button primary">What is around you</a>
         </footer>
       </article>
-      <aside><img src=/static/images/home/coffee.svg></aside>
     </div>
   </section>
 
