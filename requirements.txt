@@ -6,7 +6,7 @@ langdetect==1.0.7
 Markdown==2.6.11
 mongoengine==0.15.3
 Pillow==6.2.1
-requests==2.11.1
+requests==2.20.0
 
 # Deployment
 gunicorn
