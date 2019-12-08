@@ -174,11 +174,17 @@ body > footer h2 {
   margin-bottom: .5rem;
 }
 body > footer a {
-  display: block;
-  margin-left: 1rem;
+  height: 19px;
+  display: inline-block;
+  color: inherit;
 }
-body > footer a:before {
-  content: '• ';
+body > footer a:not(:last-of-type) {
+  margin-right: 2rem;
+}
+body > footer a img {
+  height: 100%;
+  vertical-align: bottom;
+  margin-right: .5rem;
 }
 
 /* Main */
