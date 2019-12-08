@@ -422,11 +422,14 @@ button:hover,
 }
 
 .toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  min-height: 10rem;
+  min-height: 7rem;
   background: #fefefe;
   padding: 1rem 2rem;
   text-align: right;

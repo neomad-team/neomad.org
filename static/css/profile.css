@@ -128,12 +128,15 @@ main > header {
   flex-wrap: wrap;
   order: 2;
 }
+.profile-intro nav a {
+  margin-right: 3rem;
+}
+.profile-intro nav a:last-of-type {
+  margin-right: 0;
+}
 .profile-intro nav .settings,
 .profile-intro nav .trips {
   margin-bottom: 2rem; 
-}
-.profile-intro nav a:first-child {
-  margin-right: 3rem;
 }
 .profile-intro nav .settings::before,
 .profile-intro nav .trips::before {

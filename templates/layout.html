@@ -12,9 +12,7 @@
 <link rel=stylesheet href={{ url_for('static', filename='css/main.css') }}>
 <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
 <link href="https://fonts.googleapis.com/css?family=Raleway:600|Crimson+Text|Libre+Baskerville|Libre+Franklin|Poppins|Lora|Roboto|Oxygen|Open+Sans:600" rel=stylesheet>
-{% if edit %}
-<link rel=stylesheet href={{ url_for('static', filename='css/edit.css') }}>
-{% endif %}
+
 {% block extra_css %}{% endblock %}
 
 <header>
@@ -43,13 +41,7 @@
 
 <main>{% block main %}{% endblock %}</main>
 
-<footer>
-  <nav class=wrapper>
-    <h2>About Neomad</h2>
-    <a href=mailto:contact+website@neomad.org>Contact the Team</a>
-    <a href=https://github.com/neomad-team/neomad.org title="View the source of this project on Github">Read the Source</a>
-  </nav>
-</footer>
+{% block footer %}{% endblock %}
 
 <script src={{ url_for('static', filename='js/utils.js') }}></script>
 <script src={{ url_for('static', filename='js/main.js') }}></script>

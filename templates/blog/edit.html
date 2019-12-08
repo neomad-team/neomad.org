@@ -10,7 +10,7 @@
 
 {% block main -%}
 {% set url = url_for('article_edit', id=article.id) if article.id else url_for('article_create') %}
-<form method=post action={{ url }}>
+<form class=article method=post action={{ url }}>
 
   <article lang={{ article.language }}>
     <section class=meta>

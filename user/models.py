@@ -40,6 +40,7 @@ class User(UserMixin, db.Document):
     allow_community = db.BooleanField()
     current_location = GeoPointField()
     socials = db.DictField()
+    image_path = db.ImageField(size=(600, 400), thumbnail=(200, 200))
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -52,8 +53,9 @@ class User(UserMixin, db.Document):
     def avatar(self):
         return '{}/{}'.format(app.config.get('AVATARS_URL'), self.id)
 
-    def clean_username(self):
-        self.username = Markup(self.username).striptags()
+    @property
+    def has_avatar(self):
+        return bool(self.image_path)
 
     def clean_about(self):
         self.about = (Markup(self.about.replace('<br>', '\^n^'))
