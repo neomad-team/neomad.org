@@ -10,14 +10,14 @@ main {
 }
 
 .hero {
-background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/home.jpg');
-background-position: bottom center;
-background-repeat: no-repeat;
-background-size: cover;
-height: 70rem;
-margin: 10rem 0 8rem;
-padding: 10rem 10rem;
-position: relative;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/home.jpg');
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 70rem;
+  margin: 10rem 0 8rem;
+  padding: 10rem 10rem;
+  position: relative;
 }
 .hero > h1,
 .hero > h2 {
@@ -28,6 +28,7 @@ position: relative;
   font-size: 8rem;
   line-height: 10rem;
 }
+
 #join-us {
   position: relative;;
   top: 5rem;
@@ -69,15 +70,49 @@ position: relative;
   right: 10.5rem;
 }
 
-#features,
-.articles,
-.profiles,
-footer {
-  position: relative;
-  top: -8.5rem;
+main > section:not(.hero) {
+  padding: 2rem;
+}
+main > section:not(.hero) .wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+}
+main > section article {
+  flex: 1;
+  max-width: 600px;
+}
+main > section article h3 {
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  margin-top: 6.5rem;
+}
+main > section article ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+main > section aside {
+  width: 375px;
+  overflow: hidden;
+  height: 350px;
+}
+main > section aside + article {
+  margin-left: 8rem;
+}
+main > section article footer {
+  margin-top: 5rem;
+}
+main > section article footer a:not(:last-of-type) {
+  margin-right: 3rem;
 }
 
-#features h2,
+main > section img {
+  width: 100%;
+}
+
+
 .articles > h2,
 .profiles > h2 {
   font-size: 3.5rem;
@@ -85,9 +120,6 @@ footer {
   position: relative;
 }
 
-#features {
-  padding: 0;
-}
 #features ul {
   list-style-type: none;
   display: flex;
@@ -106,9 +138,6 @@ footer {
 }
 #features > ul > li:nth-child(2) {
   background-color: #fafafa;
-}
-#features .action-button {
-  margin: 4rem 9rem 1rem;
 }
 
 .articles {
@@ -160,10 +189,9 @@ footer {
 }
 .profiles .action-button {
   margin: 0 auto;
-  width: 20rem;
 }
 
-footer {
+body > footer {
   position: relative;
   top: -9rem;
 }

@@ -16,25 +16,27 @@
 {% block extra_css %}{% endblock %}
 
 <header>
-  <h1><a href=/>Neomad</a></h1>
-  <button class=mobile-nav>Menu</button>
-  <nav class=mobile-close>
-    <a href={{ url_for('article_list') }} title="Read Neomad's adventures">Read</a>
-    <a href={{ url_for('around') }}>Around me</a>
-    {% if current_user and current_user.is_authenticated %}
-    <div class=avatar>
-      <img src={{ current_user.avatar }} width=35 height=35 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt>
-    </div>
-    <ul class=profile>
-      <li><a href={{ url_for_user(current_user) }}>Profile</a></li>
-      <li><a href={{ url_for_trips(current_user) }}>Trips</a></li>
-      <li><a href={{ url_for('privacy') }}>Privacy settings</a></li>
-      <li><a href={{ url_for('logout') }}>Logout</a></li>
-    </ul>
-    {% else %}
-    <a href={{ url_for('login') }} class=login>Log in</a>
-    {% endif %}
-  </nav>
+  <div class=wrapper>
+    <h1><a href=/>Neomad</a></h1>
+    <button class=mobile-nav>Menu</button>
+    <nav class=mobile-close>
+      <a href={{ url_for('article_list') }} title="Read Neomad's adventures">Read</a>
+      <a href={{ url_for('around') }}>Around me</a>
+      {% if current_user and current_user.is_authenticated %}
+      <div class=avatar>
+        <img src={{ current_user.avatar }} width=35 height=35 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt>
+      </div>
+      <ul class=profile>
+        <li><a href={{ url_for_user(current_user) }}>Profile</a></li>
+        <li><a href={{ url_for_trips(current_user) }}>Trips</a></li>
+        <li><a href={{ url_for('privacy') }}>Privacy settings</a></li>
+        <li><a href={{ url_for('logout') }}>Logout</a></li>
+      </ul>
+      {% else %}
+      <a href={{ url_for('login') }} class=login>Log in</a>
+      {% endif %}
+    </nav>
+  </div>
 </header>
 
 <main>{% block main %}{% endblock %}</main>
