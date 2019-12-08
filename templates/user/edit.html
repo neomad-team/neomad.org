@@ -1,0 +1,49 @@
+{% from 'blog/macros.html' import article_list with context %}
+{% extends 'layout.html' %}
+
+{% block title %}My profile{% endblock %}
+
+{% block extra_css %}
+<link rel=stylesheet href={{ url_for('static', filename='css/profile.css') }}>
+<link rel=stylesheet href={{ url_for('static', filename='css/_article_list.css') }}>
+<link rel=stylesheet href={{ url_for('static', filename='css/edit.css') }}>
+{% endblock %}
+
+{% block main -%}
+  <form class=profile-intro method=post action={{ url_for('profile_save') }} enctype=multipart/form-data>  
+    <aside class=avatar>
+      <figure>
+        <img class=avatar-img
+          name=avatar
+          src={{ user.avatar }}
+          width=100
+          height=100
+          onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
+        <caption>
+          <label>
+            <input type=file name=avatar>
+            {% if user.avatar %}Edit{% else %}Add{% endif %} your picture
+          </label>
+        </caption>
+      </figure>
+      {% if user.has_avatar %}
+      <label for=avatar-delete><input type=checkbox id=avatar-delete name=delete value=1>Remove this picture</label>
+      {% endif %}
+    </aside>
+
+    <section>
+      <input name=username value="{{ user.username }}" placeholder="Insert a username">
+      <textarea name=about placeholder="Tell a little about yourself">{{ user.about|htmlnewline }}</textarea>
+      
+      <article class=social>
+        {% for social in user.socials -%}
+          <span class="edit {{ social }}">
+            <input name=socials.{{ social }} value="{{ user.socials[social] }}" placeholder="My {{ social }} link">
+          </span>
+        {%- endfor %}
+      </article>
+      
+      <button class="action-button save" type=submit>Save my profile</button>
+    </section>
+  </form>
+{% endblock %}

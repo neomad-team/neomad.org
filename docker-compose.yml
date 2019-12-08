@@ -13,7 +13,7 @@ services:
       - "27017:27017"
 
   web:
-    build: docker
+    build: .
     links:
       - db
     volumes:

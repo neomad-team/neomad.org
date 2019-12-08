@@ -1,10 +1,12 @@
+from pathlib import Path
 from datetime import datetime
 
-from flask import render_template, request, abort, redirect
+from flask import render_template, request, abort, redirect, url_for
 from flask_login import current_user, login_required
 
 from core import app
-from core.utils import save_base64_image
+from core.helpers import url_for_user
+from core.utils import save_image
 from blog.models import Article
 from .models import User
 
@@ -15,7 +17,6 @@ def profile(username):
         user = User.objects.get(slug=username)
     except User.DoesNotExist:
         abort(404)
-
     if user == current_user:
         articles = Article.objects(author=user)
     else:
@@ -44,18 +45,36 @@ def privacy_delete_trip(date):
     return redirect('privacy'), 204
 
 
-@app.route('/profile/', methods=['patch'])
+@app.route('/profile/')
 @login_required
 def profile_edit():
-    data = request.json
-    permitted_fields = ['username', 'about', 'allow_community', 'socials']
     user = User.objects.get(id=current_user.id)
-    for field, value in data.items():
-        if field not in permitted_fields:
-            return '', 403
+    articles = Article.objects(author=user)
+    return render_template('user/edit.html', user=user, articles=articles)
+
+
+@app.route('/profile/', methods=['post'])
+@login_required
+def profile_save():
+    data_fields = ['username', 'about', 'allow_community']
+    user = User.objects.get(id=current_user.id)
+    for field in data_fields:
+        value = request.form.get(field)
         setattr(user, field, value)
+    if not user.socials:
+        user.socials = {}
+    for field, value in request.form.items():
+        if field.startswith('socials.'):
+            user.socials[field[len('socials.'):]] = value
+    if request.form.get('delete'):
+        Path.unlink(Path(f"{app.config.get('AVATARS_PATH')}/{user.id}"))
+        user.image_path = None
+    if request.files.get('avatar'):
+        path = f"{app.config.get('AVATARS_PATH')}/{user.id}"
+        save_image(request.files['avatar'], path, (200, 200))
+        user.image_path = path
     user.save()
-    return '', 204
+    return redirect(url_for_user(user))
 
 
 @app.route('/profile/avatar/', methods=['patch'])
@@ -63,9 +82,8 @@ def profile_edit():
 def profile_edit_avatar():
     try:
         user = User.objects.get(id=current_user.id)
+        avatars_path = app.config.get('AVATARS_PATH')
+        save_image(request.files['avatar'],
+            f'{avatars_path}/{user.id}', (200, 200))
     except User.DoesNotExist:
         abort(404)
-    save_base64_image(request.json['data'],
-                      '{}/{}'.format(app.config.get('AVATARS_PATH'), user.id),
-                      (200, 200))
-    return user.avatar, 201
