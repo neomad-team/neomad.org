@@ -119,7 +119,7 @@ class Article(db.Document):
         return super(Article, self).save(*args, **kwargs)
 
     def morph(self):
-        if('https://steemit.com/' in self.content):
+        if(self.content and 'https://steemit.com/' in self.content):
             match = re.match('.*(https://steemit.com/[^<\s.]*)', self.content)
             url = match.groups()[0]
             return SteemitArticle(article=self, url=url)
