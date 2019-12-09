@@ -30,7 +30,7 @@ main {
 }
 
 #join-us {
-  position: relative;;
+  position: relative;
   top: 5rem;
   background-color: rgba(17, 195, 116, 0.8);
   color: #fff;
@@ -38,17 +38,9 @@ main {
   font-weight: bold;
   border-radius: 2.5rem;
   transition: padding .3s ease;
-  z-index: 9;
 }
-#join-us:hover,
-#join-us.sticky:hover {
+#join-us:hover {
   background-color: #11c374;
-}
-#join-us.sticky {
-  position: fixed;
-  left: 17rem;
-  top: 1.5rem;
-  padding: .5rem 2rem;
 }
 #arrow-down {
   color: transparent;
@@ -77,6 +69,7 @@ main > section:not(.hero) .wrapper {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
 }
 main > section article {
   flex: 1;
@@ -107,11 +100,9 @@ main > section article footer {
 main > section article footer a:not(:last-of-type) {
   margin-right: 3rem;
 }
-
 main > section img {
   width: 100%;
 }
-
 
 .articles > h2,
 .profiles > h2 {
@@ -120,24 +111,30 @@ main > section img {
   position: relative;
 }
 
-#features ul {
+.feature ul {
   list-style-type: none;
   display: flex;
   flex-direction: column;
   padding: 0;
   margin: 0;
 }
-#features > ul > li {
+.feature > ul > li {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 6rem 2rem;
 }
-#features > ul > li > ul > li{
+.feature > ul > li > ul > li{
   margin: 0 0 1rem;
 }
-#features > ul > li:nth-child(2) {
+.feature > ul > li:nth-child(2) {
   background-color: #fafafa;
+}
+.feature footer {
+  display: flex;
+}
+.feature footer a {
+  margin-bottom: 2rem;
 }
 
 .articles {
@@ -183,6 +180,7 @@ main > section img {
 }
 .profiles figure {
   text-align: center;
+  width: 10rem;
 }
 .profiles figure img {
   margin: 0;
@@ -193,7 +191,6 @@ main > section img {
 
 body > footer {
   position: relative;
-  top: -9rem;
 }
 
 @media screen and (max-width:1200px) {
@@ -210,6 +207,10 @@ body > footer {
   }
   .articles .preview {
     margin: 2rem 0;
+  }
+  .feature aside {
+    width: 300px;
+    height: 275px;
   }
 }
 
@@ -228,33 +229,28 @@ body > footer {
   .profiles ul {
     padding: 2rem 10rem;
   }
+  .feature {
+    padding: 0 2rem;
+  }
+  .feature .wrapper {
+    flex-direction: column;
+  }
+  .feature .wrapper aside,
+  .feature .wrapper article {
+    margin: 0 auto;
+  }
+  .feature .wrapper h3 {
+    margin-top: 0;
+  }
 }
 
 @media screen and (max-width:620px) {
   .hero {
     padding: 7rem;
   }
-  #join-us.sticky {
-    top: 4.5rem;
-    left: 0;
-    right: 0;
-    text-align: center;
-    background-color: rgba(17, 195, 116, 0.8);
-    border: none;
-    font-weight: 300;
-    border-radius: 0;
-  }
-  #join-us.sticky::before {
-    font-family: FontAwesome;
-    content: "\f234";
-    font-size: 2rem;
-    color: #fff;
-    position: relative;
-    right: 2rem;
-    font-weight: lighter;
-  }
-  #features .action-button {
-    margin: 4rem 3rem 0;
+  .feature aside {
+    width: 300px;
+    height: 275px;
   }
   .column {
     padding: 0 5rem;
@@ -284,6 +280,12 @@ body > footer {
   .column {
     padding: 0 5rem;
   }
+  .feature footer {
+    flex-direction: column;
+  }
+  .feature footer .action-button {
+    margin-right: 0;
+  }
 }
 
 @media screen and (max-width:360px) {
@@ -301,9 +303,6 @@ body > footer {
   }
   .profiles ul {
     padding: 0 0 2.5rem;
-  }
-  #features h2 {
-    font-size: 3rem;
   }
 }
 

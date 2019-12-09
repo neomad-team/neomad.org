@@ -2,10 +2,9 @@
 
 #open-form {
   position: absolute;
-  top: 0;
   left: 0;
   position: absolute;
-  top: 6rem;
+  bottom: 0rem;
   left: 0;
   z-index: 8;
   display: flex;
@@ -15,24 +14,19 @@
   padding: 1.5rem 1rem 1rem;
   background-color: #fff;
   border: none;
-  border-radius:  0 0 1rem 1rem;
+  border-radius: 0 1rem 0 0;
   box-shadow: 0 .25rem .25rem 0 rgba(0,0,0,0.2);
 }
-
-
 #open-form p {
   margin: 0 .5rem 0 0;
 }
-
 #open-form:hover p {
   color: #3ba77c;
 }
-
 #open-form svg {
   fill: #333;
   width: 2.5rem;
 }
-
 #open-form:hover svg {
   fill: #3ba77c;
 }
