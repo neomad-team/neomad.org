@@ -159,7 +159,7 @@ nav .profile.active li {
 
 /* Footer */
 body > footer {
-  padding: 3rem 0;
+  padding: 2rem;
   border-top: .3rem solid #eee;
   background-color: #fff;
   z-index: 1;
@@ -189,7 +189,7 @@ body > footer a img {
 
 /* Main */
 main {
-  margin: 10rem 0;
+  margin-top: 10rem;
 }
 
 /* Article */
@@ -250,6 +250,9 @@ figure {
   color: #aaa;
   line-height: 3.4rem;
 }
+.meta > div {
+  margin-left: 1rem;
+}
 .meta p {
   margin: 0;
 }
@@ -264,9 +267,6 @@ figure {
 .meta .reading-time::before {
   content: "-";
   margin-right: .85rem;
-}
-.meta img {
-  margin-right: 1.25rem;
 }
 
 button,
@@ -318,21 +318,22 @@ button:hover,
 
 /* Notification */
 #notification[class=""] {
-  top: -10rem;
+  bottom: -10rem;
 }
 
 #notification {
   position: fixed;
   z-index: 99;
-  top: 0;
-  left: 0;
-  width: 100%;
+  bottom: 0;
+  right: 0;
   background: rgba(50, 50, 50, .8);
   color: white;
-  padding: 1.9rem;
+  padding: 1rem 2rem;
+  margin: 2rem;
   box-shadow: 0 0 .3rem #ccc;
   transition: .3s;
   border-bottom: .1rem solid #333;
+  border-radius: 3rem;
   text-align: center;
 }
 #notification.success {
@@ -566,10 +567,5 @@ button:hover,
     width: 100%;
     min-width: 0;
     margin-left: 0;
-  }
-
-  body > footer {
-    font-size: 1rem;
-    padding: 2rem 0;
   }
 }
