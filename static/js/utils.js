@@ -1,3 +1,12 @@
+window.onload = _ => {
+  const menu = document.querySelector('#menu')
+  const avatar = document.querySelector('#avatar-menu')
+  avatar.addEventListener('click', _ => menu.classList.toggle('active'))
+
+  const coordinates = document.querySelector('[data-latlng]')
+  coordinates && coordinatesToAddress(coordinates)
+}
+
 function alert (type, message, delay) {
   console.info(type, message)
   let notification = document.querySelector('#notification')
@@ -26,23 +35,4 @@ function coordinatesToAddress (coordinates) {
     data['area'] = data.town || data.village || data.city
     return data
   })
-}
-
-window.onload = _ => {
-  const menu = document.querySelector('nav .profile')
-  if (menu) {
-    const avatar = document.querySelector('nav .avatar')
-    avatar.addEventListener('click', _ => {
-      menu.classList.toggle('active')
-    })
-  }
-  const mobileNav = document.querySelector('.mobile-nav')
-  if (mobileNav) {
-    const nav = document.querySelector('.mobile-close')
-    mobileNav.addEventListener('click', e => {
-      e.preventDefault()
-      mobileNav.classList.toggle('is-open')
-      nav.classList.toggle('mobile-close')
-    })
-  }
 }

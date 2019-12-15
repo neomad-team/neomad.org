@@ -1,36 +1,50 @@
 {% macro article_list(articles, with_author=true) %}
   {% for original_article in articles %}
+
   {% set article = original_article.morph() %}
   {% set url = url_for_article(article) %}
-  <article class="preview draft">
+
+  <article class=preview>
     <header class=meta>
       {% if with_author %}
-      <a href={{ url_for_user(article.get_author()) }}>
-        <img src={{ article.get_author().avatar }} width=40 height=40 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt>
-      </a>
-      <div>
-        <a href={{ url_for_user(article.get_author()) }}>{{ article.get_author().username }}</a>
-        <time datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
-        <p class=reading-time><span>{{ article.content|reading_time }}</span> min read</p>
-      </div>
+        <a href={{ url_for_user(article.get_author()) }}>
+          <img
+            class="avatar icon"
+            src={{ article.get_author().avatar }}
+            onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'"
+            alt={{ article.get_author().avatar }}>
+        </a>
+
+        <div class=meta-data>
+          <a href={{ url_for_user(article.get_author()) }}>{{ article.get_author().username }}</a>
+          <time class="icon time" datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
+          <p class="icon time time-reading"><span>{{ article.content|reading_time }}</span> min read</p>
+        </div>
       {% elif article.publication_date %}
-      <time datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
+        <time class="icon time" datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
       {% endif %}
+      
       {% if not article.published %}
-      <div class=ribbon-wrapper>
-        <a href={{ url }} class=ribbon>draft</a>
-      </div>
+        <div class=ribbon-wrapper>
+          <a class=ribbon href={{ url }}>draft</a>
+        </div>
       {% endif %}
     </header>
-    <a href={{ url }} lang={{ article.language }}>
-      <h1>{{ article.title|title }}</h1>
-      {% if article.image %}
-      <figure>
-        <img src="{{ article.image }}" width=100% alt>
-      </figure>
-      {% endif %}
-      {{ article.content|striptags|truncate(200) }}
-    <a href={{ url }} lang={{ article.language }} class="read action-button">Read more</a>
+
+    <main class=content>
+      <a href={{ url }} lang={{ article.language }}>
+        <h1>{{ article.title|title }}</h1>
+        <figure class="icon read-more">
+          <img
+            src="{{ article.image }}"
+            onerror="this.src='{{ url_for('static', filename='images/article.png') }}'"
+            alt="{{ article.title|title }}">
+        </figure>
+        <figcaption>{{ article.content|striptags|truncate(200) }}</figcaption>
+      </a>
+    </main>
+
+    <a class="button icon read" href={{ url }} lang={{ article.language }}>Read more</a>
   </article>
   {% endfor %}
 {% endmacro %}

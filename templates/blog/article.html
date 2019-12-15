@@ -14,46 +14,44 @@
   <meta property=og:description content="{{ article|striptags|truncate(200) }}">
 {%- endblock %}
 
-{% block extra_css %}
-<link rel=stylesheet href={{ url_for('static', filename='css/article.css') }}>
+{% block main %}
+  <main>
+    <article lang={{ article.language }}>
+      <hearder class=meta>
+        <a href={{ url_for_user(article.author) }}>
+          <img
+            class="avatar"
+            src={{ article.author.avatar }}
+            onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'"
+            alt="Picture of {{ article.author }}">
+        </a>
+        <div class=meta-data>
+          <a href={{ url_for_user(article.get_author()) }}>{{ article.get_author().username }}</a>
+          <time class="icon time" datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
+          <p class="icon time time-reading"><span>{{ article.content|reading_time }}</span> min read</p>
+        </div>
+        
+        {% if not article.published %}
+          <div class=ribbon-wrapper>
+            <div class=ribbon>draft</div>
+          </div>
+        {% endif %}
+      </hearder>
+
+      <main>
+        <h1 name=title>{{ article.title }}</h1>
+        <div class=content name=content>
+          {{ (article.content)|embed|safe }}
+        </div>
+      </main>
+    </article>
+  </main>
 {% endblock %}
 
-{% block main %}
-<article lang={{ article.language }}>
-  <section class=meta>
-    <a href={{ url_for_user(article.author) }}>
-      <img src={{ article.author.avatar }} width=70 height=70 onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'" alt="Picture of {{ article.author }}">
-    </a>
-    <div>
-      <a href={{ url_for_user(article.author) }}>{{ article.author.username }}</a>
-      <p>{{ article.author.about|htmlnewline }}</p>
-      {% if article.published -%}
-        <time datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
-        <p class=reading-time><span>{{ article.content|reading_time }}</span> min read</p>
-      {%- endif %}
-    </div>
-  </section>
-
-  {% if not article.published %}
-  <div class=ribbon-wrapper>
-    <div class=ribbon>draft</div>
-  </div>
-  {% endif %}
-
-  <h1 name=title>{{ article.title }}</h1>
-  <div class=content name=content>
-    {{ (article.content)|embed|safe }}
-  </div>
-</article>
-
-
-{% if article.author == current_user -%}
-  <div class=toolbar>
-    <a class="button edit" href={{ url_for('article_edit', id=article.id) }}>Edit</a>
-  </div>
-{% else %}
-  <aside>
-    <a href={{ url_for_user(article.author) }}>Read more from {{ article.author }}</a>
-  </aside>
-{%- endif %}
+{% block footer %}
+  {% if article.author == current_user -%}
+    <a class=button href={{ url_for('article_edit', id=article.id) }}>Edit</a>
+  {% else %}
+    <a class=button href={{ url_for_user(article.author) }}>Read more from {{ article.author }}</a>
+  {%- endif %}
 {% endblock %}
