@@ -1,8 +1,3 @@
-/* Basics, every styles which applies everywhere */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-@import url('https://fonts.googleapis.com/css?family=Poppins');
-@import url('https://fonts.googleapis.com/css?family=Merriweather');
-
 * {
   box-sizing: border-box;
 }

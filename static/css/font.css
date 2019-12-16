@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'fontawesome';
+  font-style: normal;
+  font-weight: normal;
+  src: url("../dist/fontawesome/fa-brands-400.eot");
+  src:
+    url("../dist/fontawesome/fa-brands-400.eot?#iefix") format("embedded-opentype"),
+    url("../dist/fontawesome/fa-brands-400.woff2") format("woff2"),
+    url("../dist/fontawesome/fa-brands-400.woff") format("woff"),
+    url("../dist/fontawesome/fa-brands-400.ttf") format("truetype"),
+    url("../dist/fontawesome/fa-brands-400.svg#fontawesome") format("svg");
+}
+
+@font-face {
+  font-family: 'fontawesome';
+  font-style: normal;
+  font-weight: 400;
+  src: url("../dist/fontawesome/fa-regular-400.eot");
+  src:
+    url("../dist/fontawesome/fa-regular-400.eot?#iefix") format("embedded-opentype"),
+    url("../dist/fontawesome/fa-regular-400.woff2") format("woff2"),
+    url("../dist/fontawesome/fa-regular-400.woff") format("woff"),
+    url("../dist/fontawesome/fa-regular-400.ttf") format("truetype"),
+    url("../dist/fontawesome/fa-regular-400.svg#fontawesome") format("svg");
+}
+
+@font-face {
+  font-family: 'fontawesome solid';
+  font-style: normal;
+  font-weight: 900;
+  src: url("../dist/fontawesome/fa-solid-900.eot");
+  src:
+    url("../dist/fontawesome/fa-solid-900.eot?#iefix") format("embedded-opentype"),
+    url("../dist/fontawesome/fa-solid-900.woff2") format("woff2"),
+    url("../dist/fontawesome/fa-solid-900.woff") format("woff"),
+    url("../dist/fontawesome/fa-solid-900.ttf") format("truetype"),
+    url("../dist/fontawesome/fa-solid-900.svg#fontawesome") format("svg");
+}

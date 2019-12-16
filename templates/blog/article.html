@@ -49,9 +49,11 @@
 {% endblock %}
 
 {% block footer %}
-  {% if article.author == current_user -%}
-    <a class=button href={{ url_for('article_edit', id=article.id) }}>Edit</a>
-  {% else %}
-    <a class=button href={{ url_for_user(article.author) }}>Read more from {{ article.author }}</a>
-  {%- endif %}
+  <footer>
+    {% if article.author == current_user -%}
+      <a class=button href={{ url_for('article_edit', id=article.id) }}>Edit</a>
+    {% else %}
+      <a class=button href={{ url_for_user(article.author) }}>Read more from {{ article.author }}</a>
+    {%- endif %}
+  </footer>
 {% endblock %}

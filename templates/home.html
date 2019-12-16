@@ -4,6 +4,10 @@
 {% block title %}Digital Nomad Community{% endblock %}
 {% block description %}Find a local place to work, get connected to other remote workers.{% endblock %}
 
+{% block extra_css %}
+  <link rel=stylesheet href={{ url_for('static', filename='css/home.css') }}>
+{% endblock %}
+
 {% block main %}
   <main>
     <section class=hero>
@@ -89,7 +93,7 @@
       </article>
     </section>
 
-    <section>
+    <section class=previews>
       <h2>Latest articles from Neomads</h2>
       {{ article_list(articles=articles) }}
     </section>
@@ -125,15 +129,12 @@
 
 {% block footer %}
   <footer>
-    <nav class=wrapper>
-      <a href=mailto:contact+website@neomad.org>
-        <img src=https://upload.wikimedia.org/wikipedia/commons/3/3d/Envelope_font_awesome.svg
-          title="Send an email to Neomad" alt="Contact">
+    <nav>
+      <a class="icon email" href="mailto:contact+website@neomad.org" title="Contact us">
         Contact the Team
       </a>
-      <a href=https://github.com/neomad-team/neomad.org title="View the source of this project on Github">
-        <img src=https://upload.wikimedia.org/wikipedia/commons/9/95/Font_Awesome_5_brands_github.svg
-          title="Get the source code from Github" alt="Source on GitHub">Get the code
+      <a class="icon github" href="https://github.com/neomad-team/neomad.org" title="Github repository">
+        Get the code
       </a>
     </nav>
   </footer>
