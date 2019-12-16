@@ -4,33 +4,52 @@ main {
 
 section {
   background-color: var(--color-background-secondary);
-  padding: 1rem;
-}
-
-section h2 {
-  text-align: center;
-}
-
-.hero h2 {
-  text-align: left;
 }
 
 .presentation {
-  justify-content: flex-start;
-  margin: 0 auto;
-  max-width: 120rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.presentation.with-image {
+  flex-direction: row;
+}
+
+.presentation article {
+  width: 65rem;
 }
 
 .presentation aside {
   height: 32rem;
 }
 
+.article-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .preview {
-  display: inline-block;
-  width: 29%;
-  margin: 0 2%;
+  display: flex;
+  flex: 0 0 30%;
+  flex-direction: column;
+  min-width: 40rem;
+}
+
+.preview .meta-data {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.preview .meta-data a {
+  flex: 1 1 100%;
 }
 
 .preview h2 {
   word-wrap: break-word;
+}
+
+.preview .button {
+  align-self: center;
+  margin: 3rem 0 0;
+  max-width: initial;
 }

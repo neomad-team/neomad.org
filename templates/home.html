@@ -93,12 +93,14 @@
       </article>
     </section>
 
-    <section class=previews>
+    <section class=presentation>
       <h2>Latest articles from Neomads</h2>
-      {{ article_list(articles=articles) }}
+      <div class=article-group>
+        {{ article_list(articles=articles) }}
+      </div>
     </section>
 
-    <section>
+    <section class=presentation>
       <h2>Welcome to our last Neomads</h2>
       <ul class=profiles>
       {% for user in users %}
