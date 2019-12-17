@@ -7,25 +7,30 @@
 <link rel=stylesheet href={{ url_for('static', filename='css/auth.css') }}>
 {% endblock %}
 
-{% block login %}
-<form action={{ url_for('signup') }} method=post>
-  {% if errors %}
-    <ul>
-    {% for error in errors %}
-      <li class=error>{{ error }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-  <h1>Create a new account</h1>
-  <div>
-    <label for=email>Email</label>
-    <input type=email id=email name=email required>
-  </div>
-  <div>
-    <label for=password>Password</label>
-    <input type=password id=password name=password required>
-  </div>
-  <button type=submit>Sign up</button>
-  <p class=alternative><a href={{ url_for('login') }}>I already have an account!</a></p>
-</form>
+{% block main %}
+  <main>
+    {% block login %}
+      <form class=register action={{ url_for('signup') }} method=post>
+        <h1>Create a new account</h1>
+
+        {% if errors %}
+          <ul>
+          {% for error in errors %}
+            <li class=error>{{ error }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+
+
+        <label for=email>Email</label>
+        <input type=email id=email name=email required>
+
+        <label for=password>Password</label>
+        <input type=password id=password name=password required>
+
+        <button class="icon become-user" type=submit>Sign up</button>
+        <a class="icon account" href={{ url_for('signup') }}>I already have an account!</a>
+      </form>
+    {% endblock %}
+  </main>
 {% endblock %}

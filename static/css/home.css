@@ -1,5 +1,29 @@
+/* This exception/change will be handle by the styleguide.neomad.org */
+
+header.main,
+footer {
+  padding: 1rem 9rem;
+}
+
 main {
   margin: 6.5rem 0 0;
+}
+
+footer nav {
+  justify-content: flex-start;
+  padding: 1rem;
+}
+
+footer nav a {
+  display: flex;
+  flex-direction: row;
+  margin-right: 2.5rem;
+  align-items: flex-start;
+}
+
+footer .icon::before {
+  font-size: 2rem;
+  margin-right: 1rem;
 }
 
 section {
