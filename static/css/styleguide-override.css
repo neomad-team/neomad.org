@@ -1,4 +1,16 @@
-/* This exception/change will be handle by the styleguide.neomad.org */
+/*
+  NOTE:
+    - Here exception/change missing or on-going in styleguide.neomad.org
+    - This file should be empty ... better remove
+*/
+
+/*
+  STRUCTURE
+*/
+
+body {
+  background-color: var(--color-background-primary);
+}
 
 header.main,
 footer {
@@ -26,9 +38,9 @@ footer .icon::before {
   margin-right: 1rem;
 }
 
-section {
-  background-color: var(--color-background-secondary);
-}
+/*
+  SECTION
+*/
 
 .presentation {
   flex-direction: column;
@@ -47,9 +59,24 @@ section {
   height: 32rem;
 }
 
+.article-list {
+  margin: 0 auto;
+  max-width: 75rem;
+  padding: 2rem 4rem;
+}
+
+/*
+  ARTICLE CONTAINER
+*/
+
 .article-group {
   display: flex;
   flex-wrap: wrap;
+}
+
+.article-group .article-list {
+  padding: 2rem;
+  max-width: 100%;
 }
 
 .preview {
