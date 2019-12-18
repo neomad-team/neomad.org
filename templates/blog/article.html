@@ -30,7 +30,7 @@
           <time class="icon time" datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
           <p class="icon time time-reading"><span>{{ article.content|reading_time }}</span> min read</p>
         </div>
-        
+
         {% if not article.published %}
           <div class=ribbon-wrapper>
             <div class=ribbon>draft</div>

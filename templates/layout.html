@@ -20,7 +20,7 @@
   </h1>
 
   <nav>
-    <a href={{ url_for('articles') }} title="Read Neomad's adventures">Read</a>
+    <a href={{ url_for('article_list') }} title="Read Neomad's adventures">Read</a>
     <a href={{ url_for('around') }}>Around me</a>
 
     {% if current_user and current_user.is_authenticated %}
