@@ -1,10 +1,10 @@
 {% extends 'layout.html' %}
 
-{% block title %}{{ code }} - Digital Nomad Community{% endblock %} 
+{% block title %}{{ code }} - Digital Nomad Community{% endblock %}
 {% block description %}Sorry for the inconvenience, let us bring you back home.{% endblock %}
 
 {% block extra_css %}
-<link rel=stylesheet href={{ url_for('static', filename='css/error.css') }}>
+  <link rel=stylesheet href={{ url_for('static', filename='css/error.css') }}>
 {% endblock %}
 
 {% block main %}

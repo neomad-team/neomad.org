@@ -5,9 +5,9 @@
 {% block description %}{{ user|capitalize }} is on Neomad with {{ articles.count() }} articles published and {% if user.allow_community %}sharing with the community{% else %}in hight privacy{% endif %}.{% endblock %}
 
 {% block extra_og %}
-<meta property=og:image content="{{ request.url_root[:-1] }}{{ user.avatar }}">
-<meta property=og:profile content={{ request.url }}>
-<meta property=og:profile:username content="{{ user.username }}">
+  <meta property=og:image content="{{ request.url_root[:-1] }}{{ user.avatar }}">
+  <meta property=og:profile content={{ request.url }}>
+  <meta property=og:profile:username content="{{ user.username }}">
 {% endblock %}
 
 {% block extra_css %}
@@ -15,65 +15,65 @@
 {% endblock %}
 
 {% block main %}
-<header>
-  <div class="profile-intro wrapper">
-    <figure>
-      <img class=avatar-img
-        name=avatar
-        src={{ user.avatar }}
-        width=100
-        height=100
-        onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
-    </figure>
-    <div>
-      <h1 name=username>{{ user.username }}</h1>
-      <p name=about>{{ user.about|htmlnewline }}</p>
-      {% if user.allow_community %}
-      <p>
-        {{ user }} is currently around <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location and user.current_location|join(',') }}>the world</a>.</p>
-      {% else %}
-        <div class=private>
-          {{ user }} disabled community mode; the contents are therefore private.<br>
-          {% if user == current_user %}
-            <a href={{ url_for('privacy') }}>Change my community status</a>
-          {% endif %}
-        </div>
-      {% endif %}
-    </div>
-    <section class=social>
-      {% if user.socials.email -%}
-        <a class=email href=mailto:{{ user.socials.email }} title="Send an email">Send an email</a>
-      {%- endif %}
-      {% for name, url in user.socials.items() -%}
-        {% if name != 'email' and url -%}
-          <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
+  <header>
+    <div class="profile-intro wrapper">
+      <figure>
+        <img class=avatar-img
+          name=avatar
+          src={{ user.avatar }}
+          width=100
+          height=100
+          onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
+      </figure>
+      <div>
+        <h1 name=username>{{ user.username }}</h1>
+        <p name=about>{{ user.about|htmlnewline }}</p>
+        {% if user.allow_community %}
+        <p>
+          {{ user }} is currently around <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location and user.current_location|join(',') }}>the world</a>.</p>
+        {% else %}
+          <div class=private>
+            {{ user }} disabled community mode; the contents are therefore private.<br>
+            {% if user == current_user %}
+              <a href={{ url_for('privacy') }}>Change my community status</a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+      <section class=social>
+        {% if user.socials.email -%}
+          <a class=email href=mailto:{{ user.socials.email }} title="Send an email">Send an email</a>
         {%- endif %}
-      {%- endfor %}
-    </section>
-    <nav>
-      {% if user == current_user -%}
-        <a class="action-button settings" href={{ url_for('profile_edit') }}>Edit my profile</a>
-        <a class="action-button settings" href={{ url_for('privacy') }}>Edit privacy settings</a>
-        <a class="action-button trips" href={{ url_for_trips(user) }}>View my trips</a>
-      {%- else %}
-        <a class="action-button trips" href={{ url_for_trips(user) }}>View {{ user }}'s trips</a>
-      {%- endif %}
-    </nav>
-  </div>
-</header>
+        {% for name, url in user.socials.items() -%}
+          {% if name != 'email' and url -%}
+            <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
+          {%- endif %}
+        {%- endfor %}
+      </section>
+      <nav>
+        {% if user == current_user -%}
+          <a class="action-button settings" href={{ url_for('profile_edit') }}>Edit my profile</a>
+          <a class="action-button settings" href={{ url_for('privacy') }}>Edit privacy settings</a>
+          <a class="action-button trips" href={{ url_for_trips(user) }}>View my trips</a>
+        {%- else %}
+          <a class="action-button trips" href={{ url_for_trips(user) }}>View {{ user }}'s trips</a>
+        {%- endif %}
+      </nav>
+    </div>
+  </header>
 
-<section class="articles wrapper">
-  {{ article_list(articles=articles, with_author=false) }}
-</section>
+  <section class="articles wrapper">
+    {{ article_list(articles=articles, with_author=false) }}
+  </section>
 {% endblock %}
 
 {% block extra_js %}
-<script>
-  const a = document.querySelector('[data-latlng]')
-  if(a) {
-    coordinatesToAddress(a.dataset.latlng).then(data => {
-      a.textContent = `${data.area}, ${data.country}`
-    })
-  }
-</script>
+  <script>
+    const a = document.querySelector('[data-latlng]')
+    if(a) {
+      coordinatesToAddress(a.dataset.latlng).then(data => {
+        a.textContent = `${data.area}, ${data.country}`
+      })
+    }
+  </script>
 {% endblock %}

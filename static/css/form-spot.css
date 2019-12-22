@@ -1,0 +1,9 @@
+form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: white;
+  overflow: scroll;
+  cursor: pointer;
+  padding: 0 10rem;
+}

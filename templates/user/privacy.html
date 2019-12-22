@@ -1,59 +1,59 @@
 {% extends "layout.html" %}
 
 {% block extra_css %}
-<link rel=stylesheet href={{ url_for('static', filename='css/privacy.css') }}>
+  <link rel=stylesheet href={{ url_for('static', filename='css/privacy.css') }}>
 {% endblock %}
 
 {% block main %}
-<section>
-  <article>
-    <h2>Community mode</h2>
-    <form>
-      <input type=checkbox name=community {% if user.allow_community %}checked{% endif %} id=community>
-      <label for=community title="{% if user.allow_community %}Disable{% else %}Enable{% endif %} community profile">
-        Click to {% if user.allow_community %}disable{% else %}enable{% endif %}
-      </label>
-    </form>
-    <aside>
+  <section>
+    <article>
+      <h2>Community mode</h2>
+      <form>
+        <input type=checkbox name=community {% if user.allow_community %}checked{% endif %} id=community>
+        <label for=community title="{% if user.allow_community %}Disable{% else %}Enable{% endif %} community profile">
+          Click to {% if user.allow_community %}disable{% else %}enable{% endif %}
+        </label>
+      </form>
+      <aside>
+        {% if user.allow_community %}
+        <p>
+          Disabling the community mode hides your profile, your articles and your location.
+        </p>
+        {% else %}
+        <p>
+          Enabling community mode allows you to publish your articles, to share your location, and visitors to read your profile.
+        </p>
+        {% endif %}
+      </aside>
       {% if user.allow_community %}
-      <p>
-        Disabling the community mode hides your profile, your articles and your location.
-      </p>
+      <footer>
+        <p>
+          Disabling the community mode allows only you to view your map.
+        </p>
+      </footer>
       {% else %}
-      <p>
-        Enabling community mode allows you to publish your articles, to share your location, and visitors to read your profile.
-      </p>
       {% endif %}
-    </aside>
-    {% if user.allow_community %}
-    <footer>
-      <p>
-        Disabling the community mode allows only you to view your map.
-      </p>
-    </footer>
-    {% else %}
-    {% endif %}
-  </article>
-  <article>
-    <h2>List of your trip positions</h2>
-    <ul>
-      {% for location in locations %}
-      <li>
-        <p>{{ location.date | datetime }}</p>
-        <a 
-           data-latlng={{ location.position|join(',') }}  
-           href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} 
-           target=_blank>{{ location.position|join(',') }}
-        </a>
-        <form method=post action={{ url_for('privacy_delete_trip', date=location.date.timestamp()) }}>  
-          <a class=button href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} target=_blank>View on map</a>
-          <button class=delete>Delete</button>
-        </form>
-      </li>
-      {% endfor %}
-    </ul>   
-  </article>
-</section>
+    </article>
+    <article>
+      <h2>List of your trip positions</h2>
+      <ul>
+        {% for location in locations %}
+        <li>
+          <p>{{ location.date | datetime }}</p>
+          <a
+            data-latlng={{ location.position|join(',') }}
+            href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }}
+            target=_blank>{{ location.position|join(',') }}
+          </a>
+          <form method=post action={{ url_for('privacy_delete_trip', date=location.date.timestamp()) }}>
+            <a class=button href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} target=_blank>View on map</a>
+            <button class=delete>Delete</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+    </article>
+  </section>
 {% endblock %}
 
 {% block extra_js %}

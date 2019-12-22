@@ -1,10 +1,10 @@
 window.onload = _ => {
   const menu = document.querySelector('#menu')
   const avatar = document.querySelector('#avatar-menu')
-  avatar.addEventListener('click', _ => menu.classList.toggle('active'))
+  if (menu && avatar ) avatar.addEventListener('click', _ => menu.classList.toggle('active'))
 
   const coordinates = document.querySelector('[data-latlng]')
-  coordinates && coordinatesToAddress(coordinates)
+  if (coordinates) coordinatesToAddress(coordinates)
 }
 
 function alert (type, message, delay) {
@@ -15,8 +15,10 @@ function alert (type, message, delay) {
     notification.id = 'notification'
     document.body.append(notification)
   }
+
   notification.innerHTML = message
   notification.classList = [type]
+
   if (delay !== 0) {
     this.timer = setTimeout(_ => {
       notification.classList = []
@@ -34,5 +36,26 @@ function coordinatesToAddress (coordinates) {
     const data = d.address
     data['area'] = data.town || data.village || data.city
     return data
+  })
+}
+
+function getPosition() {
+  return new Promise(resolve => {
+    const fail = _ => {
+      alert('error', 'You geolocalisation went wrong, please try again.')
+      resolve([])
+    }
+
+    const success = position => {
+      const { latitude, longitude } = position.coords
+      resolve([latitude, longitude])
+    }
+
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    }
+    navigator.geolocation.getCurrentPosition(success, fail, options);
   })
 }

@@ -5,7 +5,7 @@ let pois = []
 function addPoi (poi) {
   const marker = L.marker(poi.location, {icon: markerIcon, alt: poi.name})
     .addTo(map)
-    .on('click', event => {
+    .on('click', _ => {
       moveTo(poi.location)
       urlFor(poi.id)
     })
@@ -20,9 +20,7 @@ function addPoi (poi) {
   marker.bindPopup(popup)
 
   // start view
-  if(currentLatLng.length) {
-    localizeUser.start()
-  }
+  if(currentLatLng.length) localizeUser.start()
 
   const hash = getHash()
   if(hash && hash === marker._icon.id) {

@@ -1,3 +1,7 @@
-form.register {
-  margin-top: 4rem;
+main {
+  padding: 5rem;
+}
+
+form {
+  max-width: 50rem;
 }

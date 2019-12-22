@@ -1,11 +1,7 @@
 /*
   NOTE:
-    - Here exception/change missing or on-going in styleguide.neomad.org
-    - This file should be empty ... better remove
-*/
-
-/*
-  STRUCTURE
+    - Here exceptions/updates missing or on-going in styleguide.neomad.org
+    - This file should be empty... and remove soon
 */
 
 body {
@@ -15,6 +11,23 @@ body {
 header.main,
 footer {
   padding: 1rem 9rem;
+}
+
+header.main {
+  /* overide leaflet and notification */
+  z-index: 1001;
+}
+
+.nav-account:not(.active) {
+  display: none;
+}
+
+.nav-account {
+  display: block;
+}
+
+.nav-account a {
+  padding: 1rem 0;
 }
 
 main {
@@ -103,4 +116,15 @@ footer .icon::before {
   align-self: center;
   margin: 3rem 0 0;
   max-width: initial;
+}
+
+#notification {
+  position: absolute;
+  top: 6.5rem;
+  background-color: var(--color-white);
+  box-shadow: 0 .2rem 0 var(--color-shadow);
+  padding: 1rem;
+  /* overide leaflet */
+  z-index: 1000;
+  width: 100%;
 }
