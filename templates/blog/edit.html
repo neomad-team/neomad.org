@@ -30,10 +30,10 @@
         </div>
       {%- endif %}
 
-      <h2 class=editable-title name="title">
+      <h2 class="editable title">
         {{ article.title or "Insert your title here" }}
       </h2>
-      <div class=editable-content name="content">
+      <div class="editable content">
         {{ article.content|safe or "Insert your content here" }}
       </div>
 
@@ -43,8 +43,8 @@
       </div>
 
       <div class="button-group">
-        <input type=hidden name=title value="{{ article.title }}">
-        <input type=hidden name=content value="{{ article.content|safe  }}">
+        <input type=hidden name=title>
+        <input type=hidden name=content>
         <button type=submit class=save>Save your article</button>
         {% if article.id -%}
           <a class="button delete" href={{ url_for('article_delete', id=article.id) }}>Delete your article</a>
@@ -57,8 +57,14 @@
   <script src={{ url_for('static', filename='dist/medium/js/editor.min.js') }}></script>
   <script src={{ url_for('static', filename='dist/medium/js/editor-insert.min.js') }}></script>
   <script>
-    new MediumEditor('.editable-title')
-    new MediumEditor('.editable-content', {
+    inputTitle = document.querySelector('input[name=title]')
+    inputTitle.value = 'test'
+
+    inputContent = document.querySelector('input[name=content]')
+    inputContent.value = 'test'
+
+    new MediumEditor('.editable.title')
+    new MediumEditor('.editable.content', {
       toolbar: {
         buttons: ['h2', 'h3', 'bold', 'italic', 'anchor', 'quote']
       },
