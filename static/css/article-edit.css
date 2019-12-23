@@ -1,10 +1,10 @@
-body {
+/* body {
   height: auto;
   min-height: 100%;
 }
 
 main {
-  background-color: #fff; 
+  background-color: #fff;
   margin: 0;
   height: 100vh;
   padding: 12rem 5rem 0;
@@ -145,22 +145,4 @@ footer {
   bottom: 0;
 }
 
-@media screen and (max-width: 620px) {
-  main {
-    padding-top: 7.5rem;
-    height: 100%;
-  }
-  
-  form.profile-intro {
-    flex-wrap: wrap;
-  }
-  
-  aside.avatar {
-    margin: 0 0 3rem;
-  }
-  
-  .delete,
-  .save {
-    padding: 0 0.5rem;
-  }
-}
+ */

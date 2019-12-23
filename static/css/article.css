@@ -2,12 +2,24 @@ html {
   background-color: #fff;
 }
 
-body > main {
-  padding: 5rem 10rem;
+.blog-article {
+  margin: 6.5rem auto;
+  max-width: 75rem;
+  padding: 3rem 10rem;
 }
 
-main.article {
-  margin: 0 auto;
-  max-width: 75rem;
-  padding: 2rem 4rem;
+.blog-article header {
+  background-color: var(--color-background-primary);
+}
+
+.blog-article main {
+  margin-top: 2rem;
+}
+
+.form-group {
+  display: flex;
+}
+
+.form-group label {
+  margin-right: 1rem;
 }

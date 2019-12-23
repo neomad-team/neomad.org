@@ -68,7 +68,7 @@ def article_edit(id):
     errors = []
     if request.method == 'POST':
         article.title = request.form.get('title')
-        article.content = request.form.get('content')        
+        article.content = request.form.get('content')
         article.published = bool(request.form.get('published'))
         if article.published and not article.publication_date:
             article.publication_date = datetime.datetime.utcnow()

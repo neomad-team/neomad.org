@@ -19,12 +19,12 @@
 {%- endblock %}
 
 {% block main %}
-  <main>
+  <main class=blog-article>
     <article lang={{ article.language }}>
-      <hearder class=meta>
+      <header class=meta>
         <a href={{ url_for_user(article.author) }}>
           <img
-            class="avatar"
+            class=avatar
             src={{ article.author.avatar }}
             onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'"
             alt="Picture of {{ article.author }}">
@@ -40,7 +40,7 @@
             <div class=ribbon>draft</div>
           </div>
         {% endif %}
-      </hearder>
+      </header>
 
       <main>
         <h1 name=title>{{ article.title }}</h1>
@@ -55,7 +55,8 @@
 {% block footer %}
   <footer>
     {% if article.author == current_user -%}
-      <a class=button href={{ url_for('article_edit', id=article.id) }}>Edit</a>
+      <a class=button href={{ url_for('article_edit', id=article.id) }}>Edit your article</a>
+      <a class=button href={{ url_for_user(article.author) }}>Back to your profile</a>
     {% else %}
       <a class=button href={{ url_for_user(article.author) }}>Read more from {{ article.author }}</a>
     {%- endif %}

@@ -82,12 +82,12 @@ footer .icon::before {
   ARTICLE CONTAINER
 */
 
-.article-group {
+.blog-preview {
   display: flex;
   flex-wrap: wrap;
 }
 
-.article-group .article-list {
+.blog-preview .article-list {
   padding: 2rem;
   max-width: 100%;
 }
