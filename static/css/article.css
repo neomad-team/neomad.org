@@ -6,6 +6,12 @@ body {
   position: relative;
 }
 
+.meta-data p {
+  color: var(--color-time);
+  margin: 0;
+  font-size: 1.5rem;
+}
+
 .blog-article {
   margin: 6.5rem auto;
   max-width: 75rem;

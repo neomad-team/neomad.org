@@ -33,13 +33,11 @@
           <a href={{ url_for_user(article.get_author()) }}>{{ article.get_author().username }}</a>
           <time class="icon time" datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
           <p class="icon time time-reading"><span>{{ article.content|reading_time }}</span> min read</p>
-        </div>
 
-        {% if not article.published %}
-          <div class=ribbon-wrapper>
-            <div class=ribbon>draft</div>
-          </div>
-        {% endif %}
+          {% if not article.published %}
+            <p class='icon setting'>This article is on draft</p>
+          {% endif %}
+        </div>
       </header>
 
       <main>

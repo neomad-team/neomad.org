@@ -24,6 +24,10 @@
         </ul>
       {%- endif %}
 
+      {% if not article.published %}
+        <p class='icon setting'>This article is on draft</p>
+      {% endif %}
+
       <h2 class="editable title">
         {{ article.title or "Insert your title here" }}
       </h2>
