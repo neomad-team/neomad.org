@@ -57,12 +57,6 @@
   <script src={{ url_for('static', filename='dist/medium/js/editor.min.js') }}></script>
   <script src={{ url_for('static', filename='dist/medium/js/editor-insert.min.js') }}></script>
   <script>
-    inputTitle = document.querySelector('input[name=title]')
-    inputTitle.value = 'test'
-
-    inputContent = document.querySelector('input[name=content]')
-    inputContent.value = 'test'
-
     new MediumEditor('.editable.title')
     new MediumEditor('.editable.content', {
       toolbar: {
@@ -82,5 +76,16 @@
       disableDoubleReturn: true,
       disableExtraSpaces: false
     })
+
+    const editFormArticle = document.querySelector('form.article')
+    editFormArticle.onsubmit = () => {
+      const editableTitle = document.querySelector('.editable.title')
+      const inputTitle = document.querySelector('input[name=title]')
+      inputTitle.value = editableTitle.innerText
+
+      const editableContent = document.querySelector('.editable.content')
+      const inputContent = document.querySelector('input[name=content]')
+      inputContent.value = editableContent.innerHTML
+    }
   </script>
 {%- endblock %}
