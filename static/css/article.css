@@ -2,6 +2,10 @@ html {
   background-color: #fff;
 }
 
+body {
+  position: relative;
+}
+
 .blog-article {
   margin: 6.5rem auto;
   max-width: 75rem;
@@ -16,10 +20,9 @@ html {
   margin-top: 2rem;
 }
 
-.form-group {
-  display: flex;
-}
-
-.form-group label {
-  margin-right: 1rem;
+.button-group {
+  padding: 0 1rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

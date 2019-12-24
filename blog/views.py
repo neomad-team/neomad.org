@@ -11,6 +11,12 @@ from user.models import User
 from .models import Article, clean_html
 
 
+def printLog(*args, **kwargs):
+    print(*args, **kwargs)
+    with open('output.out','a') as file:
+        print(*args, **kwargs, file=file)
+
+
 @app.route('/articles/')
 def article_list():
     articles = Article.objects(published=True)
@@ -69,7 +75,7 @@ def article_edit(id):
     if request.method == 'POST':
         article.title = request.form.get('title')
         article.content = request.form.get('content')
-        article.published = bool(request.form.get('published'))
+        article.published = request.form.get('published') == 'true'
         if article.published and not article.publication_date:
             article.publication_date = datetime.datetime.utcnow()
         if article.title != '' and clean_html(article.content) != '':

@@ -5,7 +5,7 @@
 
 {% block extra_css -%}
   <link rel=stylesheet href={{ url_for('static', filename='css/article.css') }}>
-  <link rel=stylesheet href={{ url_for('static', filename='css/article-edit.css') }}>
+  <link rel=stylesheet href={{ url_for('static', filename='css/form-article.css') }}>
 
   <link rel="stylesheet" href={{ url_for('static', filename='dist/medium/css/editor.min.css') }}>
   <link rel="stylesheet" href={{ url_for('static', filename='dist/medium/css/editor-insert.min.css') }}>
@@ -24,12 +24,6 @@
         </ul>
       {%- endif %}
 
-      {% if not article.published -%}
-        <div class=ribbon-wrapper>
-          <div class=ribbon>draft</div>
-        </div>
-      {%- endif %}
-
       <h2 class="editable title">
         {{ article.title or "Insert your title here" }}
       </h2>
@@ -37,17 +31,15 @@
         {{ article.content|safe or "Insert your content here" }}
       </div>
 
-      <div class=form-group>
-        <label for=published>Publish this article</label>
-        <input type=checkbox name=published value=1 id=published {% if article.published %}checked{% endif %}>
-      </div>
-
       <div class="button-group">
         <input type=hidden name=title>
         <input type=hidden name=content>
-        <button type=submit class=save>Save your article</button>
+        <input type=hidden name=published>
+
+        <button type=submit class=draft>Save as draft</button>
+        <button type=submit class=publish>Publish article</button>
         {% if article.id -%}
-          <a class="button delete" href={{ url_for('article_delete', id=article.id) }}>Delete your article</a>
+          <a class="button delete" href={{ url_for('article_delete', id=article.id) }}>Delete article</a>
         {%- endif %}
       </div>
     </form>
@@ -78,7 +70,7 @@
     })
 
     const editFormArticle = document.querySelector('form.article')
-    editFormArticle.onsubmit = () => {
+    editFormArticle.onsubmit = event => {
       const editableTitle = document.querySelector('.editable.title')
       const inputTitle = document.querySelector('input[name=title]')
       inputTitle.value = editableTitle.innerText
@@ -86,6 +78,9 @@
       const editableContent = document.querySelector('.editable.content')
       const inputContent = document.querySelector('input[name=content]')
       inputContent.value = editableContent.innerHTML
+
+      const inputPublished = document.querySelector('input[name=published]')
+      inputPublished.value = event.explicitOriginalTarget.className === 'published'
     }
   </script>
 {%- endblock %}

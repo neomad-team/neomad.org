@@ -49,16 +49,14 @@
         </div>
       </main>
     </article>
-  </main>
-{% endblock %}
 
-{% block footer %}
-  <footer>
-    {% if article.author == current_user -%}
-      <a class=button href={{ url_for('article_edit', id=article.id) }}>Edit your article</a>
-      <a class=button href={{ url_for_user(article.author) }}>Back to your profile</a>
-    {% else %}
-      <a class=button href={{ url_for_user(article.author) }}>Read more from {{ article.author }}</a>
-    {%- endif %}
-  </footer>
+    <div class=button-group>
+      {% if article.author == current_user -%}
+        <a class=button href={{ url_for('article_edit', id=article.id) }}>Edit your article</a>
+        <a class=button href={{ url_for_user(article.author) }}>Back to your profile</a>
+      {% else %}
+        <a class=button href={{ url_for_user(article.author) }}>Read more from {{ article.author }}</a>
+      {%- endif %}
+    </div>
+  </main>
 {% endblock %}
