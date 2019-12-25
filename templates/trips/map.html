@@ -14,18 +14,17 @@
 
   <link rel=stylesheet href={{ url_for('static', filename='css/map.css') }}>
   <link rel=stylesheet href={{ url_for('static', filename='css/map-trips.css') }}>
+  {% endblock %}
 
-  <script src={{ url_for('static', filename='dist/leaflet/leaflet.js') }}></script>
-  <script src={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.min.js') }}></script>
-{% endblock %}
-
-{% block main %}
+  {% block main %}
   <main>
     <div id=map></div>
   </main>
-{% endblock %}
+  {% endblock %}
 
-{% block extra_js %}
+  {% block extra_js %}
+  <script src={{ url_for('static', filename='dist/leaflet/leaflet.js') }}></script>
+  <script src={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.min.js') }}></script>
   <script>
     var current_location = {{ user.current_location or [] }}
     var locations = [
