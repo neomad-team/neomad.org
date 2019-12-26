@@ -4,8 +4,9 @@
   {% set article = original_article.morph() %}
   {% set url = url_for_article(article) %}
 
-  <article class=preview>
+  <article class="preview {% if not article.published %}draft{% endif %}">
     <header class=meta>
+      {% if article.published %}draft{% endif %}
       {% if with_author %}
         <a href={{ url_for_user(article.get_author()) }}>
           <img
@@ -22,12 +23,6 @@
         </div>
       {% elif article.publication_date %}
         <time class="icon time" datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
-      {% endif %}
-
-      {% if not article.published %}
-        <div class=ribbon-wrapper>
-          <a class=ribbon href={{ url }}>draft</a>
-        </div>
       {% endif %}
     </header>
 

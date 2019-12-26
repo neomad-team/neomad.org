@@ -15,56 +15,73 @@
 {% endblock %}
 
 {% block main %}
-  <header>
-    <div class="profile-intro wrapper">
-      <figure>
-        <img class=avatar-img
-          name=avatar
-          src={{ user.avatar }}
-          width=100
-          height=100
-          onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
-      </figure>
-      <div>
-        <h1 name=username>{{ user.username }}</h1>
-        <p name=about>{{ user.about|htmlnewline }}</p>
+  <main>
+    <header class=profile>
+      <article class="profile-user">
+        <h1>{{ user.username }}</h1>
+        <p class=about>{{ user.about|htmlnewline }}</p>
+
         {% if user.allow_community %}
-        <p>
-          {{ user }} is currently around <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location and user.current_location|join(',') }}>the world</a>.</p>
+          <p>
+            {{ user }} is currently around <a href={{ url_for_trips(user) }} data-latlng={{ user.current_location and user.current_location|join(',') }}>the world</a>.
+          </p>
         {% else %}
-          <div class=private>
+          <p class=private>
             {{ user }} disabled community mode; the contents are therefore private.<br>
-            {% if user == current_user %}
-              <a href={{ url_for('privacy') }}>Change my community status</a>
-            {% endif %}
-          </div>
+          </p>
         {% endif %}
-      </div>
-      <section class=social>
+
+        <figure>
+          <img class=avatar
+            src={{ user.avatar }}
+            width=100
+            height=100
+            onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'">
+        </figure>
+
+      </article>
+
+      <ul class=profile-socials>
         {% if user.socials.email -%}
-          <a class=email href=mailto:{{ user.socials.email }} title="Send an email">Send an email</a>
+          <li>
+            <a class="icon email" href=mailto:{{ user.socials.email }} title="Send email">{{ user.socials.email }}</a>
+          </li>
         {%- endif %}
+
         {% for name, url in user.socials.items() -%}
           {% if name != 'email' and url -%}
-            <a class={{ name }} href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
+            <li>
+              <a class="icon {{ name }}" href={{ url }} target=_blank title="View {{ user }}'s profile on {{ name|capitalize }}">{{ name|capitalize }}</a>
+            </li>
           {%- endif %}
         {%- endfor %}
-      </section>
+      </ul>
+
       <nav>
         {% if user == current_user -%}
-          <a class="action-button settings" href={{ url_for('profile_edit') }}>Edit my profile</a>
-          <a class="action-button settings" href={{ url_for('privacy') }}>Edit privacy settings</a>
-          <a class="action-button trips" href={{ url_for_trips(user) }}>View my trips</a>
+          <a class="button icon setting" href={{ url_for('profile_edit') }}>Edit my profile</a>
+          <a class="button icon setting" href={{ url_for('privacy') }}>Edit privacy settings</a>
+          <a class="button icon trip" href={{ url_for_trips(user) }}>View my trips</a>
         {%- else %}
-          <a class="action-button trips" href={{ url_for_trips(user) }}>View {{ user }}'s trips</a>
+          <a class="button icon trip" href={{ url_for_trips(user) }}>View {{ user }}'s trips</a>
         {%- endif %}
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <section class="articles wrapper">
-    {{ article_list(articles=articles, with_author=false) }}
-  </section>
+    <section class=articles>
+      {% if user == current_user -%}
+        <article class=preview>
+          <div class=bar></div>
+          <div class=bar></div>
+          <div class=bar></div>
+          <div class=bar></div>
+          <a href={{ url_for('article_create') }} class=read>Create a new article</a>
+        </article>
+      {% endif %}
+
+      {{ article_list(articles=articles, with_author=false) }}
+    </section>
+  </main>
 {% endblock %}
 
 {% block extra_js %}

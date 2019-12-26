@@ -4,6 +4,10 @@
     - This file should be empty... and remove soon
 */
 
+/*
+  CORE
+*/
+
 body {
   background-color: var(--color-background-primary);
 }
@@ -117,6 +121,26 @@ footer .icon::before {
   margin: 3rem 0 0;
   max-width: initial;
 }
+
+form.article {
+  width: 55rem;
+}
+
+/*
+  PROFILE
+*/
+
+header.profile {
+  padding: 3rem 10rem;
+}
+
+.preview .bar {
+  height: 1.2rem;
+}
+
+/*
+  UTILS
+*/
 
 #notification {
   position: absolute;

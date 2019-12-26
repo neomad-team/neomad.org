@@ -1,4 +1,4 @@
-main > header {
+/* main > header {
   background-color: #fff;
   border-bottom: 3px solid #eee;
   margin: -3.5rem auto 3rem;
@@ -58,7 +58,7 @@ main > header {
   order: 2;
   padding: 3rem 0 4rem;
 }
-/* edit */
+
 .profile-intro .social input {
   border: none;
   width: auto;
@@ -150,36 +150,4 @@ main > header {
 }
 .profile-intro nav .trips::before {
   content: "\f277";
-}
-
-.newtext {
-  display: block;
-  border-radius: 1rem;
-  width: 90%;
-  background-color: #333;
-  opacity: .1;
-  line-height: 70%;
-  margin-bottom: 1rem;
-}
-.newtext.title {
-  opacity: .2;
-  width: 50%;
-}
-
-@media screen and (max-width:620px) {
-  main > header > .profile-intro.wrapper{
-    margin-top: 2rem;
-    flex-direction: column;
-  }
-  main > header .profile-intro figure {
-    order: 0;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-  main > header .profile-intro label {
-    padding-top: 3.5rem;
-  }
-  .profile-intro nav a:first-child {
-    margin-right: 2rem;
-  }
-}
+} */
