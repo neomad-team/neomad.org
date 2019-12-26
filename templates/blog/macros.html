@@ -5,8 +5,11 @@
   {% set url = url_for_article(article) %}
 
   <article class="preview {% if not article.published %}draft{% endif %}">
+    <div class="ribbon-wrapper">
+      <a href="" class="ribbon">draft</a>
+    </div>
+
     <header class=meta>
-      {% if article.published %}draft{% endif %}
       {% if with_author %}
         <a href={{ url_for_user(article.get_author()) }}>
           <img

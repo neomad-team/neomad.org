@@ -130,12 +130,17 @@ form.article {
   PROFILE
 */
 
-header.profile {
-  padding: 3rem 10rem;
+header.profile,
+.articles {
+  padding: 5rem 25rem;
 }
 
 .preview .bar {
   height: 1.2rem;
+}
+
+.preview:not(.draft) .ribbon-wrapper {
+  display: none;
 }
 
 /*
