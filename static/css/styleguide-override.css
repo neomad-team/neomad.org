@@ -143,6 +143,44 @@ header.profile,
   display: none;
 }
 
+form.profile {
+  display: flex;
+  padding: 5rem;
+  margin: 0 auto;
+  width: 75rem;
+}
+
+form.profile .avatar {
+  margin-right: 2rem;
+}
+
+form.profile figure {
+  position: relative;
+}
+
+form.profile figure label {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  background-color: rgba(255, 255, 255, .7);
+  padding-top: 27%;
+  cursor: pointer;
+  display: none;
+  z-index: 4;
+}
+
+form.profile figure:hover label {
+  display: inherit;
+}
+
+form.profile figure input {
+  display: none;
+}
+
 /*
   UTILS
 */
