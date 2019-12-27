@@ -8,17 +8,17 @@
 {% endblock %}
 
 {% block main %}
-
-<section>
-  <h2>Don't worry,<br>
-    this is just <span>{{ user.username }}</span>'s page that is private.</h2>
-  <p>
-    {{ user.username }} has disabled the community mode.<br>
-    Don't be ungry, we are all free to share or not.
-   </p>
-  <a href=/ class=action-button>Go back to home</a>
-</section>
-
+  <main>
+    <section>
+      <h2>Don't worry,<br>
+        this is just <span>{{ user.username }}</span>'s page that is private.</h2>
+      <p>
+        {{ user.username }} has disabled the community mode.<br>
+        Don't be ungry, we are all free to share or not.
+      </p>
+      <a href=/ class=button>Go back to home</a>
+    </section>
+  </main>
 {% endblock %}
 
-{% include 'analytics.html' %}
+{% include 'script/analytics.html' %}

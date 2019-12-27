@@ -1,0 +1,16 @@
+<script>
+	const usersLocation = []
+	{% for user in users %}
+		usersLocation.push({
+			name: '{{ user.username or "anonymous" }}',
+			position: {{ user.current_location or [] }},
+			link: "{{ url_for_user(user) }}",
+			avatar: '{{ user.avatar }}',
+			about: `{{ user.about }}`,
+		})
+	{% endfor %}
+
+	{% if not current_user.allow_community %}
+		alert('localization', 'You do not allow localization, see you profile setting')
+	{% endif %}
+</script>

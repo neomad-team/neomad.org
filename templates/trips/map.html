@@ -22,20 +22,10 @@
   </main>
 {% endblock %}
 
+{% include 'script/location-trips.html' %}
 {% block extra_js %}
   <script src={{ url_for('static', filename='dist/leaflet/leaflet.js') }}></script>
   <script src={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.min.js') }}></script>
-  <script>
-    var current_location = {{ user.current_location or [] }}
-    var locations = [
-      {% for location in locations %}
-        {
-          date: '{{ location.date|datetime }}',
-          position: {{ location.position }}
-        },
-      {% endfor %}
-    ]
-  </script>
   <script src={{ url_for('static', filename='js/map.js') }}></script>
   <script src={{ url_for('static', filename='js/map-trips.js') }}></script>
 {% endblock %}
