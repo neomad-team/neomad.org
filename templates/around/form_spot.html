@@ -11,6 +11,15 @@
 		<form action="{{ url_for('api_spot_create') }}" method=post>
 			<h2>Share your place</h2>
 
+			{% if not current_user.allow_community %}
+				<p>Currently, you <strong>disallow</strong> community sharing.</p>
+				<p>
+					You could enable community mode to share your location otherwise, you could authorize
+					your browser location just to add this unique place.
+				</p>
+				<a class="button icon setting" href={{ url_for('privacy') }}>Edit privacy settings</a>
+			{% endif %}
+
 			<label for=name>Name<span>*</span></label>
 			<input name=name type=text required>
 
@@ -43,7 +52,7 @@
 {% block extra_js %}
 	<script>
 		let userLocation = {{ current_user.current_location }}
-		// get browser position promise from utils
+		// try to get browser position from promise in utils if the user do not share its position
 		if (!userLocation) userLocation = getPosition()
 	</script>
   <script src={{ url_for('static', filename='js/form-spot.js') }}></script>

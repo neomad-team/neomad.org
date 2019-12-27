@@ -14,7 +14,7 @@ body {
 
 .blog-article {
   margin: 6.5rem auto;
-  max-width: 75rem;
+  width: 75rem;
   padding: 3rem 10rem;
 }
 
