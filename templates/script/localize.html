@@ -2,13 +2,10 @@
   <script>
     function localize() {
       navigator.geolocation.getCurrentPosition(position => {
-        fetch("{{ url_for('trips_add') }}", {
+        fetch("/trips/add/", {
           method: 'post',
-          body: JSON.stringify([position.coords.latitude, position.coords.longitude]),
-          credentials: 'same-origin',
-          headers: {
-            'Content-Type': 'application/json'
-          }
+          body: JSON.stringify([position.coords.latitude, position.coords.longitude]), credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' }
         })
       })
     }
