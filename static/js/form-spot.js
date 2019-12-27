@@ -18,7 +18,7 @@ form.addEventListener('submit', event => {
   .then(r => r.json())
   .then(response => {
     response.id
-      ? alert('success', 'You spot was saved successfully, thanks!', 5)
+      ? alert('success', 'You spot was saved successfully, thanks!')
       : alert('error', 'Something went wrong. Please try again later.')
   })
   .catch(e => console.error(e))

@@ -7,6 +7,7 @@
     - header.main should be body > header removing the class
     - footer should be body > footer to scope style deeper
     - define different class for body > main to manage padding rules
+    - define alert style
 */
 
 /*
