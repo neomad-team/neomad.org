@@ -11,31 +11,37 @@
 		<form action="{{ url_for('api_spot_create') }}" method=post>
 			<h2>Share your place</h2>
 
-			<label for=name>Name<span>*</span></label>
-			<input name=name type=text required>
+			{% if not current_user.allow_community %}
+				<p>Currently, you <strong>disallow</strong> community sharing.</p>
+				<p>You should enable community mode to share your location and propose a place to share.</p>
+				<a class="button icon setting" href={{ url_for('privacy') }}>Edit privacy settings</a>
+			{% else %}
+				<label for=name>Name<span>*</span></label>
+				<input name=name type=text required>
 
-			<label for=category>Type of place</label>
-			<div class="select">
-				<select name=category>
-					<option value=coworking>Coworking space</option>
-					<option value=cafe>Coffeeshop / Restaurant</option>
-					<option value=other>Library / Museum / other</option>
-				</select>
-			</div>
+				<label for=category>Type of place</label>
+				<div class="select">
+					<select name=category>
+						<option value=coworking>Coworking space</option>
+						<option value=cafe>Coffeeshop / Restaurant</option>
+						<option value=other>Library / Museum / other</option>
+					</select>
+				</div>
 
-			<label for=wifi>Wifi quality</label>
-			<input name=wifi min=0 max=5 value=3 type=range>
+				<label for=wifi>Wifi quality</label>
+				<input name=wifi min=0 max=5 value=3 type=range>
 
-			<label for=power>Power is available</label>
-			<input name=power type=checkbox>
+				<label for=power>Power is available</label>
+				<input name=power type=checkbox>
 
-			<label for=comment>Anything to say?</label>
-			<textarea name=comment type=text></textarea>
+				<label for=comment>Anything to say?</label>
+				<textarea name=comment type=text></textarea>
 
-			<div class="button-group">
-				<button type=submit>Save this place</button>
-				<a class=button href={{ url_for('around') }}>Cancel</a>
-			</div>
+				<div class="button-group">
+					<button type=submit>Save this place</button>
+					<a class=button href={{ url_for('around') }}>Cancel</a>
+				</div>
+			{% endif %}
 		</form>
   </main>
 {% endblock %}
