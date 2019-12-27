@@ -1,7 +1,12 @@
 /*
   NOTE:
-    - Here exceptions/updates missing or on-going in styleguide.neomad.org
+    - Here exceptions,updates, missing or on-going style in styleguide.neomad.org
     - This file should be empty... and remove soon
+
+  ENHANCEMENT:
+    - header.main should be body > header removing the class
+    - footer should be body > footer to scope style deeper
+    - define different class for body > main to manage padding rules
 */
 
 /*
@@ -120,10 +125,6 @@ footer .icon::before {
   align-self: center;
   margin: 3rem 0 0;
   max-width: initial;
-}
-
-form.article {
-  width: 55rem;
 }
 
 /*

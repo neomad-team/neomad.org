@@ -26,11 +26,22 @@ def profile(username):
                            edit=(user == current_user))
 
 
-@app.route('/privacy/', methods=['get'])
+@app.route('/privacy/', methods=['get', 'post'])
 @login_required
 def privacy():
-    user = User.objects.get(id=current_user.id)
-    return render_template('user/privacy.html',
+    if request.method == 'POST':
+        try:
+            user = User.objects.get(id=current_user.id)
+            field = 'allow_community'
+            value = request.form.get(field) == 'enable'
+            setattr(user, field, value)
+            user.save()
+            return redirect(url_for_user(user))
+        except User.DoesNotExist:
+            abort(404)
+    else:
+        user = User.objects.get(id=current_user.id)
+        return render_template('user/privacy.html',
                            user=user,
                            locations=user.locations)
 
@@ -56,7 +67,7 @@ def profile_edit():
 @app.route('/profile/', methods=['post'])
 @login_required
 def profile_save():
-    data_fields = ['username', 'about', 'allow_community']
+    data_fields = ['username', 'about']
     user = User.objects.get(id=current_user.id)
     for field in data_fields:
         value = request.form.get(field)

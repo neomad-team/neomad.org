@@ -5,105 +5,45 @@
 {% endblock %}
 
 {% block main %}
-  <section>
-    <article>
-      <h2>Community mode</h2>
-      <form>
-        <input type=checkbox name=community {% if user.allow_community %}checked{% endif %} id=community>
-        <label for=community title="{% if user.allow_community %}Disable{% else %}Enable{% endif %} community profile">
-          Click to {% if user.allow_community %}disable{% else %}enable{% endif %}
-        </label>
-      </form>
-      <aside>
+  <main>
+    <section>
+      <form class=privacy method=post action={{ url_for('privacy') }} enctype=multipart/form-data>
+        <h2>Community mode</h2>
+
         {% if user.allow_community %}
-        <p>
-          Disabling the community mode hides your profile, your articles and your location.
-        </p>
+          <input type=hidden name=allow_community value=disable>
+          <p>Currently, you <strong>allow</strong> community sharing.</p>
+          <p>Disabling the community mode hides your profile, your articles and your location.</p>
+          <p>Only you will view your map.</p>
+          <button type=submit>Disable community mode</button>
         {% else %}
-        <p>
-          Enabling community mode allows you to publish your articles, to share your location, and visitors to read your profile.
-        </p>
+          <input type=hidden name=allow_community value=enable>
+          <p>Currently, you <strong>disallow</strong> community sharing.</p>
+          <p>Enabling community mode allows you to publish your articles, to share your location, and visitors to read your profile.</p>
+          <button type=submit>Enable community mode</button>
         {% endif %}
-      </aside>
-      {% if user.allow_community %}
-      <footer>
-        <p>
-          Disabling the community mode allows only you to view your map.
-        </p>
-      </footer>
-      {% else %}
-      {% endif %}
-    </article>
-    <article>
+      </form>
+    </section>
+
+    <section class=trips>
       <h2>List of your trip positions</h2>
       <ul>
         {% for location in locations %}
-        <li>
-          <p>{{ location.date | datetime }}</p>
-          <a
-            data-latlng={{ location.position|join(',') }}
-            href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }}
-            target=_blank>{{ location.position|join(',') }}
-          </a>
-          <form method=post action={{ url_for('privacy_delete_trip', date=location.date.timestamp()) }}>
-            <a class=button href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} target=_blank>View on map</a>
-            <button class=delete>Delete</button>
-          </form>
-        </li>
+          <li>
+            <p>{{ location.date | datetime }}</p>
+            <a
+              data-latlng={{ location.position|join(',') }}
+              href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }}
+              target=_blank>{{ location.position|join(',') }}
+            </a>
+
+            <form method=post action={{ url_for('privacy_delete_trip', date=location.date.timestamp()) }}>
+              <a class=button href=https://osm.org/?mlat={{ location.position[0] }}&mlon={{ location.position[1] }} target=_blank>View on map</a>
+              <button>Delete</button>
+            </form>
+          </li>
         {% endfor %}
-      </ul>
-    </article>
-  </section>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-const communityField = document.querySelector('[name=community]')
-communityField.addEventListener('change', event => {
-  call = api.send('patch', "{{ url_for('profile_edit') }}",
-    {allow_community: event.target.checked},
-  )
-  if (event.target.checked) {
-    apiFeedback(call, 'Community mode was enabled. Your profile, location and articles are now public.')
-    localize()
-  } else {
-    apiFeedback(call, 'Community mode was disabled. Your profile, location and articles are now hidden.')
-  }
-})
-
-Array.from(document.querySelectorAll('[data-latlng]')).forEach(a => {
-  coordinatesToAddress(a.dataset.latlng)
-  .then(data => {
-     a.textContent = `${data.area}, ${data.country}`
-  })
-})
-
-function apiFeedback(caller, confirmation) {
-  return caller.then(response => {
-    const status = response.status
-    if(200 <= status < 300) {
-      alert('success', confirmation)
-    }
-    else {
-      alert('error', `An error occured. Technical detail: response status ${status}`)
-      console.error(response)
-    }
-    return response
-  }, error => {
-    alert('error', error)
-    return error
-  })
-}
-
-const api = {
-  send(method, url, data) {
-    return fetch(url, {
-      method: method.toUpperCase(),
-      body: JSON.stringify(data),
-      credentials: 'same-origin',
-      headers: {'Content-Type': 'application/json'}
-    })
-  }
-}
-</script>
+      </ul >
+    </section>
+  </main>
 {% endblock %}

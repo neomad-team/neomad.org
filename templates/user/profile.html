@@ -23,7 +23,7 @@
           </p>
         {% else %}
           <p class=private>
-            {{ user }} disabled community mode; the contents are therefore private.<br>
+            {{ user }} <strong>disabled</strong> community mode, the contents are therefore private.<br>
           </p>
         {% endif %}
 
@@ -78,15 +78,4 @@
       {{ article_list(articles=articles, with_author=false) }}
     </section>
   </main>
-{% endblock %}
-
-{% block extra_js %}
-  <script>
-    const a = document.querySelector('[data-latlng]')
-    if(a) {
-      coordinatesToAddress(a.dataset.latlng).then(data => {
-        a.textContent = `${data.area}, ${data.country}`
-      })
-    }
-  </script>
 {% endblock %}
