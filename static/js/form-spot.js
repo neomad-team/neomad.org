@@ -3,7 +3,11 @@ form.addEventListener('submit', event => {
   event.preventDefault()
 
   /** user location value defined from template */
-  const formValues = { location: userLocation }
+  const location = userLocation
+  if (!location)
+    return alert('error', 'You have not allow you location, please change your privacy setting.')
+
+  const formValues = { location }
   const data = new FormData(event.target)
   data.forEach((v, k) => formValues[k] = v)
 
