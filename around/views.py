@@ -12,6 +12,7 @@ def around():
 
 
 @app.route('/around/spot')
+@login_required
 def form_spot():
     users = User.objects(allow_community=True)
     return render_template('around/form_spot.html', users=users)
