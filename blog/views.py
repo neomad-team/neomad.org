@@ -11,12 +11,6 @@ from user.models import User
 from .models import Article, clean_html
 
 
-def printLog(*args, **kwargs):
-    print(*args, **kwargs)
-    with open('output.out','a') as file:
-        print(*args, **kwargs, file=file)
-
-
 @app.route('/articles/')
 def article_list():
     articles = Article.objects(published=True)
