@@ -22,7 +22,7 @@
 
   <nav>
     <a href={{ url_for('article_list') }} title="Read Neomad's adventures">Read</a>
-    <a href={{ url_for('around') }}>Around me</a>
+    <a href={{ url_for('around') }}>Around Me</a>
 
     {% if current_user and current_user.is_authenticated %}
       <div id=avatar-menu>
@@ -36,11 +36,12 @@
       <nav id=menu class=nav-account>
         <a href={{ url_for_user(current_user) }}>Profile</a>
         <a href={{ url_for_trips(current_user) }}>Trips</a>
-        <a href={{ url_for('privacy') }}>Privacy settings</a>
+        <a href={{ url_for('privacy') }}>Privacy Settings</a>
         <a href={{ url_for('logout') }}>Logout</a>
       </nav>
     {% else %}
-      <a href={{ url_for('login') }} class=login>Sign in</a>
+      <a href={{ url_for('signup') }} class=signup>Sign Up</a>
+      <a href={{ url_for('login') }} class=login>Log In</a>
     {% endif %}
   </nav>
 </header>
