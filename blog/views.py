@@ -69,7 +69,7 @@ def article_edit(id):
     if request.method == 'POST':
         article.title = request.form.get('title')
         article.content = request.form.get('content')
-        article.published = request.form.get('published') == 'true'
+        article.published = eval(request.form.get('published'))
         if article.published and not article.publication_date:
             article.publication_date = datetime.datetime.utcnow()
         if article.title != '' and clean_html(article.content) != '':
