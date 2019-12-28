@@ -1,5 +1,5 @@
 from flask import render_template
-from flask_login import login_required, current_user
+from flask_login import login_required
 
 from core import app
 from user.models import User

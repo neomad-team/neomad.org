@@ -40,6 +40,6 @@ function getPosition() {
       timeout: 5000,
       maximumAge: 0
     }
-    navigator.geolocation.getCurrentPosition(success, fail, options);
+    navigator.geolocation.getCurrentPosition(success, fail, options)
   })
 }
