@@ -4,37 +4,28 @@
 {% block description %}Follow {{ user|capitalize }}'s trips on Neomad.{% endblock %}
 
 {% block extra_og %}
-<meta property=og:image content="{{ user.avatar }}">
-<meta property=og:title content="Nomad trips: where {{ user|capitalize }} has traveled">
+  <meta property=og:image content="{{ user.avatar }}">
+  <meta property=og:title content="Nomad trips: where {{ user|capitalize }} has traveled">
 {% endblock %}
 
 {% block extra_css %}
-<link rel=stylesheet href={{ url_for('static', filename='dist/leaflet/leaflet.css') }}>
-<link rel=stylesheet href={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.css') }}>
+  <link rel=stylesheet href={{ url_for('static', filename='dist/leaflet/leaflet.css') }}>
+  <link rel=stylesheet href={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.css') }}>
 
-<link rel=stylesheet href={{ url_for('static', filename='css/map.css') }}>
-<link rel=stylesheet href={{ url_for('static', filename='css/trips-map.css') }}>
-
-<script src={{ url_for('static', filename='dist/leaflet/leaflet.js') }}></script>
-<script src={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.min.js') }}></script>
+  <link rel=stylesheet href={{ url_for('static', filename='css/map.css') }}>
+  <link rel=stylesheet href={{ url_for('static', filename='css/map-trips.css') }}>
 {% endblock %}
 
 {% block main %}
-<div id=map></div>
+  <main>
+    <div id=map></div>
+  </main>
 {% endblock %}
 
+{% include 'script/location-trips.html' %}
 {% block extra_js %}
-<script>
-var current_location = {{ user.current_location or [] }}
-var locations = [
-{% for location in locations %}
-  {
-    date: '{{ location.date|datetime }}',
-    position: {{ location.position }}
-  },
-{% endfor %}
-]
-</script>
-<script src={{ url_for('static', filename='js/map.js') }}></script>
-<script src={{ url_for('static', filename='js/trips-map.js') }}></script>
+  <script src={{ url_for('static', filename='dist/leaflet/leaflet.js') }}></script>
+  <script src={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.min.js') }}></script>
+  <script src={{ url_for('static', filename='js/map.js') }}></script>
+  <script src={{ url_for('static', filename='js/map-trips.js') }}></script>
 {% endblock %}

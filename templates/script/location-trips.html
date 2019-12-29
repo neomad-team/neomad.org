@@ -1,0 +1,11 @@
+<script>
+	var current_location = {{ user.current_location or [] }}
+	var locations = [
+		{% for location in locations %}
+			{
+				date: '{{ location.date|datetime }}',
+				position: {{ location.position }}
+			},
+		{% endfor %}
+	]
+</script>

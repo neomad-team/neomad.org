@@ -8,78 +8,29 @@
 {% endblock %}
 
 {% block main %}
-<style>
-form {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  background-color: white;
-}
-label {
-  display: inline-block;
-  width: 100px;
-  margin-bottom: 20px;
-  font-weight: bold;
-}
-input {
-  font: inherit;
-  padding: 0 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-form button {
-  font: inherit;
-  font-weight: inherit;
-  background-color: #297ddb;
-  color: white;
-  border: 1px solid #6c6969;
-  border-radius: 7px;
-  padding: 5px 50px;
-  font-weight: bold;
-  margin-left: 100px;
-}
+  <main>
+    {% block login %}
+      <form class=register action={{ url_for('login') }} method=post>
+        <h1>Log into my account</h1>
 
-@media screen and (max-width:400px) {
-  label,
-  input,
-  form button {
-    width: 100%;
-  }
+        {% if errors %}
+          <ul>
+          {% for error in errors %}
+            <li class=error>{{ error }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
 
-  label {
-    margin-bottom: 0.5rem;
-  }
 
-  input {
-    margin-bottom: 2rem;
-  }
-  form button {
-    margin: 0;
-  }
-}
-</style>
+        <label for=email>Email</label>
+        <input type=email id=email name=email required>
 
-{% block login %}
-<form action={{ url_for('login') }} method=post>
-  {% if errors %}
-    <ul>
-    {% for error in errors %}
-      <li class=error>{{ error }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-  <h1>Log into my account</h1>
-  <div>
-    <label for=email>Email</label>
-    <input type=email id=email name=email required>
-  </div>
-  <div>
-    <label for=password>Password</label>
-    <input type=password id=password name=password required>
-  </div>
-  <button type=submit>Log in</button>
-  <p class=alternative><a href={{ url_for('signup') }}>I don't have an account yet!</a></p>
-</form>
-{% endblock %}
+        <label for=password>Password</label>
+        <input type=password id=password name=password required>
+
+        <button class="icon become-user" type=submit>Log in</button>
+        <a class="icon account" href={{ url_for('signup') }}>I don't have an account yet!</a>
+      </form>
+    {% endblock %}
+  </main>
 {% endblock %}

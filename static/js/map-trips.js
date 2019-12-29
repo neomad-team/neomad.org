@@ -24,7 +24,7 @@ L.polyline(locations.map(l => l.position), {
     smoothFactor: 1,
     popupAnchor: [-7, -10],
   }).addTo(map)
-  
+
 markers.addTo(map)
 currentMarker.addTo(map)
 

@@ -18,13 +18,6 @@ const osm = '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</
 const contribute = '- <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>'
 credits.addAttribution(`${mapbox} ${osm} ${contribute}`).addTo(map)
 
-// user position
-const localizeUser = new L.control.locate({
-  position: 'topright',
-  setView: 'false',
-  locateOptions: {maxZoom: 15}
-  }).addTo(map)
-
 // create icon model
 class MarkerIcon extends L.Icon {
   constructor(options) {

@@ -1,130 +1,143 @@
 {% from 'blog/macros.html' import article_list with context %}
-
 {% extends 'layout.html' %}
 
 {% block title %}Digital Nomad Community{% endblock %}
 {% block description %}Find a local place to work, get connected to other remote workers.{% endblock %}
 
-{% block extra_css %}
-  <link rel=stylesheet href={{ url_for('static', filename='css/home.css') }}>
-  <link rel=stylesheet href={{ url_for('static', filename='css/_article_list.css') }}>
-{% endblock %}
-
 {% block main %}
-  <section class=hero>
-    <h1>Neomad</h1>
-    <h2>Make the world your home. And workplace.</h2>
-    {% if not current_user or not current_user.is_authenticated %}
-    <a href={{ url_for('signup') }} id=join-us>Become a Neomad</a>
-    {% endif %}
-    <a href=#features id=arrow-down>find out below our features</a>
-  </section>
+  <main>
+    <section class=hero>
+      <h2>Neomad</h2>
+      <h3>Make the world your home. And workplace.</h3>
 
-  <section class=feature>
-    <div class=wrapper>
-      <aside><img src=/static/images/home/van.svg> </aside>
+      {% if not current_user or not current_user.is_authenticated %}
+        <a class="button icon become-user" href={{ url_for('signup') }}>Become a Neomad</a>
+      {% else %}
+        <a class="button icon account" href={{ url_for_user(current_user) }} title="go to your account">Go to your account</a>
+      {% endif %}
+
+      <a class="scroll-invitation" href=#scroll-anchor title="find out below ...">
+        <div class="mouse">
+          <div class="wheel"></div>
+        </div>
+        <div>
+          <span class="arrow first"></span>
+          <span class="arrow second"></span>
+          <span class="arrow third"></span>
+        </div>
+      </a>
+    </section>
+
+    <section class="presentation with-image" id=scroll-anchor>
+      <aside>
+        <img
+          src=/static/images/home/van.svg
+          alt="Your stories">
+      </aside>
+
       <article>
-        <h3>Read and share Neomad's stories</h3>
+        <h2>Read and share Neomad's stories</h2>
         <ul>
           <li>Share the best stories that happened on your trips,</li>
           <li>Give others your good tips for a better journey,</li>
           <li>Whatever your level of nomadism, there are things to give and take.</li>
         </ul>
-        <footer>
-          <a href={{ url_for('article_list') }} class="action-button primary">Read from Neomads</a>
-          <a href={{ url_for('signup') }} class="action-button primary">Write your stories</a>
-        </footer>
+        <div class="button-group">
+          <a class=button href={{ url_for('article_list') }}>Read from Neomads</a>
+          <a class=button href={{ url_for('signup') }}>Write your stories</a>
+        </div>
       </article>
-    </div>
-  </section>
+    </section>
 
-  <section class=feature>
-    <div class=wrapper>
-      <aside><img src=/static/images/home/trips.svg> </aside>
+    <section class="presentation with-image">
+      <aside>
+        <img
+          src=/static/images/home/trips.svg
+          alt="Your trips">
+      </aside>
+
       <article>
-        <h3>Track your trips</h3>
+        <h2>Track your trips</h2>
         <ul>
           <li>Have you ever looked where you've been and how you traveled?</li>
           <li>Are you interested to see how your trip-mates made their journey?</li>
           <li>Follow travelers on their map and get inspired!</li>
         </ul>
-
-        <footer>
-          <a href={{ url_for('signup') }} class="action-button primary">Start sharing your trips</a>
-        </footer>
+        <div class="button-group">
+          <a class=button href={{ url_for('signup') }}>Start sharing your trips</a>
+        </div>
       </article>
-      </div>
-  </section>
+    </section>
 
-  <section class=feature>
-    <div class=wrapper>
-      <aside><img src=/static/images/home/coffee.svg> </aside>
+    <section class="presentation with-image">
+      <aside>
+        <img
+          src=/static/images/home/coffee.svg
+          alt="Around you">
+      </aside>
+
       <article>
-        <h3>Find out what is around you</h3>
+        <h2>Find out what is around you</h2>
         <ul>
           <li>Are you aware that another Neomad might be in the cafe next door?</li>
           <li>Are you looking for a good spot with WiFi where to work from?</li>
           <li>Did you find some super spot to share with other Neomads?</li>
         </ul>
-        <footer>
-          <a href={{ url_for('around') }} class="action-button primary">What is around you</a>
-        </footer>
+        <div class="button-group">
+          <a class=button href={{ url_for('around') }}>What is around you</a>
+        </div>
       </article>
-    </div>
-  </section>
+    </section>
 
-  <section class=articles>
-    <h2>Latest articles from Neomads</h2>
-    <div class="row column">
-      {{ article_list(articles=articles) }}
-    </div>
-  </section>
+    <section class=presentation>
+      <h2>Latest articles from Neomads</h2>
+      <div class=blog-preview>
+        {{ article_list(articles=articles) }}
+      </div>
+    </section>
 
-  <section class=profiles>
-    <h2>Welcome to our last Neomads</h2>
-    <ul>
-    {% for user in users %}
-      {% if user.allow_community %}
-      <li>
-        <a href='{{ url_for_user(user) }}'>
-          <figure>
-            <img
-              src={{ user.avatar }}
-              title={{ user.username }}
-              width=100
-              height=100
-              onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'"
-              alt="photo of {{ user.username }}">
-            <figcaption>{{ user }}</figcaption>
-          </figure>
-        </a>
-      </li>
+    <section class=presentation>
+      <h2>Welcome to our last Neomads</h2>
+      <ul class=profiles>
+      {% for user in users %}
+        {% if user.allow_community %}
+          <li>
+            <a href='{{ url_for_user(user) }}'>
+              <figure>
+                <img
+                  class=avatar
+                  src={{ user.avatar }}
+                  title={{ user.username }}
+                  onerror="this.src='{{ url_for('static', filename='images/avatar.png') }}'"
+                  alt="photo of {{ user.username }}">
+                <figcaption>{{ user }}</figcaption>
+              </figure>
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+      </ul>
+
+      {% if not current_user or not current_user.is_authenticated %}
+        <a class=button href={{ url_for('signup') }}>Signup to join them</a>
       {% endif %}
-    {% endfor %}
-    </ul>
-    {% if not current_user or not current_user.is_authenticated %}
-    <a href={{ url_for('signup') }} class=action-button>Signup to join them</a>
-    {% endif %}
-  </section>
-
+    </section>
+  </main>
 {% endblock %}
 
 {% block footer %}
   <footer>
-    <nav class=wrapper>
-      <a href=mailto:contact+website@neomad.org>
-        <img src=https://upload.wikimedia.org/wikipedia/commons/3/3d/Envelope_font_awesome.svg
-          title="Send an email to Neomad" alt="Contact">
+    <nav>
+      <a class="icon email" href="mailto:contact+website@neomad.org" title="Contact us">
         Contact the Team
       </a>
-      <a href=https://github.com/neomad-team/neomad.org title="View the source of this project on Github">
-        <img src=https://upload.wikimedia.org/wikipedia/commons/9/95/Font_Awesome_5_brands_github.svg
-          title="Get the source code from Github" alt="Source on GitHub">Get the code
+      <a class="icon github" href="https://github.com/neomad-team/neomad.org" title="Github repository">
+        Get the code
       </a>
     </nav>
   </footer>
 {% endblock %}
 
 {% block extra_js %}
-<script src={{ url_for('static', filename='js/home.js') }}></script>
+  <script src={{ url_for('static', filename='js/home.js') }}></script>
 {% endblock %}

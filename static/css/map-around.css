@@ -1,0 +1,40 @@
+/* marker */
+.marker {
+  fill: #297ddb;
+}
+
+.not-current-marker {
+  fill: #8f8f8f;
+  /* overide leaflet native max at 1010 */
+  z-index: 1010 !important;
+}
+
+.hash-marker {
+  fill: #3ba77c;
+  /* overide regular markers */
+  z-index: 1011 !important;
+}
+
+.current-marker {
+  fill: #297ddb;
+  /* overide other markers when you hover a card */
+  z-index: 1012 !important;
+}
+
+.current-card h2 {
+  color: #297ddb;
+}
+
+.avatar {
+  background-image: url('/static/images/avatar.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0.1rem solid #fafafa;
+  border-radius: 100%;
+}
+
+.user-popup .avatar {
+  width: 150px;
+  height: 150px;
+}

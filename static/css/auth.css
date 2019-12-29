@@ -1,4 +1,7 @@
-p.alternative {
-  margin-top: 2rem;
-  font-size: 1.55rem;
+main {
+  padding: 5rem;
+}
+
+form {
+  max-width: 50rem;
 }

@@ -1,22 +1,18 @@
 #map {
-  position: fixed;
-  right: 0;
-  width: 100%;
-  min-height: 100vh;
+  position: relative;
+  height: calc(100vh - 6.5rem);
 }
 
-main {
-  margin-top: 6.5rem;
+a.button.trip {
+  position: absolute;
+  bottom: 0;
+  left: 1rem;
+  /* overide leaflet */
+  z-index: 401;
 }
 
-a.leaflet-control-zoom-in,
-a.leaflet-control-zoom-out {
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
   padding-right: .2rem;
   line-height: 2.2rem;
-}
-
-@media screen and (max-width:620px) {
-  main {
-    margin-top: 4.75rem;
-  }
 }

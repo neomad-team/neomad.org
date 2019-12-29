@@ -1,0 +1,199 @@
+/*
+  NOTE:
+    - Here exceptions,updates, missing or on-going style in styleguide.neomad.org
+    - This file should be empty... and remove soon
+
+  ENHANCEMENT:
+    - header.main should be body > header removing the class
+    - footer should be body > footer to scope style deeper
+    - define different class for body > main to manage padding rules
+    - define alert style
+*/
+
+/*
+  CORE
+*/
+
+body {
+  background-color: var(--color-background-primary);
+}
+
+header.main,
+footer {
+  padding: 1rem 9rem;
+}
+
+header.main {
+  /* overide leaflet and notification */
+  z-index: 1001;
+}
+
+.nav-account:not(.active) {
+  display: none;
+}
+
+.nav-account {
+  display: block;
+}
+
+.nav-account a {
+  padding: 1rem 0;
+}
+
+main {
+  margin: 6.5rem 0 0;
+}
+
+footer nav {
+  justify-content: flex-start;
+  padding: 1rem;
+}
+
+footer nav a {
+  display: flex;
+  flex-direction: row;
+  margin-right: 2.5rem;
+  align-items: flex-start;
+}
+
+footer .icon::before {
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+
+/*
+  SECTION
+*/
+
+.presentation {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.presentation.with-image {
+  flex-direction: row;
+}
+
+.presentation article {
+  width: 65rem;
+}
+
+.presentation aside {
+  height: 32rem;
+}
+
+.article-list {
+  margin: 0 auto;
+  max-width: 75rem;
+  padding: 2rem 4rem;
+}
+
+/*
+  ARTICLE CONTAINER
+*/
+
+.blog-preview {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.blog-preview .article-list {
+  padding: 2rem;
+  max-width: 100%;
+}
+
+.preview {
+  display: flex;
+  flex: 0 0 30%;
+  flex-direction: column;
+  min-width: 40rem;
+}
+
+.preview .meta-data {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.preview .meta-data a {
+  flex: 1 1 100%;
+}
+
+.preview h2 {
+  word-wrap: break-word;
+}
+
+.preview .button {
+  align-self: center;
+  margin: 3rem 0 0;
+  max-width: initial;
+}
+
+/*
+  PROFILE
+*/
+
+header.profile,
+.articles {
+  padding: 5rem 25rem;
+}
+
+.preview .bar {
+  height: 1.2rem;
+}
+
+.preview:not(.draft) .ribbon-wrapper {
+  display: none;
+}
+
+form.profile {
+  display: flex;
+  padding: 5rem;
+  margin: 0 auto;
+  width: 75rem;
+}
+
+form.profile .avatar {
+  margin-right: 2rem;
+}
+
+form.profile figure {
+  position: relative;
+}
+
+form.profile figure label {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  background-color: rgba(255, 255, 255, .7);
+  padding-top: 27%;
+  cursor: pointer;
+  display: none;
+  z-index: 4;
+}
+
+form.profile figure:hover label {
+  display: inherit;
+}
+
+form.profile figure input {
+  display: none;
+}
+
+/*
+  UTILS
+*/
+
+#notification {
+  position: absolute;
+  top: 6.5rem;
+  background-color: var(--color-white);
+  box-shadow: 0 .2rem 0 var(--color-shadow);
+  padding: 1rem;
+  /* overide leaflet */
+  z-index: 1000;
+  width: 100%;
+}

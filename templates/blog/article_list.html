@@ -1,27 +1,28 @@
 {% from 'blog/macros.html' import article_list with context %}
 {% extends 'layout.html' %}
 
-{% block title %}Neomad articles {% if articles[0] %} - {{ articles[0].title|truncate(40) }}{% endif %}
+{% block title %}
+  Neomad articles
+  {% if articles[0] %} - {{ articles[0].title|truncate(40) }}{% endif %}
 {% endblock %}
-{% block description %}Read the latest Neomad's articles on Neomad.
-  {% if articles[0] %} Hotest article is « {{ articles[0].title }} ».{% endif %}
+{% block description %}
+  Read the latest Neomad's articles on Neomad.
+  {% if articles[0] %} Hotest article is "{{ articles[0].title }}".{% endif %}
 {% endblock %}
+
 {% block extra_og %}
   {% if articles[0] %}
-  <meta property=og:image content="{{ articles[0].image }}">
-  <meta property=og:title content="Latest articles ({{ articles[0].title }})">
-  <meta property=og:description content="{{ articles[0]|striptags|truncate(200) }}">
+    <meta property=og:image content="{{ articles[0].image }}">
+    <meta property=og:title content="Latest articles ({{ articles[0].title }})">
+    <meta property=og:description content="{{ articles[0]|striptags|truncate(200) }}">
   {% endif %}
 {% endblock %}
 
-
-{% block extra_css %}
-<link rel=stylesheet href={{ url_for('static', filename='css/_article_list.css') }}>
-{% endblock %}
-
 {% block main %}
-<h1>Latest articles</h1>
-<div class="articles wrapper">
-  {{ article_list(articles=articles) }}
-</div>
+  <main>
+    <section class=article-list>
+      <h2>Latest articles</h2>
+      {{ article_list(articles=articles) }}
+    </section>
+  </main>
 {% endblock %}

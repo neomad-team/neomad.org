@@ -6,4 +6,17 @@ function autoReplaceCoordinates () {
   })
 }
 
+function coordinatesToAddress (coordinates) {
+  const [lat, lng] = coordinates.split(',')
+  return fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`, {
+    mode: 'cors'
+  })
+  .then(r => r.json())
+  .then(d => {
+    const data = d.address
+    data['area'] = data.town || data.village || data.city
+    return data
+  })
+}
+
 autoReplaceCoordinates()

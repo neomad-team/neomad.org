@@ -1,0 +1,28 @@
+form {
+  width: 55rem;
+}
+
+[contenteditable=true] {
+  position: relative;
+  line-height: 1.5;
+  border-bottom: .1rem dashed transparent;
+  transition: .2s border-bottom-color;
+}
+
+[contenteditable=true]:hover {
+  border-bottom-color: #333;
+}
+
+[contenteditable=true]::after {
+  position: absolute;
+  top: -1.5rem;
+  left: -3rem;
+  visibility: hidden;
+  content: "✏️";
+  font-size: 2rem;
+}
+
+[contenteditable=true]:hover::after,
+[contenteditable=true]:focus::after {
+  visibility: inherit;
+}
