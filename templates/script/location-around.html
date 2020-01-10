@@ -11,6 +11,6 @@
 	{% endfor %}
 
 	{% if not current_user.allow_community %}
-		alert('localization', 'You do not allow localization, see you profile setting')
+		notify('localization', 'You do not allow localization, see you profile setting')
 	{% endif %}
 </script>

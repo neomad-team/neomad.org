@@ -4,7 +4,7 @@ window.onload = _ => {
   if (menu && avatar ) avatar.addEventListener('click', _ => menu.classList.toggle('active'))
 }
 
-function alert (type, message, delay) {
+function notify (type, message, delay) {
   console.info(type, message)
   let notification = document.querySelector('#notification')
   if (!notification) {
@@ -26,7 +26,7 @@ function alert (type, message, delay) {
 function getPosition() {
   return new Promise(resolve => {
     const fail = _ => {
-      alert('error', 'You geolocalisation went wrong, please try again.')
+      notify('error', 'You geolocalisation went wrong, please try again.')
       resolve([])
     }
 

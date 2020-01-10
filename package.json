@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/neomad-team/neomad.org#readme",
   "dependencies": {
-    "leaflet": "^1.2.0",
-    "leaflet.locatecontrol": "^0.62.0"
+    "leaflet": "^1.6.0",
+    "leaflet.locatecontrol": "^0.70.0"
   }
 }

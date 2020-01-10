@@ -5,6 +5,6 @@ if (videoButton) {
 
   videoButton.setAttribute('title', helperMessage)
   videoButton.addEventListener('click', _ => {
-    alert('info', helperMessage)
+    notify('info', helperMessage)
   })
 }

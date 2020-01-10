@@ -56,7 +56,7 @@
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
   {% set message = messages[0] %}
-    <script>alert("{{message[0]}}", "{{message[1]}}")</script>
+    <script>notify("{{message[0]}}", "{{message[1]}}")</script>
   {% endif %}
 {% endwith %}
 
