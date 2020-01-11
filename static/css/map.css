@@ -16,3 +16,15 @@ a.button.trip {
   padding-right: .2rem;
   line-height: 2.2rem;
 }
+
+.icon.location {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.icon.location::before {
+  font-family: 'fontawesome', 'fontawesome solid';
+  content: '\f3c5';
+  margin: 0;
+}
