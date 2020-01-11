@@ -13,8 +13,8 @@ new L.Control.Zoom({position: 'topright'}).addTo(map)
 L.control.locate({
   icon: 'icon location',
   position: 'topright',
-  locateOptions: { enableHighAccuracy: true} }
-).addTo(map)
+  locateOptions: { enableHighAccuracy: true }
+}).addTo(map)
 
 // credentials
 const credits = L.control.attribution()
