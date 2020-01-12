@@ -3,14 +3,14 @@
 {% block title %}Around you{% endblock %}
 
 {% block extra_css %}
-  <link rel=stylesheet href={{ url_for('static', filename='dist/leaflet/leaflet.css') }}>
-  <link rel=stylesheet href={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.css') }}>
+  <link rel=stylesheet href={{ url_for('static', filename='dist/leaflet/dist/leaflet.css') }}>
+  <link rel=stylesheet href={{ url_for('static', filename='dist/leaflet.locatecontrol/dist/L.Control.Locate.css') }}>
 
   <link rel=stylesheet href={{ url_for('static', filename='css/map.css') }}>
   <link rel=stylesheet href={{ url_for('static', filename='css/map-around.css') }}>
 
-  <script src={{ url_for('static', filename='dist/leaflet/leaflet.js') }}></script>
-  <script src={{ url_for('static', filename='dist/locatecontrol/L.Control.Locate.min.js') }}></script>
+  <script src={{ url_for('static', filename='dist/leaflet/dist/leaflet.js') }}></script>
+  <script src={{ url_for('static', filename='dist/leaflet.locatecontrol/dist/L.Control.Locate.min.js') }}></script>
 {% endblock %}
 
 {% block main %}
@@ -23,9 +23,8 @@
   </main>
 {% endblock %}
 
-
-{% include 'script/location-around.html' %}
 {% block extra_js %}
-  <script src={{ url_for('static', filename='js/map.js') }}></script>
-  <script src={{ url_for('static', filename='js/map-around.js') }}></script>
+{% include 'script/location-around.html' %}
+<script src={{ url_for('static', filename='js/map.js') }}></script>
+<script src={{ url_for('static', filename='js/map-around.js') }}></script>
 {% endblock %}

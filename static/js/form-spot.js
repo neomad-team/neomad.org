@@ -5,7 +5,7 @@ form.addEventListener('submit', event => {
   /** user location value defined from template */
   const location = userLocation
   if (!location)
-    return alert('error', 'You have not allow you location, please change your privacy setting.')
+    return notify('error', 'You have not allow you location, please change your privacy setting.')
 
   const formValues = { location }
   const data = new FormData(event.target)
@@ -22,8 +22,8 @@ form.addEventListener('submit', event => {
   .then(r => r.json())
   .then(response => {
     response.id
-      ? alert('success', 'You spot was saved successfully, thanks!')
-      : alert('error', 'Something went wrong. Please try again later.')
+      ? notify('success', 'You spot was saved successfully, thanks!')
+      : notify('error', 'Something went wrong. Please try again later.')
   })
   .catch(e => console.error(e))
 })
