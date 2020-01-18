@@ -26,6 +26,15 @@ body {
   margin-top: 2rem;
 }
 
+.blog-article .content a {
+  color: var(--color-primary);
+  text-decoration: underline dotted var(--color-primary);
+}
+
+.blog-article .content a:hover {
+  text-decoration: underline;
+}
+
 .button-group {
   padding: 0 1rem;
   position: absolute;
