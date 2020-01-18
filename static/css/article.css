@@ -26,6 +26,10 @@ body {
   margin-top: 2rem;
 }
 
+.blog-article .video {
+  width: 100%;
+}
+
 .button-group {
   padding: 0 1rem;
   position: absolute;
