@@ -31,6 +31,8 @@ body {
   text-decoration: underline dotted var(--color-primary);
 }
 
+.blog-article .content a:active,
+.blog-article .content a:focus,
 .blog-article .content a:hover {
   text-decoration: underline;
 }
