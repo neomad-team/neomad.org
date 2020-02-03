@@ -12,11 +12,3 @@ services:
     ports:
       - "27017:27017"
 
-  web:
-    build: .
-    links:
-      - db
-    volumes:
-      - .:/app
-    ports:
-      - 5000:80

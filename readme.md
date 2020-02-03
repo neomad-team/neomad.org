@@ -24,7 +24,6 @@ willing to _nomadize_ themselves.
 The next steps are also simple. Choose your story:
 
 - for lazy developers: go to [lazy developer install](#lazy-developer-installation)
-- for lazy testers: choose the [full-docker install](#full-docker-installation)
 - for developers who want to keep control: read the [Manual installation](#manual-installation)
 
 > You may then want to insert dummy data use `make fixtures`.
@@ -41,22 +40,6 @@ Lazy you!
 Next times you want to run your project, you can do the following:
 
     make start
-
-
-### Full-Docker Installation
-
-First of all you should create your required files: `make install_files`.
-
-In the _settings.py_ file, set the `DATABASE = {…, 'host': 'db', …}` to
-connect the server to the database (`'db'` is the actual name you want as
-_host_, it is the name of the docker _link_).
-
-Then run `docker-compose up` and open your browser at http://localhost:5000.
-
-> You can access your python server machine with
-> `docker-compose exec -it web` (you may need it to create a user for example).
->
-> The sources in your docker server are in the _/app_ folder (`cd /app`).
 
 
 ### Manual installation
