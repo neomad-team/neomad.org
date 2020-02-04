@@ -8,7 +8,7 @@ PORT = 5000
 DATABASE = {
   'db': 'neomad_test',
   'username': 'root',
-  'host': 'localhost',  # set this value to 'db' if using docker-compose server.
+  'host': 'localhost'
   'password': '',
   'port': 27017,
 }

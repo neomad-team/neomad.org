@@ -10,7 +10,7 @@ willing to _nomadize_ themselves.
 
 - Git
 - Python3.6 or above
-- [Docker-compose](https://docs.docker.com/compose/)
+- [Docker](https://docs.docker.com/get-docker/)
 
 > If you don't have/want to use docker, you can process to the
 > [Manual installation section](#manual-installation).
@@ -23,7 +23,7 @@ willing to _nomadize_ themselves.
 
 The next steps are also simple. Choose your story:
 
-- for lazy developers: go to [lazy developer install](#lazy-developer-installation)
+- for lazy developers: go to [Lazy developer install](#lazy-developer-installation)
 - for developers who want to keep control: read the [Manual installation](#manual-installation)
 
 > You may then want to insert dummy data use `make fixtures`.
@@ -49,8 +49,7 @@ Are you a Python warrior willing to take full control of your environment?
 View the _makefile_ file in the _install_ section and tweak your commands.
 It's been made to be easily readable.
 
-Note that you can either have your own _MongoDB_ or use Docker even if it's only
-for running a database: `docker-compose up -d db`.
+Note that you can either have your own _MongoDB_ or use Docker.
 
 
 ## Configuring
@@ -58,6 +57,10 @@ for running a database: `docker-compose up -d db`.
 In the previous commands you created a file called _settings.py_ at the root of
 the project.
 Tune your settings there.
+
+Note that the project is dedicated the port 27018 to the Docker container running
+MongoDB. You can change it with the port you want with the envionment variable
+`DB_PORT` declared in **both** _install.py_ and _start.py_.
 
 
 ## Running test
