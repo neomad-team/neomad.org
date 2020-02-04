@@ -2,6 +2,7 @@ import datetime
 import json
 
 from core import db
+from core.fields import GeoPointField
 
 from user.models import User
 
@@ -9,7 +10,7 @@ from user.models import User
 class Spot(db.Document):
     name = db.StringField(required=True)
     user = db.ReferenceField(User)
-    location = db.GeoPointField(required=True)
+    location = GeoPointField(required=True)
     wifi = db.IntField(min_value=0, max_value=5)
     power = db.BooleanField()
     category = db.StringField()

@@ -3,6 +3,7 @@ from datetime import datetime
 
 from flask import render_template, request, abort, redirect, url_for
 from flask_login import current_user, login_required
+from mongoengine.errors import DoesNotExist
 
 from core import app
 from core.helpers import url_for_user
@@ -50,10 +51,12 @@ def privacy():
 @login_required
 def privacy_delete_trip(date):
     user = User.objects.get(id=current_user.id)
-    user.locations.remove(user.locations.get(date=datetime.fromtimestamp(
-                                             date)))
-    user.save()
-    return redirect('privacy'), 204
+    try:
+        user.locations.remove(user.locations.get(date=datetime.fromtimestamp(date)))
+        user.save()
+        return redirect(url_for('privacy'))
+    except DoesNotExist:
+        abort(410)
 
 
 @app.route('/profile/')
