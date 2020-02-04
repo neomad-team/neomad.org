@@ -58,9 +58,7 @@ In the previous commands you created a file called _settings.py_ at the root of
 the project.
 Tune your settings there.
 
-Note that the project is dedicated the port 27018 to the Docker container running
-MongoDB. You can change it with the port you want with the envionment variable
-`DB_PORT` declared in **both** _install.py_ and _start.py_.
+`DB_PORT` is an environment variable where your Mongo instance is running. The default for a native install (27017) is preserved. _Lazy installation_ runs on 27018 by default.
 
 
 ## Running test

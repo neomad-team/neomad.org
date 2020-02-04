@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export DB_PORT=27018 # Edit with the wanted port
+export DB_PORT=27018 # Please ensure that this value is the same in install.sh
 
 make install_files
 
