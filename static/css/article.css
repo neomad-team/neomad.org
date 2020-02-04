@@ -30,6 +30,12 @@ body {
   width: 100%;
 }
 
+.blog-article .content a:active,
+.blog-article .content a:focus,
+.blog-article .content a:hover {
+  text-decoration: underline;
+}
+
 .button-group {
   padding: 0 1rem;
   position: absolute;
