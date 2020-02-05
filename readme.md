@@ -26,7 +26,7 @@ The next steps are also simple. Choose your story:
 - for lazy developers: go to [Lazy developer install](#lazy-developer-installation)
 - for developers who want to keep control: read the [Manual installation](#manual-installation)
 
-> You may then want to insert dummy data use `make fixtures`.
+> You may then want to insert dummy data use `make fixtures` (it is already done in th _Lazy installation_).
 
 ### Lazy developer installation
 

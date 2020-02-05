@@ -13,6 +13,8 @@ pip3 install -r requirements.txt
 
 make title text="Installing your dabase"
 docker pull mongo:latest
-docker container create --expose 27017 -p ${DB_PORT}:27017 --name=neomadorg_db_1 -v ${PWD}/data:/data -v ${PWD}/data/db:/data/db mongo:latest mongod
+docker run -d --expose 27017 -p ${DB_PORT}:27017 --name=neomadorg_db_1 -v ${PWD}/data:/data -v ${PWD}/data/db:/data/db mongo:latest mongod
+
+make fixtures
 
 make start
