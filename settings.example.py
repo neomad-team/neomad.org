@@ -8,9 +8,9 @@ PORT = 5000
 DATABASE = {
   'db': 'neomad',
   'username': 'root',
-  'host': 'localhost',  # set this value to 'db' if using docker-compose server.
+  'host': 'localhost',
   'password': '',
-  'port': 27017,
+  'port': int(os.environ.get('DB_PORT', 27017))
 }
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
