@@ -26,8 +26,6 @@ The next steps are also simple. Choose your story:
 - for lazy developers: go to [Lazy developer install](#lazy-developer-installation)
 - for developers who want to keep control: read the [Manual installation](#manual-installation)
 
-> You may then want to insert dummy data use `make fixtures`.
-
 ### Lazy developer installation
 
     make install
@@ -50,6 +48,8 @@ View the _makefile_ file in the _install_ section and tweak your commands.
 It's been made to be easily readable.
 
 Note that you can either have your own _MongoDB_ or use Docker.
+
+> You may then want to insert dummy data running `make fixtures`.
 
 
 ## Configuring
