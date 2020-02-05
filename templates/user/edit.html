@@ -26,15 +26,19 @@
       </aside>
 
       <section>
-        <input name=username value="{{ user.username }}" placeholder="Insert a username">
-        <textarea name=about placeholder="Tell a little about yourself">{{ user.about|htmlnewline }}</textarea>
+        <label for="username">Username</label>
+        <input name=username id="username" value="{{ user.username }}" placeholder="Insert a username">
+        <label for="about">About</label>
+        <textarea name=about id="about" placeholder="Tell a little about yourself">{{ user.about|htmlnewline }}</textarea>
 
         <article class=social>
-          {% for social in user.socials -%}
-            <span class="edit {{ social }}">
-              <input name=socials.{{ social }} value="{{ user.socials[social] }}" placeholder="My {{ social }} link">
-            </span>
-          {%- endfor %}
+          <ul class="profile-socials">
+            {% for social in user.socials -%}
+              <li class="icon {{ social }}">
+                <input name="{{ social }}" value="{{ user.socials[social] }}" placeholder="My {{ social }} link" type=text>
+              </li>
+            {%- endfor %}
+          </ul>
         </article>
 
         <button class="action-button save" type=submit>Save my profile</button>
