@@ -44,7 +44,7 @@ def privacy():
         user = User.objects.get(id=current_user.id)
         return render_template('user/privacy.html',
                            user=user,
-                           locations=user.locations)
+                           locations=reversed(user.locations))
 
 
 @app.route('/privacy/<float:date>/delete/', methods=['post'])
