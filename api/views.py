@@ -1,6 +1,6 @@
 import json
 
-from flask import request, Response, jsonify
+from flask import request, Response, jsonify, redirect, url_for
 from flask_login import current_user, login_user
 
 from core import app
@@ -25,7 +25,7 @@ def api_spot_create():
         user=current_user.id,
         comments=[response.get('comment')]
     ).save()
-    return spot.to_json(), 201
+    return redirect(url_for('around'))
 
 
 @app.route('/api/users/<string:id>/')

@@ -27,6 +27,7 @@ L.polyline(locations.map(l => l.position), {
 
 markers.addTo(map)
 currentMarker.addTo(map)
+markers.addLayer(currentMarker)
 
 // Zoom to view all positions
 map.fitBounds(markers.getBounds())
