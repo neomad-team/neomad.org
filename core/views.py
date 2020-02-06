@@ -17,12 +17,12 @@ def home():
 
 @app.errorhandler(NotFound)
 def error_404(e):
-    return render_template('error.html', code=404)
+    return render_template('error.html', code=404), 404
 
 @app.errorhandler(Gone)
 def error_410(e):
-    return render_template('error.html', code=410)
+    return render_template('error.html', code=410), 410
 
 @app.errorhandler(InternalServerError)
 def error_500(e):
-    return render_template('error.html', code=500)
+    return render_template('error.html', code=500), 500
