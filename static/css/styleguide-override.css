@@ -183,6 +183,18 @@ form.profile figure input {
   display: none;
 }
 
+form.profile section {
+  width: 100%;
+}
+
+form.profile ul.profile-socials li {
+  margin-right: 0;
+}
+
+form.profile button {
+  width: 100%;
+}
+
 /*
   UTILS
 */
