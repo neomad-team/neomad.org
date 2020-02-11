@@ -18,6 +18,10 @@
   <link rel=stylesheet href={{ url_for('static', filename='css/article.css') }}>
 {%- endblock %}
 
+{% block extra_js -%}
+  <script src={{ url_for('static', filename='js/article.js') }}></script>
+{%- endblock %}
+
 {% block main %}
   <main class=blog-article>
     <article lang={{ article.language }}>

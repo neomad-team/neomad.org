@@ -19,11 +19,10 @@ form.addEventListener('submit', event => {
       'Content-Type': 'application/json'
     }
   })
-  .then(r => r.json())
   .then(response => {
-    response.id
-      ? notify('success', 'You spot was saved successfully, thanks!')
-      : notify('error', 'Something went wrong. Please try again later.')
+    if (response.redirected) window.location.href = response.url
+    else
+      notify('error', 'Something went wrong. Please try again later.')
   })
   .catch(e => console.error(e))
 })

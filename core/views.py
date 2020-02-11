@@ -1,6 +1,6 @@
 from flask import redirect, render_template
 from flask_login import current_user
-from werkzeug.exceptions import NotFound, InternalServerError
+from werkzeug.exceptions import NotFound, Gone, InternalServerError
 
 from blog.models import Article
 from user.models import User
@@ -19,6 +19,9 @@ def home():
 def error_404(e):
     return render_template('error.html', code=404)
 
+@app.errorhandler(Gone)
+def error_410(e):
+    return render_template('error.html', code=410)
 
 @app.errorhandler(InternalServerError)
 def error_500(e):

@@ -35,6 +35,8 @@
         {{ article.content|safe or "Insert your content here" }}
       </div>
 
+      <input type=date name=publication_date value={{ article.publication_date }}>
+
       <div class="button-group">
         <input type=hidden name=title>
         <input type=hidden name=content>

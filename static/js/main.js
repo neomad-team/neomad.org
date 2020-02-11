@@ -1,7 +1,8 @@
 function autoReplaceCoordinates () {
   Array.from(document.querySelectorAll('[data-latlng]')).forEach(a => {
     coordinatesToAddress(a.dataset.latlng).then(data => {
-       a.textContent = `${data.town || data.village || data.city}, ${data.country}`
+      if (!data) return
+      a.textContent = `${data.town || data.village || data.city}, ${data.country}`
     })
   })
 }
@@ -13,6 +14,7 @@ function coordinatesToAddress (coordinates) {
   })
   .then(r => r.json())
   .then(d => {
+    if (d.error) return
     const data = d.address
     data['area'] = data.town || data.village || data.city
     return data

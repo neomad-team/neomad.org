@@ -56,7 +56,7 @@ class UserTest(TestCase):
         self.assertEqual(user.locations.count(), 1)
         url = '/privacy/{}/delete/'.format(user.locations[0].date.timestamp())
         result = self.client.post(url, content_type='application/json')
-        self.assertEqual(result.status_code, 204)
+        self.assertEqual(result.status_code, 302)
         user = User.objects.first()  # DB was updated.
         self.assertEqual(user.locations.count(), 0)
 
