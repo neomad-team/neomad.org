@@ -62,11 +62,3 @@
     </div>
   </main>
 {% endblock %}
-
-{% block extra_js -%}
-  <script>
-    Array
-      .from(document.querySelectorAll('.video'))
-      .forEach(video => video.style.height = `${video.clientWidth}px`)
-  </script>
-{%- endblock %}
