@@ -2,12 +2,10 @@ const form = document.querySelector('form')
 form.addEventListener('submit', event => {
   event.preventDefault()
 
-  /** user location value defined from template */
-  const location = userLocation
-  if (!location)
+  if (!userPosition)
     return notify('error', 'You have not allow you location, please change your privacy setting.')
 
-  const formValues = { location }
+  const formValues = { location: userPosition }
   const data = new FormData(event.target)
   data.forEach((v, k) => formValues[k] = v)
 

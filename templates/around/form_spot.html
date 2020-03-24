@@ -51,9 +51,7 @@
 
 {% block extra_js %}
   <script>
-    let userLocation = {{ current_user.current_location }}
-    // try to get browser position from promise in utils if the user do not share its position
-    if (!userLocation) userLocation = getPosition()
+    let userLocation // NOTE : Its value is affected from localize.html script
   </script>
   <script src={{ url_for('static', filename='js/form-spot.js') }}></script>
 {% endblock %}

@@ -22,24 +22,3 @@ function notify (type, message, delay) {
     }, delay || 5000)
   }
 }
-
-function getPosition() {
-  return new Promise(resolve => {
-    const fail = _ => {
-      notify('error', 'You geolocalisation went wrong, please try again.')
-      resolve([])
-    }
-
-    const success = position => {
-      const { latitude, longitude } = position.coords
-      resolve([latitude, longitude])
-    }
-
-    const options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    }
-    navigator.geolocation.getCurrentPosition(success, fail, options)
-  })
-}
