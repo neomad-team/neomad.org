@@ -1,13 +1,31 @@
 {% if current_user and current_user.is_authenticated %}
   <script>
     function localize() {
-      navigator.geolocation.getCurrentPosition(position => {
-        fetch("/trips/add/", {
-          method: 'post',
-          body: JSON.stringify([position.coords.latitude, position.coords.longitude]), credentials: 'same-origin',
-          headers: { 'Content-Type': 'application/json' }
+      let localizeUserPosition
+      const storedPositionJSON = sessionStorage.getItem('currentPosition')
+
+      if (!storedPositionJSON) {
+        navigator.geolocation.getCurrentPosition(async currentPosition => {
+          const res = await fetch('/trips/add/', {
+            method: 'post',
+            body: JSON.stringify([ currentPosition.coords.latitude, currentPosition.coords.longitude ]),
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' }
+          })
+
+          localizeUserPosition = [currentPosition.coords.latitude, currentPosition.coords.longitude]
+          sessionStorage.setItem('currentPosition', JSON.stringify(localizeUserPosition))
+
+          if (window.location.pathname === "{{ url_for_trips(current_user) }}" && res.status === 201)
+            window.location.reload()
         })
-      })
+      }
+      localizeUserPosition = JSON.parse(storedPositionJSON)
+
+      if (window.location.pathname === "{{ url_for('around') }}")
+        moveTo(localizeUserPosition)
+      if (window.location.pathname === "{{ url_for('form_spot') }}")
+        userPosition = localizeUserPosition
     }
   </script>
 {% endif %}
