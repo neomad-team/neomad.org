@@ -3,7 +3,7 @@ Description=Neomad.org website
 After=network.target
 
 [Service]
-ExecStart=/home/ubuntu/prod/venv/bin/gunicorn server --timeout 60
+ExecStart=/home/ubuntu/prod/venv/bin/gunicorn app -w 3 --timeout 60
 # Required on some systems
 WorkingDirectory=/home/ubuntu/prod
 Restart=always
