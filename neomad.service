@@ -1,0 +1,18 @@
+[Unit]
+Description=Neomad.org website
+After=network.target
+
+[Service]
+ExecStart=/home/ubuntu/prod/venv/bin/gunicorn app -w 3 --timeout 60
+# Required on some systems
+WorkingDirectory=/home/ubuntu/prod
+Restart=always
+RestartSec=3
+# Output to syslog
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=neomad
+Environment=PORT=8080
+
+[Install]
+WantedBy=multi-user.target

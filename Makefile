@@ -13,10 +13,8 @@ server_update:  # env=prod|preprod
 	ssh neomad "${goto_src} && pip install -r requirements.txt"
 
 server_reload:  # env=prod|preprod
-	@make title text="Rebuilding the server."
-	ssh neomad "${goto_src} && pkill gunicorn; \
-		gunicorn -w 3 --daemon -b 127.0.0.1:5000 app \
-		--error-logfile ./log/error.log --access-logfile ./log/access.log"
+	@make title text="Restarting the service."
+	ssh neomad "sudo systemctl restart neomad"
 
 prepare-deploy:  # env=prod|preprod
 	git checkout $(env)
