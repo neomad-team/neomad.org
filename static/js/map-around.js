@@ -2,8 +2,8 @@
 const worker = new Worker('/static/js/webworker-around.js')
 let pois = []
 
-function addPoi (poi) {
-  const marker = L.marker(poi.location, {icon: markerIcon, alt: poi.name})
+function addPoi(poi) {
+  const marker = L.marker(poi.location, { icon: markerIcon, alt: poi.name })
     .addTo(map)
     .on('click', _ => {
       moveTo(poi.location)
@@ -12,7 +12,7 @@ function addPoi (poi) {
   marker._icon.setAttribute('id', poi.id)
 
   const popup = L.popup()
-  .setContent(`<h2>${poi.name}</h2>
+    .setContent(`<h2>${poi.name}</h2>
             <ul>
               <li>Wifi quality: ${poi.wifi}</li>
               <li>Power available: ${poi.power}</li>
@@ -20,10 +20,10 @@ function addPoi (poi) {
   marker.bindPopup(popup)
 
   // start view
-  if(window.currentLatLng && currentLatLng.length) localizeUser.start()
+  if (window.currentLatLng && currentLatLng.length) localizeUser.start()
 
   const hash = getHash()
-  if(hash && hash === marker._icon.id) {
+  if (hash && hash === marker._icon.id) {
     hashMarker(hash)
     moveTo(poi.location)
   }
@@ -39,6 +39,8 @@ worker.postMessage('')
 // add users on map
 usersLocation.filter(user => user.position.length).forEach(user => addUser(user))
 
+map.setView(usersLocation.slice(-1)[0].position, 13)
+
 // events
 window.onhashchange = _ => {
   const hash = getHash()
@@ -46,7 +48,7 @@ window.onhashchange = _ => {
 }
 
 // functions
-function addUser (user) {
+function addUser(user) {
   const popup = L.popup()
     .setContent(`
       <a class=user-popup href=${user.link} title="View profile in detail">
@@ -56,39 +58,39 @@ function addUser (user) {
       </a>`)
 
   const userIcon = L.icon({
-      iconUrl: user.avatar,
-      iconSize: [30, 30],
-      iconAnchor: [15, 15],
-      popupAnchor: [0, -15],
-      className: 'avatar'
+    iconUrl: user.avatar,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
+    popupAnchor: [0, -15],
+    className: 'avatar'
   })
 
-  const userMarker = L.marker(user.position, {icon: userIcon})
+  const userMarker = L.marker(user.position, { icon: userIcon })
     .setZIndexOffset(1000)
     .bindPopup(popup)
     .addTo(map)
 }
 
-function moveTo (latLng) {
+function moveTo(latLng) {
   map.flyTo(latLng, 15)
 }
 
-function getHash () {
+function getHash() {
   return window.location.hash.slice(1)
 }
 
-function urlFor (id) {
+function urlFor(id) {
   window.location.hash = id
 }
 
-function hashMarker (poi_id) {
+function hashMarker(poi_id) {
   const superMarker = document.querySelector('.hash-marker')
   const selectedMarker = document.getElementById(poi_id)
-  if(superMarker) {
+  if (superMarker) {
     superMarker.classList.toggle('hash-marker')
     superMarker.classList.toggle('marker')
   }
-  if(selectedMarker) {
+  if (selectedMarker) {
     selectedMarker.classList.add('hash-marker')
     selectedMarker.classList.remove('current-marker')
     selectedMarker.classList.remove('not-current-marker')
