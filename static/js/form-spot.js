@@ -1,4 +1,6 @@
 const form = document.querySelector('form')
+let userPosition = null
+
 form.addEventListener('submit', event => {
   event.preventDefault()
 
@@ -24,3 +26,7 @@ form.addEventListener('submit', event => {
   })
   .catch(e => console.error(e))
 })
+
+function userLocalized(userLocation) {
+  userPosition = userLocation
+}

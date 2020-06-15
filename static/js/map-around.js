@@ -1,6 +1,7 @@
 // POIS creation
 const worker = new Worker('/static/js/webworker-around.js')
 let pois = []
+let currentUserLocation
 
 function addPoi (poi) {
   const marker = L.marker(poi.location, {icon: markerIcon, alt: poi.name})
@@ -43,6 +44,11 @@ usersLocation.filter(user => user.position.length).forEach(user => addUser(user)
 window.onhashchange = _ => {
   const hash = getHash()
   hashMarker(hash)
+}
+
+function userLocalized(userLocation) {
+  currentUserLocation = userLocation
+  moveTo(currentUserLocation)
 }
 
 // functions

@@ -22,14 +22,15 @@ function localize() {
 
       if (window.location.pathname === "{{ url_for_trips(current_user) }}" && res.status === 201)
         window.location.reload()
+
+      if (userLocalized)
+        userLocalized(localizeUserPosition)
     })
   }
   localizeUserPosition = JSON.parse(storedPositionJSON)
 
-  if (window.location.pathname === "{{ url_for('around') }}")
-    moveTo(localizeUserPosition)
-  if (window.location.pathname === "{{ url_for('form_spot') }}")
-    userPosition = localizeUserPosition
+  if (localizeUserPosition && userLocalized)
+    userLocalized(localizeUserPosition)
 }
 
 function notify(type, message, delay) {
