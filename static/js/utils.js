@@ -1,10 +1,39 @@
 window.onload = _ => {
   const menu = document.querySelector('#menu')
   const avatar = document.querySelector('#avatar-menu')
-  if (menu && avatar ) avatar.addEventListener('click', _ => menu.classList.toggle('active'))
+  if (menu && avatar) avatar.addEventListener('click', _ => menu.classList.toggle('active'))
 }
 
-function notify (type, message, delay) {
+function localize() {
+  let localizeUserPosition
+  const storedPositionJSON = sessionStorage.getItem('currentPosition')
+
+  if (!storedPositionJSON) {
+    navigator.geolocation.getCurrentPosition(async currentPosition => {
+      const res = await fetch('/trips/add/', {
+        method: 'post',
+        body: JSON.stringify([currentPosition.coords.latitude, currentPosition.coords.longitude]),
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' }
+      })
+
+      localizeUserPosition = [currentPosition.coords.latitude, currentPosition.coords.longitude]
+      sessionStorage.setItem('currentPosition', JSON.stringify(localizeUserPosition))
+
+      if (window.location.pathname === "{{ url_for_trips(current_user) }}" && res.status === 201)
+        window.location.reload()
+
+      if (userLocalized)
+        userLocalized(localizeUserPosition)
+    })
+  }
+  localizeUserPosition = JSON.parse(storedPositionJSON)
+
+  if (localizeUserPosition && userLocalized)
+    userLocalized(localizeUserPosition)
+}
+
+function notify(type, message, delay) {
   console.info(type, message)
   let notification = document.querySelector('#notification')
   if (!notification) {
@@ -21,25 +50,4 @@ function notify (type, message, delay) {
       notification.classList = []
     }, delay || 5000)
   }
-}
-
-function getPosition() {
-  return new Promise(resolve => {
-    const fail = _ => {
-      notify('error', 'You geolocalisation went wrong, please try again.')
-      resolve([])
-    }
-
-    const success = position => {
-      const { latitude, longitude } = position.coords
-      resolve([latitude, longitude])
-    }
-
-    const options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    }
-    navigator.geolocation.getCurrentPosition(success, fail, options)
-  })
 }

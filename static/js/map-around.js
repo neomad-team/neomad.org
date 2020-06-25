@@ -45,6 +45,10 @@ window.onhashchange = _ => {
   hashMarker(hash)
 }
 
+function userLocalized(userLocation) {
+  moveTo(userLocation)
+}
+
 // functions
 function addUser (user) {
   const popup = L.popup()
