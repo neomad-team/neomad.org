@@ -23,13 +23,13 @@ function localize() {
       if (window.location.pathname === "{{ url_for_trips(current_user) }}" && res.status === 201)
         window.location.reload()
 
-      if (userLocalized)
+      if (typeof userLocalized === 'function')
         userLocalized(localizeUserPosition)
     })
   }
   localizeUserPosition = JSON.parse(storedPositionJSON)
 
-  if (localizeUserPosition && userLocalized)
+  if (localizeUserPosition && typeof userLocalized === 'function')
     userLocalized(localizeUserPosition)
 }
 
