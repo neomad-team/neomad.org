@@ -8,7 +8,7 @@ PORT = 5000
 DATABASE = {
   'db': 'neomad_test',
   'username': 'root',
-  'host': 'localhost'
+  'host': 'localhost',
   'password': '',
   'port': int(os.environ.get('DB_PORT', 27017))
 }

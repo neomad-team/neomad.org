@@ -134,7 +134,7 @@ class Article(db.Document):
 class SteemitArticle:
     def __init__(self, article, url):
         res = requests.get(url)
-        html = BeautifulSoup(res.text)
+        html = BeautifulSoup(res.text, "lxml")
         uri = re.match('https://steemit.com/.+/@(.*)', url).groups()[0]
         content = html.body.find('script',
                                  attrs={'type': 'application/json'}).text
