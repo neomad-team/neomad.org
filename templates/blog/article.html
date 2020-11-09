@@ -35,7 +35,9 @@
         </a>
         <div class=meta-data>
           <a href={{ url_for_user(article.get_author()) }}>{{ article.get_author().username }}</a>
-          <time class="icon time" datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
+          {% if article.publication_date %}
+            <time class="icon time" datetime={{ article.publication_date }} pubdate>{{ article.publication_date.strftime('%d %B, %Y') }}</time>
+          {% endif %}
           <p class="icon time time-reading"><span>{{ article.content|reading_time }}</span> min read</p>
 
           {% if not article.published %}

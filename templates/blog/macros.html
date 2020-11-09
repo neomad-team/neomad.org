@@ -1,5 +1,6 @@
 {% macro article_list(articles, with_author=true) %}
-  {% for original_article in articles %}
+  <!-- Date comparison inspired from https://stackoverflow.com/questions/26718664/how-to-compare-two-dates-in-jinja2 -->
+  {% for original_article in articles if not with_author or original_article.publication_date < original_article.publication_date.now() %}
 
   {% set article = original_article.morph() %}
   {% set url = url_for_article(article) %}
