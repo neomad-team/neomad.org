@@ -5,7 +5,7 @@ Flask-Login==0.4.0
 langdetect==1.0.7
 Markdown==2.6.11
 mongoengine==0.15.3
-Pillow==6.2.1
+Pillow==7.1.0
 requests==2.22.0
 
 # Deployment
